@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Full Circle Maui — Trip Plan</title>
+<meta name="description" content="Full Circle Maui — Solo, May 2027. Day-by-day itinerary, lodging, map, packing, budget and safety notes." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌺</text></svg>" />
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-text">
+      <p class="eyebrow">Trip Plan</p>
+      <h1 id="trip-title">Full Circle Maui</h1>
+      <p class="subtitle" id="trip-subtitle">Solo, May 2027</p>
+    </div>
+    <div class="header-stats" id="header-stats"></div>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Sections">
+    <button class="tab-btn active" data-tab="overview">Overview</button>
+    <button class="tab-btn" data-tab="itinerary">Itinerary</button>
+    <button class="tab-btn" data-tab="map">Map</button>
+    <button class="tab-btn" data-tab="lodging">Lodging</button>
+    <button class="tab-btn" data-tab="hikes">Hikes</button>
+    <button class="tab-btn" data-tab="conditions">Sun / Moon / Weather</button>
+    <button class="tab-btn" data-tab="budget">Budget</button>
+    <button class="tab-btn" data-tab="packing">Packing</button>
+    <button class="tab-btn" data-tab="reservations">Reservations</button>
+    <button class="tab-btn" data-tab="notes">Notes</button>
+  </nav>
+</header>
+
+<main>
+  <section id="panel-overview" class="panel active"></section>
+  <section id="panel-itinerary" class="panel"></section>
+  <section id="panel-map" class="panel">
+    <div id="map"></div>
+    <div id="map-unverified"></div>
+  </section>
+  <section id="panel-lodging" class="panel"></section>
+  <section id="panel-hikes" class="panel"></section>
+  <section id="panel-conditions" class="panel"></section>
+  <section id="panel-budget" class="panel"></section>
+  <section id="panel-packing" class="panel"></section>
+  <section id="panel-reservations" class="panel"></section>
+  <section id="panel-notes" class="panel"></section>
+</main>
+
+<footer class="site-footer">
+  <p>Full Circle Maui — built from the trip spec. Coordinates marked "unverified" are intentionally blank; confirm before navigating.</p>
+</footer>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
