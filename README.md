@@ -1,56 +1,61 @@
-# Full Circle Maui — Trip Plan
+# Trail Notes
 
-A static, single-page trip-planning site for a solo, 8-day / 7-night
-counterclockwise camping loop around Maui (May 13–20, 2027), built from
-[`maui2027tripspec.md`](https://claude.ai).
+A personal hub for travel research, trip planning and camping logistics.
+Every trip — booked, half-planned, or still just an idea — lives in one place,
+in one format, at one URL.
 
-No build step, no dependencies to install — just open `index.html` in a
-browser, or serve the folder statically (GitHub Pages works out of the box).
+Static site: no build step, no dependencies. Open `index.html` in a browser or
+serve the folder. GitHub Pages works out of the box.
 
-## What's here
+## The hub
 
-- **Overview** — trip meta, route, quick stats.
-- **Itinerary** — day-by-day cards: schedule, overnight, meals, highlights, warnings.
-- **Map** — Leaflet map plotting every waypoint with a verified coordinate.
-  Waypoints with unverified/blank coordinates are listed separately and
-  **not** plotted (see "A note on data accuracy" below).
-- **Lodging** — nightly campground summary table.
-- **Hikes** — trail stats table.
-- **Sun / Moon / Weather** — daily sun & moon tables plus regional averages.
-- **Budget** — line-item cost breakdown.
-- **Packing** — interactive checklist (state saved to `localStorage`, per browser).
-- **Reservations** — interactive booking checklist (also saved to `localStorage`).
-- **Notes** — the trip's safety/logistics notes (Piʻilani Hwy, Waioka Pond, moon phase, gear, altitude, solo protocol, closures, food, respect).
+`index.html` is the front door. Four tabs:
 
-## Structure
+- **Trips** — every trip as a card, pinned first, then by how real it is.
+  Filter by Pinned / Planned / Needs work / Wishlist / Done. Each card shows
+  the single **next action** standing between that trip and being booked.
+- **Map** — every trip pinned on one world map, colored by theme.
+- **Gear Locker** — what's in the kit and, more usefully, what it can't do
+  yet. Anything marked *replace* is a purchase with a deadline.
+- **Playbook** — the planning principles every itinerary here is built to, the
+  checklist that runs on every trip regardless of destination, and default
+  booking-window timing.
 
+## A trip page
+
+Each trip is a folder under `trips/`. The tabs are generated from whichever
+data sections exist — a trip with no hikes has no Hikes tab:
+
+Overview · Itinerary · Map · Lodging · Hikes · Sun/Moon/Weather · Budget ·
+Packing · Reservations · Open Questions · Notes
+
+Packing and reservations are interactive checklists saved to `localStorage`
+(per browser — a scratchpad, not a record). Maps use Leaflet, vendored
+locally, because these pages get opened where there's no signal.
+
+**[Full Circle Maui, May 2027](trips/maui-2027/)** is the reference
+implementation: an 8-day solo counterclockwise camping loop.
+
+## Adding a trip
+
+```bash
+cp -r template/trip-slug trips/<slug>   # fill in data.js, leave index.html alone
+# add a matching entry to data/trips.js
+node tools/validate.mjs                  # must exit clean
 ```
-index.html          # shell + tab markup
-css/styles.css       # all styling (single stylesheet, no framework)
-js/data.js           # all trip data, transcribed from the spec
-js/app.js            # renders data.js into the DOM, tab switching, map, checklists
-vendor/leaflet/       # Leaflet 1.9.4, vendored locally (no CDN dependency)
-```
 
-## A note on data accuracy
+`template/trip-slug/data.js` is an annotated blank with every field explained.
+[`docs/TRIP_SPEC.md`](docs/TRIP_SPEC.md) is the reference. If you're using
+Claude Code, the `/new-trip` skill does all of it from a pasted itinerary.
 
-Per the source spec, some waypoints intentionally have **no coordinates**
-(Kahului Airport, Makena Big Beach, Costco Kahului, Hāmoa Beach, Waioka
-Pond, the Piʻilani Hwy east end, Grandma's Coffee House, and Komoda Store
-& Bakery). These were left blank rather than guessed, because a wrong
-coordinate can route someone to a locked gate on a one-lane road with no
-cell service. They appear in the Map tab's "unverified" list instead of
-as pins. If you fill these in, verify each one against a real source
-(Google Maps, the official venue) first.
+## Why some things are blank on purpose
 
-Camping confirmation numbers are similarly marked `TBD` — none of the
-reservations described in the spec have been made yet (see the
-Reservations tab).
+Some waypoints have no coordinates. That's deliberate, and the validator
+enforces the shape of it: an unverified location is listed under a warning
+rather than plotted on the map. A coordinate 200 metres off can route someone
+to a locked gate on a one-lane road with no cell service. Same reasoning
+applies to confirmation numbers, prices and opening hours — a blank makes you
+look it up, a fabricated one doesn't.
 
-## Editing the data
-
-Everything content-wise lives in `js/data.js` as plain JS objects/arrays
-(`TRIP`, `DAYS`, `LODGING`, `WAYPOINTS`, `HIKES`, `SUN_MOON`, `WEATHER`,
-`BUDGET`, `PACKING`, `RESERVATIONS`, `NOTES`). Edit that file and reload —
-`js/app.js` re-renders everything from it, so no HTML edits are needed for
-content changes.
+`node tools/validate.mjs` checks registry/page consistency, coordinate sanity,
+verified-flag mismatches, and that budget line items actually add up.

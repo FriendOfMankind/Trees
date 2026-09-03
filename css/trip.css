@@ -1,0 +1,150 @@
+/* ==========================================================================
+   trip.css — styles specific to a single trip page (day cards, schedule,
+   overnight boxes, packing grid). Loaded after base.css.
+   ========================================================================== */
+
+.route-banner {
+  background: var(--t-950);
+  color: var(--t-sand);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.route-banner strong { color: #fff; }
+.route-banner p:last-child { margin-bottom: 0; }
+
+.mini-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
+
+.mini-day {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-left: 4px solid var(--t-500);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.mini-day:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+.mini-day .d-num {
+  font-family: var(--ui);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--t-700);
+}
+.mini-day .d-title { font-weight: 700; margin-top: 0.15em; }
+.mini-day .d-date { font-size: 0.78rem; color: var(--t-ink-dim); margin-top: 0.2em; }
+
+/* ---------- Day cards ---------- */
+
+.day-card {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: var(--radius);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  scroll-margin-top: 6.5rem;
+}
+
+.day-card-head {
+  padding: 1.1rem 1.4rem;
+  background: linear-gradient(120deg, var(--t-800), var(--t-700));
+  color: var(--t-sand);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.2rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.day-card-head .d-label {
+  font-family: var(--ui);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--t-300);
+}
+.day-card-head h2 { color: #fff; font-size: 1.35rem; margin: 0.15em 0 0; }
+.day-card-head .tagline { font-style: italic; color: var(--t-sand-dim); margin: 0.2em 0 0; font-size: 0.92rem; }
+
+.day-card-body { padding: 1.2rem 1.4rem 1.4rem; }
+
+.day-meta-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem; }
+
+.day-columns { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem; }
+
+@media (max-width: 760px) {
+  .day-columns { grid-template-columns: 1fr; }
+}
+
+.schedule-list { list-style: none; margin: 0; padding: 0; }
+.schedule-list li {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--t-line);
+  font-size: 0.92rem;
+}
+.schedule-list li:last-child { border-bottom: none; }
+.schedule-list .time { font-family: var(--ui); font-weight: 700; color: var(--t-700); font-size: 0.82rem; }
+
+.side-block { margin-bottom: 1rem; }
+.side-block h4 {
+  font-family: var(--ui);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  color: var(--t-700);
+  margin-bottom: 0.35em;
+}
+
+.overnight-box {
+  background: var(--t-paper);
+  border: 1px solid var(--t-line);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+}
+.overnight-box .on-name { font-weight: 700; }
+.overnight-box .on-line { font-size: 0.88rem; color: var(--t-ink-dim); margin-top: 0.2em; }
+
+.meals-row { display: flex; gap: 0.5rem; flex-wrap: wrap; font-size: 0.85rem; }
+.meals-row span { background: #fff; border: 1px solid var(--t-line); border-radius: 6px; padding: 0.25rem 0.5rem; }
+
+/* ---------- Packing ---------- */
+
+.pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+
+.pack-card {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+.pack-card h3 { font-size: 1rem; margin-bottom: 0.6em; }
+
+/* ---------- Open questions ---------- */
+
+.question-card {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-left: 4px solid var(--warn-border);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.75rem;
+}
+.question-card h3 { font-size: 1rem; margin-bottom: 0.3em; }
+.question-card p { color: var(--t-ink-dim); font-size: 0.92rem; margin: 0; }
+.question-card .q-meta {
+  font-family: var(--ui);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--t-700);
+  margin-bottom: 0.25em;
+}
+
+@media (max-width: 600px) {
+  .schedule-list li { grid-template-columns: 88px 1fr; }
+}

@@ -1,9 +1,13 @@
 // Full Circle Maui — Trip Data
-// Transcribed from the trip spec. Coordinates marked verified:true were
-// looked up and confirmed. Coordinates marked verified:false are
-// intentionally NOT filled in — do not guess them. Confirm against a
-// real source (Google Maps / official park site) before using for
-// navigation.
+//
+// Rendered by ../../js/trip.js. See docs/TRIP_SPEC.md for the full schema and
+// ../../template/trip-slug/data.js for an annotated blank.
+//
+// Coordinates marked verified:true were looked up and confirmed. Coordinates
+// marked verified:false are intentionally NOT filled in — do not guess them.
+// Confirm against a real source (Google Maps / official park site) before
+// using for navigation. A coordinate 200 m off routes you to a locked gate on
+// a one-lane road with no cell service.
 
 const TRIP = {
   title: "Full Circle Maui",
@@ -17,7 +21,7 @@ const TRIP = {
     "Counterclockwise island loop: Kahului → Olowalu (west) → South Maui lava coast → Paia → Hāna (east) → Piʻilani Hwy across the south flank → Haleakalā summit → Olowalu → OGG. No road driven twice except the OGG–Olowalu stub.",
   totalDistance: "~400 miles",
   totalDrivingHours: "~19 hours",
-  themeColor: "#0F5257",
+  theme: "ocean",
 };
 
 const DAYS = [
@@ -476,3 +480,58 @@ const NOTES = [
       "Camp Olowalu sits ~6 miles south of Lahaina. The fire footprint is still visible and residents are still living it. Drive through, don't sightsee. Puʻu Kekaʻa is a leina a ka ʻuhane — a place where souls were said to depart the island. Waioka is the real name; \"Venus Pool\" is a guidebook invention.",
   },
 ];
+
+/* --------------------------------------------------------------------------
+   Assembly — hands the data above to the shared renderer. Everything the
+   renderer needs is in here; the consts above are just the source of truth.
+   -------------------------------------------------------------------------- */
+
+window.TRIP_DATA = {
+  meta: {
+    slug: "maui-2027",
+    title: TRIP.title,
+    subtitle: TRIP.subtitle,
+    dates: TRIP.dates,
+    emoji: "🌺",
+    theme: TRIP.theme,
+    route: TRIP.route,
+    vehicle: TRIP.vehicle,
+    stats: [
+      { num: "8 days", lbl: "Length" },
+      { num: TRIP.totalDistance, lbl: "Distance" },
+      { num: TRIP.totalDrivingHours, lbl: "Driving" },
+      { num: "7", lbl: "Nights camping" },
+    ],
+    overviewCards: [
+      { h: "Dates", p: `${TRIP.dates}<br>${TRIP.lengthLabel}` },
+      { h: "Group", p: TRIP.group },
+      { h: "Total distance", p: `${TRIP.totalDistance}, ${TRIP.totalDrivingHours} driving` },
+      {
+        h: "Lodging",
+        p: "7 nights camping — 2 private (Camp Olowalu), 3 state park (Waiʻānapanapa), 2 national park (Hosmer Grove)",
+      },
+    ],
+    footerNote:
+      'Built from the trip spec. Coordinates marked "unverified" are intentionally blank; confirm before navigating. <a href="../../index.html">← All trips</a>',
+  },
+
+  days: DAYS,
+  lodging: { rows: LODGING, total: LODGING_TOTAL, summary: `7 nights camping · ${LODGING_TOTAL} total` },
+  waypoints: WAYPOINTS,
+  hikes: { title: "Hikes &amp; Trails", rows: HIKES },
+  sunMoon: SUN_MOON,
+  sunMoonNote: "Calculated, elevation-corrected. ~13 hours of daylight daily.",
+  weather: WEATHER,
+  budget: {
+    rows: BUDGET,
+    subtotal: BUDGET_SUBTOTAL,
+    buffer: BUDGET_BUFFER,
+    bufferLabel: "Buffer (12%)",
+    total: BUDGET_TOTAL,
+    note: BUDGET_NOTE,
+  },
+  packing: PACKING,
+  reservations: RESERVATIONS,
+  notes: NOTES,
+  map: { center: [20.79, -156.32], zoom: 10 },
+};
