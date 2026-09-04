@@ -19,12 +19,20 @@ trips/<slug>/         one folder per trip: index.html (shell) + data.js (everyth
 template/trip-slug/   annotated blank to copy
 tools/validate.mjs    node tools/validate.mjs
 docs/TRIP_SPEC.md     full schema + conventions
+docs/TRIPFORMAT.md    the paste-in brief. Hand this to an upstream research
+                      chatbot; it returns a filled version you paste here
 ```
 
 ## Working on this repo
 
 - **Adding a trip?** Use the `/new-trip` skill
   (`.claude/skills/new-trip/SKILL.md`). Don't freestyle it.
+- **The intake pipeline:** upstream chatbot fills `docs/TRIPFORMAT.md` →
+  Colin pastes it here → `/new-trip` runs the confidence pass (`[V]`/`[U]`/`[?]`
+  tags become verified data, prose, or open questions — never upgraded by
+  vibes) → page ships. A `[U]` fact never becomes `verified: true`.
+- **The hub wears `basecamp`; trips wear terrain.** `js/hub.js` calls
+  `applyTheme("basecamp")` explicitly. Don't let a trip use it.
 - **Content changes are data changes.** A trip's `data.js` holds everything;
   its `index.html` is a shell that must not be edited per-trip. Tabs generate
   from whichever data sections exist.

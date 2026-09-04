@@ -8,6 +8,13 @@ If you're Claude and someone just pasted an itinerary at you: read
 instead — it's the operational version of this document. This file is the
 reference.
 
+If you want to *generate* the thing that gets pasted, that's
+[`TRIPFORMAT.md`](TRIPFORMAT.md) — the brief handed to an upstream research
+assistant. It carries the traveler profile and the three rules, and it makes
+the upstream bot tag every fact `[V]` verified / `[U]` unverified / `[?]`
+unknown. Those tags are what let the build step tell research from
+hallucination.
+
 ---
 
 ## The three rules
@@ -50,6 +57,8 @@ js/hub.js             hub renderer
 js/trip.js            shared trip renderer — every trip page uses this, unmodified
 trips/<slug>/         one folder per trip: index.html (20-line shell) + data.js
 template/trip-slug/   annotated blank to copy
+docs/TRIPFORMAT.md    the upstream research brief — paste it into another
+                      chatbot, paste the filled result back here
 tools/validate.mjs    node tools/validate.mjs — run before committing
 vendor/leaflet/       Leaflet 1.9.4, vendored, no CDN
 ```
@@ -81,7 +90,7 @@ tab. Add data → get a tab.
 | `title` | yes | |
 | `subtitle` | | one line on the shape of it |
 | `emoji` | | the card and favicon glyph |
-| `theme` | | `ocean` `desert` `alpine` `forest` `night` `savanna` |
+| `theme` | | `ocean` `desert` `alpine` `forest` `night` `savanna` `autumn` — must match `meta.theme` on the page |
 | `status` | yes | `planned` \| `outline` \| `wishlist` \| `done` |
 | `pinned` | | floats it above everything on the hub |
 | `page` | | `"trips/<slug>/"`, or `null` for a wishlist entry |
@@ -162,10 +171,18 @@ food strategy, gear reasoning. This is where the page earns its keep.
 
 ## Themes
 
-Six presets in `js/themes.js`, chosen by terrain rather than by country:
+Terrain presets in `js/themes.js`, chosen by terrain rather than by country:
 `ocean` (reef, wet volcanic coast), `desert` (red rock, slot canyons),
 `alpine` (granite, glacier, above treeline), `forest` (temperate rainforest),
-`night` (dark sky, aurora, winter), `savanna` (grassland, dry heat).
+`night` (dark sky, aurora, winter), `savanna` (grassland, dry heat), `autumn`
+(hardwood ridges at peak color).
+
+Plus one that is not a terrain: **`basecamp`**, slate and brass, worn by the
+hub itself. The hub is an index, not a place — it shouldn't dress as one, and
+the neutral chrome is what lets the cards' terrain colors read at a glance.
+`js/hub.js` applies it explicitly and the validator rejects a trip that claims
+it. The `base.css` `:root` defaults are the same palette, so a page that
+renders before JS flashes neutral rather than flashing somebody else's ocean.
 
 Pick by what the ground looks like. Opening a page should tell you within half
 a second whether you're looking at lava or granite. Adding a preset means

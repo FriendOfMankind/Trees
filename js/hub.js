@@ -320,6 +320,9 @@
   }
 
   function init() {
+    // The hub wears its own palette, not a trip's. Without this it inherits
+    // base.css's defaults and ends up dressed as whichever trip those match.
+    applyTheme("basecamp");
     renderHeaderStats();
     renderFilters();
     renderTripGrid();

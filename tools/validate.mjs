@@ -9,6 +9,8 @@
      - a slug mismatch between the registry and the trip's own data
      - a waypoint marked verified:true with no coordinates (or vice versa)
      - a coordinate outside the possible range
+     - an "outline" trip with no openQuestions — the honesty check
+     - a theme mismatch between the registry card and the page
    ========================================================================== */
 
 import { readFileSync, existsSync, readdirSync } from "node:fs";
@@ -57,6 +59,7 @@ if (!Array.isArray(TRIPS)) {
 
     if (!validStatus.has(t.status)) fail(`${id}: status "${t.status}" is not one of planned/outline/wishlist/done`);
     if (t.theme && !THEMES[t.theme]) fail(`${id}: unknown theme "${t.theme}" (see js/themes.js)`);
+    if (t.theme === "basecamp") fail(`${id}: "basecamp" is the hub's own palette — pick a terrain theme`);
 
     if (t.coords) {
       const [lat, lng] = t.coords;
@@ -100,6 +103,14 @@ for (const slug of slugs) {
   if (Array.isArray(TRIPS) && !TRIPS.some((t) => t.slug === slug)) fail(`${rel}: not listed in data/trips.js — it won't appear on the hub`);
   if (D.meta.theme && !THEMES[D.meta.theme] && typeof D.meta.theme !== "object") {
     fail(`${rel}: unknown theme "${D.meta.theme}"`);
+  }
+  if (D.meta.theme === "basecamp") fail(`${rel}: "basecamp" is the hub's own palette — pick a terrain theme`);
+  const reg = Array.isArray(TRIPS) ? TRIPS.find((t) => t.slug === slug) : null;
+  if (reg && reg.theme && D.meta.theme && reg.theme !== D.meta.theme) {
+    warn(`${rel}: theme "${D.meta.theme}" differs from the registry's "${reg.theme}" — the hub card and the page won't match`);
+  }
+  if (reg && reg.status === "outline" && !(D.openQuestions || []).length) {
+    fail(`${rel}: status is "outline" but there are no openQuestions — that's what makes it an outline rather than a bad plan`);
   }
   if (!Array.isArray(D.days) || !D.days.length) warn(`${rel}: no days — the itinerary tab will be empty`);
 
