@@ -38,15 +38,15 @@ window.TRIP_DATA = {
     stats: [
       { num: "11 days", lbl: "Length" },
       { num: "10", lbl: "Nights camping" },
-      { num: "8 of 10", lbl: "Nights reserved" },
+      { num: "7 of 10", lbl: "Nights confirmed" },
       { num: "~46 mi", lbl: "On foot" },
     ],
     overviewCards: [
       { h: "Dates", p: "Oct 15–25, 2026<br>11 days / 10 nights" },
       { h: "Group", p: "Solo." },
-      { h: "Lodging", p: "Arrowhead ✅ · Davidson River ✅ (confirmed open by phone after four slipped dates) · <b>FS 210 ❌ first-come</b> · Hurricane ✅" },
+      { h: "Lodging", p: "⚠️ <b>Arrowhead moved to Oct 16–18</b>, so <b>Oct 15 has no bed</b> · Davidson River ✅ 0864063574-1 · <b>FS 210 ❌ first-come</b> · Hurricane ✅ 0840120294-1" },
       { h: "The one real risk", p: "<b>Oct 22.</b> Leave a reserved site at 6:30 AM and compete for a first-come dispersed site on FS 210, on the Thursday of peak color week, with no cell service and no reservation possible in the corridor." },
-      { h: "The one open call", p: "<b>Fayette Station Road parking on Bridge Day.</b> Fayette County Chamber, 800-927-0263. The only unresolved item that changes a day." },
+      { h: "Two open calls", p: "<b>Arrowhead 304-900-5501</b> — get the Oct 16–18 change in writing. <b>Fayette County Chamber 800-927-0263</b> — Bridge Day parking." },
       { h: "The lecture", p: "Wed Oct 21, 11:00–3:00, at camp over Starlink. Confirmed on both 2026 trips. Oct 21 was already the buffer day — this one absorbs it cleanly." },
     ],
     footerNote:
@@ -63,13 +63,13 @@ window.TRIP_DATA = {
       driving: "~6h 05m",
       slack: "<b>None after dark.</b> If the drive runs 90 min long, cut Fayette Station Road and do it Friday morning. Long Point is what to protect.",
       overnight: {
-        name: "Arrowhead Bike Farm",
+        name: "⚠️ Arrowhead Bike Farm — NOT BOOKED FOR TONIGHT",
         place: "8263 Gatewood Rd, Fayetteville WV",
         kind: "Private campground",
-        cost: "Reserved",
-        checkin: "Kitchen Sun–Thu till 6 PM, Fri–Sat till 10 PM",
-        confirmation: "RESERVED ✅ — number not yet in this file",
-        notes: "Under 3 mi from town. <b>The Long Point trailhead is at the campground.</b> Kaymoor Top is 5 minutes away. On-site bike shop, biergarten, showers, wifi.",
+        cost: "$25.44 for the stay",
+        checkin: "Check-in 3 PM at the bike shop, or the Handle Bar after hours with the camp host. Checkout 11 AM.",
+        confirmation: "❌ Ref ROTXCV now reads <b>Oct 16 → Oct 18</b>. This night is not covered — see Open Questions.",
+        notes: "Under 3 mi from town. <b>The Long Point trailhead is at the campground.</b> Kaymoor Top is 5 minutes away. Bike shop 10–6, bar and kitchen 11–9 (10 on Fri/Sat). Bathhouse is the red building by the parking lot. <b>Waiver required</b> — sign it before arrival. Changes and cancellations by phone only: 304-900-5501.",
       },
       schedule: [
         { kind: "drive", time: "7:30 → 1:05", est: "5h 35m", text: "Avon OH → Arrowhead Bike Farm, I-77 S.", maps: "Arrowhead Bike Farm Fayetteville WV" },
@@ -101,9 +101,9 @@ window.TRIP_DATA = {
         name: "Arrowhead Bike Farm",
         place: "Fayetteville, WV",
         kind: "Private campground",
-        cost: "Reserved",
-        checkin: "Kitchen till 10 PM Friday",
-        confirmation: "RESERVED ✅",
+        cost: "$25.44 for the stay",
+        checkin: "Check-in 3 PM. Kitchen till 10 PM Friday.",
+        confirmation: "✅ Ref ROTXCV — first covered night under the Oct 16–18 change",
         notes: null,
       },
       schedule: [
@@ -136,9 +136,9 @@ window.TRIP_DATA = {
         name: "Arrowhead Bike Farm",
         place: "Fayetteville, WV",
         kind: "Private campground",
-        cost: "Reserved",
+        cost: "$25.44 for the stay",
         checkin: null,
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ Ref ROTXCV — checkout 11 AM Sunday Oct 18",
         notes: null,
       },
       schedule: [
@@ -175,7 +175,7 @@ window.TRIP_DATA = {
         kind: "USFS campground",
         cost: "Reserved",
         checkin: "Check-in 2 PM Oct 18, checkout noon Oct 22",
-        confirmation: "RESERVED ✅ and CONFIRMED OPEN BY PHONE",
+        confirmation: "✅ recreation.gov <b>0864063574-1</b> — 4 nights. Campground open, confirmed by phone.",
         notes: "~2,200 ft. Reopening had slipped four times (May 1 → Jul 1 → Sep 1 → Oct 1) before phone confirmation. Mount Pisgah and Lake Powhatan fallbacks are off the board.",
       },
       schedule: [
@@ -212,7 +212,7 @@ window.TRIP_DATA = {
         kind: "USFS campground",
         cost: "Reserved",
         checkin: null,
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ 0864063574-1",
         notes: null,
       },
       schedule: [
@@ -249,7 +249,7 @@ window.TRIP_DATA = {
         kind: "USFS campground",
         cost: "Reserved",
         checkin: null,
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ 0864063574-1",
         notes: null,
       },
       schedule: [
@@ -283,7 +283,7 @@ window.TRIP_DATA = {
         kind: "USFS campground",
         cost: "Reserved",
         checkin: "Checkout noon Oct 22 — you leave at 6:30 anyway",
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ 0864063574-1",
         notes: null,
       },
       schedule: [
@@ -386,7 +386,7 @@ window.TRIP_DATA = {
         kind: "USFS campground",
         cost: "$20",
         checkin: "Gate 7 AM–10 PM",
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ recreation.gov <b>0840120294-1</b> — 1 night",
         notes: "~30 sites at 2,800–3,050 ft along Hurricane Branch and Comers Creek, under oak, hemlock and rhododendron. Paved spurs, gravel tent pads, two bathhouses with flush toilets and hot showers. The AT is within half a mile. <b>No cell service at all, no pay phone.</b> ⚠️ Skip site 6 — a camper reported it's neither private nor level.",
       },
       schedule: [
@@ -425,13 +425,14 @@ window.TRIP_DATA = {
   ],
 
   lodging: {
-    summary: "10 nights · 8 reserved, 2 first-come with no reservation possible",
-    total: "Hurricane $20; others reserved",
+    summary: "⚠️ 10 nights · 7 confirmed, 1 uncovered (Oct 15), 2 first-come with no reservation possible",
+    total: "Arrowhead $25.44 · Hurricane $20 · Davidson River reserved",
     rows: [
-      { night: "1–3", date: "Oct 15–17", location: "Fayetteville, WV", type: "Private", name: "Arrowhead Bike Farm", cost: "Reserved", status: "RESERVED ✅" },
-      { night: "4–7", date: "Oct 18–21", location: "Brevard, NC", type: "USFS", name: "Davidson River", cost: "Reserved", status: "RESERVED ✅ + phone-confirmed open" },
+      { night: "1", date: "Oct 15", location: "Fayetteville, WV", type: "—", name: "⚠️ NOTHING BOOKED", cost: "—", status: "❌ Arrowhead moved off this night" },
+      { night: "2–3", date: "Oct 16–17", location: "Fayetteville, WV", type: "Private", name: "Arrowhead Bike Farm", cost: "$25.44", status: "⚠️ Ref ROTXCV — change made by phone, never re-confirmed in writing" },
+      { night: "4–7", date: "Oct 18–21", location: "Brevard, NC", type: "USFS", name: "Davidson River", cost: "Reserved", status: "✅ 0864063574-1 + phone-confirmed open" },
       { night: "8–9", date: "Oct 22–23", location: "Linville Gorge, NC", type: "Dispersed, no facilities", name: "FS 210 roadside", cost: "Free", status: "❌ FIRST-COME — no reservation possible" },
-      { night: 10, date: "Oct 24", location: "Mount Rogers, VA", type: "USFS", name: "Hurricane Campground", cost: "$20", status: "RESERVED ✅" },
+      { night: 10, date: "Oct 24", location: "Mount Rogers, VA", type: "USFS", name: "Hurricane Campground", cost: "$20", status: "✅ 0840120294-1" },
     ],
   },
 
@@ -527,12 +528,14 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "⚠️ CALL 800-927-0263 — Fayette Station Road parking on Bridge Day. The only open item that changes a day." },
+    { text: "⚠️ CALL 304-900-5501 — Arrowhead. Confirm the Oct 16–18 change in writing and resolve the missing Oct 15 night. Do this first." },
+    { text: "⚠️ CALL 800-927-0263 — Fayette Station Road parking on Bridge Day." },
+    { text: "Sign the Arrowhead waiver before arrival — every camper needs one" },
     { text: "Call Grandfather Ranger District (828) 652-2144 — FS 210 site availability, the 200-ft camping Forest Order, and Table Rock loop routing given the washed-out Spence Ridge bridge" },
     { text: "Day 1 at Canyon Rim Visitor Center: ask about Keeneys Creek Road condition for a 5.9 in clearance car" },
-    { text: "✅ Arrowhead Bike Farm Oct 15–17 — RESERVED. Pull the confirmation number into this page." },
-    { text: "✅ Davidson River Oct 18–21 — RESERVED and phone-confirmed open" },
-    { text: "✅ Hurricane Campground Oct 24 — RESERVED. Gate 7 AM–10 PM." },
+    { text: "⚠️ Arrowhead ref ROTXCV — was Oct 15–17 (2 nights), verbally moved to Oct 16–18. Unconfirmed in writing." },
+    { text: "✅ Davidson River Oct 18–21 — recreation.gov 0864063574-1, 4 nights, campground open (phone-confirmed)" },
+    { text: "✅ Hurricane Campground Oct 24 — recreation.gov 0840120294-1, 1 night. Gate 7 AM–10 PM. No cell service — carry it on paper." },
     { text: "Decide the FS 210 bail-out BEFORE the trip: Mortimer Campground, or a motel in Newland / Linville Falls / Morganton" },
     { text: "Sleeping bag liner — decide after the September Kentucky shakedown" },
     { text: "Reserve The Falls Landing, Brevard, for Tuesday Oct 20" },
@@ -543,6 +546,18 @@ window.TRIP_DATA = {
   ],
 
   openQuestions: [
+    {
+      question: "⚠️ Arrowhead moved to Oct 16–18, and Oct 15 now has no bed.",
+      blocks: "Day 1 — and possibly the whole shape of the WV leg",
+      detail:
+        "The master file says Arrowhead is reserved for Oct 15–17, three nights. Gmail says otherwise. The original confirmation (ref <b>ROTXCV</b>, Aug 31) was <b>Oct 15 3 PM → Oct 17 11 AM — two nights, not three</b>. On Sept 1 you emailed asking to shift it forward one day to <b>Oct 16 through Oct 18</b>, and Phil replied that John had handled it by phone.<br><br>That change makes sense — under the original booking you had no bed on <b>Bridge Day night</b>, and the new dates line the 11 AM Oct 18 checkout up against Davidson River's 2 PM Oct 18 check-in. But it leaves two problems. <b>First: Oct 15 is now uncovered</b>, and Day 1 as written drives to Arrowhead and sleeps there. <b>Second: it collides with Endless Wall.</b> Endless Wall must happen before Saturday because the bridge-overlook trails close for Bridge Day security — but if the trip now starts Oct 16, Friday is your arrival day and Endless Wall has nowhere to go.<br><br>Three ways out, and this is your call: <b>(a)</b> shift the whole WV leg one day later and find something to cut, <b>(b)</b> book Oct 15 somewhere else and keep the itinerary as written, or <b>(c)</b> ask Arrowhead to restore Oct 15 as well and pay for a third night.",
+    },
+    {
+      question: "⚠️ Nothing confirms the Arrowhead change in writing.",
+      blocks: "Days 1–3",
+      detail:
+        "The only evidence the shift happened is Phil relaying that <i>\"John told me you called and he took care of this for you.\"</i> No revised confirmation email was ever sent — the thread ends with your thank-you. The financial exposure is $25.44, which is nothing; the real exposure is arriving in Fayette County on Bridge Day weekend, with roughly 100,000 people in it, and finding the booking still reads Oct 15–17 or got cancelled outright. <b>Call 304-900-5501 and ask them to email the updated confirmation.</b> Changes and cancellations are phone-only at this campground, so there's no self-service page to check.",
+    },
     {
       question: "Fayette Station Road parking on Bridge Day.",
       blocks: "Day 3 — the whole day",
@@ -580,10 +595,10 @@ window.TRIP_DATA = {
         "MEALS-trip2-october.md exists and contains the storage zones, format library, quantities, shopping list, and the cooler timeline that solves eleven days on one 48qt cooler. None of it has been transcribed here. Camp meals above say \"made at camp\" and nothing more, which is the one place this page is thinner than the Kentucky one.",
     },
     {
-      question: "Confirmation numbers are not in this file.",
-      blocks: "Nothing — three of four are reserved",
+      question: "Print the confirmations, especially Hurricane.",
+      blocks: "Nothing — the numbers are on this page now",
       detail:
-        "Arrowhead, Davidson River and Hurricane are all booked and the numbers live in email. They belong on the page you'll have open at a gate with no signal — especially Hurricane, which has no cell service and no pay phone.",
+        "Davidson River <b>0864063574-1</b> (4 nights), Hurricane <b>0840120294-1</b> (1 night), Arrowhead ref <b>ROTXCV</b>. Hurricane has <b>no cell service and no pay phone</b> — if anything is wrong at that gate you cannot look it up, so that one goes on paper. Arrowhead also requires a signed waiver from every camper; sign it before you leave.",
     },
   ],
 
@@ -651,6 +666,11 @@ window.TRIP_DATA = {
     "Three Google Maps regions: <b>Fayetteville–Oak Hill–Beckley</b>, <b>Brevard–Asheville–Black Balsam</b>, and <b>Linville–Morganton north to Marion VA</b>. Download the last two on <b>Wednesday Oct 21 in Brevard</b> — that's the last reliable signal before four days without it. ⚠️ Google Maps offline does not include trails; download AllTrails or Gaia separately.",
 
   notes: [
+    {
+      heading: "The lodging in the master file does not match the lodging in your inbox",
+      body:
+        "The master file says Arrowhead Bike Farm, Oct 15–17, three nights, reserved. The confirmation email says the original booking was Oct 15 3 PM to Oct 17 11 AM — <b>two nights</b>. On Sept 1 you asked to move it forward a day to Oct 16–18 and were told by phone that it was done, with no revised confirmation ever sent. So the plan, the original booking, and the current booking are three different things, and only one of them is written down anywhere.<br><br>The move itself was the right instinct: the original dates left you with no bed on Bridge Day night, and the new ones hand off cleanly to Davidson River's 2 PM check-in on Oct 18. What it costs is Oct 15, which Day 1 currently assumes, and it squeezes Endless Wall — that hike has to happen before Saturday's trail closures, and under the new dates Friday is an arrival day. This is the first thing to sort on this trip, ahead of the Bridge Day parking question, because it determines where you sleep on night one.",
+    },
     {
       heading: "Thursday Oct 22 is the trip's single point of failure",
       body:

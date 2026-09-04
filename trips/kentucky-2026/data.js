@@ -67,7 +67,7 @@ window.TRIP_DATA = {
         kind: "USFS campground — walk-in tent site",
         cost: "$24/night",
         checkin: "Showers + potable water run through Oct 31",
-        confirmation: "RESERVED ✅ — confirmation number not yet in this file",
+        confirmation: "✅ recreation.gov <b>0822210215-1</b> — 2 nights",
         notes: "54 sites at ~1,200 ft. Cliff, Silvermine, Hidden Arch and Koomer Ridge trails all leave from the campground.",
       },
       schedule: [
@@ -111,7 +111,7 @@ window.TRIP_DATA = {
         kind: "USFS campground",
         cost: "$24/night",
         checkin: null,
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ 0822210215-1",
         notes: null,
       },
       schedule: [
@@ -154,7 +154,7 @@ window.TRIP_DATA = {
         kind: "NPS campground — tent loop",
         cost: "Reserved",
         checkin: "Visitor center adjacent, 9–5 ET",
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ recreation.gov <b>0895576747-1</b> — 3 nights",
         notes: "Free hot showers. ⚠️ Active black bear habitat — food storage required. Flagged hazardous tree area: look up before pitching.",
       },
       schedule: [
@@ -194,7 +194,7 @@ window.TRIP_DATA = {
         kind: "NPS campground",
         cost: "Reserved",
         checkin: null,
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ 0895576747-1",
         notes: null,
       },
       schedule: [
@@ -232,7 +232,7 @@ window.TRIP_DATA = {
         kind: "NPS campground",
         cost: "Reserved",
         checkin: null,
-        confirmation: "RESERVED ✅",
+        confirmation: "✅ 0895576747-1",
         notes: null,
       },
       schedule: [
@@ -287,14 +287,14 @@ window.TRIP_DATA = {
   ],
 
   lodging: {
-    summary: "5 nights camping · both campgrounds reserved · no permits required",
+    summary: "5 nights camping · both campgrounds reserved and confirmed · no permits required",
     total: "Koomer Ridge $24/night; Bandy Creek reserved",
     rows: [
-      { night: 1, date: "Tue 9/22", location: "Slade, KY", type: "USFS — walk-in tent", name: "Koomer Ridge", cost: "$24", status: "RESERVED ✅" },
-      { night: 2, date: "Wed 9/23", location: "Slade, KY", type: "USFS — walk-in tent", name: "Koomer Ridge", cost: "$24", status: "RESERVED ✅" },
-      { night: 3, date: "Thu 9/24", location: "Big South Fork, TN", type: "NPS — tent loop", name: "Bandy Creek", cost: "Reserved", status: "RESERVED ✅" },
-      { night: 4, date: "Fri 9/25", location: "Big South Fork, TN", type: "NPS — tent loop", name: "Bandy Creek", cost: "Reserved", status: "RESERVED ✅" },
-      { night: 5, date: "Sat 9/26", location: "Big South Fork, TN", type: "NPS — tent loop", name: "Bandy Creek", cost: "Reserved", status: "RESERVED ✅" },
+      { night: 1, date: "Tue 9/22", location: "Slade, KY", type: "USFS — walk-in tent", name: "Koomer Ridge", cost: "$24", status: "✅ 0822210215-1" },
+      { night: 2, date: "Wed 9/23", location: "Slade, KY", type: "USFS — walk-in tent", name: "Koomer Ridge", cost: "$24", status: "✅ 0822210215-1" },
+      { night: 3, date: "Thu 9/24", location: "Big South Fork, TN", type: "NPS — tent loop", name: "Bandy Creek", cost: "Reserved", status: "✅ 0895576747-1" },
+      { night: 4, date: "Fri 9/25", location: "Big South Fork, TN", type: "NPS — tent loop", name: "Bandy Creek", cost: "Reserved", status: "✅ 0895576747-1" },
+      { night: 5, date: "Sat 9/26", location: "Big South Fork, TN", type: "NPS — tent loop", name: "Bandy Creek", cost: "Reserved", status: "✅ 0895576747-1" },
     ],
   },
 
@@ -393,8 +393,8 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "✅ Koomer Ridge, Sept 22–23 — RESERVED. Pull the confirmation number into this page." },
-    { text: "✅ Bandy Creek, Sept 24–26 — RESERVED. Pull the confirmation number into this page." },
+    { text: "✅ Koomer Ridge, Sept 22–23 — recreation.gov 0822210215-1, 2 nights, confirmed 9/1" },
+    { text: "✅ Bandy Creek, Sept 24–26 — recreation.gov 0895576747-1, 3 nights, confirmed 9/1" },
     { text: "✅ Tunnel Ridge Road — confirmed OPEN by phone. The Bison Way fallback is dead." },
     { text: "✅ Honey Creek — confirmed OPEN by phone." },
     { text: "Check fire ban status, both parks" },
@@ -445,10 +445,10 @@ window.TRIP_DATA = {
         "Stargazing is on the declined list so this may not matter at all — but the 5:45 AM Wednesday walk out Auxier Ridge in the dark is easier or harder depending on it, and it's the one thing the conditions table can't answer yet.",
     },
     {
-      question: "Confirmation numbers are not in this file.",
-      blocks: "Nothing — both sites are reserved",
+      question: "Print the confirmations before you leave.",
+      blocks: "Nothing — both sites are confirmed",
       detail:
-        "Both campgrounds are booked but the numbers live in email. They belong here, on the page you'll have open at a check-in kiosk with no signal.",
+        "Koomer Ridge <b>0822210215-1</b> (2 nights) and Bandy Creek <b>0895576747-1</b> (3 nights), both booked through recreation.gov on Sept 1. The numbers are on this page now, but cell service is limited to none at both campgrounds — carry paper too.",
     },
   ],
 
