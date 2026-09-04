@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trip Plan</title>
+<meta name="description" content="Day-by-day itinerary, lodging, map, packing, budget and safety notes." />
+<link rel="stylesheet" href="../../vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="../../css/base.css" />
+<link rel="stylesheet" href="../../css/trip.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-text">
+      <p class="eyebrow"><a href="../../index.html">&larr; All trips</a></p>
+      <h1 id="trip-title">Loading…</h1>
+      <p class="subtitle" id="trip-subtitle"></p>
+    </div>
+    <div class="header-stats" id="header-stats"></div>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+</header>
+
+<main id="panels"></main>
+
+<footer class="site-footer"><p id="footer-note"></p></footer>
+
+<script src="../../vendor/leaflet/leaflet.js"></script>
+<script src="../../js/themes.js"></script>
+<script src="data.js"></script>
+<script src="../../js/trip.js"></script>
+</body>
+</html>

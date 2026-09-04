@@ -33,6 +33,7 @@
   const SECTIONS = [
     { id: "overview",     label: "Overview",             on: true,                       render: renderOverview },
     { id: "itinerary",    label: "Itinerary",            on: has(D.days),                render: renderItinerary },
+    { id: "places",       label: "Places",               on: has(D.places),              render: renderPlaces },
     { id: "map",          label: "Map",                  on: has(D.waypoints),           render: renderMapPanel },
     { id: "lodging",      label: "Lodging",              on: has(D.lodging && D.lodging.rows), render: renderLodging },
     { id: "hikes",        label: (M.labels && M.labels.hikes) || "Hikes", on: has(D.hikes && D.hikes.rows), render: renderHikes },
@@ -135,6 +136,35 @@
       `<h2 class="section-title">Day-by-Day Itinerary</h2>` + D.days.map(dayCardHtml).join("");
   }
 
+  /* One row of the movement log. Accepts either the simple {time,text} shape
+     or the full {kind,time,est,text,maps,warn} one — Maui uses the first,
+     everything since uses the second. */
+  const KIND_ICON = {
+    drive: "\u{1F697}", stop: "\u{1F4CD}", hike: "\u{1F97E}", food: "\u{1F37D}\uFE0F",
+    dessert: "\u{1F366}", shop: "\u{1F6D2}", sunrise: "\u{1F304}", sunset: "\u{1F305}",
+    lecture: "\u{1F4E1}", ruins: "\u{1F3DA}\uFE0F", view: "\u{1F440}", camp: "\u26FA",
+    shuttle: "\u{1F68C}", event: "\u{1F336}\uFE0F",
+  };
+
+  /* Google Maps search deep link. The query string is what survives offline —
+     it's stored in the page, so the link works the moment there's signal, and
+     the offline Google Maps region download does the actual navigation. */
+  function mapsUrl(query) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  }
+
+  function scheduleRowHtml(s) {
+    const icon = s.kind ? (KIND_ICON[s.kind] || "\u{1F4CD}") : "";
+    const maps = s.maps
+      ? `<a class="maps-btn" href="${mapsUrl(s.maps)}" target="_blank" rel="noopener">Maps &#8599;</a>`
+      : "";
+    const est = s.est ? `<span class="est">${s.est}</span>` : "";
+    return `<li class="${s.warn ? "warn-row" : ""}">
+      <span class="time">${icon ? `<span class="kind">${icon}</span>` : ""}${s.time}</span>
+      <span class="row-body"><span class="row-text">${s.text}</span>${est}${maps}</span>
+    </li>`;
+  }
+
   function dayCardHtml(d) {
     const o = d.overnight;
     const overnight = o
@@ -157,6 +187,10 @@
       d.walking ? `<span class="chip">🥾 ${d.walking}</span>` : "",
     ].filter(Boolean).join("");
 
+    const slack = d.slack
+      ? `<div class="slack-line"><b>Slack:</b> ${d.slack}</div>`
+      : "";
+
     return `
       <article class="day-card" id="day-${d.day}">
         <div class="day-card-head">
@@ -173,8 +207,9 @@
               <div class="side-block">
                 <h4>Schedule</h4>
                 <ul class="schedule-list">
-                  ${(d.schedule || []).map((s) => `<li><span class="time">${s.time}</span><span>${s.text}</span></li>`).join("")}
+                  ${(d.schedule || []).map(scheduleRowHtml).join("")}
                 </ul>
+                ${slack}
               </div>
             </div>
             <div>
@@ -186,6 +221,29 @@
           </div>
         </div>
       </article>`;
+  }
+
+  /* ---------------- Places ----------------
+     The field view. Every entry is a Google Maps query rather than a pin,
+     because a query works with the offline region download and a tile map
+     does not. This is the tab to use at a trailhead; the Map tab is for
+     planning at home. */
+  function renderPlaces() {
+    $("#panel-places").innerHTML = `
+      <h2 class="section-title">Places to Pin</h2>
+      <p class="section-sub">${D.placesNote || "Tap Maps to open the search. Download the offline regions listed at the bottom before leaving home."}</p>
+      ${D.places.map((g) => `
+        <div class="place-group">
+          <h3>${g.group}</h3>
+          <ul class="place-list">
+            ${g.items.map((i) => `<li>
+              <span class="p-name">${i.name}${i.note ? `<span class="p-note">${i.note}</span>` : ""}</span>
+              <a class="maps-btn" href="${mapsUrl(i.maps || i.name)}" target="_blank" rel="noopener">Maps &#8599;</a>
+            </li>`).join("")}
+          </ul>
+        </div>`).join("")}
+      ${D.offlineRegions ? `<div class="callout warning" style="margin-top:1.25rem">
+        <strong>Offline downloads</strong>${D.offlineRegions}</div>` : ""}`;
   }
 
   /* ---------------- Map ---------------- */

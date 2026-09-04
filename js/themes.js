@@ -42,6 +42,13 @@ const THEMES = {
     sand: "#e6e3f0", sandDim: "#b9b4cf",
     paper: "#f9f8fd", ink: "#17162a", inkDim: "#514e6b", line: "#dbd7e6",
   },
+  // Peak color week. Hardwood ridges, rust and amber, low autumn light.
+  autumn: {
+    c950: "#241005", c900: "#3a1a09", c800: "#6e3410", c700: "#8f4a15",
+    c500: "#c47a24", c300: "#e8bb7a",
+    sand: "#f3e6d2", sandDim: "#d6bd9c",
+    paper: "#fdf9f3", ink: "#241a11", inkDim: "#655547", line: "#e5d6c0",
+  },
   // Grassland, savanna, dry heat, golden light.
   savanna: {
     c950: "#241c07", c900: "#382c0b", c800: "#5c4a12", c700: "#7a641c",

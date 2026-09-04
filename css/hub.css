@@ -213,3 +213,14 @@
 @media (max-width: 600px) {
   .trip-grid { grid-template-columns: 1fr; }
 }
+
+.trip-card .card-countdown {
+  font-family: var(--ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--t-ink-dim);
+  margin-top: 0.3em;
+}
+.trip-card .card-countdown.soon { color: var(--warn-border); }

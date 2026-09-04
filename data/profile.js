@@ -1,115 +1,161 @@
 /* ==========================================================================
-   profile.js — the traveler profile. This is the "applies to every trip"
-   layer: how Colin travels, what's in the kit, what always has to happen
-   before wheels up.
+   profile.js — the traveler profile. The "applies to every trip" layer.
 
-   EVERYTHING HERE WAS DERIVED FROM THE MAUI 2027 TRIP SPEC. It has not been
-   independently confirmed. Fix anything that's wrong — this file is what a
-   trip generator reads to make a plan feel like yours instead of a listicle.
+   SOURCE: rebuilt 2026-09-04 from the Sept 2026 handoff, both 2026 MASTER
+   trip files, both MEALS files, and the Sept 3 2026 bucket list. Earlier
+   versions of this file inferred these facts from the Maui 2027 spec and got
+   several of them wrong. This version is transcribed, not inferred.
 
-   Gear `state` values: "own" | "replace" | "need" | "rent"
+   Gear `state`: "own" | "replace" | "need" | "rent"
    ========================================================================== */
 
 const PROFILE = {
   name: "Colin",
-  homeBase: "Cleveland, Ohio (CLE)",
-  defaultGroup: "Solo",
-  defaultBudget: "$1,000–2,000 per trip, excluding airfare",
+  homeBase: "Avon, Ohio — west Cleveland metro. Drive times are measured from there; flights from CLE.",
+  defaultGroup: "Solo. One person, one tent, one portion.",
+  vehicle:
+    "2013 Subaru Legacy. AWD, ~5.9 in ground clearance, low front air dam. <b>Not high-clearance.</b> Road quality is a trip-breaker, not an inconvenience — check the access road before getting attached to a campground.",
+  ceiling:
+    "Soft ~10 mi / ~2,500 ft per day. Exceeded when the payoff justifies it, not by accident.",
+  difficulty:
+    "Welcomes sustained low-consequence difficulty — scrambles, ladders, route-finding, wet rock. More cautious about single high-consequence moves.",
+  crowds: 'Actively avoids them. "Empty is cool if it\'s worth it."',
+  food:
+    "Cooks at camp by default. Restaurants are for specific named dishes, not for convenience. Wants high-value authentic local food and fresh dessert. <b>No coffee, no beer.</b>",
   driverNote:
-    "Under 25 — young-driver fees apply to every rental. AAA membership waives the Hertz young-renter fee for ages 20–24; verify at booking. Turo avoids most of it and avoids rental-agreement road bans.",
+    "Under 25 — the young-renter surcharge runs $15–35/day, up to ~$245 on a week. AAA membership is the standard workaround; also check whether the credit card already covers rental collision before buying the counter product.",
+  tripShape:
+    "2–5 campgrounds per trip, 5–10 nights, 4–8 hikes. Occasional motel night for a shower.",
 };
 
-/* The style rules. A trip that violates one of these needs a reason written
-   into its Notes, not a quiet exception. */
+/* The locked rule set. A trip that breaks one of these needs a written reason
+   in its Notes, not a quiet exception. */
 const PRINCIPLES = [
-  "Camping-first. Campgrounds over hotels unless the campground genuinely doesn't exist or the weather makes it stupid.",
-  "No road driven twice. Loops beat out-and-backs; if a stub repeat is unavoidable, make it the shortest one.",
-  "Dawn starts. The best light, the empty trailhead and the cool air are all before 8 AM. Plan around first light, not around opening hours.",
-  "Geology is the through-line. Lava fields, fault scarps, dissected volcanoes, canyon stratigraphy — the 'why does this landscape look like this' is half the point.",
-  "Grocery store over restaurant. Poke counters, deli counters, bulk warehouse runs. Budget 4–6 restaurant meals per week and make them count.",
-  "One hard day, then a recovery day. Don't stack two strenuous hikes back to back on a solo trip.",
-  "Calculated risk, documented. Risky segments get their own note with real numbers and a stated fallback — not a warning label and not silence.",
-  "Respect the place. Real place names over guidebook inventions. Sacred and grieving places get driven through, not sightseen.",
+  "<b>Car camping only.</b> Camp with the car, drive to trailheads, day hike. No hike-in nights, no permit lotteries, no overnight wilderness quotas. This rule is locked and it has already removed real destinations from the list.",
+  "<b>Check the access road first.</b> 5.9 inches of clearance and a low air dam. This is now the single most common way a good campground turns out to be unusable.",
+  "<b>On any fly-in trip, night one and the last night are reservable.</b> First-come only in the middle, and only with a named reservable fallback inside 45 minutes. No arrival time solves structural oversubscription.",
+  "<b>Dawn starts.</b> The light, the empty trailhead and the cool air are all before 8 AM. Plan around first light, not around opening hours.",
+  "<b>Schedule against the crowd, not around it.</b> Popular trailheads Mon–Thu. Put the hard, empty hike on the busiest day — that's why it stays empty.",
+  "<b>Every risky day gets a hard turnaround time and a bail-out named in advance</b>, decided before the forest road, not at it.",
+  "<b>Drive estimates are Google plus 15%</b>, and stop durations are set at the slow end. Optimistic driving is how a day runs out of daylight.",
+  "<b>Every day carries a slack line</b> saying how much margin exists and what gets cut first.",
+  "<b>Cook at camp; eat out for a named dish.</b> The restaurant entry is the order, not the address.",
+  "<b>Ruins count as scenery.</b> Coal towns, homesteads, tipples and ghost structures are destinations, not filler.",
 ];
 
-/* The kit. `state` drives the color chip on the hub. */
+/* How Claude should behave on this repo. Rendered on the hub so the rules are
+   visible rather than buried in a system prompt. */
+const WORKING_RULES = [
+  "Direct and honest. Push back. Do not flatter or over-validate.",
+  "Say plainly when a plan has a hole, when reasoning is weak, or when an earlier recommendation was wrong.",
+  "Turn his own stated criteria back on a decision — that's the feedback that lands.",
+  "Do not comment on how often plans change, pivot, or stay unbooked. Trip planning is a sandbox and exploring options is the point. Don't push to book.",
+  "Flag confidence explicitly. \"I could not confirm this\" is a useful answer; a confident guess is not.",
+];
+
+/* Considered and declined. Re-proposing these wastes his time.
+   ⚠️ Note the conflict: stargazing is on this list, but the Maui 2027 page
+   schedules a dark-sky window on the morning of 5/19. The declined list is
+   from the Sept 2026 handoff and Maui was planned earlier — worth resolving
+   rather than silently editing one of them. */
+const DECLINED = [
+  "Mountain biking, including renting one in Brevard",
+  "Bridge Walk, highline and zipline tickets (New River Gorge)",
+  "Big South Fork Scenic Railway",
+  "Via ferrata at Torrent Falls",
+  "The Cumberland Falls moonbow",
+  "Stargazing",
+  "Breweries",
+];
+
 const GEAR = [
   {
     category: "Sleep system",
-    note: "The identified weak link. Two of three items are inadequate below ~55°F.",
+    note: "Rebuilt for cold in 2026. This was the weak link and no longer is — the only open item is the liner.",
     items: [
+      { name: "REI Co-op Siesta 20 sleeping bag", state: "own", note: "New, Sept 2026. First cold-weather bag. Sept KY is the shakedown for the October 30s — note whether it actually sleeps warm enough to trust at 32°F." },
+      { name: "Sleeping bag liner", state: "need", note: "Recommended for the last three October nights (Linville and Hurricane, mid-30s). Purchase not confirmed." },
+      { name: "Therm-a-Rest MondoKing 3D, 25 in Large", state: "own", note: "R-7.0. Overkill for anything on the current list, which is the correct problem to have." },
       { name: "2-person tent", state: "own", note: "" },
-      { name: "Sleeping bag", state: "replace", note: "Summer weight. Does not handle 45°F nights — a problem at any campground above ~5,000 ft." },
-      { name: "Sleeping pad", state: "replace", note: "Deflates halfway through the night. Replace before the next trip, not during it." },
-      { name: "Puffy jacket", state: "own", note: "Doubles as a sleep layer at altitude." },
+      { name: "Puffy, hat, gloves", state: "own", note: "" },
+    ],
+  },
+  {
+    category: "Connectivity — the trip-critical one",
+    note: "A remote lecture runs 11:00–3:00 on a Wednesday of both 2026 trips, taken at camp.",
+    items: [
+      { name: "Starlink", state: "own", note: "Needs sky view. Both Koomer Ridge and Davidson River are forested. <b>Test on arrival day, not the morning of the lecture.</b>" },
+      { name: "Portable power bank", state: "own", note: "Four hours of laptop plus Starlink is the real draw, not the phone." },
+      { name: "Offline maps — Google Maps regions", state: "need", note: "Downloaded before leaving home. Covers driving only." },
+      { name: "Offline maps — AllTrails or Gaia", state: "need", note: "<b>Google Maps offline does not include trails.</b> Separate download, and a GPX for anything poorly blazed." },
     ],
   },
   {
     category: "Pack & hiking",
     items: [
-      { name: "Mystery Ranch Coulee 30 daypack", state: "own", note: "" },
-      { name: "Trekking poles", state: "own", note: "" },
-      { name: "Hiking boots", state: "own", note: "" },
-      { name: "3L water capacity", state: "own", note: "Non-negotiable minimum for any desert or lava-field day." },
-      { name: "Headlamp + spare batteries", state: "own", note: "Pre-dawn starts are the norm." },
-    ],
-  },
-  {
-    category: "Water",
-    items: [
-      { name: "Snorkel, mask, fins", state: "own", note: "Checked baggage." },
-      { name: "Rash guard", state: "own", note: "Better sun protection than sunscreen on long snorkels." },
-      { name: "Dry bag + quick-dry towel", state: "own", note: "" },
-      { name: "Water shoes / reef booties", state: "own", note: "Coarse basalt 'black sand' beaches cut bare feet." },
+      { name: "Day pack", state: "own", note: "" },
+      { name: "Trekking poles", state: "own", note: "The alternative to trusting muddy fixed ropes." },
+      { name: "Boots with real grip", state: "own", note: "Wet rock and wet rope are the recurring hazard." },
+      { name: "Headlamp + spare batteries", state: "own", note: "In the pack regardless of the hour." },
+      { name: "Camp shoes", state: "own", note: "" },
     ],
   },
   {
     category: "Camp kitchen",
+    note: "One burner, one pot, one pan. The meal plans are built to that exact constraint.",
     items: [
-      { name: "Lightweight stove + pot", state: "own", note: "" },
-      { name: "Fuel canisters", state: "need", note: "CANNOT FLY. Buy on arrival, every trip. Locate the store before you land." },
-      { name: "Small cooler", state: "own", note: "Ice from the first bulk grocery stop." },
+      { name: "One burner, pot, pan, mug, spork", state: "own", note: "" },
+      { name: "Wide-mouth thermos", state: "own", note: "Load-bearing. Hot oats on a dark ridge and hot dinner at an overlook both depend on it. A second one would unlock the pre-dawn hot chocolate." },
+      { name: "48 qt cooler", state: "own", note: "Frozen meals in flat quart bags <i>are</i> the ice. Holds ~2.5 days unaided in 75°F — buy a <b>block</b> of ice at resupply, not cubes." },
+      { name: "Olive oil in a squeeze bottle", state: "own", note: "One of the four things that turn a can into a meal: oil, hard cheese, crushed chips, starch pouch." },
+      { name: "Fuel canisters", state: "need", note: "Cannot fly. Buy on arrival on any fly-in trip." },
     ],
   },
   {
-    category: "Safety & navigation",
+    category: "Vehicle & road",
     items: [
-      { name: "Satellite communicator", state: "rent", note: "~$50/trip. Non-optional for solo days without cell service. Book ~2 weeks out." },
-      { name: "Offline maps", state: "own", note: "Download the whole region BEFORE leaving home. Not from the airport wifi." },
+      { name: "Spare, jack, tire plug kit", state: "need", note: "On maintained gravel the realistic failure mode is a cut sidewall, not getting stuck. Confirm the spare is actually inflated before FS 210." },
+      { name: "AAA membership", state: "own", note: "Waives the under-25 renter fee on fly-in trips. Verify it still applies at booking — this changes." },
+    ],
+  },
+  {
+    category: "Safety & documents",
+    items: [
       { name: "First aid kit", state: "own", note: "" },
-    ],
-  },
-  {
-    category: "Documents & memberships",
-    items: [
-      { name: "America the Beautiful pass", state: "own", note: "Covers NPS entry. Does not cover state park fees or timed-entry reservations." },
-      { name: "AAA membership", state: "own", note: "Waives the Hertz under-25 fee. Verify it still applies at booking — this changes." },
-      { name: "Printed permits + reservations", state: "need", note: "Paper copies. Some entrance stations require paper + photo ID and have no signal to look you up." },
+      { name: "Printed permits + reservations", state: "need", note: "Paper copies. Some entrance stations require paper plus photo ID and have no signal to look you up." },
+      { name: "America the Beautiful pass", state: "own", note: "Covers NPS entry. Not state park fees, not timed entry." },
     ],
   },
 ];
 
-/* Runs on every trip regardless of destination. The trip's own Reservations
-   list handles the destination-specific stuff. */
+/* Runs on every trip regardless of destination. */
 const UNIVERSAL_CHECKLIST = [
-  "Trip plan texted to someone at home, with the date and time of any no-signal segment",
-  "Offline maps downloaded for the entire region, before leaving home",
-  "Satellite communicator booked (~2 weeks out) for any solo no-signal day",
+  "Offline Google Maps regions downloaded for the whole route — before leaving home",
+  "Trail maps downloaded separately (AllTrails/Gaia) — Google Maps offline has no trails",
+  "GPX loaded for any route with poor blazing or route-finding",
+  "Starlink sky view tested on arrival day at every forested campground",
+  "Trip plan texted home, with the date and time of every no-signal segment",
+  "Hard turnaround time set for the biggest day, and a bail-out named before the forest road",
+  "Fire and burn ban status checked for every state on the route",
+  "Bear food storage sorted where required",
+  "Block ice — not cubes — on the resupply list",
+  "Fuel canisters sourced at the destination on any fly-in trip",
+  "Spare tire pressure checked before any gravel road",
   "Permits and reservations printed on paper, plus photo ID",
-  "Sleeping pad and bag confirmed adequate for the coldest night on the itinerary",
-  "Fuel canister source identified at the destination (can't fly with them)",
-  "Rental car: young-driver fee handled, and any road restrictions confirmed in writing",
-  "Travel/medical coverage checked for anything remote or overseas",
+  "Road conditions re-confirmed by phone the morning of departure",
 ];
 
-/* Generic booking-window rules. Destination-specific windows live on the trip
-   page — these are the defaults to reason from when planning a new one. */
+/* Booking timing. The recreation.gov row previously said "10:00 AM ET" here —
+   that was invented. This version follows the Sept 2026 bucket list, which
+   marks it verified. Re-check anything that would end a trip if wrong. */
 const BOOKING_WINDOWS = [
-  { what: "US National Park campgrounds (recreation.gov)", when: "6 months ahead, 10:00 AM ET", note: "Small campgrounds sell out in seconds. Set an alarm for the exact drop." },
-  { what: "NPS timed-entry / sunrise reservations", when: "Typically 60 days, plus a next-day release", note: "Staying inside the park often bypasses the lottery entirely — check before you fight for one." },
-  { what: "State park campgrounds", when: "Varies wildly — 30 days to 1 year", note: "Confirm the window as soon as the trip is real. Getting this wrong is the #1 way to lose a site." },
+  { what: "recreation.gov (most USFS / NPS)", when: "6-month rolling window, releases 7 AM local", note: "Small campgrounds go in seconds. Set an alarm for the exact drop." },
+  { what: "State park campgrounds", when: "Varies wildly — 30 days to 1 year", note: "Confirm the window as soon as the trip is real. Getting this wrong is the most common way to lose a site." },
   { what: "Private campgrounds", when: "Usually anytime", note: "Call about after-hours arrival. Office cutoffs are the most common day-one failure." },
+  { what: "First-come dispersed", when: "No reservation possible", note: "Arrive early, drive the road once from the top, take the first acceptable site. Bail-out named in advance." },
+  { what: "Glacier NP", when: "Vehicle reservations are a separate system from camping", note: "You can hold one without the other. Verify the current year early." },
+  { what: "Buffalo National River", when: "6-month window, minimum 5 days in advance", note: "Reservations required at Steel Creek, Ozark, Carver, Tyler Bend and Rush since Mar 13 2026. Older first-come guidance is dead." },
+  { what: "Baxter State Park", when: "Rolling 4 months", note: "First night plus 3 consecutive nights bookable online together as of summer 2026. Separate Day Use Parking Reservation for the Katahdin trailheads." },
   { what: "Flights", when: "~11 months when schedules open; sweet spot 2–5 months", note: "" },
   { what: "Rental car / Turo", when: "2–3 months, re-check monthly", note: "Free cancellation means book early and rebook if the price drops." },
-  { what: "Backcountry / wilderness permits", when: "Lottery, often 4–6 months, sometimes January for the whole year", note: "The one item that can dictate the trip's dates instead of the other way around." },
 ];

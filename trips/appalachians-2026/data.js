@@ -1,0 +1,708 @@
+/* ==========================================================================
+   Bridge Day + Southern Appalachians — Oct 15–25, 2026
+
+   Transcribed from MASTER-trip2-october-2026.md (Sept 2026).
+   Rendered by ../../js/trip.js.
+
+   TRANSCRIPTION NOTES
+     - Sun times recomputed (NOAA solar position) for each day's coordinates.
+       The source ran ~3–4 min optimistic, always in the direction of more
+       daylight than exists. Corrected values are used throughout.
+     - Hike stats cross-checked against AllTrails where available. Looking
+       Glass Rock confirms almost exactly. Black Balsam needs a route
+       decision rather than a correction — see the hike table.
+     - The lecture is confirmed on BOTH trips' Wednesdays. Oct 21 was already
+       the buffer day, so this trip absorbs it with no structural cost.
+     - Camp meals are NOT transcribed here. MEALS-trip2-october.md exists and
+       contains the cooler timeline for 11 days on one cooler; it has not been
+       folded in yet. Restaurant entries below come from the master file.
+
+   Coordinates: only Spence Ridge is verified, and it came from the source
+   file. Everything else is unplotted — use the Places tab.
+   ========================================================================== */
+
+window.TRIP_DATA = {
+  meta: {
+    slug: "appalachians-2026",
+    title: "Bridge Day + Southern Appalachians",
+    subtitle: "Solo · Cleveland → New River Gorge → Pisgah → Linville → Mount Rogers",
+    dates: "Thursday, Oct 15 – Sunday, Oct 25, 2026",
+    emoji: "🍂",
+    theme: "autumn",
+    route:
+      "Four bases, north to south then back up: Arrowhead Bike Farm WV (3) → Davidson River NC (4) → FS 210 dispersed, Linville Gorge (2) → Hurricane Campground VA (1). Chasing color <i>downhill</i> — balds peak early October, the 3,000–5,000 ft band peaks the second and third weeks, and Linville on Oct 22–23 is the bullseye.",
+    vehicle:
+      "2013 Subaru Legacy. AWD, ~5.9 in ground clearance, low front air dam. Two roads matter: Keeneys Creek (Nuttallburg access, some sources recommend high clearance) and FS 210 (maintained gravel — the realistic failure mode is a cut sidewall, not getting stuck).",
+    gettingThere:
+      "I-77 S to Fayetteville, 5h 35m. Home from Hurricane Campground via US 58 E → I-77 N, 7h 30m.",
+    stats: [
+      { num: "11 days", lbl: "Length" },
+      { num: "10", lbl: "Nights camping" },
+      { num: "8 of 10", lbl: "Nights reserved" },
+      { num: "~46 mi", lbl: "On foot" },
+    ],
+    overviewCards: [
+      { h: "Dates", p: "Oct 15–25, 2026<br>11 days / 10 nights" },
+      { h: "Group", p: "Solo." },
+      { h: "Lodging", p: "Arrowhead ✅ · Davidson River ✅ (confirmed open by phone after four slipped dates) · <b>FS 210 ❌ first-come</b> · Hurricane ✅" },
+      { h: "The one real risk", p: "<b>Oct 22.</b> Leave a reserved site at 6:30 AM and compete for a first-come dispersed site on FS 210, on the Thursday of peak color week, with no cell service and no reservation possible in the corridor." },
+      { h: "The one open call", p: "<b>Fayette Station Road parking on Bridge Day.</b> Fayette County Chamber, 800-927-0263. The only unresolved item that changes a day." },
+      { h: "The lecture", p: "Wed Oct 21, 11:00–3:00, at camp over Starlink. Confirmed on both 2026 trips. Oct 21 was already the buffer day — this one absorbs it cleanly." },
+    ],
+    footerNote:
+      'Transcribed from the Sept 2026 master file. Sun times recomputed; hike stats cross-checked where AllTrails had them. <a href="../../index.html">← All trips</a>',
+  },
+
+  days: [
+    {
+      day: 1,
+      date: "Thu Oct 15, 2026",
+      title: "Down I-77",
+      tagline: "Five and a half hours, then the bridge head-on at sunset.",
+      type: "travel + activity",
+      driving: "~6h 05m",
+      slack: "<b>None after dark.</b> If the drive runs 90 min long, cut Fayette Station Road and do it Friday morning. Long Point is what to protect.",
+      overnight: {
+        name: "Arrowhead Bike Farm",
+        place: "8263 Gatewood Rd, Fayetteville WV",
+        kind: "Private campground",
+        cost: "Reserved",
+        checkin: "Kitchen Sun–Thu till 6 PM, Fri–Sat till 10 PM",
+        confirmation: "RESERVED ✅ — number not yet in this file",
+        notes: "Under 3 mi from town. <b>The Long Point trailhead is at the campground.</b> Kaymoor Top is 5 minutes away. On-site bike shop, biergarten, showers, wifi.",
+      },
+      schedule: [
+        { kind: "drive", time: "7:30 → 1:05", est: "5h 35m", text: "Avon OH → Arrowhead Bike Farm, I-77 S.", maps: "Arrowhead Bike Farm Fayetteville WV" },
+        { kind: "stop", time: "1:05 → 1:50", est: "45m", text: "Check in, pitch tent, unpack." },
+        { kind: "drive", time: "1:50 → 2:05", est: "15m", text: "→ Canyon Rim Visitor Center.", maps: "Canyon Rim Visitor Center Lansing WV" },
+        { kind: "stop", time: "2:05 → 2:55", est: "50m", text: "Both decks plus the boardwalk. ⚠️ <b>Ask a ranger about Keeneys Creek Road</b> — that's tomorrow's Nuttallburg access and it's the day's biggest variable.", warn: true },
+        { kind: "drive", time: "2:55 → 3:55", est: "60m", text: "<b>Fayette Station Road</b> — 8-mile one-way loop, hairpins to the gorge floor, passes directly under the bridge, crosses the Tunney Hunsaker Bridge, through the Fayette and South Fayette townsites.", maps: "Fayette Station Road Fayetteville WV" },
+        { kind: "drive", time: "3:55 → 4:10", est: "15m", text: "Road exit onto US-19 → Arrowhead." },
+        { kind: "stop", time: "4:10 → 5:20", est: "1h 10m", text: "Camp, eat, reset. ⚠️ <b>Arrowhead kitchen closes 6 PM Thursday.</b>", warn: true },
+        { kind: "hike", time: "5:20 → 6:05", est: "45m", text: "<b>Walk to Long Point from the tent</b>, ~1.6 mi each way.", maps: "Long Point Trailhead Fayetteville WV" },
+        { kind: "sunset", time: "6:05 → 7:05", est: "60m", text: "⭐ <b>Long Point through sunset, 6:48</b> (recomputed; the plan said 6:52). Head-on bridge view — the classic angle." },
+        { kind: "hike", time: "7:05 → 7:50", est: "45m", text: "Walk back. <b>Headlamp required</b> — civil twilight ends ~7:17 and it's fully dark before you're off the trail.", warn: true },
+      ],
+      meals: { b: "home", l: "packed — eaten in the car", d: "Arrowhead biergarten, before the 6 PM Thursday cutoff — bratwurst, pretzels, sandwiches. Convenient rather than destination." },
+      highlights:
+        "Long Point gives the head-on bridge view and the trailhead is at your campsite, so the first evening costs no driving. Fayette Station Road drops you to the gorge floor and back the same afternoon.",
+      warnings:
+        "The kitchen closes at 6 and you're on the trail at 5:20 — eat before you walk, not after. Nothing on this day has margin once the sun goes down.",
+    },
+    {
+      day: 2,
+      date: "Fri Oct 16, 2026",
+      title: "Endless Wall and a Ford Coal Town",
+      tagline: "The rim in the morning, 80 coke ovens in the afternoon.",
+      type: "activity",
+      driving: "~1h 50m",
+      slack: "~1h 15m.",
+      overnight: {
+        name: "Arrowhead Bike Farm",
+        place: "Fayetteville, WV",
+        kind: "Private campground",
+        cost: "Reserved",
+        checkin: "Kitchen till 10 PM Friday",
+        confirmation: "RESERVED ✅",
+        notes: null,
+      },
+      schedule: [
+        { kind: "drive", time: "7:45 → 8:05", est: "20m", text: "→ <b>Nuttall lot</b> — NOT Fern Creek. Same distance to the overlook, consistently fewer people.", maps: "Nuttall Trailhead Endless Wall New River Gorge" },
+        { kind: "hike", time: "8:05 → 11:05", est: "3h", text: "<b>Endless Wall loop → Diamond Point</b>, 5.4 mi / ~508 ft. Small lots and roadside parking is prohibited — if it's full, come back after 11. ⚠️ <b>This MUST be today</b> — all bridge-overlook trails close tomorrow for Bridge Day security.", warn: true },
+        { kind: "drive", time: "11:05 → 11:20", est: "15m", text: "→ downtown Fayetteville.", maps: "Secret Sandwich Society Fayetteville WV" },
+        { kind: "food", time: "11:20 → 12:35", est: "1h 15m", text: "<b>Secret Sandwich Society.</b> ⚠️ Weekend waits run 35–50 min; Friday lunch is the right slot. ⭐ <b>The Brussels sprouts</b> — feta, hot honey, balsamic; the dish locals name unprompted. Then the <b>McKinley</b>. <b>Key lime pie to go.</b>" },
+        { kind: "drive", time: "12:35 → 1:10", est: "35m", text: "→ <b>Nuttallburg</b> via Keeneys Creek Rd. One lane, steep, drops into the gorge — trees over the hood, rock walls close.", maps: "Nuttallburg Winona WV", warn: true },
+        { kind: "ruins", time: "1:10 → 3:40", est: "2h 30m", text: "⭐ <b>NUTTALLBURG.</b> Coal tipple on the C&O tracks, a rust-colored steel conveyor swooping down the hillside above the treetops, <b>80 coke ovens you can walk into</b>, town ruins. Nothing has run since 1958 — no glass in the windows, no graffiti either, grounds maintained. The Nuttall family gave it to the Park Service in 1998.<br><br><b>The Henry Ford angle:</b> Fordson Coal took the mining rights in 1920 trying to vertically integrate coal into the steel supply. Edsel oversaw the investment — the tipple and conveyor are from the 1923–26 rebuild. Ford mothballed the No. 2 mine within a year of visiting." },
+        { kind: "hike", time: "optional", est: "+60m", text: "<i>Optional:</i> <b>Conveyor Trail</b>, ~0.5 mi steep to the headhouse. Also nearby: <b>Seldom Seen</b>, a former community reduced to foundation blocks and a great name." },
+        { kind: "drive", time: "3:40 → 4:20", est: "40m", text: "→ Arrowhead." },
+        { kind: "stop", time: "4:20 → 6:00", est: "1h 40m", text: "Camp, shower, rest. Sunset 6:46." },
+        { kind: "food", time: "6:00 → 7:30", est: "1h 30m", text: "Dinner — <b>Pies & Pints</b> (founded here before spreading to five states). ⭐ <b>The black bean pizza with pork</b> — the tourist order is Grape & Gorgonzola; this is the local one. Pimento cheese fries. Or Arrowhead, open till 10 tonight." },
+      ],
+      meals: { b: "made at camp", l: "bought — Secret Sandwich Society", d: "bought — Pies & Pints, or Arrowhead" },
+      highlights:
+        "Nuttallburg is the best ruin on either 2026 trip: a stabilized 90-acre historic district with a conveyor running down the hillside above the treetops, and a Henry Ford vertical-integration story attached to it.",
+      warnings:
+        "<b>Keeneys Creek Road is the variable.</b> Some sources recommend high clearance and you have 5.9 inches. Ask at Canyon Rim on Day 1. <b>If it's a no:</b> fall back to Kaymoor Top, 5 minutes from camp — same corridor, conveyor and coke ovens, reached by a long stairway down.",
+    },
+    {
+      day: 3,
+      date: "Sat Oct 17, 2026",
+      title: "Bridge Day, From the Bottom",
+      tagline: "876 feet of bridge above you, one jumper every 30 seconds.",
+      type: "the big one",
+      driving: "~40m plus two shuttles",
+      slack: "2 hours before dark. The walk up is the variable — if it takes 3 hours, skip the deck and go straight to the chili.",
+      overnight: {
+        name: "Arrowhead Bike Farm",
+        place: "Fayetteville, WV",
+        kind: "Private campground",
+        cost: "Reserved",
+        checkin: null,
+        confirmation: "RESERVED ✅",
+        notes: null,
+      },
+      schedule: [
+        { kind: "stop", time: "5:45 → 6:45", est: "60m", text: "Wake, breakfast, day bag and <b>CASH</b>. Breakfast option: <b>Tudor's Biscuit World</b>, Oak Hill, ~15 min — a real WV institution, not a tourist stop." },
+        { kind: "drive", time: "6:45 → 7:00", est: "15m", text: "→ top of Fayette Station Rd, park. ⚠️ <b>CALL 800-927-0263 TO CONFIRM PARKING.</b> This is the one detail standing between the walk-to-the-bottom plan and improvising at 7 AM.", warn: true },
+        { kind: "hike", time: "7:00 → 8:30", est: "1h 30m", text: "<b>Walk DOWN Fayette Station Road</b>, 4.5 mi. Sunrise 7:35 — you start in the dark." },
+        { kind: "stop", time: "8:30 → 9:00", est: "30m", text: "Position at the bottom before the 9:00 opening." },
+        { kind: "view", time: "9:00 → 11:30", est: "2h 30m", text: "⭐ <b>WATCH FROM BELOW THE JUMP ZONE.</b> 876 ft of bridge above, chutes opening. 2025 figures: 315 jumpers from 35 states and 4 countries, 752 jumps plus 16 tandems — roughly one every 30 seconds." },
+        { kind: "hike", time: "11:30 → 1:45", est: "2h 15m", text: "<b>Walk back up</b> — 4.5 mi, ~800 ft, all of it." },
+        { kind: "drive", time: "1:45 → 2:00", est: "15m", text: "→ Fayetteville High School shuttle lot.", maps: "Fayetteville High School Fayetteville WV" },
+        { kind: "shuttle", time: "2:00 → 2:25", est: "25m", text: "Shuttle, $3 cash." },
+        { kind: "stop", time: "2:25 → 3:00", est: "35m", text: "<b>Bridge deck</b> — vendors, rappel teams working the catwalk, final jumps. <b>Watching the rappellers is the sustained action</b> — jumpers are gone in seconds." },
+        { kind: "shuttle", time: "3:00 → 3:25", est: "25m", text: "Shuttle back." },
+        { kind: "event", time: "3:25 → 4:40", est: "1h 15m", text: "<b>Chili cook-off</b>, Fayette County Courthouse. The food event of the day, plus 200+ vendors. <b>Cash.</b>", maps: "Fayette County Courthouse Fayetteville WV" },
+        { kind: "drive", time: "4:40 → 4:50", est: "10m", text: "→ Arrowhead. Sunset 6:45." },
+      ],
+      meals: { b: "bought — Tudor's Biscuit World, Oak Hill, 6 AM", l: "packed — carried into the gorge", d: "bought — chili cook-off, cash" },
+      highlights:
+        "The free, legal version: the roads are open to pedestrians even though the trails are closed and patrolled. You watch from directly below the jump zone instead of from the deck with everyone else.",
+      warnings:
+        "<b>Rules:</b> US-19 closed 7 AM–5 PM, all four lanes; local traffic only from Ames Heights Rd (N) and Rt 16 (S). Private vehicles cannot reach Fayette Station or Teays Landing — the road closes below Teays Landing at 6 PM Friday and cars there get towed. Riverbank spectating between Fayette Station Rapid and Fleaflicker Rapid is prohibited. No pets, bikes, carts or strollers on the bridge. <b>Fallback if the walk-down is closed in 2026:</b> leave camp 7:30, park at Fayetteville HS by 7:45, shuttle at 8:30, deck 9–3, chili at 3.",
+    },
+    {
+      day: 4,
+      date: "Sun Oct 18, 2026",
+      title: "Thurmond, Then South",
+      tagline: "Population 5, then a waterfall you walk behind.",
+      type: "activity + transfer",
+      driving: "~5h 30m",
+      slack: "Moderate. The afternoon waterfall cluster is all roadside and trims easily.",
+      overnight: {
+        name: "Davidson River Campground",
+        place: "Brevard, NC",
+        kind: "USFS campground",
+        cost: "Reserved",
+        checkin: "Check-in 2 PM Oct 18, checkout noon Oct 22",
+        confirmation: "RESERVED ✅ and CONFIRMED OPEN BY PHONE",
+        notes: "~2,200 ft. Reopening had slipped four times (May 1 → Jul 1 → Sep 1 → Oct 1) before phone confirmation. Mount Pisgah and Lake Powhatan fallbacks are off the board.",
+      },
+      schedule: [
+        { kind: "stop", time: "7:00 → 7:45", est: "45m", text: "Break camp." },
+        { kind: "drive", time: "7:45 → 8:25", est: "40m", text: "→ Thurmond.", maps: "Thurmond Depot Thurmond WV" },
+        { kind: "ruins", time: "8:25 → 9:40", est: "1h 15m", text: "<b>Thurmond.</b> Population 5 as of the 2010 census. Preserved storefronts and bank buildings; the C&O depot is now an NPS visitor center. In its prime it moved <b>95,000 passengers a year</b> — a division point where the coal and rail industries met." },
+        { kind: "drive", time: "9:40 → 2:30", est: "4h 50m", text: "→ Davidson River Campground.", maps: "Davidson River Campground Pisgah Forest NC" },
+        { kind: "stop", time: "2:30 → 3:30", est: "60m", text: "Check in (2 PM), set up. ⚠️ <b>TEST STARLINK for Wednesday.</b> Davidson River is forested and cell service here is described as extremely limited. This gives three days of buffer — use them.", warn: true },
+        { kind: "drive", time: "3:30 → 3:40", est: "10m", text: "→ Looking Glass Falls.", maps: "Looking Glass Falls Pisgah Forest NC" },
+        { kind: "stop", time: "3:40 → 4:00", est: "20m", text: "Looking Glass Falls — roadside." },
+        { kind: "drive", time: "4:00 → 4:10", est: "10m", text: "→ Moore Cove trailhead.", maps: "Moore Cove Falls Trailhead Pisgah Forest NC" },
+        { kind: "hike", time: "4:10 → 5:10", est: "60m", text: "⭐ <b>Moore Cove Falls</b>, 1.4 mi — 50-ft plunge and <b>the trail goes behind the water</b>." },
+        { kind: "drive", time: "5:10 → 5:20", est: "10m", text: "→ Sliding Rock.", maps: "Sliding Rock Pisgah Forest NC" },
+        { kind: "stop", time: "5:20 → 5:35", est: "15m", text: "Sliding Rock — looking, not sliding. It's October." },
+        { kind: "drive", time: "5:35 → 5:50", est: "15m", text: "→ camp, cook. Sunset 6:53." },
+      ],
+      meals: { b: "made at camp", l: "packed — eaten on the drive", d: "made at camp" },
+      highlights:
+        "Thurmond is a town of five people that used to move 95,000 passengers a year. Moore Cove is the waterfall you walk behind, and it's a mile and a half.",
+      warnings:
+        "Cathedral Falls and Hawks Nest were <b>removed</b> — they're northwest on Rt 60, the wrong direction when driving south, and cost about an hour of backtracking. Thurmond replaced them. Don't add them back on the day.",
+    },
+    {
+      day: 5,
+      date: "Mon Oct 19, 2026",
+      title: "Five Parkway Miles",
+      tagline: "Grassy summits with no trees, four trailheads, one stretch of road.",
+      type: "activity",
+      driving: "~1h 30m",
+      slack: "<b>Tight, ~15 min.</b> First cut is Sam Knob. Second is Skinny Dip.",
+      overnight: {
+        name: "Davidson River Campground",
+        place: "Brevard, NC",
+        kind: "USFS campground",
+        cost: "Reserved",
+        checkin: null,
+        confirmation: "RESERVED ✅",
+        notes: null,
+      },
+      schedule: [
+        { kind: "drive", time: "7:45 → 8:30", est: "45m", text: "→ Black Balsam trailhead, off BRP MP 420. Sunrise 7:41.", maps: "Black Balsam Knob Trailhead Canton NC" },
+        { kind: "hike", time: "8:30 → 11:00", est: "2h 30m", text: "<b>Black Balsam → Tennent Mtn</b>, ~4 mi via Art Loeb. Open grassy summits, real 360°, no trees. ⚠️ See the hike table — AllTrails lists a 1.4 mi version and a 9.7 mi version and your ~4 mi is neither; decide the route before you park." },
+        { kind: "hike", time: "11:00 → 12:50", est: "1h 50m", text: "<b>Sam Knob</b>, ~2.5 mi, same lot." },
+        { kind: "stop", time: "12:50 → 1:20", est: "30m", text: "Lunch at the trailhead." },
+        { kind: "drive", time: "1:20 → 1:30", est: "10m", text: "→ Graveyard Fields, MP 418.8.", maps: "Graveyard Fields Blue Ridge Parkway" },
+        { kind: "hike", time: "1:30 → 3:15", est: "1h 45m", text: "Graveyard Fields loop, ~3 mi." },
+        { kind: "drive", time: "3:15 → 3:30", est: "15m", text: "→ Devil's Courthouse, MP 422.", maps: "Devils Courthouse Blue Ridge Parkway" },
+        { kind: "hike", time: "3:30 → 4:15", est: "45m", text: "Devil's Courthouse — short, steep, five-state view. Reopened Aug 2025." },
+        { kind: "drive", time: "4:15 → 4:30", est: "15m", text: "→ Looking Glass Rock Overlook, MP 417.", maps: "Looking Glass Rock Overlook Blue Ridge Parkway" },
+        { kind: "hike", time: "4:30 → 5:30", est: "60m", text: "<b>Skinny Dip Falls</b>, ~0.5 mi in." },
+        { kind: "dessert", time: "5:30 → 6:30", est: "35m + 25m", text: "→ <b>Dolly's Dairy Bar.</b> 100+ flavors with combos named after the adventures in the forest.", maps: "Dollys Dairy Bar Pisgah Forest NC" },
+        { kind: "drive", time: "6:30 → 6:40", est: "10m", text: "→ camp. Sunset 6:52." },
+      ],
+      meals: { b: "made at camp", l: "packed — eaten at the Black Balsam trailhead", d: "made at camp, after Dolly's" },
+      highlights:
+        "Everything today sits within five Parkway miles. Black Balsam and Tennent are grassy balds with genuine 360° views and no trees at all — the most un-Appalachian terrain in the Appalachians.",
+      warnings:
+        "Everything above 5,000 ft here is fully exposed — roughly <b>15°F colder than camp</b>, with wind. <b>Color note:</b> the balds peak late Sept / early Oct, so by the 19th the high country may already be browning. The color payoff on this trip is Linville on the 22nd–23rd, not here.",
+    },
+    {
+      day: 6,
+      date: "Tue Oct 20, 2026",
+      title: "Looking Glass Rock",
+      tagline: "Switchbacks to a bare granite slab, then the quiet side of the road.",
+      type: "activity",
+      driving: "~1h",
+      slack: "Comfortable. Dinner is the fixed point.",
+      overnight: {
+        name: "Davidson River Campground",
+        place: "Brevard, NC",
+        kind: "USFS campground",
+        cost: "Reserved",
+        checkin: null,
+        confirmation: "RESERVED ✅",
+        notes: null,
+      },
+      schedule: [
+        { kind: "drive", time: "7:45 → 7:55", est: "10m", text: "→ Looking Glass Rock TH. Sunrise 7:41.", maps: "Looking Glass Rock Trailhead Pisgah Forest NC" },
+        { kind: "hike", time: "7:55 → 12:25", est: "4h 30m", text: "<b>Looking Glass Rock</b>, 6.5 mi / ~1,700 ft. Switchbacks the whole way, bare granite slab at the top. The marquee Pisgah summit. ✅ <b>AllTrails confirms: 6.0 mi / 1,699 ft</b>, ~3h 30m typical — the plan's 4h 30m has real margin in it." },
+        { kind: "drive", time: "12:25 → 12:35", est: "10m", text: "→ Daniel Ridge trailhead.", maps: "Daniel Ridge Loop Trailhead Pisgah Forest NC" },
+        { kind: "stop", time: "12:35 → 1:05", est: "30m", text: "Lunch." },
+        { kind: "hike", time: "1:05 → 3:20", est: "2h 15m", text: "<b>Daniel Ridge Loop + Falls</b>, ~4 mi. Turn <b>left</b> instead of right at the Looking Glass junction — quieter than anything else on that road." },
+        { kind: "drive", time: "3:20 → 3:40", est: "20m", text: "→ Brevard.", maps: "Brevard NC" },
+        { kind: "shop", time: "3:40 → 4:40", est: "60m", text: "<b>RESUPPLY — the only one this trip.</b> Water, fuel, food for the Linville leg. <b>Buy block ice</b> — the last cold of the trip. Also: <b>Bracken Mountain Bakery</b> for trail food.", warn: true },
+        { kind: "food", time: "5:00 → 6:30", est: "1h 30m", text: "<b>Dinner: The Falls Landing.</b> Downtown since 1993, the town's serious restaurant. <b>Reserve ahead.</b> ⭐ <b>Fresh NC mountain trout</b> — the owner steers people to it personally; comes with a potato cake reviewers single out. Mountain trout is <i>the</i> regional dish.", maps: "The Falls Landing Brevard NC" },
+        { kind: "drive", time: "6:30 → 6:50", est: "20m", text: "→ camp. Sunset 6:51." },
+      ],
+      meals: { b: "made at camp", l: "packed — eaten at Daniel Ridge", d: "bought — The Falls Landing, mountain trout" },
+      highlights:
+        "The best-corroborated hike on the trip: AllTrails and the plan agree to within half a mile and one foot of gain. Daniel Ridge in the afternoon is the quiet counterweight.",
+      warnings:
+        "John Rock was <b>removed</b> in favour of Moore Cove on Day 4 — John Rock's selling point is looking back at a mountain you climbed four hours earlier. Don't re-add it.",
+    },
+    {
+      day: 7,
+      date: "Wed Oct 21, 2026",
+      title: "Lecture, Then Prep",
+      tagline: "The rest day that makes Thursday possible.",
+      type: "rest + lecture",
+      driving: "~1h",
+      slack: "Deliberately large. <b>Do not fill it.</b>",
+      overnight: {
+        name: "Davidson River Campground",
+        place: "Brevard, NC",
+        kind: "USFS campground",
+        cost: "Reserved",
+        checkin: "Checkout noon Oct 22 — you leave at 6:30 anyway",
+        confirmation: "RESERVED ✅",
+        notes: null,
+      },
+      schedule: [
+        { kind: "stop", time: "7:30 → 10:15", est: "2h 45m", text: "Slow morning at camp. Breakfast, no time pressure. <b>This is a rest day now.</b>" },
+        { kind: "stop", time: "10:15 → 11:00", est: "45m", text: "Set up the laptop, <b>verify Starlink</b>." },
+        { kind: "lecture", time: "11:00 → 3:00", est: "4h", text: "<b>REMOTE LECTURE.</b> Class runs 11:10–2:30; the padding is setup and overrun.", warn: true },
+        { kind: "shop", time: "3:15 → 4:45", est: "1h 30m", text: "→ Brevard. Final resupply, top off fuel." },
+        { kind: "stop", time: "5:00 → 5:30", est: "30m", text: "⭐ <b>Download offline maps — Linville + Mount Rogers.</b> Last reliable signal on the trip.", warn: true },
+        { kind: "stop", time: "5:30 → 6:30", est: "60m", text: "⭐ <b>Repack for two nights with no water and no service.</b> Charge everything. Starlink packed and accessible.", warn: true },
+        { kind: "food", time: "6:30 →", est: "—", text: "Dinner at camp. <b>In bed early — tomorrow starts at 5:45.</b> Sunset 6:49." },
+      ],
+      meals: { b: "made at camp — slow, no coffee", l: "made at camp", d: "made at camp" },
+      highlights:
+        "October absorbs the lecture cleanly because Oct 21 was already the buffer day. Mount Pisgah, DuPont and PARI come off, and they were filler.",
+      warnings:
+        "⚠️ <b>The afternoon prep block is what makes Thursday possible. Do not let it get squeezed.</b> Offline maps, water, fuel, repack, charge. Thursday and Friday have no water, no service, and no reservation.",
+    },
+    {
+      day: 8,
+      date: "Thu Oct 22, 2026",
+      title: "The Race for FS 210",
+      tagline: "Wake at a site you paid for. Sleep somewhere you have no claim on.",
+      type: "transfer + the risk day",
+      driving: "~4h 05m",
+      slack: "~1 hour, <b>all of it before noon</b>. If the site hunt takes two hours, drop Linville Falls.",
+      overnight: {
+        name: "FS 210 roadside dispersed",
+        place: "Linville Gorge, NC",
+        kind: "Dispersed — first-come",
+        cost: "Free",
+        checkin: "❌ NO RESERVATION POSSIBLE",
+        confirmation: "❌ NONE — this is the weakest link in the trip",
+        notes: "~3,800 ft. <b>No water, no facilities.</b> No camping within 200 ft of trailhead parking — standing Forest Order. Roadside FS 210 camping needs no permit; Wilderness camping does on Fri/Sat through Oct 31 (50-person quota, 30% releases Wednesday 10 AM ET).",
+      },
+      schedule: [
+        { kind: "stop", time: "5:45 → 6:30", est: "45m", text: "Break camp in the dark. <b>Checkout is noon; you leave at 6:30 anyway.</b> The night is paid for — leaving early costs nothing and the FS 210 sites go today.", warn: true },
+        { kind: "drive", time: "6:30 → 8:45", est: "2h 15m", text: "→ Linville Falls. Sunrise 7:40.", maps: "Linville Falls Visitor Center Linville Falls NC" },
+        { kind: "hike", time: "8:45 → 9:45", est: "60m", text: "<i>Optional:</i> Erwins View, 1.6 mi RT. ⚠️ <b>Verify access</b> — the campground is closed all 2026 and the visitor center took Helene damage. Skip if behind." },
+        { kind: "drive", time: "9:45 → 10:15", est: "30m", text: "→ <b>Gingercake turnoff.</b> NC 181 south <b>3 miles</b> to the <b>SECOND</b> Gingercake intersection — the road loops and meets 181 twice. There are also an Old Gingercake Rd and a Gingercake Acres Rd nearby, which is why map search is unreliable here.", maps: "Gingercake Road Jonas Ridge NC", warn: true },
+        { kind: "drive", time: "10:15 → 10:45", est: "30m", text: "<b>Left fork</b> at the small brown Table Rock sign, through Gingercake Acres. Pavement ends in ~1 mi and becomes <b>FS 210</b> — same road, two numbers.", maps: "Table Rock Picnic Area Linville Gorge NC" },
+        { kind: "camp", time: "10:45 → 12:15", est: "1h 30m", text: "⭐ <b>CLAIM A SITE.</b> Parking areas run north→south: <b>Sitting Bear → Hawksbill → Spence Ridge.</b> Drive it once from the top and take the first open Hawksbill site rather than pushing south hoping for better.", warn: true },
+        { kind: "stop", time: "12:15 → 1:00", est: "45m", text: "Lunch, water sorted, camp secure." },
+        { kind: "drive", time: "1:00 → 1:15", est: "15m", text: "→ Hawksbill lot — boulder-marked, on the left.", maps: "Hawksbill Mountain Trailhead Linville Gorge" },
+        { kind: "hike", time: "1:15 → 3:15", est: "2h", text: "<b>Hawksbill</b>, 2.4 mi RT / ~700 ft, summit 4,009 ft. Trail starts on the <b>RIGHT</b> side of the road. <b>At the summit split, GO RIGHT</b> — most people go left because it's the obvious turn; the views are on the narrow right-hand path to the northern peak.<br><br>⭐ <b>He hikes it today specifically so he knows it in the dark tomorrow.</b> Note the boulder lot, the turns, and where the split is." },
+        { kind: "drive", time: "3:15 → 3:50", est: "35m", text: "→ Table Rock picnic area." },
+        { kind: "sunset", time: "3:50 → 6:20", est: "2h 30m", text: "<b>The Chimneys at sunset</b> — rock towers on the rim. Sunset <b>6:44</b> (recomputed; the plan said 6:41)." },
+        { kind: "drive", time: "6:55 → 7:30", est: "35m", text: "→ camp. <b>Dark on FS 210 — go slow.</b>", warn: true },
+      ],
+      meals: { b: "made — before breaking camp in the dark", l: "packed", d: "made at camp — ⚠️ no water on site, low-cleanup only" },
+      highlights:
+        "Peak color week in the corridor the whole trip was sequenced around. Hawksbill today is reconnaissance for tomorrow's sunrise — that's the entire reason it's on the schedule twice.",
+      warnings:
+        "<b>The single point of failure of the trip.</b> First-come dispersed, on the Thursday of peak color week, no cell service, no reservation possible anywhere in the corridor. <b>Bail-outs, decided before turning onto the forest road:</b> Mortimer Campground (~10 mi), or a motel in Newland, Linville Falls, or Morganton. <b>Road:</b> FS 210 is maintained gravel — passenger cars do it routinely and a Prius has reportedly made it with care. The realistic failure mode is a cut sidewall, not getting stuck: spare, jack, tire plug kit. Roughness increases with distance; the first ~3 miles to Hawksbill are tamer than the last stretch to the picnic area at ~9.5 miles.",
+    },
+    {
+      day: 9,
+      date: "Fri Oct 23, 2026",
+      title: "Hawksbill at Sunrise",
+      tagline: "4,009 feet, the river 2,000 below, peak color. It costs an alarm.",
+      type: "the payoff",
+      driving: "~1h 25m",
+      slack: "2 hours before dark. Day total ~10 mi — right at the ceiling.",
+      overnight: {
+        name: "FS 210 roadside dispersed",
+        place: "Linville Gorge, NC",
+        kind: "Dispersed — first-come",
+        cost: "Free",
+        checkin: "❌ Second night on the same site",
+        confirmation: "❌ NONE",
+        notes: "No water on site.",
+      },
+      schedule: [
+        { kind: "stop", time: "5:45 → 6:15", est: "30m", text: "Wake. Layers, gloves, <b>thermos</b>, headlamp. Mid-30s at 3,800 ft." },
+        { kind: "drive", time: "6:15 → 6:30", est: "15m", text: "Camp → Hawksbill lot, in the dark." },
+        { kind: "hike", time: "6:30 → 7:15", est: "45m", text: "Climb in the dark, 1.2 mi / ~700 ft. You walked this yesterday — that's why." },
+        { kind: "sunrise", time: "7:15 → 8:30", est: "1h 15m", text: "⭐ <b>SUMMIT. 4,009 ft, the Linville River 2,000 ft below, peak color week.</b> Sunrise <b>7:41</b> (recomputed; the plan said 7:38 — three more minutes in the dark). <b>The best photograph available on the entire trip, and it costs an alarm.</b>" },
+        { kind: "hike", time: "8:30 → 9:05", est: "35m", text: "Descend." },
+        { kind: "stop", time: "9:05 → 9:50", est: "45m", text: "Real breakfast at camp. ⚠️ <b>No water on site — low-cleanup only.</b>" },
+        { kind: "drive", time: "9:50 → 10:25", est: "35m", text: "→ Table Rock picnic area." },
+        { kind: "hike", time: "10:25 → 3:55", est: "5h 30m", text: "<b>Table Rock Loop</b>, 7.5 mi, 2,000 → 4,100 ft. Little Table Rock → Spence Ridge → Table Rock Gap → summit. Rugged and rocky. ⚠️ <b>The Spence Ridge bridge over the Linville River is washed out.</b> The east-rim loop shouldn't need it — <b>confirm routing with Grandfather Ranger District, (828) 652-2144.</b>", warn: true },
+        { kind: "drive", time: "3:55 → 4:30", est: "35m", text: "→ camp. Sunset 6:43." },
+      ],
+      meals: { b: "made — after the summit, back at camp. Low cleanup, no water on site.", l: "packed — carried on Table Rock", d: "made at camp — low cleanup" },
+      highlights:
+        "This is the day the whole trip was sequenced to reach. Hawksbill at sunrise during peak color week, from a site you have to be lucky to get.",
+      warnings:
+        "<b>Release valve:</b> Table Rock summit out-and-back from the picnic area, ~2.4 mi through The Chimneys, instead of the full loop. Decide at the trailhead based on what the sunrise cost you. Ten miles on the day is exactly the ceiling and you started at 5:45.",
+    },
+    {
+      day: 10,
+      date: "Sat Oct 24, 2026",
+      title: "Mount Rogers and Fatman's Squeeze",
+      tagline: "Virginia's high point, wild ponies, and a rock slot you take your pack off for.",
+      type: "activity + transfer",
+      driving: "~3h",
+      slack: "3 hours.",
+      overnight: {
+        name: "Hurricane Campground",
+        place: "Mount Rogers NRA, VA",
+        kind: "USFS campground",
+        cost: "$20",
+        checkin: "Gate 7 AM–10 PM",
+        confirmation: "RESERVED ✅",
+        notes: "~30 sites at 2,800–3,050 ft along Hurricane Branch and Comers Creek, under oak, hemlock and rhododendron. Paved spurs, gravel tent pads, two bathhouses with flush toilets and hot showers. The AT is within half a mile. <b>No cell service at all, no pay phone.</b> ⚠️ Skip site 6 — a camper reported it's neither private nor level.",
+      },
+      schedule: [
+        { kind: "stop", time: "5:45 → 6:30", est: "45m", text: "Break camp." },
+        { kind: "drive", time: "6:30 → 9:00", est: "2h 30m", text: "FS 210 → <b>Massie Gap.</b> US 221 N → NC 194 → US 58 W. Sunrise 7:41.", maps: "Massie Gap Grayson Highlands State Park" },
+        { kind: "stop", time: "9:00 → 9:20", est: "20m", text: "Park entrance fee, gear up." },
+        { kind: "hike", time: "9:20 → 3:20", est: "6h", text: "<b>Mount Rogers via Wilburn Ridge</b>, 8.0 mi / ~1,455 ft, topping at 5,729 ft — Virginia's high point.<br><br>⚠️ <b>The summit is wooded with no view.</b> The ridge is the entire payoff — take Wilburn Ridge, <b>not</b> the direct AT approach.<br><br>⭐ <b>FATMAN'S SQUEEZE</b> near Rhododendron Gap — a rock slot you physically squeeze through. Pack off.<br><br>⭐ <b>The ponies</b> are entirely unbothered by people and will walk right up. Don't feed them." },
+        { kind: "drive", time: "3:20 → 3:50", est: "30m", text: "→ <b>Hurricane Campground.</b> ⚠️ <b>Follow these directions, not GPS</b> — both the Forest Service and Recreation.gov say so in bold. From I-81, <b>Marion exit 45</b> → <b>VA-16 South</b> → 15 miles → <b>SR 650</b> (5 mi south of Sugar Grove) → right → 2 miles to the paved entrance road. One camper let GPS route them onto 650 from the northwest and got four miles of gravel.", maps: "Hurricane Campground Mount Rogers National Recreation Area", warn: true },
+        { kind: "stop", time: "3:50 → 5:00", est: "1h 10m", text: "Check in, set up, <b>hot shower.</b> $20. Sunset 6:39." },
+        { kind: "food", time: "5:00 →", est: "—", text: "Cook. Last night. Damascus is ~35 min if you want a town; the leg is otherwise thin for food." },
+      ],
+      meals: { b: "made — before breaking camp", l: "packed — carried on Wilburn Ridge", d: "made at camp. Mount Rogers leg is genuinely thin for food and that's not a research failure." },
+      highlights:
+        "Wild ponies that walk right up, a rock slot you take your pack off to get through, and Virginia's high point — with the honest caveat that the summit itself is wooded and the ridge is the reason you're there.",
+      warnings:
+        "Wind on the exposed ridge is relentless — shell and gloves, not optional. Follow the written directions to Hurricane, not GPS.",
+    },
+    {
+      day: 11,
+      date: "Sun Oct 25, 2026",
+      title: "Home",
+      tagline: "Move the legs, then seven and a half hours.",
+      type: "travel",
+      driving: "~7h 30m",
+      slack: "The optional loop is the only variable.",
+      overnight: { name: "Home", place: null, kind: null, cost: null, checkin: null, confirmation: null, notes: null },
+      schedule: [
+        { kind: "hike", time: "6:00 → 6:45", est: "45m", text: "<i>Optional:</i> <b>Hurricane Knob Nature Trail</b>, 1-mi loop from the campground. Move the legs before seven hours in the car. Sunrise 7:42 — this starts in the dark." },
+        { kind: "stop", time: "6:45 → 7:30", est: "45m", text: "Break camp." },
+        { kind: "drive", time: "7:30 → 3:00", est: "7h 30m", text: "Hurricane CG → Avon OH. US 58 E → I-77 N the whole way.", maps: "Avon, OH" },
+      ],
+      meals: { b: "made — or in the thermos for the road", l: "on the road", d: "home" },
+      highlights: "One mile on the legs before 450 miles in a seat.",
+      warnings: "Sunrise is 7:42 and the optional loop starts at 6:00 — that's a headlamp walk, not a stroll. Skip it if the alarm hurts.",
+    },
+  ],
+
+  lodging: {
+    summary: "10 nights · 8 reserved, 2 first-come with no reservation possible",
+    total: "Hurricane $20; others reserved",
+    rows: [
+      { night: "1–3", date: "Oct 15–17", location: "Fayetteville, WV", type: "Private", name: "Arrowhead Bike Farm", cost: "Reserved", status: "RESERVED ✅" },
+      { night: "4–7", date: "Oct 18–21", location: "Brevard, NC", type: "USFS", name: "Davidson River", cost: "Reserved", status: "RESERVED ✅ + phone-confirmed open" },
+      { night: "8–9", date: "Oct 22–23", location: "Linville Gorge, NC", type: "Dispersed, no facilities", name: "FS 210 roadside", cost: "Free", status: "❌ FIRST-COME — no reservation possible" },
+      { night: 10, date: "Oct 24", location: "Mount Rogers, VA", type: "USFS", name: "Hurricane Campground", cost: "$20", status: "RESERVED ✅" },
+    ],
+  },
+
+  hikes: {
+    title: "Hikes &amp; Trails",
+    summary:
+      "Eleven of eighteen stats in the source file were unverified estimates. AllTrails resolves some of them; where it disagrees or offers a different route, both are shown rather than one being picked.",
+    rows: [
+      { name: "Long Point", day: 1, distance: "~3.0 mi (est)", gain: "—", difficulty: "Easy", duration: "1h 30m", notes: "Trailhead is at the campground. Returns after dark — headlamp." },
+      { name: "Endless Wall → Diamond Point", day: 2, distance: "5.4 mi", gain: "508 ft", difficulty: "Moderate", duration: "3h", notes: "Verified in source. Nuttall lot, not Fern Creek. Must be Friday — closed Saturday." },
+      { name: "Nuttallburg + Conveyor Trail", day: 2, distance: "~1.0 mi (est)", gain: "—", difficulty: "Easy–steep", duration: "+60m", notes: "Keeneys Creek Rd access is the clearance question." },
+      { name: "Fayette Station Rd walk-down", day: 3, distance: "9.0 mi", gain: "~800 ft", difficulty: "Moderate", duration: "3h 45m total", notes: "⚠️ Parking at the top unconfirmed — 800-927-0263." },
+      { name: "Moore Cove Falls", day: 4, distance: "1.4 mi", gain: "—", difficulty: "Easy", duration: "60m", notes: "The trail goes behind the water." },
+      { name: "Black Balsam → Tennent Mtn", day: 5, distance: "⚠️ ~4.0 mi (est)", gain: "—", difficulty: "Moderate", duration: "2h 30m", notes: "⚠️ AllTrails has a 1.4 mi out-and-back to Black Balsam alone and a 9.7 mi / 1,666 ft Graveyard Ridge loop. Your ~4 mi is between them — pick the route before you park." },
+      { name: "Sam Knob", day: 5, distance: "~2.5 mi (est)", gain: "—", difficulty: "Moderate", duration: "1h 50m", notes: "Same lot. First thing cut if the day slips." },
+      { name: "Graveyard Fields Loop", day: 5, distance: "~3.0 mi (est)", gain: "—", difficulty: "Easy", duration: "1h 45m", notes: "" },
+      { name: "Devil's Courthouse", day: 5, distance: "~0.8 mi (est)", gain: "—", difficulty: "Short, steep", duration: "45m", notes: "Five-state view. Reopened Aug 2025." },
+      { name: "Skinny Dip Falls", day: 5, distance: "~1.0 mi (est)", gain: "—", difficulty: "Easy", duration: "60m", notes: "Second cut if the day slips." },
+      { name: "✅ Looking Glass Rock", day: 6, distance: "6.5 mi (plan) · AllTrails 6.0 mi", gain: "~1,700 ft · AllTrails 1,699 ft", difficulty: "Moderate", duration: "4h 30m budgeted · AllTrails ~3h 30m", notes: "✅ Best-corroborated hike on the trip. The budget has real margin." },
+      { name: "Daniel Ridge Loop + Falls", day: 6, distance: "~4.0 mi (est)", gain: "—", difficulty: "Easy–moderate", duration: "2h 15m", notes: "Turn LEFT at the Looking Glass junction." },
+      { name: "Hawksbill (daylight recon)", day: 8, distance: "2.4 mi", gain: "~700 ft", difficulty: "Moderate", duration: "2h", notes: "Verified in source. Trail on the RIGHT side of the road; at the summit split GO RIGHT." },
+      { name: "The Chimneys", day: 8, distance: "~2.0 mi (est)", gain: "—", difficulty: "Easy–moderate", duration: "2h 30m", notes: "Sunset from the rim towers." },
+      { name: "⭐ Hawksbill at sunrise", day: 9, distance: "2.4 mi", gain: "~700 ft", difficulty: "Moderate, in the dark", duration: "2h 45m", notes: "Same lot, same trail, hiked yesterday on purpose." },
+      { name: "Table Rock Loop", day: 9, distance: "7.5 mi", gain: "~2,100 ft", difficulty: "Rugged", duration: "5h 30m", notes: "⚠️ Spence Ridge river bridge washed out — confirm routing, (828) 652-2144. Release valve: 2.4 mi out-and-back instead." },
+      { name: "⭐ Mount Rogers via Wilburn Ridge", day: 10, distance: "8.0 mi", gain: "~1,455 ft", difficulty: "Moderate", duration: "6h", notes: "Verified in source. Summit is wooded — the ridge is the payoff. Fatman's Squeeze, wild ponies." },
+      { name: "Hurricane Knob (optional)", day: 11, distance: "1.0 mi", gain: "—", difficulty: "Easy", duration: "45m", notes: "From the campground, in the dark at 6 AM." },
+    ],
+  },
+
+  sunMoon: [
+    { date: "Thu 10/15", location: "Arrowhead / Long Point WV", firstLight: "7:06", sunrise: "7:33", sunset: "6:48 PM", dark: "~7:17 PM", moon: "—" },
+    { date: "Fri 10/16", location: "Endless Wall / Nuttallburg", firstLight: "7:07", sunrise: "7:33", sunset: "6:46 PM", dark: "~7:15 PM", moon: "—" },
+    { date: "Sat 10/17", location: "Bridge Day, Fayetteville", firstLight: "7:08", sunrise: "7:35", sunset: "6:45 PM", dark: "~7:14 PM", moon: "—" },
+    { date: "Sun 10/18", location: "Thurmond → Brevard", firstLight: "7:13", sunrise: "7:39", sunset: "6:53 PM", dark: "~7:21 PM", moon: "—" },
+    { date: "Mon 10/19", location: "Black Balsam, 6,000 ft", firstLight: "7:15", sunrise: "7:41", sunset: "6:52 PM", dark: "~7:20 PM", moon: "—" },
+    { date: "Tue 10/20", location: "Looking Glass Rock", firstLight: "7:15", sunrise: "7:41", sunset: "6:51 PM", dark: "~7:19 PM", moon: "—" },
+    { date: "Wed 10/21", location: "Davidson River", firstLight: "7:16", sunrise: "7:42", sunset: "6:49 PM", dark: "~7:17 PM", moon: "—" },
+    { date: "Thu 10/22", location: "Linville / The Chimneys", firstLight: "7:14", sunrise: "7:40", sunset: "6:44 PM", dark: "~7:12 PM", moon: "—" },
+    { date: "Fri 10/23", location: "Hawksbill summit, 4,009 ft", firstLight: "7:15", sunrise: "7:41", sunset: "6:43 PM", dark: "~7:11 PM", moon: "—" },
+    { date: "Sat 10/24", location: "Massie Gap / Mount Rogers", firstLight: "7:15", sunrise: "7:41", sunset: "6:39 PM", dark: "~7:07 PM", moon: "—" },
+    { date: "Sun 10/25", location: "Hurricane Campground VA", firstLight: "7:16", sunrise: "7:42", sunset: "6:37 PM", dark: "~7:05 PM", moon: "—" },
+  ],
+  sunMoonNote:
+    "Recomputed with the NOAA solar position algorithm for each day's coordinates. The source file ran roughly 3–4 minutes optimistic on every entry — always in the direction of <i>more</i> daylight than exists. Individually trivial; on Day 1 and Day 9 it's the difference between finishing in twilight and finishing with a headlamp. Sea-level times with standard refraction: a ridge or gorge wall takes light earlier. Moon phase not yet worked out.",
+
+  weather: [
+    { location: "Arrowhead, WV", elevation: "~1,900 ft", high: "—", low: "40s", notes: "Source file figures. Not yet cross-checked against climate normals." },
+    { location: "Davidson River, NC", elevation: "~2,200 ft", high: "—", low: "upper 30s–40s", notes: "" },
+    { location: "Black Balsam and above", elevation: "5,000–6,000 ft", high: "—", low: "—", notes: "⚠️ Fully exposed, roughly 15°F colder than camp, with wind." },
+    { location: "FS 210, Linville", elevation: "~3,800 ft", high: "—", low: "mid 30s", notes: "No water on site. Two consecutive nights." },
+    { location: "Hurricane, VA", elevation: "~2,900 ft", high: "—", low: "mid 30s", notes: "Hot showers. Relentless wind on the Mount Rogers ridge." },
+  ],
+  weatherNote:
+    "<b>Siesta 20 + MondoKing covers all of it.</b> The liner recommendation stands for the last three nights and is unconfirmed. September's Kentucky trip is the shakedown — note there whether the bag actually sleeps warm before deciding. <b>Color gradient:</b> balds above 5,000 ft peak late Sept/early Oct; the 3,000–5,000 ft corridor peaks the second and third weeks of October; the last week is best low. You're chasing color downhill and <b>Linville on Oct 22–23 is the bullseye.</b>",
+
+  packing: [
+    {
+      category: "The Linville leg — two nights, no water, no service",
+      items: [
+        "All water for two nights, carried in from Brevard",
+        "Low-cleanup meals only — there is nothing to wash with",
+        "Offline maps for Linville AND Mount Rogers, downloaded Wednesday in Brevard",
+        "Everything charged Wednesday. Starlink packed and accessible.",
+        "Spare tire pressure checked, jack, tire plug kit — cut sidewall is the real FS 210 risk",
+      ],
+    },
+    {
+      category: "Sleep — colder than September",
+      items: [
+        "REI Siesta 20 — mid-30s at Linville and Hurricane",
+        "Sleeping bag liner ⚠️ recommended, not confirmed purchased. Decide after the September shakedown.",
+        "Therm-a-Rest MondoKing 3D",
+        "Puffy, hat, gloves — Hawksbill at 7:15 AM at 4,009 ft, and the Mount Rogers ridge",
+      ],
+    },
+    {
+      category: "Bridge Day",
+      items: ["CASH — shuttle is $3, chili cook-off and 200+ vendors are cash", "Day bag only — no packs, pets, bikes, carts or strollers on the bridge", "Layers for 9 miles with 800 ft of climb on the return"],
+    },
+    {
+      category: "The lecture kit",
+      items: ["Starlink + mount", "Power bank charged", "Laptop + charger", "Tested Sunday Oct 18 on arrival — three days of buffer, use them"],
+    },
+    {
+      category: "Camp kitchen",
+      items: [
+        "One burner, pot, pan, mug, spork",
+        "Wide-mouth thermos — Hawksbill sunrise at 4,009 ft in the dark",
+        "48qt cooler ⚠️ eleven days on one cooler. The cooler timeline is in MEALS-trip2-october.md and is not yet on this page.",
+        "Block ice at the Brevard resupply — the last cold of the trip",
+      ],
+    },
+  ],
+
+  reservations: [
+    { text: "⚠️ CALL 800-927-0263 — Fayette Station Road parking on Bridge Day. The only open item that changes a day." },
+    { text: "Call Grandfather Ranger District (828) 652-2144 — FS 210 site availability, the 200-ft camping Forest Order, and Table Rock loop routing given the washed-out Spence Ridge bridge" },
+    { text: "Day 1 at Canyon Rim Visitor Center: ask about Keeneys Creek Road condition for a 5.9 in clearance car" },
+    { text: "✅ Arrowhead Bike Farm Oct 15–17 — RESERVED. Pull the confirmation number into this page." },
+    { text: "✅ Davidson River Oct 18–21 — RESERVED and phone-confirmed open" },
+    { text: "✅ Hurricane Campground Oct 24 — RESERVED. Gate 7 AM–10 PM." },
+    { text: "Decide the FS 210 bail-out BEFORE the trip: Mortimer Campground, or a motel in Newland / Linville Falls / Morganton" },
+    { text: "Sleeping bag liner — decide after the September Kentucky shakedown" },
+    { text: "Reserve The Falls Landing, Brevard, for Tuesday Oct 20" },
+    { text: "Check burn ban status across WV, NC and VA" },
+    { text: "Verify Linville Falls trail and spur road access from the closed Parkway corridor" },
+    { text: "Wednesday Oct 21: download offline maps for Linville and Mount Rogers — last reliable signal" },
+    { text: "Text the trip plan home, flagging Oct 22–24 as no-service days" },
+  ],
+
+  openQuestions: [
+    {
+      question: "Fayette Station Road parking on Bridge Day.",
+      blocks: "Day 3 — the whole day",
+      detail:
+        "The walk-to-the-bottom plan is free and legal; the roads are open to pedestrians even though the trails are closed and patrolled. What's unconfirmed is <b>where you can legally park at the top.</b> Fayette County Chamber, 800-927-0263. Get this before departure — the fallback (Fayetteville HS at 7:45, shuttle at 8:30, deck 9–3) is a completely different day and you don't want to discover it at 7 AM.",
+    },
+    {
+      question: "Which Black Balsam route?",
+      blocks: "Day 5 — and Day 5 has only 15 minutes of slack",
+      detail:
+        "The plan says ~4 mi via Art Loeb to Tennent Mountain in 2h 30m. AllTrails lists a 1.4 mi out-and-back to Black Balsam alone, and a 9.7 mi / 1,666 ft Graveyard Ridge loop. Your figure sits between them, which is consistent with an out-and-back along the ridge to Tennent — but on a day with 15 minutes of margin, guessing wrong by five miles ends the day in the dark. Decide the exact route, then re-check whether Sam Knob still fits.",
+    },
+    {
+      question: "The two Linville nights have no fallback written down.",
+      blocks: "Days 8–9",
+      detail:
+        "Bail-outs are named in the master file — Mortimer, or a motel in Newland, Linville Falls or Morganton — but none has been called, priced, or checked for October availability. \"Decided in advance\" means a phone number and a rough price, not a list of towns. This is the difference between a plan and a hope.",
+    },
+    {
+      question: "Keeneys Creek Road for 5.9 inches of clearance.",
+      blocks: "Day 2 afternoon",
+      detail:
+        "Some sources recommend high clearance. The fallback is Kaymoor Top, five minutes from camp, same corridor, conveyor and coke ovens down a long stairway — a genuinely good substitute rather than a consolation. Ask a ranger at Canyon Rim on Day 1 and be willing to take the substitute.",
+    },
+    {
+      question: "Table Rock loop routing with the Spence Ridge bridge out.",
+      blocks: "Day 9 afternoon",
+      detail:
+        "The east-rim loop shouldn't need the washed-out river bridge, but that's an inference, not a confirmation. Grandfather Ranger District, (828) 652-2144. If it does need it, the release valve is the 2.4 mi out-and-back through The Chimneys.",
+    },
+    {
+      question: "The meal plan isn't on this page.",
+      blocks: "Every camp meal",
+      detail:
+        "MEALS-trip2-october.md exists and contains the storage zones, format library, quantities, shopping list, and the cooler timeline that solves eleven days on one 48qt cooler. None of it has been transcribed here. Camp meals above say \"made at camp\" and nothing more, which is the one place this page is thinner than the Kentucky one.",
+    },
+    {
+      question: "Confirmation numbers are not in this file.",
+      blocks: "Nothing — three of four are reserved",
+      detail:
+        "Arrowhead, Davidson River and Hurricane are all booked and the numbers live in email. They belong on the page you'll have open at a gate with no signal — especially Hurricane, which has no cell service and no pay phone.",
+    },
+  ],
+
+  places: [
+    {
+      group: "New River Gorge",
+      items: [
+        { name: "Arrowhead Bike Farm", maps: "Arrowhead Bike Farm Fayetteville WV", note: "Nights 1–3. Long Point TH is on site." },
+        { name: "Canyon Rim Visitor Center", maps: "Canyon Rim Visitor Center Lansing WV", note: "Ask about Keeneys Creek Rd" },
+        { name: "Fayette Station Road", maps: "Fayette Station Road Fayetteville WV", note: "8-mi one-way loop to the gorge floor" },
+        { name: "Nuttall lot — Endless Wall", maps: "Nuttall Trailhead Endless Wall New River Gorge", note: "NOT Fern Creek" },
+        { name: "Long Point Trailhead", maps: "Long Point Trailhead Fayetteville WV", note: "Head-on bridge view" },
+        { name: "Nuttallburg", maps: "Nuttallburg Winona WV", note: "80 coke ovens. Via Keeneys Creek Rd." },
+        { name: "Kaymoor Top", maps: "Kaymoor Top New River Gorge", note: "The Nuttallburg fallback, 5 min from camp" },
+        { name: "Thurmond Depot", maps: "Thurmond Depot Thurmond WV", note: "Population 5" },
+        { name: "Fayetteville HS shuttle lot", maps: "Fayetteville High School Fayetteville WV", note: "Bridge Day shuttle, $3 cash" },
+        { name: "Fayette County Courthouse", maps: "Fayette County Courthouse Fayetteville WV", note: "Chili cook-off, 3 PM Saturday" },
+        { name: "Secret Sandwich Society", maps: "Secret Sandwich Society Fayetteville WV", note: "⭐ Brussels sprouts, then the McKinley" },
+        { name: "Pies & Pints", maps: "Pies and Pints Fayetteville WV", note: "⭐ Black bean pizza with pork" },
+        { name: "Cathedral Café", maps: "Cathedral Cafe Fayetteville WV", note: "⭐ The carrot cake. That's the whole reason to go." },
+        { name: "Tudor's Biscuit World, Oak Hill", maps: "Tudors Biscuit World Oak Hill WV", note: "Bridge Day breakfast, 6 AM" },
+      ],
+    },
+    {
+      group: "Pisgah",
+      items: [
+        { name: "Davidson River Campground", maps: "Davidson River Campground Pisgah Forest NC", note: "Nights 4–7. Test Starlink on arrival." },
+        { name: "Looking Glass Falls", maps: "Looking Glass Falls Pisgah Forest NC", note: "Roadside" },
+        { name: "Moore Cove Falls TH", maps: "Moore Cove Falls Trailhead Pisgah Forest NC", note: "Walk behind the water" },
+        { name: "Sliding Rock", maps: "Sliding Rock Pisgah Forest NC", note: "Looking, not sliding" },
+        { name: "Black Balsam Knob TH", maps: "Black Balsam Knob Trailhead Canton NC", note: "BRP MP 420. Decide the route first." },
+        { name: "Graveyard Fields", maps: "Graveyard Fields Blue Ridge Parkway", note: "MP 418.8" },
+        { name: "Devil's Courthouse", maps: "Devils Courthouse Blue Ridge Parkway", note: "MP 422" },
+        { name: "Looking Glass Rock Overlook", maps: "Looking Glass Rock Overlook Blue Ridge Parkway", note: "MP 417 — Skinny Dip Falls" },
+        { name: "Looking Glass Rock TH", maps: "Looking Glass Rock Trailhead Pisgah Forest NC", note: "✅ 6.0 mi / 1,699 ft confirmed" },
+        { name: "Daniel Ridge TH", maps: "Daniel Ridge Loop Trailhead Pisgah Forest NC", note: "Turn LEFT at the junction" },
+        { name: "The Falls Landing", maps: "The Falls Landing Brevard NC", note: "⭐ Mountain trout. Reserve ahead." },
+        { name: "Dolly's Dairy Bar", maps: "Dollys Dairy Bar Pisgah Forest NC", note: "100+ flavors" },
+        { name: "Bracken Mountain Bakery", maps: "Bracken Mountain Bakery Brevard NC", note: "Trail food for the Linville resupply" },
+      ],
+    },
+    {
+      group: "Linville Gorge",
+      items: [
+        { name: "Gingercake Rd turnoff", maps: "Gingercake Road Jonas Ridge NC", note: "⚠️ The SECOND intersection. Map search is unreliable here." },
+        { name: "Hawksbill Mountain Trailhead", maps: "Hawksbill Mountain Trailhead Linville Gorge", note: "Boulder-marked lot. Trail on the RIGHT." },
+        { name: "Spence Ridge parking", maps: "35.904183, -81.878217", note: "Verified coordinate from the source file. 200-ft walk east into the forest." },
+        { name: "Table Rock picnic area", maps: "Table Rock Picnic Area Linville Gorge NC", note: "End of FS 210, roughest stretch" },
+        { name: "Linville Falls Visitor Center", maps: "Linville Falls Visitor Center Linville Falls NC", note: "⚠️ Helene damage — verify access" },
+        { name: "Mortimer Campground", maps: "Mortimer Campground Pisgah National Forest", note: "The bail-out, ~10 mi" },
+      ],
+    },
+    {
+      group: "Mount Rogers",
+      items: [
+        { name: "Massie Gap", maps: "Massie Gap Grayson Highlands State Park", note: "Entrance fee. Take Wilburn Ridge, not the AT." },
+        { name: "Hurricane Campground", maps: "Hurricane Campground Mount Rogers National Recreation Area", note: "⚠️ Follow written directions, NOT GPS. Marion exit 45 → VA-16 S → SR 650." },
+        { name: "Damascus VA", maps: "Damascus Virginia", note: "~35 min, the only real town on this leg" },
+      ],
+    },
+  ],
+  placesNote:
+    "The field tab. Every entry opens a Google Maps search rather than dropping a pin. ⚠️ Note the two entries that say to ignore GPS — Gingercake Road and Hurricane Campground both route wrong.",
+  offlineRegions:
+    "Three Google Maps regions: <b>Fayetteville–Oak Hill–Beckley</b>, <b>Brevard–Asheville–Black Balsam</b>, and <b>Linville–Morganton north to Marion VA</b>. Download the last two on <b>Wednesday Oct 21 in Brevard</b> — that's the last reliable signal before four days without it. ⚠️ Google Maps offline does not include trails; download AllTrails or Gaia separately.",
+
+  notes: [
+    {
+      heading: "Thursday Oct 22 is the trip's single point of failure",
+      body:
+        "You wake at a site you paid for and go to sleep somewhere you have no claim on. First-come dispersed camping on FS 210, on the Thursday of peak color week, with no cell service and no reservation possible anywhere in the corridor. The mitigation is already built in: leave Davidson River at 6:30 despite a noon checkout, drive FS 210 once from the top, and take the first open Hawksbill site rather than pushing south hoping for better. What is <i>not</i> built in is a bail-out that has actually been called. Mortimer Campground and motels in Newland, Linville Falls and Morganton are named but unverified. Decided in advance means a phone number and a price.",
+    },
+    {
+      heading: "Why Hawksbill is on the schedule twice",
+      body:
+        "Thursday afternoon's Hawksbill hike is not a hike, it's reconnaissance. You climb it in daylight so that Friday at 6:30 AM you already know the boulder-marked lot, the trail starting on the right side of the road, and the summit split where most people go left and the views are right. The payoff is a 4,009 ft summit at sunrise with the Linville River 2,000 ft below during peak color week — the best photograph available on the entire trip, and it costs an alarm and one repeated hike.",
+    },
+    {
+      heading: "The lecture is confirmed on both trips",
+      body:
+        "This was the open question across both 2026 files and it's now closed: 11:10–2:30, budgeted 11:00–3:00, on <b>both</b> Wednesdays. October absorbs it cleanly because Oct 21 was already the deliberately unscheduled buffer day — Mount Pisgah, DuPont and PARI come off and they were filler. Kentucky does not absorb it: Sept 23 permanently loses Double Arch. What survives here and matters more is the afternoon prep block: resupply, fuel, offline map downloads, and repacking for two waterless nights. <b>That work is what makes Thursday possible and it must not get squeezed.</b>",
+    },
+    {
+      heading: "Starlink under canopy",
+      body:
+        "Davidson River is forested and Starlink needs sky view. Test it Sunday Oct 18 on arrival — three days of buffer, against Kentucky's one. Fallbacks if it fails: an open loop elsewhere in the campground, the Pisgah Inn area, or Brevard — though cell service at Davidson River is described as extremely limited, so the fallback is a drive, not a walk.",
+    },
+    {
+      heading: "Sun times were optimistic in one direction",
+      body:
+        "Every sunrise and sunset in the source file ran roughly 3–4 minutes in the direction of more daylight than exists. Recomputed values are used throughout. Individually that's noise. It matters twice: Day 1, where you finish a 1.6-mile walk back from Long Point after full dark and the source already flagged it; and Day 9, where sunrise on Hawksbill is 7:41 rather than 7:38, meaning three more minutes standing on an exposed 4,009 ft summit in the mid-30s before the light arrives. Bring the layers you'd bring anyway, and don't trust a clock you didn't derive.",
+    },
+    {
+      heading: "Fayetteville eats five restaurant slots in three days",
+      body:
+        "That's deliberate — it's the best food town on either 2026 trip, and the rest of the route is thin. Secret Sandwich Society's Brussels sprouts are what locals name unprompted; Pies & Pints was founded there before spreading to five states and the local order is the black bean pizza, not the Grape & Gorgonzola the tourists get; Cathedral Café is worth a stop for the carrot cake alone. Then it dries up: Brevard has The Falls Landing and Dolly's, Linville has nothing, and the Mount Rogers leg is genuinely thin with Damascus 35 minutes away. Front-loading the good food is the correct response to that geography, not an indulgence.",
+    },
+    {
+      heading: "The color gradient is the trip's spine",
+      body:
+        "Balds above 5,000 ft peak late September into early October — so Black Balsam on the 19th may already be browning, and that's expected rather than a miss. The 3,000–5,000 ft corridor peaks the second and third weeks of October, which puts Linville on the 22nd–23rd exactly on the bullseye. The last week of the month is best low. You're chasing color downhill and the itinerary is ordered to do that, which is also why the two unreservable nights fall on the most contested days: the thing that makes Linville worth the risk is the same thing that fills FS 210.",
+    },
+    {
+      heading: "What the source file removed, and why not to add it back",
+      body:
+        "Cathedral Falls and Hawks Nest were cut — northwest on Rt 60, the wrong direction going south, about an hour of backtracking; Thurmond replaced them and is better. John Rock was cut in favour of Moore Cove because John Rock's selling point is looking back at a mountain you climbed four hours earlier. Mount Pisgah, DuPont and PARI went to the lecture and were filler. Also standing: mountain biking (and renting one in Brevard), Bridge Walk, highline and zipline tickets, and breweries were all considered and declined.",
+    },
+  ],
+
+  waypoints: [
+    { name: "Spence Ridge parking, FS 210", lat: 35.904183, lng: -81.878217, verified: true, icon: "⛺", days: "8–9", notes: "From the source file. A 200-ft walk east into the forest — right at the Forest Order threshold." },
+    { name: "Arrowhead Bike Farm", lat: 38.0403, lng: -81.0805, verified: true, icon: "⛺", days: "1–3", notes: "From the source file. Long Point trailhead on site." },
+    { name: "Canyon Rim Visitor Center", lat: null, lng: null, verified: false, icon: "🌉", days: "1", notes: "" },
+    { name: "Nuttallburg", lat: null, lng: null, verified: false, icon: "🏚️", days: "2", notes: "Via Keeneys Creek Rd — clearance question" },
+    { name: "Davidson River Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "4–7", notes: "" },
+    { name: "Hawksbill Trailhead", lat: null, lng: null, verified: false, icon: "🌄", days: "8–9", notes: "Boulder-marked lot" },
+    { name: "Table Rock picnic area", lat: null, lng: null, verified: false, icon: "🪨", days: "8–9", notes: "End of FS 210" },
+    { name: "Massie Gap", lat: null, lng: null, verified: false, icon: "🐴", days: "10", notes: "" },
+    { name: "Hurricane Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "10", notes: "Follow written directions, not GPS" },
+  ],
+  map: { center: [37.2, -81.9], zoom: 7 },
+};

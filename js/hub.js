@@ -15,15 +15,29 @@
   let activeFilter = "all";
 
   /* ---------------- Sorting ----------------
-     Pinned first, then by how real the trip is, then by soonest date. A
-     wishlist idea should never sit above a trip you're actually booking. */
+     Chronological: the next trip you actually leave on is first. Undated
+     ideas come after the dated ones, and finished trips go to the bottom —
+     otherwise a 2026 trip you already took would outrank next month's.
+     Sorting uses the `start` field (ISO date), not the display string. */
   function sortTrips(list) {
+    const bucket = (t) => (t.status === "done" ? 2 : t.start ? 0 : 1);
     return list.slice().sort((a, b) => {
-      if (!!b.pinned !== !!a.pinned) return b.pinned ? 1 : -1;
-      const s = STATUS_ORDER[a.status] - STATUS_ORDER[b.status];
-      if (s !== 0) return s;
-      return (a.dates || "zzz").localeCompare(b.dates || "zzz");
+      const ba = bucket(a), bb = bucket(b);
+      if (ba !== bb) return ba - bb;
+      if (ba === 0) return a.start.localeCompare(b.start);
+      if (ba === 2) return (b.start || "").localeCompare(a.start || "");
+      return (a.title || "").localeCompare(b.title || "");
     });
+  }
+
+  /* Days until departure, for the card. Null once the trip has started. */
+  function daysOut(t) {
+    if (!t.start) return null;
+    const now = new Date();
+    const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    const [y, m, d] = t.start.split("-").map(Number);
+    const diff = Math.round((Date.UTC(y, m - 1, d) - today) / 86400000);
+    return diff >= 0 ? diff : null;
   }
 
   function matches(t, filter) {
@@ -99,6 +113,7 @@
       t.budget ? { k: "Budget", v: t.budget } : null,
     ].filter(Boolean);
 
+    const countdown = daysOut(t);
     const prog = t.page ? readProgress(t.slug) : null;
     const pct = prog ? Math.round((prog.done / prog.total) * 100) : null;
 
@@ -115,6 +130,7 @@
             <h3>${t.title}</h3>
             ${t.subtitle ? `<p class="card-sub">${t.subtitle}</p>` : ""}
             <div class="card-when">${t.dates || t.window || "No dates yet"}${t.region ? ` · ${t.region}` : ""}</div>
+            ${countdown !== null ? `<div class="card-countdown${countdown <= 30 ? " soon" : ""}">${countdown === 0 ? "Leaves today" : countdown === 1 ? "1 day out" : `${countdown} days out`}</div>` : ""}
           </div>
         </div>
         <div class="card-body">
@@ -211,17 +227,33 @@
   function renderPlaybook() {
     $("#panel-playbook").innerHTML = `
       <h2 class="section-title">How ${PROFILE.name} Travels</h2>
-      <p class="section-sub">The rules every itinerary on this site is built to. A plan that breaks one of these needs a written reason, not a quiet exception.</p>
+      <p class="section-sub">The constraints every itinerary on this site is built to. These are transcribed from the trip files, not inferred — if one is wrong, fix it here and every future plan changes with it.</p>
       <div class="card-grid">
         <div class="info-card"><h3>Home base</h3><p>${PROFILE.homeBase}</p></div>
-        <div class="info-card"><h3>Default group</h3><p>${PROFILE.defaultGroup}</p></div>
-        <div class="info-card"><h3>Budget target</h3><p>${PROFILE.defaultBudget}</p></div>
-        <div class="info-card"><h3>Driving</h3><p>${PROFILE.driverNote}</p></div>
+        <div class="info-card"><h3>Party</h3><p>${PROFILE.defaultGroup}</p></div>
+        <div class="info-card"><h3>Vehicle</h3><p>${PROFILE.vehicle}</p></div>
+        <div class="info-card"><h3>Hiking ceiling</h3><p>${PROFILE.ceiling}</p></div>
+        <div class="info-card"><h3>Difficulty appetite</h3><p>${PROFILE.difficulty}</p></div>
+        <div class="info-card"><h3>Crowds</h3><p>${PROFILE.crowds}</p></div>
+        <div class="info-card"><h3>Food</h3><p>${PROFILE.food}</p></div>
+        <div class="info-card"><h3>Trip shape</h3><p>${PROFILE.tripShape}</p></div>
+        <div class="info-card"><h3>Rental cars</h3><p>${PROFILE.driverNote}</p></div>
       </div>
 
       <div class="note-card">
-        <h3>Planning principles</h3>
+        <h3>The locked rule set</h3>
         <ul class="principle-list">${PRINCIPLES.map((p) => `<li>${p}</li>`).join("")}</ul>
+      </div>
+
+      <div class="note-card">
+        <h3>Working rules for Claude</h3>
+        <p class="section-sub" style="margin:-0.2em 0 0.6em">What any session planning a trip here is told about how to talk to you.</p>
+        <ul class="principle-list">${WORKING_RULES.map((p) => `<li>${p}</li>`).join("")}</ul>
+      </div>
+
+      <div class="note-card" style="border-left-color: var(--warn-border)">
+        <h3>Considered and declined — do not re-propose</h3>
+        <div class="tag-row" style="margin-top:0.5em">${DECLINED.map((d) => `<span class="tag">${d}</span>`).join("")}</div>
       </div>
 
       <h2 class="section-title" style="margin-top:2rem">Every-Trip Checklist</h2>
@@ -229,14 +261,11 @@
       <div class="progress-label" id="uni-progress-label"></div>
       <div class="progress-bar-wrap"><div class="progress-bar-fill" id="uni-progress-fill"></div></div>
       <ul class="flat-list" id="uni-list">
-        ${UNIVERSAL_CHECKLIST.map((text, i) => {
-          const id = `u-${i}`;
-          return `<li><label class="check-item" data-id="${id}"><input type="checkbox" /><span>${text}</span></label></li>`;
-        }).join("")}
+        ${UNIVERSAL_CHECKLIST.map((text, i) => `<li><label class="check-item" data-id="u-${i}"><input type="checkbox" /><span>${text}</span></label></li>`).join("")}
       </ul>
 
       <h2 class="section-title" style="margin-top:2rem">Booking Windows</h2>
-      <p class="section-sub">Default timing rules to plan against. Destination-specific windows live on the trip page — and the state-park one is the trap: it ranges from 30 days to a year.</p>
+      <p class="section-sub">Default timing to plan against. Destination-specific windows live on the trip page — and the state-park row is the trap: it ranges from 30 days to a year.</p>
       <div class="table-wrap"><table>
         <thead><tr><th>What</th><th>When it opens</th><th>Notes</th></tr></thead>
         <tbody>${BOOKING_WINDOWS.map((b) => `<tr><td>${b.what}</td><td>${b.when}</td><td>${b.note}</td></tr>`).join("")}</tbody>
