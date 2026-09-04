@@ -39,6 +39,7 @@
     { id: "hikes",        label: (M.labels && M.labels.hikes) || "Hikes", on: has(D.hikes && D.hikes.rows), render: renderHikes },
     { id: "conditions",   label: "Sun / Moon / Weather", on: has(D.sunMoon) || has(D.weather), render: renderConditions },
     { id: "budget",       label: "Budget",               on: has(D.budget && D.budget.rows), render: renderBudget },
+    { id: "provisions",   label: "Food &amp; Cooler",    on: has(D.provisions),          render: renderProvisions },
     { id: "packing",      label: "Packing",              on: has(D.packing),             render: renderPacking },
     { id: "reservations", label: "Reservations",         on: has(D.reservations),        render: renderReservations },
     { id: "questions",    label: "Open Questions",       on: has(D.openQuestions),       render: renderQuestions },
@@ -437,6 +438,47 @@
       </div>`;
     const update = () => setProgress("#pack-progress-fill", "#pack-progress-label", checked.size, totalPackItems(), "packed");
     wireChecklist(el, LS_PACK, checked, update);
+    update();
+  }
+
+  /* ---------------- Food & cooler ----------------
+     The meal plan lives with the itinerary rather than in a separate file,
+     because the two constrain each other: a cook time that lands inside a
+     lecture block, or a cooler that runs warm before the resupply, is only
+     visible when they sit on the same page. */
+  const LS_PROV = `${SLUG}.provisions`;
+
+  function renderProvisions() {
+    const el = $("#panel-provisions");
+    const P = D.provisions;
+    const checked = loadSet(LS_PROV);
+    let n = 0;
+    const lists = (P.lists || []).map((g) => `
+      <div class="pack-card">
+        <h3>${g.group}</h3>
+        ${g.note ? `<p class="section-sub" style="margin:-0.2em 0 0.6em">${g.note}</p>` : ""}
+        ${g.items.map((item) => checkItemHtml(`v-${n++}`, item, checked.has(`v-${n - 1}`))).join("")}
+      </div>`).join("");
+
+    el.innerHTML = `
+      <h2 class="section-title">Food &amp; Cooler</h2>
+      ${P.summary ? `<p class="section-sub">${P.summary}</p>` : ""}
+      ${P.cooler ? `
+        <h3 class="section-title" style="margin-top:1.25rem">The cooler timeline</h3>
+        ${P.coolerNote ? `<p class="section-sub">${P.coolerNote}</p>` : ""}
+        ${tableHtml(["Days", "Where", "Cooler state"], P.cooler.map((c) => [c.days, c.where, c.state]))}` : ""}
+      ${P.criticalSlots ? `
+        <div class="callout warning" style="margin-top:1.25rem">
+          <strong>The slots that decide whether you eat</strong>${P.criticalSlots}</div>` : ""}
+      ${lists ? `
+        <h3 class="section-title" style="margin-top:1.75rem">Prep &amp; shopping</h3>
+        <div class="progress-label" id="prov-progress-label"></div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="prov-progress-fill"></div></div>
+        <div class="pack-grid">${lists}</div>` : ""}`;
+
+    const total = (P.lists || []).reduce((sum, g) => sum + g.items.length, 0);
+    const update = () => setProgress("#prov-progress-fill", "#prov-progress-label", checked.size, total, "done");
+    wireChecklist(el, LS_PROV, checked, update);
     update();
   }
 

@@ -338,6 +338,68 @@ window.TRIP_DATA = {
   weatherNote:
     "Climate normals, not a forecast — the 10-day forecast reaches Sept 22 around Sept 12. ⚠️ <b>The warmer normals matter for the cooler:</b> the meal plan sizes Zone 1 against 70–75°F and gets ~2.5 days out of the 48qt. At 77–84°F that shortens. The Thursday block of ice is not optional.",
 
+  provisions: {
+    summary:
+      "Five nights, one 48qt cooler, one resupply on Thursday. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving.",
+    coolerNote:
+      "<b>Zone 1 is your ice</b> — cooked meals frozen flat in quart bags, which chill everything above them and then get eaten. <b>Zone 2 is the zone that ruins trips</b> (eggs, dairy, produce, raw meat): keep it small, eat it early. Zone 3 is shelf-stable and takes no cooler space at all. ⚠️ Climate normals for these dates run 75–77°F, warmer than the 70–75°F the meal plan assumed, which shortens the window before Thursday's resupply.",
+    cooler: [
+      { days: "1–2 · Sep 22–23", where: "Koomer Ridge, KY", state: "<b>Zone 2 is nearly empty until Thursday, which is the whole reason this works</b> — only four meals happen before the resupply. Zone 1 holds the chili and the burrito." },
+      { days: "3 · Sep 24", where: "Kroger, Stanton", state: "<b>Buy one BLOCK of ice — block, not cubes, it lasts 2–3× longer.</b> Plus the rotisserie chicken that covers Thursday and Friday dinner." },
+      { days: "4–6 · Sep 25–27", where: "Bandy Creek, TN", state: "Running on the block ice and the resupply. Bandy Creek has potable water and free hot showers, which is the only reason Saturday's high-cleanup ribeye is scheduled there." },
+    ],
+    criticalSlots:
+      "⚠️ <b>K-L2 is scheduled at 12:05 on Wednesday, inside the 11:00–3:00 lecture block</b> — three rounds of quesadillas, pan, spatula, MED cleanup. The meal file predates the lecture revision and also still doubles snacks for \"the Auxier loop\", which the lecture cut. Either build the quesadillas cold Tuesday night and eat them at the break, or swap to a no-cook tortilla plate and move the quesadillas to Friday.",
+    lists: [
+      {
+        group: "Freeze flat at home",
+        items: [
+          "Beef-and-bean chili — 500 ml quart bag (K-D1, Wed dinner). Split a Frito bag lengthwise and pour it in.",
+          "Chorizo–potato foil burrito (K-B2, Thu breakfast). Move to Zone 2 Wednesday night.",
+        ],
+      },
+      {
+        group: "Pre-mix into labeled bags at home",
+        items: [
+          "Oats ×2 — 2 packets · 25g milk powder · nuts · dried fruit · salt (K-B1 Wed, K-B5 Sun)",
+          "Hot chocolate — packets · 15g whole milk powder · pinch of salt. <b>For the dark Auxier Ridge start; the fat and sugar do more at 50°F than caffeine would.</b>",
+        ],
+      },
+      {
+        group: "Buy at home",
+        items: [
+          "Sub fixings for K-L1: sourdough, Genoa salami, provolone, pepperoncini, oil, oregano",
+          "Eggs, spinach, bell peppers, sourdough loaf, tortillas",
+          "Chicken pouch (7oz) · hard salami · aged cheddar · provolone · sun-dried tomato pesto",
+          "Trail mix 900g · bars ×8 · jerky 200g · waffles ×6 · dried mango 250g · almonds 250g",
+          "Honey mustard packets · dried figs · banana chips · cocoa",
+          "Olive oil squeeze bottle, hard cheese, crushed chips, starch pouches — the four things that turn a can into a meal",
+        ],
+      },
+      {
+        group: "Resupply — Kroger, Stanton KY, Thursday",
+        note: "The only one this trip.",
+        items: [
+          "<b>1 BLOCK of ice</b> — not cubes",
+          "<b>Rotisserie chicken</b> — covers K-D2 Thursday and K-D3 Friday. The correct move for one person.",
+          "400g russet potatoes (<b>cook double Friday</b> — half is Saturday's breakfast) · 400g baby potatoes",
+          "1× 12oz ribeye for Saturday · butter · garlic · thyme · balsamic · beef broth",
+          "Couscous · chickpeas (pull-tab) · feta · sun-dried tomatoes in oil · lemon",
+          "Frozen green beans · frozen broccoli · red onion · bell peppers · salsa",
+        ],
+      },
+      {
+        group: "Kit",
+        items: [
+          "<b>Wide-mouth thermos</b> — hot oats on the ridge Wednesday, hot couscous dinner at the Sunset Overlook Thursday. Two meals depend on it.",
+          "One burner, 2L pot with lid, 8–10\" pan, insulated mug, spork, long spoon, folding knife, spatula",
+          "48qt cooler, pre-chilled · wash basin · biodegradable soap · 2 bandanas",
+          "Bear-aware food storage for Bandy Creek — sorted before dark Thursday",
+        ],
+      },
+    ],
+  },
+
   packing: [
     {
       category: "The lecture kit — this trip's single point of failure",
