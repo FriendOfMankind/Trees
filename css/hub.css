@@ -1,0 +1,226 @@
+/* ==========================================================================
+   hub.css — styles for the hub (index.html). Loaded after base.css.
+   ========================================================================== */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--ui);
+}
+
+.filter-btn {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--t-ink-dim);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.filter-btn:hover { border-color: var(--t-500); color: var(--t-800); }
+.filter-btn.active { background: var(--t-800); border-color: var(--t-800); color: #fff; }
+.filter-btn .count { opacity: 0.7; font-weight: 400; margin-left: 0.35em; }
+
+/* ---------- Trip cards ---------- */
+
+.trip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.1rem; }
+
+.trip-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.trip-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.trip-card.no-page { cursor: default; }
+.trip-card.no-page:hover { transform: none; box-shadow: none; }
+
+.trip-card .card-band {
+  height: 6px;
+  background: linear-gradient(90deg, var(--c-800, var(--t-800)), var(--c-500, var(--t-500)));
+}
+
+.trip-card .card-head {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 0.5rem 1.15rem 0.6rem;
+}
+
+.trip-card .card-emoji {
+  font-size: 1.9rem;
+  line-height: 1;
+  flex: 0 0 auto;
+  filter: saturate(1.05);
+}
+
+.trip-card h3 { margin: 0; font-size: 1.15rem; line-height: 1.25; }
+.trip-card .card-sub { font-size: 0.85rem; color: var(--t-ink-dim); font-style: italic; margin: 0.2em 0 0; }
+.trip-card .card-when {
+  font-family: var(--ui);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--c-700, var(--t-700));
+  margin-top: 0.35em;
+}
+
+.trip-card .card-body { padding: 0 1.15rem 0.9rem; flex: 1; }
+.trip-card .card-why { font-size: 0.9rem; color: var(--t-ink-dim); margin: 0.5em 0 0; }
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.8rem;
+  font-family: var(--ui);
+}
+.stat-row .s { min-width: 62px; }
+.stat-row .s .v { display: block; font-size: 0.95rem; font-weight: 700; color: var(--t-ink); }
+.stat-row .s .k {
+  display: block;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--t-ink-dim);
+}
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
+.tag {
+  font-family: var(--ui);
+  font-size: 0.7rem;
+  background: var(--t-paper);
+  border: 1px solid var(--t-line);
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  color: var(--t-ink-dim);
+}
+
+.trip-card .card-foot {
+  border-top: 1px solid var(--t-line);
+  padding: 0.65rem 1.15rem;
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  color: var(--t-ink-dim);
+  background: var(--t-paper);
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+}
+.trip-card .card-foot .next { flex: 1; }
+.trip-card .card-foot .next b { color: var(--t-800); font-weight: 700; }
+
+.badges {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.7rem 0.85rem 0;
+}
+
+.badge {
+  font-family: var(--ui);
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-radius: 999px;
+  padding: 0.22rem 0.6rem;
+  border: 1px solid transparent;
+}
+.badge.planned  { background: var(--ok-bg);   color: var(--ok-ink);   border-color: var(--ok-border); }
+.badge.outline  { background: var(--warn-bg); color: var(--warn-ink); border-color: var(--warn-border); }
+.badge.wishlist { background: #eef1f6;        color: #445269;         border-color: #c3cddc; }
+.badge.done     { background: #efeee9;        color: #6a6455;         border-color: #ccc5b4; }
+.badge.pin { background: #fff5d6; color: #7a5b12; border-color: #e0c374; }
+
+.progress-mini { width: 84px; height: 6px; background: var(--t-line); border-radius: 999px; overflow: hidden; flex: 0 0 auto; }
+.progress-mini > i { display: block; height: 100%; background: var(--c-500, var(--t-500)); }
+
+/* ---------- Hub map ---------- */
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+  font-family: var(--ui);
+  font-size: 0.82rem;
+  color: var(--t-ink-dim);
+}
+.map-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.map-legend i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+
+/* ---------- Playbook / gear ---------- */
+
+.gear-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+
+.gear-card {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+.gear-card h3 { font-size: 1rem; margin-bottom: 0.55em; }
+.gear-list { list-style: none; margin: 0; padding: 0; }
+.gear-list li {
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--t-line);
+  font-size: 0.9rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.gear-list li:last-child { border-bottom: none; }
+.gear-list .g-name { flex: 1; }
+.gear-list .g-state {
+  font-family: var(--ui);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+}
+.g-state.own     { background: var(--ok-bg);   color: var(--ok-ink); }
+.g-state.replace { background: var(--warn-bg); color: var(--warn-ink); }
+.g-state.need    { background: #eef1f6;        color: #445269; }
+.g-state.rent    { background: #f3eefb;        color: #57407a; }
+.gear-list .g-note { display: block; font-size: 0.8rem; color: var(--t-ink-dim); margin-top: 0.15em; }
+
+.principle-list { list-style: none; margin: 0; padding: 0; }
+.principle-list li {
+  padding: 0.55rem 0 0.55rem 1.4rem;
+  border-bottom: 1px dashed var(--t-line);
+  font-size: 0.94rem;
+  position: relative;
+}
+.principle-list li:last-child { border-bottom: none; }
+.principle-list li::before { content: "▸"; position: absolute; left: 0.25rem; color: var(--t-500); }
+
+@media (max-width: 600px) {
+  .trip-grid { grid-template-columns: 1fr; }
+}
+
+.trip-card .card-countdown {
+  font-family: var(--ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--t-ink-dim);
+  margin-top: 0.3em;
+}
+.trip-card .card-countdown.soon { color: var(--warn-border); }
