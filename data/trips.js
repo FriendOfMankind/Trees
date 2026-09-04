@@ -140,6 +140,52 @@ const TRIPS = [
 
   /* ------------------------------------------------- WISHLIST — TIER 2
      Strong, unscheduled. */
+  /* --------------------------------------- WISHLIST — MAUI BOOKENDS
+     Candidates for a CLE → California → Maui → California → CLE sandwich in
+     May 2027. ⚠️ Everything Californian already on this list (Eastern Sierra,
+     Lassen) is a July–September alpine trip and does NOT work in May. These
+     are the ones whose window is actually May. */
+  {
+    slug: "owens-valley", title: "Owens Valley + Alabama Hills", subtitle: "Maui bookend — the outbound leg",
+    emoji: "🪨", theme: "desert", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null, window: "⭐ Apr–May and Oct — too hot in summer, snowbound above",
+    region: "Lone Pine, California", country: "USA", coords: [36.6, -118.06],
+    nights: "3–4 nights", budget: "3.5 hr drive from LAX or Burbank",
+    tags: ["car camping", "geology", "granite", "ruins", "may", "maui bookend"],
+    why: "The Sierra escarpment is about <b>10,000 ft of relief in a few horizontal miles</b> — one of the great normal-fault fronts on Earth — and the 1872 Lone Pine earthquake scarp is walkable at the valley floor. Weathered granite at Alabama Hills, basalt scoured by the Owens River at Fossil Falls, and Manzanar for the ruins. <b>This is also the only piece of the Eastern Sierra that works in May</b>, so it doubles as a scouting trip for the committed summer version. ⚠️ Alabama Hills is now <b>designated sites only</b> (~50, first-come) plus a <b>free one-year permit</b>; no camping west of Movie Road. Tuttle Creek BLM — already on your Eastern Sierra list as the bad-weather fallback — is the drive-up base.",
+    next: "Get the free Alabama Hills permit online, and check whether AAA waives the young-renter fee on a second and third rental", updated: "2026-09-04",
+  },
+  {
+    slug: "point-reyes-marin", title: "Point Reyes + Marin", subtitle: "Maui bookend — the return leg",
+    emoji: "🌁", theme: "forest", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null, window: "Apr–Jun — spring wildflowers, before the summer fog wall",
+    region: "Marin County, California", country: "USA", coords: [38.05, -122.88],
+    nights: "3–4 nights", budget: "1.5 hr from SFO",
+    tags: ["geology", "coast", "wildlife", "may", "maui bookend", "san andreas"],
+    why: "⚠️ The San Andreas runs straight through it — the Earthquake Trail has the fence line <b>offset 20 feet by the 1906 rupture</b>, and the whole peninsula is a slab of granite carried ~300 miles north from the southern Sierra. Tomales Point for tule elk, Chimney Rock, Alamere Falls. ⚠️ <b>Every campground inside the park is hike-in (1.5–5.5 mi), which breaks the car-camping rule</b> — the drive-up bases are Samuel P. Taylor SP and Olema, both just outside.",
+    next: "Confirm whether Samuel P. Taylor SP has May availability — it is reservable and popular", updated: "2026-09-04",
+  },
+  {
+    slug: "pinnacles", title: "Pinnacles", subtitle: "A volcano the San Andreas tore in half",
+    emoji: "🦅", theme: "desert", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null, window: "Mar–May and Oct — summer is brutal",
+    region: "Central California", country: "USA", coords: [36.49, -121.16],
+    nights: "2–3 nights", budget: "~2 hr from San Jose",
+    tags: ["car camping", "geology", "talus caves", "condors", "may", "maui bookend"],
+    why: "⚠️ A 23-million-year-old volcanic field split by the San Andreas and carried <b>195 miles north</b> from where it erupted — the other half is still down at Neenach. Talus caves, rhyolite spires, condors. ⚠️ Two real problems for May: <b>over 80% of annual visitation happens in spring</b> with long queues 10 AM–3 PM, and <b>Bear Gulch Cave closes mid-May to mid-July</b> for bat pupping. Midweek only, and check which caves are open.",
+    next: "Only if you can go midweek — otherwise it fails the crowd test outright", updated: "2026-09-04",
+  },
+  {
+    slug: "sequoia-kings", title: "Sequoia + Kings Canyon", subtitle: "The big-tree bookend",
+    emoji: "🌲", theme: "forest", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null, window: "May works low; Mineral King road opens late May",
+    region: "Central California", country: "USA", coords: [36.55, -118.75],
+    nights: "3–4 nights", budget: "~4 hr from LAX, ~1.5 hr from Fresno",
+    tags: ["car camping", "old growth", "granite", "may", "maui bookend"],
+    why: "⚠️ Giant Forest and Grant Grove are reachable in May when the high country is not. The largest trees on Earth by volume, plus glaciated granite. ⚠️ <b>Mineral King — the quiet corner — is a narrow 25-mile road that usually opens late May</b>, so an early-May trip gets the busy half of the park. Fits the outbound leg from LAX better than the return.",
+    next: "Check the Mineral King road opening date against your dates before choosing this over Owens Valley", updated: "2026-09-04",
+  },
+
   /* ------------------------------------------------- WISHLIST — TIER 3
      Shoulder and off-season. This is the tier that answers "what can I do
      in April" — Tiers 1 and 2 are all July–September alpine. */
