@@ -11,6 +11,7 @@
      - a coordinate outside the possible range
      - an "outline" trip with no openQuestions — the honesty check
      - a theme mismatch between the registry card and the page
+     - a target window that falls outside the trip's own season
    ========================================================================== */
 
 import { readFileSync, existsSync, readdirSync } from "node:fs";
@@ -73,6 +74,21 @@ if (!Array.isArray(TRIPS)) {
     } else if (t.status === "planned" || t.status === "outline") {
       fail(`${id}: status "${t.status}" but no page — planned and outline trips need a page`);
     }
+
+    if (t.months) {
+      if (!Array.isArray(t.months) || !t.months.length) fail(`${id}: months must be a non-empty array of 1-12`);
+      else if (t.months.some((m) => !Number.isInteger(m) || m < 1 || m > 12)) fail(`${id}: months must be integers 1-12`);
+    } else if (!t.external && t.status !== "done") {
+      warn(`${id}: no "months" — the Calendar tab can't offer it for any window`);
+    }
+    if (t.mode && !["fly", "drive", "weekend"].includes(t.mode)) fail(`${id}: mode "${t.mode}" is not fly/drive/weekend`);
+    if (t.days != null && (!Number.isInteger(t.days) || t.days < 1)) fail(`${id}: days must be a positive integer`);
+    if (t.target && !/^\d{4}-\d{2}-\d{2}$/.test(t.target)) fail(`${id}: target must be YYYY-MM-DD`);
+    if (t.target && t.months) {
+      const tm = Number(t.target.slice(5, 7));
+      if (!t.months.includes(tm)) fail(`${id}: target ${t.target} is in month ${tm}, which is not in its season ${JSON.stringify(t.months)}`);
+    }
+    if (t.start && !t.days) warn(`${id}: has a start date but no "days" — it won't render a bar on the calendar`);
 
     if (!t.next) warn(`${id}: no "next" action set — the hub card will just say "Open the plan"`);
   }

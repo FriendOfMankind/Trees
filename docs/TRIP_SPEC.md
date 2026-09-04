@@ -103,6 +103,11 @@ tab. Add data → get a tab.
 | `why` | | the one-paragraph case for going |
 | `next` | | **the single next action.** This is the most useful field on the hub |
 | `updated` | | `YYYY-MM-DD` |
+| `months` | | `[7, 8, 9]` — the season, as integers. **This is what the Calendar tab matches against.** Prose lives in `window`; this is the machine-readable half |
+| `mode` | | `fly` \| `drive` \| `weekend` — decides which windows are long enough to be worth it |
+| `days` | | trip length. With `start`, it draws the bar; without, it sizes the slot |
+| `target` | | `YYYY-MM-DD` — the window this trip is *aimed* at but not yet booked. Renders as a claim on the calendar. Must fall inside `months` |
+| `external` | | a fixed commitment you aren't planning here (family, work). Blocks the calendar, exempt from the page requirement |
 
 ### Statuses
 
@@ -190,6 +195,24 @@ adding twelve hex values to `THEMES` — do that rather than inventing a
 one-off inline palette, so the next trip can reuse it.
 
 ---
+
+## The Calendar tab
+
+`data/profile.js` carries an `AVAILABILITY` block: term dates, which weekday
+each term's classes fall on, holidays, fixed commitments, and the horizon
+after which the planning model changes. The hub computes free windows from
+it rather than from a hand-kept list, so **when the term dates change the
+gaps recompute themselves.**
+
+A window is only listed if it costs **zero** missed classes. Deciding to skip
+one is a judgment call the tool shouldn't make for you — it can only tell you
+what the window would be worth.
+
+Candidates for a window are trips whose `months` overlap it and whose `mode`
+fits its length (`modeFit` in `AVAILABILITY` sets the thresholds: 8+ days to
+justify an airfare, 5+ for a long drive, 3+ for a weekend). This is the whole
+point of the tab: the January 2027 window sat unnoticed for months because
+nobody had ever asked the data which trips were in season in January.
 
 ## Checked state
 

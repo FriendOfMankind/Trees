@@ -8,7 +8,8 @@ Static site. No build step, no package manager, no dependencies. Open
 ```
 index.html            hub — renders from data/trips.js + data/profile.js
 data/trips.js         THE REGISTRY. every trip, planned or dreamed
-data/profile.js       traveler profile, gear locker, universal checklist, booking windows
+data/profile.js       traveler profile, gear locker, checklist, booking windows,
+                      AVAILABILITY (term dates → the Calendar tab's free windows)
 css/base.css          shared tokens + primitives (theming via --t-* custom props)
 css/hub.css           hub only
 css/trip.css          trip pages only
@@ -36,6 +37,9 @@ docs/TRIPFORMAT.md    the paste-in brief. Hand this to an upstream research
 - **Content changes are data changes.** A trip's `data.js` holds everything;
   its `index.html` is a shell that must not be edited per-trip. Tabs generate
   from whichever data sections exist.
+- **Every registry entry needs `months` and `mode`.** They're what the
+  Calendar tab matches against; `window` prose is for humans, `months` is for
+  the machine. A trip with no `months` can never be offered for a gap.
 - **Run `node tools/validate.mjs` before committing.** Must exit 0.
 - Leaflet is vendored in `vendor/leaflet/`. Don't add a CDN dependency —
   these pages get used where there's no signal.
