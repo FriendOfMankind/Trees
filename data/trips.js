@@ -146,6 +146,36 @@ const TRIPS = [
      Lassen) is a July–September alpine trip and does NOT work in May. These
      are the ones whose window is actually May. */
   {
+    slug: "capitol-reef", title: "Capitol Reef", subtitle: "Maui return leg — the pick",
+    emoji: "🧱", theme: "desert", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null, window: "⭐ May–Oct for hiking; early-to-mid May before the heat",
+    region: "Torrey, Utah", country: "USA", coords: [38.29, -111.26],
+    nights: "3–4 nights", budget: "~3.5 hr drive from SLC",
+    tags: ["car camping", "geology", "red rock", "may", "maui bookend", "uncrowded"],
+    why: "The <b>Waterpocket Fold is a 100-mile wrinkle in the Earth's crust</b> — a monocline about as well exposed as any on the planet, and the entire reason the park exists. ✅ <b>Least-visited of Utah's Mighty Five</b>, so it passes the crowd test that Zion and Arches fail outright: no shuttle, no timed entry, no permit lottery.<br><br>✅ <b>Fruita Campground</b> — 71 sites in a historic orchard on the Fremont River, drive-up, reservable year-round on recreation.gov on a 6-month rolling window. The only established campground in the park, so book it.<br><br>Every hike fits the ceiling: Cassidy Arch (3.1 mi, ~850 ft), Chimney Rock, Grand Wash (flat, through the Fold itself), Hickman Bridge, Cohab Canyon. The Scenic Drive is paved; <b>Cathedral Valley is the high-clearance half and you would simply skip it</b>. ⚠️ Late May gets into the upper 80s — earlier in the month is better.",
+    next: "Fruita books 6 months out and has 71 sites — that is the only real constraint here", updated: "2026-09-04",
+  },
+  {
+    slug: "dinosaur-nm", title: "Dinosaur National Monument", subtitle: "Maui return leg — the sleeper",
+    emoji: "🦕", theme: "desert", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null, window: "Apr–Oct; May is ideal, before the summer heat",
+    region: "Jensen, Utah / Colorado", country: "USA", coords: [40.44, -109.3],
+    nights: "3 nights", budget: "✅ 191 mi, just over 3 hr from SLC — the shortest transfer of any option",
+    tags: ["car camping", "geology", "fossils", "river", "may", "maui bookend", "empty"],
+    why: "The <b>Quarry Exhibit Hall is a rock face with roughly 1,500 dinosaur bones still embedded in it</b> — an in-situ Jurassic bone bed under a building, not a museum with casts. Then <b>Split Mountain</b>, where the Green River cuts <i>straight through</i> an anticline instead of going around it, which is the textbook example of an antecedent stream.<br><br>✅ <b>Green River Campground</b>: $12/night, open April–October with drinking water and flush toilets, on the riverbank under Split Mountain, five miles from the Quarry. ⚠️ Split Mountain Campground is group-only in peak season, so Green River is the one.<br><br>If the through-line is genuinely 'why does this landscape look like this', this is the most concentrated answer on the whole list — and almost nobody goes. Smaller than Capitol Reef, so three nights, not four.",
+    next: "Confirm Green River Campground's April–October dates cover your week", updated: "2026-09-04",
+  },
+  {
+    slug: "great-sand-dunes", title: "Great Sand Dunes", subtitle: "Maui return leg — with a real catch",
+    emoji: "🏖️", theme: "savanna", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null, window: "Late May–June for Medano Creek — but see the warning",
+    region: "Colorado", country: "USA", coords: [37.79, -105.59],
+    nights: "2–3 nights", budget: "~4 hr from DEN",
+    tags: ["car camping", "dunes", "swimming", "may", "maui bookend"],
+    why: "Tallest dunes in North America — 750 ft of sand piled against the Sangre de Cristos. Your bucket list flags late May for Medano Creek: sand plus water, a completely different kind of day.<br><br>⚠️ <b>Do not build a trip around the creek.</b> It is entirely snowpack-fed and it fails. In <b>May 2026 it ran at 5–10% of normal — near record low — with reporting that it likely would not flow at all</b>, after an abnormally dry winter. Check the March–April snowpack before committing, and be content with just dunes if it does not come.<br><br>✅ Piñon Flats: 88 sites, $20, reservable 6 months out, drive-up.",
+    next: "Check Sangre de Cristo snowpack in March before this becomes a plan", updated: "2026-09-04",
+  },
+  {
     slug: "owens-valley", title: "Owens Valley + Alabama Hills", subtitle: "Maui bookend — the outbound leg",
     emoji: "🪨", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⭐ Apr–May and Oct — too hot in summer, snowbound above",
