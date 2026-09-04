@@ -218,8 +218,8 @@ const TRIPS = [
     start: null, dates: null, window: "July–September", region: "Nevada", country: "USA",
     coords: [40.6, -115.36], nights: null, budget: "SLC airport",
     tags: ["car camping", "alpine", "empty", "already researched"],
-    why: "📋 A paved canyon road to a glacial cirque with near-zero people. Thomas Canyon CG in Lamoille Canyon. ⚠️ <b>Two recreation.gov reservations (0861563331-1 and -2) were booked on Jul 27 2026 and reminder emails on Aug 3 and Aug 7 said the trip was one month away — which is right about now.</b> Both confirmations are still unread in the inbox.",
-    next: "⚠️ Check whether the Thomas Canyon nights are still live and cancel them if unused — recreation.gov 0861563331", updated: "2026-09-04",
+    why: "📋 A paved canyon road to a glacial cirque with near-zero people. Thomas Canyon CG in Lamoille Canyon. Booked for Sept 2026, then pivoted to Colorado — those reservations were cancelled and refunded. Still owed a visit.",
+    next: "Recover the Sept 2026 booking research rather than starting over", updated: "2026-09-04",
   },
   {
     slug: "great-basin", title: "Great Basin", subtitle: "Darkest sky in the lower 48",
