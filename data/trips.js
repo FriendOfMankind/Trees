@@ -173,8 +173,8 @@ const TRIPS = [
     region: "Alaska", country: "USA", coords: [60.1, -149.44],
     nights: "8 nights, 4 camps", budget: "Highest on the list — flights and rentals triple a Reno rate",
     tags: ["car camping", "glacier", "bears", "expensive", "wet"],
-    why: "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.",
-    next: "Decide whether this is a real item or a fantasy item — if real it belongs before 2029", updated: "2026-09-03",
+    why: "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.<br><br>⭐ <b>Slotted for Aug 2027 — the last summer before full-time work.</b> This is the trip the free summer exists for: every other fly-in on this list survives a two-week PTO allowance and this one does not. A PNW bundle (CLE→SEA→ANC→CLE) was considered and <b>declined on purpose</b> — Seattle is the natural connection so the routing was sound, but North Cascades is PTO-survivable and would have made Alaska the back half of a 24-day trip, and back halves get compressed.<br><br>✅ <b>Rental cars: most Alaska companies prohibit unpaved roads outright and void insurance if you drive them</b> — but the named restrictions (Denali Hwy, McCarthy, Steese, Dalton) are all interior. The Kenai\'s Seward and Sterling Highways are paved, so this is the least-affected corner of the state. ⚠️ <b>Hatcher Pass is the exception and it is already in this plan</b> — it sits north of Anchorage in the Mat-Su, not on the Kenai, and the summit traverse is gravel and seasonally gated. Paved approaches from either side are fine; the through-route is likely prohibited. Resolve before building the route.",
+    next: "Get a named rental company\'s restricted-roads list in writing, and decide whether Hatcher Pass means the paved approach or the gravel traverse", updated: "2026-09-05",
   },
 
   /* ------------------------------------------------- WISHLIST — TIER 2
