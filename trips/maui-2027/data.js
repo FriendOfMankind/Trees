@@ -306,6 +306,24 @@ const HIKES = [
   { name: "Hosmer Grove Nature Loop", day: 6, distance: "0.5 mi", gain: "Minimal", difficulty: "Easy", duration: "30 min", notes: "Endemic forest birds. Straight from camp." },
 ];
 
+/* Where each morning actually starts, so tools/sun.mjs can compute the table
+   instead of anyone typing it. Coordinates come from verified waypoints by
+   name — the tool refuses an unverified one, which is the same rule the map
+   follows. Elevations are the published campground/summit figures.
+
+   Regenerate:  node tools/sun.mjs maui-2027
+   Check:       node tools/sun.mjs maui-2027 --check                        */
+const SUN_MOON_SITES = [
+  { date: "2027-05-13", label: "Olowalu", waypoint: "Camp Olowalu", tz: "Pacific/Honolulu" },
+  { date: "2027-05-14", label: "La Pérouse → Hāna", waypoint: "La Pérouse Bay", tz: "Pacific/Honolulu" },
+  { date: "2027-05-15", label: "Hāna", waypoint: "Waiʻānapanapa State Park", tz: "Pacific/Honolulu" },
+  { date: "2027-05-16", label: "Hāna", waypoint: "Waiʻānapanapa State Park", tz: "Pacific/Honolulu" },
+  { date: "2027-05-17", label: "Hosmer (6,800 ft)", waypoint: "Hosmer Grove Campground", elevationM: 2073, tz: "Pacific/Honolulu" },
+  { date: "2027-05-18", label: "Hosmer (6,800 ft)", waypoint: "Hosmer Grove Campground", elevationM: 2073, tz: "Pacific/Honolulu" },
+  { date: "2027-05-19", label: "Summit (10,023 ft)", waypoint: "Haleakalā Visitor Center", elevationM: 3055, tz: "Pacific/Honolulu" },
+  { date: "2027-05-20", label: "Olowalu", waypoint: "Camp Olowalu", tz: "Pacific/Honolulu" },
+];
+
 const SUN_MOON = [
   { date: "Thu 5/13", location: "Olowalu", firstLight: "5:25 AM", sunrise: "5:49 AM", sunset: "6:56 PM", dark: "7:20 PM", moon: "52%" },
   { date: "Fri 5/14", location: "La Pérouse → Hāna", firstLight: "5:24 AM", sunrise: "5:48 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "59%" },
@@ -520,6 +538,7 @@ window.TRIP_DATA = {
   waypoints: WAYPOINTS,
   hikes: { title: "Hikes &amp; Trails", rows: HIKES },
   sunMoon: SUN_MOON,
+  sunMoonSites: SUN_MOON_SITES,
   sunMoonNote: "Calculated, elevation-corrected. ~13 hours of daylight daily.",
   weather: WEATHER,
   budget: {
