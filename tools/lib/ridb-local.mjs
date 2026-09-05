@@ -239,8 +239,16 @@ export function ridbDataDir(root) {
     const found = findExportUnder(c, c === home ? 2 : 3);
     if (found) return found;
   }
+  LAST_SEARCH = candidates;
   return null;
 }
+
+/* Where the last unsuccessful search looked. The export is often on another
+   drive entirely — E:\, an external disk — and no amount of searching a home
+   directory will find it, so the honest answer is to say what was covered and
+   let the person point at the rest. */
+let LAST_SEARCH = [];
+export function searchedPaths() { return LAST_SEARCH; }
 
 /** Say precisely what is wrong with a data directory, because "nothing usable
     found" covers four different mistakes and sends you looking at the wrong

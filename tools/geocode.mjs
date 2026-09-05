@@ -39,7 +39,7 @@ import vm from "node:vm";
 import {
   PROVIDERS, lookupOverpass, lookupNominatim, lookupRidb, lookupNps,
 } from "./lib/sources.mjs";
-import { lookupRidbLocal, ridbDataDir, buildIndex, diagnose } from "./lib/ridb-local.mjs";
+import { lookupRidbLocal, ridbDataDir, buildIndex, diagnose, searchedPaths } from "./lib/ridb-local.mjs";
 import { haversineMeters, spreadMeters, centroid } from "./lib/geo.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -210,7 +210,15 @@ if (bulkDir) {
   }
 }
 if (!bulkDir && !process.env.RIDB_API_KEY) {
-  console.log(`  note: Recreation.gov skipped — no RIDB_DATA download and no RIDB_API_KEY`);
+  console.log(`  note: Recreation.gov skipped — no bulk export found and no RIDB_API_KEY.`);
+  const looked = searchedPaths();
+  if (looked.length) {
+    console.log(`        Looked for Facilities_API_v1.csv under:`);
+    for (const p of looked) console.log(`          ${p}`);
+    console.log(`        On another drive? Point at it directly:`);
+    console.log(`          PowerShell:  $env:RIDB_DATA = "E:\\path\\to\\RIDBFullExport_V1_CSV"`);
+    console.log(`          bash:        export RIDB_DATA=/path/to/RIDBFullExport_V1_CSV`);
+  }
 }
 if (!process.env.NPS_API_KEY) console.log(`  note: ${PROVIDERS.nps.label} skipped — NPS_API_KEY not set`);
 console.log("");
