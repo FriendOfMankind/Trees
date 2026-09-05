@@ -29,6 +29,7 @@ import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import { routeOrs, routeOsrm } from "./lib/sources.mjs";
 import { haversineMeters, metersToMiles, decodePolyline } from "./lib/geo.mjs";
+import { renderBlock, spliceBlock } from "./lib/blocks.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -146,7 +147,7 @@ if (D.meta && D.meta.distance) console.log(`data.js currently claims: ${D.meta.d
 
 /* ---------------- write ---------------- */
 
-const block = renderBlock(routes);
+const block = renderBlock("ROUTES", "routes", routes);
 
 if (!has("write")) {
   console.log(`\nPreview only. Re-run with --write to put this into ${rel}:\n`);
@@ -154,40 +155,13 @@ if (!has("write")) {
   process.exit(0);
 }
 
-const START = "  // >>> ROUTES";
-const END = "  // <<< ROUTES";
-const i = source.indexOf(START);
-const j = source.indexOf(END);
-
-if (i === -1 || j === -1) {
-  console.log(`\n${rel} has no generated-routes block. Paste this into window.TRIP_DATA:\n`);
+const spliced = spliceBlock(source, "ROUTES", block);
+if (!spliced) {
+  console.log(`\nCould not find the waypoints array in ${rel} to place this after. Paste it in yourself:\n`);
   console.log(block);
-  console.log(`\n(Keep the >>> and <<< marker lines — they are how --write finds the block next time.)`);
-  process.exit(0);
+  process.exit(1);
 }
 
-writeFileSync(file, source.slice(0, i) + block + source.slice(j + END.length));
-console.log(`\nWrote ${routes.length} route(s) into ${rel}. Now run: node tools/validate.mjs`);
-
-function renderBlock(rs) {
-  const body = rs.map((r) =>
-    `    {\n` +
-    `      id: ${JSON.stringify(r.id)},\n` +
-    `      label: ${JSON.stringify(r.label)},\n` +
-    `      mode: ${JSON.stringify(r.mode)},\n` +
-    `      days: ${JSON.stringify(r.days)},\n` +
-    `      distanceMi: ${r.distanceMi},\n` +
-    (r.durationMin != null ? `      durationMin: ${r.durationMin},\n` : "") +
-    `      source: ${JSON.stringify(r.source)},\n` +
-    `      generated: ${JSON.stringify(r.generated)},\n` +
-    `      geometry: ${JSON.stringify(r.geometry)},\n` +
-    `    },`
-  ).join("\n");
-
-  return `${START} — generated. Re-run the tool rather than hand-editing;
-  // the next --write overwrites everything between these markers.
-  routes: [
-${body}
-  ],
-${END}`;
-}
+writeFileSync(file, spliced.text);
+console.log(`\n${spliced.how === "inserted" ? "Inserted" : "Updated"} ${routes.length} route(s) in ${rel}.`);
+console.log(`Now run: node tools/manifest.mjs && node tools/validate.mjs`);
