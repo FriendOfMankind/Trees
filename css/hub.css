@@ -105,6 +105,54 @@
   border-radius: 999px;
   padding: 0.18rem 0.55rem;
   color: var(--t-ink-dim);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.tag:hover { border-color: var(--c-500, var(--t-500)); color: var(--t-800); }
+.tag.on { background: var(--c-800, var(--t-800)); border-color: var(--c-800, var(--t-800)); color: #fff; }
+.filter-btn.tag-clear { background: var(--t-800); border-color: var(--t-800); color: #fff; }
+
+/* ---------- Agenda ----------
+   One row per dated thing. The date column is fixed-width so the eye can run
+   down it, and anything inside 30 days gets an accent bar — the point of the
+   tab is that a window you missed looks different from one you haven't. */
+
+.agenda-list { list-style: none; margin: 0 0 0.5rem; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+
+.agenda-row {
+  display: flex;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-left: 4px solid var(--c-500, var(--t-500));
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+}
+.agenda-row.urgent { border-left-color: var(--warn-border); }
+.agenda-row.unknown-window { border-left-style: dashed; }
+
+.agenda-row .a-when {
+  flex: 0 0 8.5rem;
+  font-family: var(--ui);
+  font-size: 0.82rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.agenda-row .a-when b { color: var(--t-900); }
+.agenda-row .a-rel { color: var(--t-ink-dim); font-size: 0.76rem; }
+.agenda-row.urgent .a-rel { color: var(--warn-border); font-weight: 700; }
+
+.agenda-row .a-body { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
+.agenda-row .a-head { font-size: 0.98rem; }
+.agenda-row .a-icon { opacity: 0.75; margin-right: 0.15em; }
+.agenda-row .a-trip { font-family: var(--ui); font-size: 0.78rem; color: var(--t-ink-dim); }
+.agenda-row .a-trip a { color: var(--t-700); text-decoration: none; border-bottom: 1px dotted currentColor; }
+.agenda-row .a-note { font-size: 0.82rem; color: var(--t-ink-dim); font-style: italic; }
+
+@media (max-width: 600px) {
+  .agenda-row { flex-direction: column; gap: 0.35rem; }
+  .agenda-row .a-when { flex: none; flex-direction: row; gap: 0.5rem; align-items: baseline; }
 }
 
 .trip-card .card-foot {

@@ -6,13 +6,12 @@
 (function () {
   "use strict";
 
-  const $ = (sel, root) => (root || document).querySelector(sel);
-  const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
-
   const STATUS_LABEL = { planned: "Planned", outline: "Outline", wishlist: "Wishlist", done: "Done" };
   const STATUS_ORDER = { planned: 0, outline: 1, wishlist: 2, done: 3 };
 
   let activeFilter = "all";
+  let activeTag = null;      // set by clicking a tag on any card
+  let tabs = null;
 
   /* ---------------- Sorting ----------------
      Chronological: the next trip you actually leave on is first. Undated
@@ -32,41 +31,51 @@
 
   /* Days until departure, for the card. Null once the trip has started. */
   function daysOut(t) {
-    if (!t.start) return null;
-    const now = new Date();
-    const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-    const [y, m, d] = t.start.split("-").map(Number);
-    const diff = Math.round((Date.UTC(y, m - 1, d) - today) / 86400000);
-    return diff >= 0 ? diff : null;
+    const n = daysUntil(t.start);
+    return n !== null && n >= 0 ? n : null;
   }
 
-  function matches(t, filter) {
-    if (filter === "all") return true;
-    if (filter === "pinned") return !!t.pinned;
-    return t.status === filter;
+  function matches(t) {
+    if (activeTag && !(t.tags || []).includes(activeTag)) return false;
+    if (activeFilter === "all") return true;
+    if (activeFilter === "pinned") return !!t.pinned;
+    return t.status === activeFilter;
   }
 
-  /* Progress written by a trip page into this browser's localStorage. */
-  function readProgress(slug) {
+  /* How far along the booking is.
+
+     First choice is what the trip page wrote into this browser's
+     localStorage, because it counts every reservation line. Failing that —
+     a phone that has never opened the trip page, a cleared cache — fall back
+     to the `done` flags on the registry's own booking declarations, which are
+     committed to git and therefore true everywhere. A slightly coarser bar
+     that is always right beats a precise one that is usually missing. */
+  function readProgress(t) {
     try {
-      const raw = localStorage.getItem(`${slug}.progress`);
-      if (!raw) return null;
-      const p = JSON.parse(raw);
-      if (!p.reservations || !p.reservations.total) return null;
-      return p.reservations;
-    } catch (e) { return null; }
+      const raw = localStorage.getItem(`${t.slug}.progress`);
+      const p = raw && JSON.parse(raw);
+      if (p && p.reservations && p.reservations.total) {
+        return Object.assign({ source: "this browser" }, p.reservations);
+      }
+    } catch (e) { /* private mode */ }
+
+    const decls = !t.booking ? [] : (Array.isArray(t.booking) ? t.booking : [t.booking]);
+    if (!decls.length) return null;
+    return { done: decls.filter((b) => b.done).length, total: decls.length, source: "the registry" };
   }
 
   /* ---------------- Header ---------------- */
 
   function renderHeaderStats() {
     const by = (s) => TRIPS.filter((t) => t.status === s).length;
+    const next = agenda(TRIPS, BOOKING_WINDOWS).find((i) => i.dateISO && i.days >= 0);
     const stats = [
+      next ? { num: next.days === 0 ? "today" : `${next.days}d`, lbl: next.kind === "booking" ? "To a window" : "To departure" } : null,
       { num: by("planned"), lbl: "Planned" },
       { num: by("outline"), lbl: "In progress" },
       { num: by("wishlist"), lbl: "On the list" },
       { num: by("done"), lbl: "Done" },
-    ];
+    ].filter(Boolean);
     $("#header-stats").innerHTML = stats
       .map((s) => `<div class="stat"><span class="num">${s.num}</span><span class="lbl">${s.lbl}</span></div>`)
       .join("");
@@ -93,7 +102,17 @@
            ${label}<span class="count">${counts[k]}</span></button>`)
       .join("");
 
-    $$(".filter-btn").forEach((b) =>
+    if (activeTag) {
+      $("#filter-bar").insertAdjacentHTML("beforeend",
+        `<button class="filter-btn tag-clear" id="clear-tag">tag: ${activeTag} &times;</button>`);
+      $("#clear-tag").addEventListener("click", () => {
+        activeTag = null;
+        renderFilters();
+        renderTripGrid();
+      });
+    }
+
+    $$(".filter-btn[data-filter]").forEach((b) =>
       b.addEventListener("click", () => {
         activeFilter = b.dataset.filter;
         renderFilters();
@@ -114,7 +133,7 @@
     ].filter(Boolean);
 
     const countdown = daysOut(t);
-    const prog = t.page ? readProgress(t.slug) : null;
+    const prog = readProgress(t);
     const pct = prog ? Math.round((prog.done / prog.total) * 100) : null;
 
     return `
@@ -136,23 +155,39 @@
         <div class="card-body">
           ${t.why ? `<p class="card-why">${t.why}</p>` : ""}
           ${stats.length ? `<div class="stat-row">${stats.map((s) => `<div class="s"><span class="v">${s.v}</span><span class="k">${s.k}</span></div>`).join("")}</div>` : ""}
-          ${t.tags && t.tags.length ? `<div class="tag-row">${t.tags.map((x) => `<span class="tag">${x}</span>`).join("")}</div>` : ""}
+          ${t.tags && t.tags.length ? `<div class="tag-row">${t.tags.map((x) =>
+            `<button type="button" class="tag${x === activeTag ? " on" : ""}" data-tag="${x}">${x}</button>`).join("")}</div>` : ""}
         </div>
         <div class="card-foot">
           <span class="next">${t.next ? `<b>Next:</b> ${t.next}` : (href ? "Open the plan →" : "Not planned yet")}</span>
-          ${pct !== null ? `<span class="progress-mini" title="${prog.done}/${prog.total} reservations done"><i style="width:${pct}%"></i></span>` : ""}
+          ${pct !== null ? `<span class="progress-mini" title="${prog.done}/${prog.total} booked — from ${prog.source}"><i style="width:${pct}%"></i></span>` : ""}
         </div>
       </${tag}>`;
   }
 
   function renderTripGrid() {
-    const list = sortTrips(TRIPS.filter((t) => matches(t, activeFilter)));
+    const list = sortTrips(TRIPS.filter(matches));
     const el = $("#trip-grid");
     if (!list.length) {
-      el.innerHTML = `<div class="empty-state">Nothing here yet. Add an entry to <code>data/trips.js</code> — a wishlist entry takes about six lines.</div>`;
-      return;
+      el.innerHTML = `<div class="empty-state">Nothing matches that combination.
+        ${activeTag ? `Try clearing the <b>${activeTag}</b> tag.` : "Add an entry to <code>data/trips.js</code> — a wishlist entry takes about six lines."}</div>`;
+    } else {
+      el.innerHTML = list.map(tripCardHtml).join("");
     }
-    el.innerHTML = list.map(tripCardHtml).join("");
+
+    /* Tags were rendered but inert for the site's whole life, which made the
+       "reuse tags across trips so they mean something" rule unfalsifiable.
+       Now they filter, so a tag that means nothing is visibly a tag that
+       returns one trip. */
+    $$("#trip-grid .tag").forEach((btn) =>
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        activeTag = activeTag === btn.dataset.tag ? null : btn.dataset.tag;
+        renderFilters();
+        renderTripGrid();
+      })
+    );
   }
 
   /* ---------------- Map ---------------- */
@@ -167,7 +202,7 @@
 
     const map = L.map("map", { scrollWheelZoom: false });
     window.__hubMap = map;
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    L.tileLayer(TILE_URL, {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18,
     }).addTo(map);
@@ -199,6 +234,64 @@
       .filter((s) => TRIPS.some((t) => t.status === s && t.coords))
       .map((s) => `<span><i style="background:${resolveTheme((TRIPS.find((t) => t.status === s) || {}).theme).c800}"></i>${STATUS_LABEL[s]}</span>`)
       .join("") + `<span style="margin-left:auto">Pin color follows the trip's theme, not its status.</span>`;
+  }
+
+  /* ---------------- Agenda ----------------
+     Every dated thing across every trip, in date order.
+
+     This is the view the site was missing. The `next` field is the most
+     useful thing on a trip card and there was nowhere to see all of them at
+     once; booking windows were arithmetic somebody had to do in their head
+     against a table on a different tab. Both are derived here — see
+     js/derive.js — from `start`, the trip's `booking` declarations, and the
+     lead times in data/profile.js. Nothing on this tab is typed by hand, so
+     nothing on it can go stale. */
+
+  const KIND_META = {
+    booking: { icon: "🗓", label: "Booking window" },
+    departure: { icon: "🚗", label: "Departure" },
+    next: { icon: "➡", label: "Next action" },
+    "unknown-window": { icon: "❓", label: "Unknown window" },
+  };
+
+  function renderAgenda() {
+    const items = agenda(TRIPS, BOOKING_WINDOWS);
+    const dated = items.filter((i) => i.dateISO);
+    const undated = items.filter((i) => !i.dateISO);
+
+    const row = (i) => {
+      const meta = KIND_META[i.kind] || { icon: "•", label: i.kind };
+      const n = i.days;
+      const urgent = n !== null && n <= 30;
+      const open = i.kind === "booking" && n !== null && n <= 0;
+      return `<li class="agenda-row ${i.kind}${urgent ? " urgent" : ""}" style="${cardThemeStyle(i.theme)}">
+        <span class="a-when">
+          ${i.dateISO ? `<b>${fmtDay(i.dateISO)}</b><span class="a-rel">${open ? "open now" : relDays(n)}</span>` : `<span class="a-rel">no date</span>`}
+        </span>
+        <span class="a-body">
+          <span class="a-head"><span class="a-icon" title="${meta.label}">${meta.icon}</span> ${i.headline}</span>
+          <span class="a-trip">${i.emoji || "🧭"} ${
+            TRIPS.some((t) => t.slug === i.slug && t.page)
+              ? `<a href="${TRIPS.find((t) => t.slug === i.slug).page}">${i.trip}</a>`
+              : i.trip}</span>
+          ${i.basis ? `<span class="a-note">${i.basis}</span>` : ""}
+          ${i.detail ? `<span class="a-note">${i.detail}</span>` : ""}
+        </span>
+      </li>`;
+    };
+
+    $("#panel-agenda").innerHTML = `
+      <h2 class="section-title">Agenda</h2>
+      <p class="section-sub">Everything with a date attached, soonest first. Booking windows are
+        counted back from the night being booked using the lead times in the Playbook — not typed in,
+        so they can't drift. A window this site can't derive is listed as unknown rather than guessed.</p>
+      ${dated.length ? `<ul class="agenda-list">${dated.map(row).join("")}</ul>`
+        : `<div class="empty-state">No dated deadlines. Give a trip a <code>start</code> and a
+           <code>booking</code> declaration and it shows up here.</div>`}
+      ${undated.length ? `
+        <h3 class="section-title" style="margin-top:2rem">No date yet</h3>
+        <p class="section-sub">Live trips' next actions, and the windows nobody has confirmed.</p>
+        <ul class="agenda-list">${undated.map(row).join("")}</ul>` : ""}`;
   }
 
   /* ---------------- Gear ---------------- */
@@ -277,56 +370,39 @@
   const LS_UNI = "hub.universal";
 
   function wireUniversalChecklist() {
-    let set;
-    try { set = new Set(JSON.parse(localStorage.getItem(LS_UNI) || "[]")); } catch (e) { set = new Set(); }
-
-    const update = () => {
-      const total = UNIVERSAL_CHECKLIST.length;
-      const pct = total ? Math.round((set.size / total) * 100) : 0;
-      $("#uni-progress-fill").style.width = `${pct}%`;
-      $("#uni-progress-label").textContent = `${set.size} / ${total} done (${pct}%)`;
-    };
-
-    $$("#uni-list .check-item").forEach((label) => {
-      const input = $("input", label);
-      const on = set.has(label.dataset.id);
-      input.checked = on;
+    const store = checkStore(LS_UNI);
+    const list = $("#uni-list");
+    $$(".check-item", list).forEach((label) => {
+      const on = store.has(label.dataset.id);
+      $("input", label).checked = on;
       label.classList.toggle("checked", on);
-      input.addEventListener("change", () => {
-        if (input.checked) set.add(label.dataset.id); else set.delete(label.dataset.id);
-        label.classList.toggle("checked", input.checked);
-        try { localStorage.setItem(LS_UNI, JSON.stringify(Array.from(set))); } catch (e) { /* private mode */ }
-        update();
-      });
     });
+    const update = () =>
+      setProgress("#uni-progress-fill", "#uni-progress-label", store.size, UNIVERSAL_CHECKLIST.length, "done");
+    wireChecklist(list, store, update);
     update();
   }
 
-  /* ---------------- Tabs ---------------- */
-
-  function initTabs() {
-    $$(".tab-btn").forEach((btn) => btn.addEventListener("click", () => activateTab(btn.dataset.tab)));
-    const hash = (location.hash || "").replace("#", "");
-    if (hash && $(`#panel-${hash}`)) activateTab(hash);
-  }
-
-  function activateTab(name) {
-    $$(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
-    $$(".panel").forEach((p) => p.classList.toggle("active", p.id === `panel-${name}`));
-    history.replaceState(null, "", `#${name}`);
-    if (name === "map" && window.__hubMap) {
-      requestAnimationFrame(() => window.__hubMap.invalidateSize());
-    }
-  }
+  /* ---------------- Init ---------------- */
 
   function init() {
     renderHeaderStats();
     renderFilters();
     renderTripGrid();
+    renderAgenda();
     renderGear();
     renderPlaybook();
-    initTabs();
+    tabs = initTabs({
+      nav: "#tabs",
+      onActivate: (name) => {
+        if (name === "map" && window.__hubMap) {
+          requestAnimationFrame(() => window.__hubMap.invalidateSize());
+        }
+      },
+    });
     initHubMap();
+    Offline.register("./sw.js");
+    Offline.mountIndicator($(".header-inner"));
   }
 
   document.addEventListener("DOMContentLoaded", init);

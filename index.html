@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/print.css" media="print" />
 </head>
 <body>
 
@@ -23,6 +24,7 @@
   </div>
   <nav class="tabs" id="tabs" aria-label="Sections">
     <button class="tab-btn active" data-tab="trips">Trips</button>
+    <button class="tab-btn" data-tab="agenda">Agenda</button>
     <button class="tab-btn" data-tab="map">Map</button>
     <button class="tab-btn" data-tab="gear">Gear Locker</button>
     <button class="tab-btn" data-tab="playbook">Playbook</button>
@@ -36,6 +38,8 @@
     <div class="filter-bar" id="filter-bar"></div>
     <div class="trip-grid" id="trip-grid"></div>
   </section>
+
+  <section id="panel-agenda" class="panel"></section>
 
   <section id="panel-map" class="panel">
     <h2 class="section-title">Where It All Is</h2>
@@ -54,6 +58,9 @@
 
 <script src="vendor/leaflet/leaflet.js"></script>
 <script src="js/themes.js"></script>
+<script src="js/derive.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/offline.js"></script>
 <script src="data/profile.js"></script>
 <script src="data/trips.js"></script>
 <script src="js/hub.js"></script>

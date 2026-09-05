@@ -316,6 +316,50 @@ tfoot td { font-weight: 700; padding: 0.65rem 0.9rem; background: var(--t-paper)
   font-size: 0.8rem;
 }
 
+/* ---------- Buttons, network state, locked checks ---------- */
+
+.btn {
+  font-family: var(--ui);
+  font-size: 0.84rem;
+  font-weight: 600;
+  background: var(--t-800);
+  color: #fff;
+  border: 1px solid var(--t-800);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn:hover { background: var(--t-700); }
+.btn:disabled { opacity: 0.55; cursor: default; }
+.btn.ghost { background: #fff; color: var(--t-800); }
+.btn.ghost:hover { background: var(--t-paper); }
+
+.tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0 0 1.2rem; }
+.tool-bar .tool-note { font-family: var(--ui); font-size: 0.78rem; color: var(--t-ink-dim); }
+
+/* Offline is a fact worth stating on a page whose whole premise is being
+   readable without signal. Hidden while online; it is not decoration. */
+.net-state {
+  font-family: var(--ui);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border: 1px solid var(--warn-border);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  align-self: center;
+}
+
+/* A reservation confirmed in the data file. Not a checkbox you can change
+   from here, because the data file is the record and this isn't. */
+.check-item.locked { cursor: default; opacity: 0.95; }
+.check-item.locked input { accent-color: var(--ok-border); }
+.check-item.locked span { color: var(--ok-ink); }
+
 @media (max-width: 600px) {
   .header-inner { padding: 1.2rem 1.1rem 0.8rem; }
   .tabs { padding: 0 1.1rem; }

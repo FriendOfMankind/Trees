@@ -13,9 +13,6 @@
 (function () {
   "use strict";
 
-  const $ = (sel, root) => (root || document).querySelector(sel);
-  const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
-
   const D = window.TRIP_DATA;
   if (!D) {
     document.body.innerHTML = "<p style='padding:2rem;font-family:sans-serif'>No TRIP_DATA found. Check that data.js loaded before trip.js.</p>";
@@ -76,20 +73,9 @@
     if (M.footerNote) $("#footer-note").innerHTML = M.footerNote;
   }
 
-  function initTabs() {
-    $$(".tab-btn").forEach((btn) => btn.addEventListener("click", () => activateTab(btn.dataset.tab)));
-    const hash = (location.hash || "").replace("#", "");
-    if (hash && $(`#panel-${hash}`)) activateTab(hash);
-  }
+  let tabs = null;
 
-  function activateTab(name) {
-    $$(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
-    $$(".panel").forEach((p) => p.classList.toggle("active", p.id === `panel-${name}`));
-    history.replaceState(null, "", `#${name}`);
-    if (name === "map" && window.__tripMap) {
-      requestAnimationFrame(() => window.__tripMap.invalidateSize());
-    }
-  }
+  function activateTab(name) { if (tabs) tabs.activate(name); }
 
   /* ---------------- Overview ---------------- */
 
@@ -154,11 +140,16 @@
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
   }
 
+  /* The query string is carried in data-q as well as the href, because on
+     paper an href is invisible and the query is the only part that's useful
+     standing at a junction with a phone that has no signal. */
+  function mapsBtn(query) {
+    return `<a class="maps-btn" href="${mapsUrl(query)}" data-q="${query.replace(/"/g, "&quot;")}" target="_blank" rel="noopener">Maps &#8599;</a>`;
+  }
+
   function scheduleRowHtml(s) {
     const icon = s.kind ? (KIND_ICON[s.kind] || "\u{1F4CD}") : "";
-    const maps = s.maps
-      ? `<a class="maps-btn" href="${mapsUrl(s.maps)}" target="_blank" rel="noopener">Maps &#8599;</a>`
-      : "";
+    const maps = s.maps ? mapsBtn(s.maps) : "";
     const est = s.est ? `<span class="est">${s.est}</span>` : "";
     return `<li class="${s.warn ? "warn-row" : ""}">
       <span class="time">${icon ? `<span class="kind">${icon}</span>` : ""}${s.time}</span>
@@ -239,7 +230,7 @@
           <ul class="place-list">
             ${g.items.map((i) => `<li>
               <span class="p-name">${i.name}${i.note ? `<span class="p-note">${i.note}</span>` : ""}</span>
-              <a class="maps-btn" href="${mapsUrl(i.maps || i.name)}" target="_blank" rel="noopener">Maps &#8599;</a>
+              ${mapsBtn(i.maps || i.name)}
             </li>`).join("")}
           </ul>
         </div>`).join("")}
@@ -250,7 +241,53 @@
   /* ---------------- Map ---------------- */
 
   function renderMapPanel() {
-    $("#panel-map").innerHTML = `<div id="map"></div><div id="map-unverified"></div>`;
+    $("#panel-map").innerHTML = `
+      <div id="map"></div>
+      <div id="tile-panel" class="tile-panel"></div>
+      <div id="map-unverified"></div>`;
+  }
+
+  /* ---------------- Offline tiles ----------------
+     The map is the one part of this site that was never actually offline:
+     Leaflet is vendored, the tiles were not. This stores the tiles you can
+     legitimately store and is honest about the ceiling.
+
+     The OSM tile servers are donated and their policy treats more than 250
+     tiles in one go as bulk downloading. So this covers the trip at overview
+     zoom and stops. For navigation-grade offline maps, export the GPX and
+     use an app built for it — that is not a limitation of this page, it is
+     what the GPX button is for. */
+  function renderTilePanel(bounds) {
+    const el = $("#tile-panel");
+    if (!el) return;
+
+    if (!Offline.available()) {
+      el.innerHTML = `<p class="tile-note">Offline tile storage needs the service worker, which isn't running here
+        (opened from a file, or the page hasn't reloaded since it registered). The map still works online.</p>`;
+      return;
+    }
+    if (!bounds) { el.innerHTML = ""; return; }
+
+    const plan = Offline.zoomBudget(bounds, 7, 13, 250);
+    if (!plan.urls.length) { el.innerHTML = ""; return; }
+
+    el.innerHTML = `
+      <div class="tile-row">
+        <button class="btn" id="tile-save">Save ${plan.urls.length} map tiles for offline</button>
+        <span class="tile-note" id="tile-status">Covers this trip's area to zoom ${plan.maxZoom} — an overview, not turn-by-turn.</span>
+      </div>`;
+
+    const btn = $("#tile-save"), note = $("#tile-status");
+    btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      note.textContent = "Saving…";
+      const res = await Offline.prefetch(plan.urls, (p) => {
+        note.textContent = `Saving ${p.done} / ${p.total}…`;
+      });
+      if (!res) { note.textContent = "The service worker didn't answer. Reload and try again."; btn.disabled = false; return; }
+      note.textContent = `Saved. ${res.done - res.failed} tiles stored${res.failed ? `, ${res.failed} failed` : ""}. `
+        + `They'll be there with no signal; anything past zoom ${plan.maxZoom} won't.`;
+    });
   }
 
   function initMap() {
@@ -262,7 +299,10 @@
     const map = L.map("map", { scrollWheelZoom: false });
     window.__tripMap = map;
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    /* No {s} subdomains: OSM deprecated them, and a single predictable URL
+       per tile is what makes the offline prefetch cache the same bytes
+       Leaflet will later ask for. */
+    L.tileLayer(TILE_URL, {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 18,
     }).addTo(map);
@@ -283,15 +323,25 @@
 
     // Fit to what we actually know. Only fall back to a fixed view if we
     // don't have enough verified points to frame the trip.
+    let area = null;
     if (verified.length >= 2) {
-      map.fitBounds(verified.map((w) => [w.lat, w.lng]), { padding: [40, 40] });
+      const pts = verified.map((w) => [w.lat, w.lng]);
+      map.fitBounds(pts, { padding: [40, 40] });
+      const lats = pts.map((p) => p[0]), lngs = pts.map((p) => p[1]);
+      area = [[Math.min(...lats) - 0.15, Math.min(...lngs) - 0.15],
+              [Math.max(...lats) + 0.15, Math.max(...lngs) + 0.15]];
     } else if (verified.length === 1) {
       map.setView([verified[0].lat, verified[0].lng], 11);
+      const [la, ln] = [verified[0].lat, verified[0].lng];
+      area = [[la - 0.3, ln - 0.3], [la + 0.3, ln + 0.3]];
     } else if (D.map && D.map.center) {
       map.setView(D.map.center, D.map.zoom || 9);
+      const [la, ln] = D.map.center;
+      area = [[la - 0.6, ln - 0.6], [la + 0.6, ln + 0.6]];
     } else {
       map.setView([0, 0], 2);
     }
+    renderTilePanel(area);
 
     if (unverified.length) {
       $("#map-unverified").className = "map-note";
@@ -373,59 +423,43 @@
 
   const LS_PACK = `${SLUG}.packing`;
   const LS_RES = `${SLUG}.reservations`;
+  const LS_PROV = `${SLUG}.provisions`;
   const LS_PROGRESS = `${SLUG}.progress`;
 
-  function loadSet(key) {
-    try { return new Set(JSON.parse(localStorage.getItem(key) || "[]")); } catch (e) { return new Set(); }
-  }
-  function saveSet(key, set) {
-    try { localStorage.setItem(key, JSON.stringify(Array.from(set))); } catch (e) { /* private mode */ }
+  const packStore = checkStore(LS_PACK);
+  const resStore = checkStore(LS_RES);
+  const provStore = checkStore(LS_PROV);
+
+  /* Reservations that are actually confirmed live in data.js with done:true.
+     localStorage only ever tracks the rest. That way the hub is right on a
+     phone that has never opened this page, and clearing site data cannot lose
+     a confirmation number. */
+  const resDone = (r, i) => !!r.done || resStore.has(`r-${i}`);
+
+  function resDoneCount() {
+    return (D.reservations || []).filter(resDone).length;
   }
 
   /* The hub reads this so a trip card can show how far along booking is
-     without loading every trip's data file. Per-browser, best effort. */
+     without loading every trip's data file. Per-browser, best effort — the
+     hub falls back to the data file's own done flags when it's absent. */
   function writeProgress() {
     try {
       localStorage.setItem(LS_PROGRESS, JSON.stringify({
-        reservations: { done: loadSet(LS_RES).size, total: (D.reservations || []).length },
-        packing: { done: loadSet(LS_PACK).size, total: totalPackItems() },
+        reservations: { done: resDoneCount(), total: (D.reservations || []).length },
+        packing: { done: packStore.size, total: totalPackItems() },
         ts: Date.now(),
       }));
     } catch (e) { /* private mode */ }
-  }
-
-  function wireChecklist(scope, key, set, onChange) {
-    $$(".check-item", scope).forEach((label) => {
-      const input = $("input", label);
-      input.addEventListener("change", () => {
-        if (input.checked) set.add(label.dataset.id); else set.delete(label.dataset.id);
-        label.classList.toggle("checked", input.checked);
-        saveSet(key, set);
-        onChange();
-        writeProgress();
-      });
-    });
-  }
-
-  function checkItemHtml(id, text, checked) {
-    return `<label class="check-item ${checked ? "checked" : ""}" data-id="${id}">
-      <input type="checkbox" ${checked ? "checked" : ""} /><span>${text}</span></label>`;
   }
 
   function totalPackItems() {
     return (D.packing || []).reduce((sum, c) => sum + c.items.length, 0);
   }
 
-  function setProgress(fillSel, labelSel, done, total, noun) {
-    const pct = total ? Math.round((done / total) * 100) : 0;
-    const fill = $(fillSel), label = $(labelSel);
-    if (fill) fill.style.width = `${pct}%`;
-    if (label) label.textContent = `${done} / ${total} ${noun} (${pct}%)`;
-  }
-
   function renderPacking() {
     const el = $("#panel-packing");
-    const checked = loadSet(LS_PACK);
+    const checked = packStore;
     el.innerHTML = `
       <h2 class="section-title">Packing List</h2>
       <p class="section-sub">Checked state is saved in this browser only. See the <a href="../../index.html#gear">Gear Locker</a> on the hub for what you already own.</p>
@@ -437,7 +471,7 @@
         </div>`).join("")}
       </div>`;
     const update = () => setProgress("#pack-progress-fill", "#pack-progress-label", checked.size, totalPackItems(), "packed");
-    wireChecklist(el, LS_PACK, checked, update);
+    wireChecklist(el, checked, () => { update(); writeProgress(); });
     update();
   }
 
@@ -446,12 +480,10 @@
      because the two constrain each other: a cook time that lands inside a
      lecture block, or a cooler that runs warm before the resupply, is only
      visible when they sit on the same page. */
-  const LS_PROV = `${SLUG}.provisions`;
-
   function renderProvisions() {
     const el = $("#panel-provisions");
     const P = D.provisions;
-    const checked = loadSet(LS_PROV);
+    const checked = provStore;
     let n = 0;
     const lists = (P.lists || []).map((g) => `
       <div class="pack-card">
@@ -478,23 +510,26 @@
 
     const total = (P.lists || []).reduce((sum, g) => sum + g.items.length, 0);
     const update = () => setProgress("#prov-progress-fill", "#prov-progress-label", checked.size, total, "done");
-    wireChecklist(el, LS_PROV, checked, update);
+    wireChecklist(el, checked, update);
     update();
   }
 
   function renderReservations() {
     const el = $("#panel-reservations");
-    const checked = loadSet(LS_RES);
+    const locked = D.reservations.filter((r) => r.done).length;
     el.innerHTML = `
       <h2 class="section-title">Reservations Checklist</h2>
-      <p class="section-sub">In booking order. The first unchecked item is what to do next.</p>
+      <p class="section-sub">In booking order. The first unchecked item is what to do next.${
+        locked ? ` <b>${locked}</b> ${locked === 1 ? "line is" : "lines are"} confirmed in the data file and can't be unticked here — that's the record, not the scratchpad.` : ""
+      }</p>
       <div class="progress-label" id="res-progress-label"></div>
       <div class="progress-bar-wrap"><div class="progress-bar-fill" id="res-progress-fill"></div></div>
       <ul class="flat-list">
-        ${D.reservations.map((r, i) => `<li>${checkItemHtml(`r-${i}`, r.text, checked.has(`r-${i}`))}</li>`).join("")}
+        ${D.reservations.map((r, i) =>
+          `<li>${checkItemHtml(`r-${i}`, r.text, resDone(r, i), { locked: !!r.done })}</li>`).join("")}
       </ul>`;
-    const update = () => setProgress("#res-progress-fill", "#res-progress-label", checked.size, D.reservations.length, "done");
-    wireChecklist(el, LS_RES, checked, update);
+    const update = () => setProgress("#res-progress-fill", "#res-progress-label", resDoneCount(), D.reservations.length, "done");
+    wireChecklist(el, resStore, () => { update(); writeProgress(); });
     update();
   }
 
@@ -524,9 +559,18 @@
   function init() {
     renderChrome();
     SECTIONS.forEach((s) => s.render());
-    initTabs();
+    tabs = initTabs({
+      nav: "#tabs",
+      onActivate: (name) => {
+        if (name === "map" && window.__tripMap) {
+          requestAnimationFrame(() => window.__tripMap.invalidateSize());
+        }
+      },
+    });
     initMap();
     writeProgress();
+    Offline.register("../../sw.js");
+    Offline.mountIndicator($(".header-inner"));
   }
 
   document.addEventListener("DOMContentLoaded", init);

@@ -222,3 +222,11 @@
   .schedule-list .row-text { flex: 1 1 100%; }
   .maps-btn { padding: 0.35rem 0.75rem; }
 }
+
+/* ---------- Offline tiles ----------
+   Sits directly under the map, because the honest version of "download this
+   for offline" is one that tells you what it does and does not cover. */
+
+.tile-panel { margin-top: 0.75rem; }
+.tile-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.tile-note { font-family: var(--ui); font-size: 0.8rem; color: var(--t-ink-dim); }

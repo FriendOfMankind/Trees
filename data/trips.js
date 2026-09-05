@@ -16,6 +16,14 @@
            Navigation-grade coordinates live in each trip's WAYPOINTS, where
            the verified flag applies.
 
+   booking: what has to be reserved and through which system. The Agenda tab
+            counts back from `target` — the FIRST NIGHT of that booking, not
+            the trip's start — using the lead time in data/profile.js, so
+            nobody does six-month arithmetic in their head at 6 AM. Declare a
+            booking when it has a real window or a real unknown; a private
+            campground you can call any time is not a deadline. `done: true`
+            keeps it in the record and out of the Agenda.
+
    Wishlist entries below are transcribed from the Sept 3 2026 bucket list,
    Tiers 1 and 2. Their confidence marks are preserved in `why`: ✅ verified
    Sept 2026, 📋 verified in an earlier 2026 session, ⚠️ unverified lead.
@@ -44,6 +52,10 @@ const TRIPS = [
     tags: ["car camping", "arches", "scrambling", "ruins", "solo", "lecture day"],
     why: "Two sandstone plateaus back to back — the Gorge's arch cluster, then Honey Creek's ladders and ropes on the busiest Saturday of the season, because that's what keeps it empty.",
     next: "Re-check Tunnel Ridge Road the morning of departure — Cumberland District, 606-784-6428",
+    booking: [
+      { system: "recreation.gov", what: "Koomer Ridge (Sept 22–23)", target: "2026-09-22", done: true },
+      { system: "recreation.gov", what: "Bandy Creek (Sept 24–26)", target: "2026-09-24", done: true },
+    ],
     updated: "2026-09-04",
   },
   {
@@ -67,6 +79,11 @@ const TRIPS = [
     tags: ["car camping", "fall color", "ruins", "BASE jumping", "first-come", "solo", "lodging gap"],
     why: "BASE jumpers watched from the gorge floor, three coal ghost towns, and a sunrise on Hawksbill during peak color week — with two unreservable nights on a forest road as the price.",
     next: "Call Arrowhead 304-900-5501 — the reservation moved to Oct 16–18 by phone, leaving Oct 15 with no bed and nothing in writing",
+    booking: [
+      { system: "private", what: "Arrowhead Bike Farm (Oct 16–18)", target: "2026-10-16", done: true },
+      { system: "recreation.gov", what: "Davidson River (Oct 18–21)", target: "2026-10-18", done: true },
+      { system: "recreation.gov", what: "Hurricane Campground (Oct 24)", target: "2026-10-24", done: true },
+    ],
     updated: "2026-09-04",
   },
 
@@ -92,6 +109,12 @@ const TRIPS = [
     tags: ["camping", "volcanic", "snorkeling", "solo", "road loop", "altitude"],
     why: "Every major Maui landscape in one counterclockwise loop — reef, lava field, rainforest, and a 10,000 ft summit.",
     next: "Confirm the Waiʻānapanapa booking window (1 year vs 90 days) so the alarm is set correctly",
+    booking: [
+      { system: "state-park", what: "Waiʻānapanapa SP camping (5/14–5/16)", target: "2027-05-14",
+        note: "The trip's own open question. 1 year vs 90 days is a nine-month difference in when the alarm goes off." },
+      { system: "recreation.gov", what: "Hosmer Grove (5/17–5/18)", target: "2027-05-17",
+        note: "6 sites total. Book the morning it drops." },
+    ],
     updated: "2026-09-03",
   },
 
