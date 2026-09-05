@@ -26,10 +26,10 @@ export const PROVIDERS = {
 
 /* ---------------- HTTP ---------------- */
 
-async function getJson(url, { headers = {}, method = "GET", body, timeoutMs = 30000, retries = 2 } = {}) {
+async function getJson(url, { headers = {}, method = "GET", body, timeoutMs = 30000, retries = 2, backoff = 1000 } = {}) {
   let lastErr;
   for (let attempt = 0; attempt <= retries; attempt++) {
-    if (attempt) await new Promise((r) => setTimeout(r, 1000 * 2 ** attempt));
+    if (attempt) await new Promise((r) => setTimeout(r, backoff * 2 ** attempt));
     const ac = new AbortController();
     const timer = setTimeout(() => ac.abort(), timeoutMs);
     try {
@@ -39,7 +39,8 @@ async function getJson(url, { headers = {}, method = "GET", body, timeoutMs = 30
         signal: ac.signal,
         headers: { "User-Agent": UA, Accept: "application/json", ...headers },
       });
-      if (res.status === 429 || res.status >= 500) throw new Error(`HTTP ${res.status}`);
+      if (res.status === 429) { const e = new Error("HTTP 429 (rate limited)"); e.rateLimited = true; throw e; }
+      if (res.status >= 500) throw new Error(`HTTP ${res.status}`);
       if (!res.ok) throw new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);
       return await res.json();
     } catch (e) {
@@ -103,17 +104,54 @@ export function nameVariants(name) {
 
 /* ---------------- OpenStreetMap ---------------- */
 
+/* Overpass is donated infrastructure with an aggressive rate limiter, and a
+   name regex over a 200 km radius is an expensive query — the first real run
+   of this tool collected an HTTP 429 and a pile of timeouts. So: pace the
+   calls, allow a long time for one to finish, and roll onto another public
+   instance when one starts refusing rather than hammering the same host. */
+const OVERPASS_MIRRORS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+];
+const OVERPASS_GAP_MS = 3000;   // minimum spacing between our own queries
+let lastOverpass = 0;
+let mirror = 0;
+
+async function overpassQuery(data) {
+  const wait = OVERPASS_GAP_MS - (Date.now() - lastOverpass);
+  if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+
+  let lastErr;
+  for (let i = 0; i < OVERPASS_MIRRORS.length; i++) {
+    const url = OVERPASS_MIRRORS[(mirror + i) % OVERPASS_MIRRORS.length];
+    try {
+      const out = await getJson(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ data }).toString(),
+        timeoutMs: 120000,   // a big regex query legitimately takes a minute
+        retries: 1,
+        backoff: 8000,       // 429 means slow down, not try again immediately
+      });
+      lastOverpass = Date.now();
+      mirror = (mirror + i) % OVERPASS_MIRRORS.length;   // stay on what worked
+      return out;
+    } catch (e) {
+      lastErr = e;
+      lastOverpass = Date.now();
+      if (!e.rateLimited && !/abort/i.test(e.message)) throw e;  // a real error
+    }
+  }
+  throw new Error(`${lastErr?.message || "failed"} — all Overpass mirrors busy. Re-run in a few minutes; it caches nothing, so nothing is lost.`);
+}
+
 /** Overpass: match OSM objects by name near a point, and return their tags.
     Preferred over a geocoder because you can see WHAT was matched — a
     `tourism=camp_site` way is a campground; a `highway=residential` way that
     happens to share the name is not. */
 export async function lookupOverpass(name, { lat, lng, radiusM = 20000 }) {
-  const q = `[out:json][timeout:25];nwr["name"~"${escapeRegex(coreName(name))}",i](around:${radiusM},${lat},${lng});out center tags 25;`;
-  const data = await getJson("https://overpass-api.de/api/interpreter", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ data: q }).toString(),
-  });
+  const q = `[out:json][timeout:90];nwr["name"~"${escapeRegex(coreName(name))}",i](around:${radiusM},${lat},${lng});out center tags 25;`;
+  const data = await overpassQuery(q);
   return (data.elements || [])
     .map((el) => {
       const p = el.type === "node" ? el : el.center;
@@ -140,14 +178,19 @@ export async function lookupOverpass(name, { lat, lng, radiusM = 20000 }) {
     Rate limit is 1 req/sec and it is enforced — the caller paces this. */
 export async function lookupNominatim(name, { lat, lng, radiusM = 20000 }) {
   const d = radiusM / 111000; // rough degrees; the box only needs to be close
-  const params = new URLSearchParams({
-    q: name,
-    format: "jsonv2",
-    limit: "5",
-    viewbox: `${lng - d},${lat + d},${lng + d},${lat - d}`,
-    bounded: "1",
-  });
-  const data = await getJson(`https://nominatim.openstreetmap.org/search?${params}`);
+
+  // "Auxier Ridge Trailhead" is how the page says it; the gazetteer has
+  // "Auxier Ridge". Try the page's wording first, then looser forms, and stop
+  // at the first that returns anything so an exact hit is never diluted.
+  let data = [];
+  for (const variant of nameVariants(name)) {
+    data = await getJson(`https://nominatim.openstreetmap.org/search?${new URLSearchParams({
+      q: variant, format: "jsonv2", limit: "5",
+      viewbox: `${lng - d},${lat + d},${lng + d},${lat - d}`, bounded: "1",
+    })}`);
+    if (data && data.length) break;
+    await new Promise((r) => setTimeout(r, 1100));   // 1 req/sec, enforced
+  }
   return (data || []).map((r) => ({
     provider: "osm",
     via: "nominatim",
@@ -282,14 +325,10 @@ export async function routeOsrm(coords) {
     nothing and know the trail is not mapped — no invented detour in between. */
 export async function trailGeometryOsm(name, { lat, lng, radiusM = 15000 }) {
   const q =
-    `[out:json][timeout:30];` +
+    `[out:json][timeout:90];` +
     `way["name"~"${escapeRegex(coreName(name))}",i]["highway"~"^(path|footway|track|bridleway|steps)$"](around:${radiusM},${lat},${lng});` +
     `out geom;`;
-  const data = await getJson("https://overpass-api.de/api/interpreter", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ data: q }).toString(),
-  });
+  const data = await overpassQuery(q);
   return (data.elements || [])
     .filter((el) => Array.isArray(el.geometry) && el.geometry.length > 1)
     .map((el) => ({

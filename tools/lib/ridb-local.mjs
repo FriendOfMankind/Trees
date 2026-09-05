@@ -170,6 +170,74 @@ function harvest(records, sourceFile) {
 
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
+/* Words that describe what a place IS rather than name it. A page says
+   "Auxier Ridge Trailhead"; RIDB says "Auxier Ridge". Requiring these to
+   match would reject the right record, so they are not required to. */
+const GENERIC = new Set([
+  "campground", "campsite", "camp", "trailhead", "trail", "head", "picnic",
+  "area", "site", "sites", "loop", "recreation", "national", "forest", "park",
+  "visitor", "center", "centre", "station", "day", "use", "the", "of", "and",
+  "at", "a", "an", "s",
+]);
+
+/* Landscape nouns. Distinctive in combination — "Twin Arches", "Honey Creek"
+   — and meaningless alone: half the federal estate has a creek in it. A name
+   that reduces to one of these on its own cannot identify a place, so it is
+   not allowed to match one. "Nuttallburg" is not in here, and shouldn't be:
+   a genuinely distinctive single word is a fine name. */
+const COMMON_GEO = new Set([
+  "creek", "ridge", "arch", "arches", "falls", "fall", "lake", "river", "run",
+  "fork", "hollow", "gap", "rock", "rocks", "point", "valley", "mountain",
+  "mountains", "hill", "hills", "bend", "spring", "springs", "cave", "caves",
+  "canyon", "bay", "beach", "island", "pond", "branch", "bluff", "cove",
+  "meadow", "flat", "flats", "peak", "gorge", "narrows", "crossing", "landing",
+]);
+
+const sigTokens = (s) => norm(s).split(" ").filter((t) => t.length > 1 && !GENERIC.has(t));
+
+/** Do two tokens name the same thing? Exact, or one a prefix of the other
+    once it is long enough to mean something — which is what lets "Gray's
+    Arch" (gray) reach RIDB's "Grays Arch" (grays). */
+function tokenMatch(a, b) {
+  if (a === b) return true;
+  if (a.length >= 4 && b.startsWith(a)) return true;
+  if (b.length >= 4 && a.startsWith(b)) return true;
+  return false;
+}
+
+/** Whole-word matching, replacing a naive two-way substring test.
+
+    THE BUG THAT PROMPTED THIS: `target.includes(placeName)` is true for every
+    federal facility named "D", because "auxier ridge trailhead" contains a
+    "d". One real waypoint pulled 206 matches named "A", "D" and "E". Radius
+    filtering hid it, but nothing stopped a one-letter facility that happened
+    to be nearby from becoming a candidate coordinate.
+
+    Now: every meaningful word of the shorter name must appear in the longer
+    one, and at least one shared word has to be four characters or more. A
+    name with no meaningful words left — "D" — can no longer match anything. */
+export function namesMatch(a, b) {
+  const ta = sigTokens(a);
+  const tb = sigTokens(b);
+  if (!ta.length || !tb.length) return false;
+
+  const [short, long] = ta.length <= tb.length ? [ta, tb] : [tb, ta];
+
+  // One landscape noun on its own identifies nothing. "Honey Creek Trailhead"
+  // must not match a facility called "Creek Campground", and "Twin Arches"
+  // must not match "Arches National Park" — both share exactly one word, and
+  // it is the word every third place out there also has.
+  if (short.length === 1 && COMMON_GEO.has(short[0])) return false;
+
+  let strongest = 0;
+  for (const t of short) {
+    const hit = long.find((u) => tokenMatch(t, u));
+    if (!hit) return false;
+    strongest = Math.max(strongest, Math.min(t.length, hit.length));
+  }
+  return strongest >= 4;
+}
+
 function walk(dir, depth = 0) {
   if (depth > 3) return [];
   let entries;
@@ -303,12 +371,11 @@ export async function buildIndex(dir, { verbose = false, names = [] } = {}) {
   const places = [];
 
   // Pre-normalise once. Empty list = keep everything, up to MAX_PLACES.
-  const targets = names.map(norm).filter((n) => n.length > 2);
+  const targets = names.filter((n) => sigTokens(n).length > 0);
   const wanted = (raw) => {
     if (!targets.length) return true;
-    const n = norm(raw);
-    if (!n) return false;
-    for (const t of targets) if (n.includes(t) || t.includes(n)) return true;
+    if (!raw) return false;
+    for (const t of targets) if (namesMatch(raw, t)) return true;
     return false;
   };
   const report = [];
@@ -376,15 +443,11 @@ export function lookupRidbLocal(name, { lat, lng, radiusM = 100000, root }) {
     return { skipped: `RIDB data at ${dir} had no records with a name and coordinates` };
   }
 
-  const target = norm(name);
   const hits = [];
   const outOfRange = [];
 
   for (const p of idx.places) {
-    const pn = norm(p.name);
-    // Substring either way: the page says "Koomer Ridge Campground" and RIDB
-    // may say "Koomer Ridge" — or the reverse.
-    if (!pn.includes(target) && !target.includes(pn)) continue;
+    if (!namesMatch(p.name, name)) continue;
     const d = haversineMeters({ lat, lng }, p);
     if (d > radiusM) {
       // Keep it. A trip that spans two regions — Red River Gorge to Big South
