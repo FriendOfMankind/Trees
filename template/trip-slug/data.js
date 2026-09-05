@@ -143,8 +143,15 @@ window.TRIP_DATA = {
 
   // In booking order, earliest window first. The first unchecked item is
   // literally what to do next, so the order carries information.
+  //
+  // `booked: true` is the DURABLE record — it lives in git, survives a new
+  // laptop, and is the same on your phone. It renders as a locked ✓ that
+  // cannot be un-ticked in the browser. Ticking a box on the page only writes
+  // to that browser's localStorage and is explicitly a scratchpad.
+  // When something is actually booked, put it here with its number.
   reservations: [
     { text: "Thing to book — when the window opens — what happens if you miss it" },
+    { text: "Something already locked in", booked: true, confirmation: "ABC-123456" },
   ],
 
   // For trips that aren't finished. Delete when the list empties.

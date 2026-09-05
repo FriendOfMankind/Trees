@@ -165,6 +165,11 @@ carries information: the first unchecked item is literally what to do next.
 Each line should say what to book, when the window opens, and what happens if
 you miss it.
 
+A row with **`booked: true`** (plus a `confirmation`) is the *durable* record.
+It lives in git, so it survives a new laptop and reads the same on a phone,
+and the page renders it as a locked ✓ that can't be un-ticked by accident.
+**When something is genuinely booked, it goes here** — not into a checkbox.
+
 **openQuestions** — required for `outline` status. Each is a real question with
 what it `blocks` and where to look for the answer. Delete the section when it
 empties and flip the status to `planned`.
@@ -218,8 +223,15 @@ nobody had ever asked the data which trips were in season in January.
 
 Packing, reservations and the hub's universal checklist save to
 `localStorage`, namespaced by slug. It's **per browser** — not synced, and
-gone if you clear site data. Don't treat it as a record of what's booked;
-treat it as a scratchpad. Anything that must survive goes in the data file.
+gone if you clear site data. Treat it as a scratchpad, never as a record of
+what's booked.
+
+The reservations tab now says so on the page, detects a browser that blocks
+storage outright (rather than silently reporting 0%), and carries a button
+that copies your ticked-but-not-recorded items in a form you can paste into
+`data.js`. **`booked: true` in the data file is the real record** — it's
+counted into the hub's progress bar too, so a fresh browser shows true
+progress instead of zero.
 
 Trip pages also write a small `<slug>.progress` blob so the hub can show a
 booking progress bar on the card without loading every trip's data.

@@ -106,15 +106,15 @@ const TRIPS = [
      reads as spoken-for without pretending it's planned. */
   {
     slug: "mojave-winter-2027", title: "Mojave Winter Loop", subtitle: "Death Valley, Joshua Tree, and the desert that only exists in January",
-    emoji: "🏜️", theme: "desert", status: "wishlist", pinned: false, page: null,
+    emoji: "🏜️", theme: "desert", status: "outline", pinned: true, page: "trips/mojave-winter-2027/",
     months: [12, 1, 2], mode: "fly", target: "2027-01-02", days: 14,
-    start: null, dates: null,
+    start: null, dates: "Jan 2–15, 2027 (target, unbooked)",
     window: "⭐ Dec–Feb only. Every one of these is lethal or miserable May–September, which is exactly why they belong in the January window.",
     region: "Las Vegas → Death Valley → Mojave → Joshua Tree", country: "USA", coords: [36.2, -116.8],
-    nights: "~13 nights camping", distance: "~1,100 mi loop", budget: "TBD",
+    nights: "13 nights camping", distance: "~1,100 mi loop", budget: "~$1,965 excl. airfare",
     tags: ["car camping", "desert", "geology", "solo", "winter", "fly-in", "open-jaw"],
-    why: "⚠️ <b>Unverified — this entry is a plan, not research.</b> The January window is 18 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante\'s View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
-    next: "Price the CLE→DEN→LAS→CLE multi-city against two round trips, then verify which Death Valley campgrounds are reservable in January",
+    why: "⚠️ <b>Outline — one verification pass done, nine questions still open.</b> The January window is 19 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante\'s View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
+    next: "Book Valley of Fire on reservenevada.com — the 11-month window is already open, and it is reservation-only with no first-come fallback",
     updated: "2026-09-04",
   },
   {

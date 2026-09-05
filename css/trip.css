@@ -222,3 +222,57 @@
   .schedule-list .row-text { flex: 1 1 100%; }
   .maps-btn { padding: 0.35rem 0.75rem; }
 }
+
+/* ---------- Durable vs scratch checklist state ----------
+   A tick in this browser is a scratchpad. A `booked: true` in data.js is a
+   fact that survives a new laptop, so it renders locked and visually
+   different — you should never be able to un-tick a booking by accident. */
+
+.storage-note { margin: 0.4rem 0 1.1rem; }
+.storage-note p { font-family: var(--ui); font-size: 0.84rem; line-height: 1.5; }
+
+.check-item.locked {
+  cursor: default;
+  background: var(--ok-bg);
+  border-color: var(--ok-border);
+}
+.check-item.locked input { cursor: default; }
+.check-item.locked span { color: var(--ok-ink); }
+
+.in-git {
+  display: inline-block;
+  margin-left: 0.5em;
+  font-family: var(--ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ok-border);
+  padding: 0.1rem 0.42rem;
+  border-radius: 3px;
+  vertical-align: 1px;
+}
+
+.promote-btn {
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: #fff;
+  color: var(--t-800);
+  border: 1px solid var(--t-500);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+}
+.promote-btn:hover { background: var(--t-800); border-color: var(--t-800); color: #fff; }
+.promote-btn code { font-size: 0.95em; background: none; color: inherit; }
+
+.promote-out {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  color: var(--t-ink-dim);
+  white-space: pre-wrap;
+}

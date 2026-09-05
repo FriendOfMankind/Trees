@@ -375,6 +375,17 @@
   const LS_RES = `${SLUG}.reservations`;
   const LS_PROGRESS = `${SLUG}.progress`;
 
+  /* Is browser storage actually usable? A private window, cleared site data or
+     a blocked-cookies setting all make it silently useless, and a checklist
+     that forgets everything without saying so is worse than no checklist. */
+  const STORAGE_OK = (function () {
+    try {
+      localStorage.setItem("__probe", "1");
+      localStorage.removeItem("__probe");
+      return true;
+    } catch (e) { return false; }
+  })();
+
   function loadSet(key) {
     try { return new Set(JSON.parse(localStorage.getItem(key) || "[]")); } catch (e) { return new Set(); }
   }
@@ -382,12 +393,25 @@
     try { localStorage.setItem(key, JSON.stringify(Array.from(set))); } catch (e) { /* private mode */ }
   }
 
+  /* Reservations marked booked:true in data.js are FACTS — they live in git,
+     they survive a new laptop, and they are the same on every device. The
+     checkbox state in localStorage is a scratchpad layered on top of them and
+     is never allowed to contradict one. */
+  const bookedInData = (i) => !!((D.reservations || [])[i] || {}).booked;
+
   /* The hub reads this so a trip card can show how far along booking is
-     without loading every trip's data file. Per-browser, best effort. */
+     without loading every trip's data file. Per-browser and best effort —
+     the durable count is `booked: true` in data.js, which is included here so
+     a fresh browser still shows real progress instead of zero. */
   function writeProgress() {
     try {
       localStorage.setItem(LS_PROGRESS, JSON.stringify({
-        reservations: { done: loadSet(LS_RES).size, total: (D.reservations || []).length },
+        reservations: {
+          done: (D.reservations || []).reduce(
+            (n, r, i) => n + (r.booked || loadSet(LS_RES).has(`r-${i}`) ? 1 : 0), 0),
+          fromData: (D.reservations || []).filter((r) => r.booked).length,
+          total: (D.reservations || []).length,
+        },
         packing: { done: loadSet(LS_PACK).size, total: totalPackItems() },
         ts: Date.now(),
       }));
@@ -407,7 +431,12 @@
     });
   }
 
-  function checkItemHtml(id, text, checked) {
+  function checkItemHtml(id, text, checked, locked, lockNote) {
+    if (locked) {
+      return `<label class="check-item checked locked" data-id="${id}" title="Recorded in the trip's data file — edit data.js to change it">
+        <input type="checkbox" checked disabled /><span>${text}
+        <span class="in-git">✓ ${lockNote || "booked — recorded in git"}</span></span></label>`;
+    }
     return `<label class="check-item ${checked ? "checked" : ""}" data-id="${id}">
       <input type="checkbox" ${checked ? "checked" : ""} /><span>${text}</span></label>`;
   }
@@ -485,17 +514,61 @@
   function renderReservations() {
     const el = $("#panel-reservations");
     const checked = loadSet(LS_RES);
+    const rows = D.reservations;
+    const gitDone = rows.filter((r) => r.booked).length;
+
+    const countDone = () => rows.reduce(
+      (n, r, i) => n + (r.booked || checked.has(`r-${i}`) ? 1 : 0), 0);
+
     el.innerHTML = `
       <h2 class="section-title">Reservations Checklist</h2>
       <p class="section-sub">In booking order. The first unchecked item is what to do next.</p>
+
+      <div class="note-card storage-note">
+        <p style="margin:0">
+          <b>Ticks here live in this browser only.</b> They are a scratchpad — not synced,
+          not on your phone, gone if you clear site data.
+          <b>Anything actually booked belongs in <code>data.js</code></b> as
+          <code>booked: true</code> with its confirmation number; those show as
+          locked ✓ and survive a new laptop.
+          ${STORAGE_OK ? "" : `<br><b style="color:var(--warn-ink)">⚠ This browser is blocking storage entirely — nothing you tick here will be remembered at all.</b>`}
+        </p>
+      </div>
+
       <div class="progress-label" id="res-progress-label"></div>
       <div class="progress-bar-wrap"><div class="progress-bar-fill" id="res-progress-fill"></div></div>
       <ul class="flat-list">
-        ${D.reservations.map((r, i) => `<li>${checkItemHtml(`r-${i}`, r.text, checked.has(`r-${i}`))}</li>`).join("")}
-      </ul>`;
-    const update = () => setProgress("#res-progress-fill", "#res-progress-label", checked.size, D.reservations.length, "done");
+        ${rows.map((r, i) => `<li>${checkItemHtml(`r-${i}`, r.text, checked.has(`r-${i}`), r.booked,
+            r.confirmation ? `booked — ${r.confirmation}` : "booked — recorded in git")}</li>`).join("")}
+      </ul>
+
+      <p class="section-sub" style="margin-top:0.9rem">
+        <button class="promote-btn" id="promote-res">Copy ticked items for <code>data.js</code></button>
+        <span id="promote-out" class="promote-out"></span>
+      </p>`;
+
+    const update = () => setProgress("#res-progress-fill", "#res-progress-label", countDone(), rows.length, "done");
     wireChecklist(el, LS_RES, checked, update);
     update();
+
+    const btn = $("#promote-res", el);
+    if (btn) btn.addEventListener("click", () => {
+      const pending = rows
+        .map((r, i) => ({ r, i }))
+        .filter(({ r, i }) => !r.booked && checked.has(`r-${i}`));
+      const out = $("#promote-out", el);
+      if (!pending.length) {
+        out.textContent = "Nothing ticked that isn't already in the data file.";
+        return;
+      }
+      const text = pending
+        .map(({ r, i }) => `  // reservations[${i}] — add to this entry in data.js:\n  //   booked: true, confirmation: "…",\n  // ${r.r.text.replace(/<[^>]+>/g, "")}`)
+        .join("\n");
+      const done = () => { out.textContent = `Copied ${pending.length} item(s). Paste into data.js so it survives this browser.`; };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, () => { out.textContent = text; });
+      } else { out.textContent = text; }
+    });
   }
 
   /* ---------------- Open questions ---------------- */
