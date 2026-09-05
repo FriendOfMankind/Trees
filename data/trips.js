@@ -134,10 +134,19 @@ const TRIPS = [
     start: null, dates: "Jan 2–15, 2027 (target, unbooked)",
     window: "⭐ Dec–Feb only. Every one of these is lethal or miserable May–September, which is exactly why they belong in the January window.",
     region: "Las Vegas → Death Valley → Mojave → Joshua Tree", country: "USA", coords: [36.2, -116.8],
-    nights: "13 nights camping", distance: "~1,100 mi loop", budget: "~$1,965 excl. airfare",
+    nights: "13 nights camping", distance: "~1,100 mi loop", budget: "~$2,033 excl. airfare",
     tags: ["car camping", "desert", "geology", "solo", "winter", "fly-in", "open-jaw"],
-    why: "⚠️ <b>Outline — one verification pass done, nine questions still open.</b> The January window is 19 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante\'s View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
-    next: "Book Valley of Fire on reservenevada.com — the 11-month window is already open, and it is reservation-only with no first-come fallback",
+    why: "🚨 <b>All four campground booking windows are ALREADY OPEN</b> — Valley of Fire since Feb, the three federal ones since July. Two verification passes done; six questions left, and the campground ones are all closed. The January window is 19 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante\'s View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
+    next: "Book all four campgrounds — every window is open and Furnace Creek books to capacity most days. Valley of Fire (reservenevada) is reservation-only with no fallback; start there",
+    booking: [
+      { system: "reservenevada", what: "Valley of Fire, Atlatl Rock (Jan 2–3)", target: "2027-01-02" },
+      { system: "recreation.gov", what: "Furnace Creek (Jan 4–9)", target: "2027-01-04",
+        note: "NPS: booked to capacity most days in recent years. 136 sites, 45 tent-only." },
+      { system: "recreation.gov", what: "Hole-in-the-Wall (Jan 10–11)", target: "2027-01-10",
+        note: "Reservation-only. 38 sites. Preserve info (760) 252-6100." },
+      { system: "recreation.gov", what: "Jumbo Rocks, Joshua Tree (Jan 12–14)", target: "2027-01-12",
+        note: "Reservable year-round. NPS: park campgrounds usually full on weekends Sept–May." },
+    ],
     updated: "2026-09-04",
   },
   {
@@ -150,7 +159,7 @@ const TRIPS = [
     tags: ["family", "fixed", "winter"],
     why: "On the calendar because it blocks a window and because it is the outbound half of the January open jaw — the Mojave loop flies DEN → LAS from here rather than routing home first.<br><br>⚠️ <b>These dates are a placeholder.</b> \"Dec 25 for maybe 5 nights\" is all that is actually known. Everything downstream moves with them: the length of the January window, the DEN → LAS leg date, and when the Mojave loop can start. <b>Get the real dates before booking anything in January.</b>",
     next: "Get the exact Frisco dates from family — the January trip's start date and the whole 19-day window depend on them",
-    updated: "2026-09-04",
+    updated: "2026-09-05",
   },
 
   /* ------------------------------------------------- WISHLIST — TIER 1

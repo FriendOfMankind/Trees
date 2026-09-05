@@ -119,16 +119,25 @@
 
   function renderHeaderStats() {
     const by = (s) => TRIPS.filter((t) => t.status === s).length;
-    const next = agenda(TRIPS, BOOKING_WINDOWS).find((i) => i.dateISO && i.days >= 0);
+    const items = agenda(TRIPS, BOOKING_WINDOWS);
+
+    /* A window that opened three months ago is not a countdown, so it never
+       appeared in the header at all — the one state that most deserves to.
+       Overdue bookings take the first slot when there are any. */
+    const overdue = items.filter((i) => i.kind === "booking" && i.days !== null && i.days < 0);
+    const next = items.find((i) => i.dateISO && i.days >= 0);
+
     const stats = [
-      next ? { num: next.days === 0 ? "today" : `${next.days}d`, lbl: next.kind === "booking" ? "To a window" : "To departure" } : null,
+      overdue.length
+        ? { num: overdue.length, lbl: overdue.length === 1 ? "Window open" : "Windows open", cls: "warn" }
+        : next ? { num: next.days === 0 ? "today" : `${next.days}d`, lbl: next.kind === "booking" ? "To a window" : "To departure" } : null,
       { num: by("planned"), lbl: "Planned" },
       { num: by("outline"), lbl: "In progress" },
       { num: by("wishlist"), lbl: "On the list" },
       { num: by("done"), lbl: "Done" },
     ].filter(Boolean);
     $("#header-stats").innerHTML = stats
-      .map((s) => `<div class="stat"><span class="num">${s.num}</span><span class="lbl">${s.lbl}</span></div>`)
+      .map((s) => `<div class="stat${s.cls ? ` ${s.cls}` : ""}"><span class="num">${s.num}</span><span class="lbl">${s.lbl}</span></div>`)
       .join("");
   }
 

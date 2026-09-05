@@ -366,3 +366,8 @@ tfoot td { font-weight: 700; padding: 0.65rem 0.9rem; background: var(--t-paper)
   .tabs { padding: 0 1.1rem; }
   main { padding: 1.25rem 1.1rem 2.5rem; }
 }
+
+/* A booking window that has already opened is the one header number worth
+   shouting about — every other stat is a count or a countdown. */
+.header-stats .stat.warn .num { color: #ffd7a8; }
+.header-stats .stat.warn .lbl { color: #ffd7a8; opacity: 0.85; }
