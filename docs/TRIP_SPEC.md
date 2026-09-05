@@ -375,6 +375,31 @@ gives you the coordinates to re-anchor on, rather than reporting NONE.
 `route.mjs --engine osrm` needs no key at all but is driving-only, and OSRM's
 public demo server asks you not to build on it.
 
+### The division of labour
+
+`geocode.mjs` resolves what authoritative data can resolve — campgrounds,
+picnic areas, visitor centers, boat ramps — because Recreation.gov publishes
+those with official coordinates. **Trailheads mostly are not in it.** They live
+in OpenStreetMap under whatever name a mapper chose, and one community source
+is not corroboration, so they land in REVIEW and stay there. That is the rule
+working, not the tool failing: no amount of code turns one source into two.
+
+So look up the handful it can't, and record them with `setcoord.mjs`:
+
+```bash
+node tools/setcoord.mjs kentucky-2026 "Twin Arches Trailhead" 36.5417,-84.7357 \
+  --source "OSM node 12269314919, cross-checked on the NPS Big South Fork map"
+```
+
+`--source` is required. A coordinate with no provenance can't be re-checked by
+anyone, including you in eight months. It is written to a `source` field on the
+waypoint, alongside the coordinate it justifies.
+
+It refuses a coordinate far from every confirmed waypoint and from the trip's
+map centre, and when the two numbers swapped would land near the trip it says
+so — that is the paste error people actually make, and it produces a confident
+coordinate on the wrong continent.
+
 ### When a coordinate earns `verified: true`
 
 Rule 1 says never invent a coordinate. `geocode.mjs` mechanises the bar:
