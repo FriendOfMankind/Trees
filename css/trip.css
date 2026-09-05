@@ -301,3 +301,18 @@
   color: var(--t-ink-dim);
   white-space: pre-wrap;
 }
+
+/* An unverified waypoint is still a place you have to get to. The list gets
+   the same Maps search the Places tab uses, rather than being a dead end. */
+.unverified-list { list-style: none; margin: 0; padding: 0; }
+.unverified-list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed currentColor;
+}
+.unverified-list li:last-child { border-bottom: none; }
+.unverified-list .u-day { font-family: var(--ui); font-size: 0.72rem; opacity: 0.75; }
+.unverified-list .u-note { font-size: 0.85rem; opacity: 0.85; }

@@ -201,7 +201,7 @@ for (const slug of slugs) {
   }
   const verified = (D.waypoints || []).filter((w) => w.verified && w.lat != null);
   if ((D.waypoints || []).length && !verified.length) {
-    warn(`${rel}: a Map tab with no verified waypoints — it renders a tile map with zero pins`);
+    warn(`${rel}: not one of its ${D.waypoints.length} waypoints is verified — the Map tab falls back to a searchable list, which works, but the trip has no map`);
   }
 
   /* --- Dates line up --- */

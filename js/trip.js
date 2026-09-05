@@ -293,11 +293,19 @@
 
   /* ---------------- Map ---------------- */
 
+  const VERIFIED = (D.waypoints || []).filter((w) => w.verified && w.lat != null && w.lng != null);
+
   function renderMapPanel() {
-    $("#panel-map").innerHTML = `
-      <div id="map"></div>
-      <div id="tile-panel" class="tile-panel"></div>
-      <div id="map-unverified"></div>`;
+    /* A tile map with zero pins is not an empty map, it's a broken-looking
+       one — you cannot tell "nothing is located yet" from "the tiles failed
+       to load". When nothing is verified, don't draw a map at all: say why,
+       and hand over the search strings, which are what actually work for a
+       place nobody has coordinates for. */
+    $("#panel-map").innerHTML = VERIFIED.length
+      ? `<div id="map"></div>
+         <div id="tile-panel" class="tile-panel"></div>
+         <div id="map-unverified"></div>`
+      : `<div id="map-unverified"></div>`;
   }
 
   /* ---------------- Offline tiles ----------------
@@ -344,10 +352,13 @@
   }
 
   function initMap() {
-    if (!has(D.waypoints) || typeof L === "undefined") return;
+    if (!has(D.waypoints)) return;
 
-    const verified = D.waypoints.filter((w) => w.verified && w.lat != null && w.lng != null);
+    const verified = VERIFIED;
     const unverified = D.waypoints.filter((w) => !(w.verified && w.lat != null && w.lng != null));
+
+    if (!verified.length) { renderUnverified(unverified, true); return; }
+    if (typeof L === "undefined") return;
 
     const map = L.map("map", { scrollWheelZoom: false });
     window.__tripMap = map;
@@ -396,13 +407,26 @@
     }
     renderTilePanel(area);
 
-    if (unverified.length) {
-      $("#map-unverified").className = "map-note";
-      $("#map-unverified").innerHTML = `
-        <h4>Unverified locations — not plotted</h4>
-        <p style="margin:0 0 0.5em">Coordinates were left blank on purpose. A pin 200 m off can route you to a locked gate on a one-lane road with no signal. Confirm each against a real source before navigating.</p>
-        <ul>${unverified.map((w) => `<li><strong>${w.name}</strong> (Day ${w.days})${w.notes ? ` — ${w.notes}` : ""}</li>`).join("")}</ul>`;
-    }
+    renderUnverified(unverified, false);
+  }
+
+  /* The unverified list. Every entry gets a Maps search, because a search
+     string is the thing that genuinely works for a place with no coordinate —
+     it's what the Places tab is built on, and there's no reason this list
+     should be a dead end when that one isn't. */
+  function renderUnverified(unverified, isOnly) {
+    const el = $("#map-unverified");
+    if (!el || !unverified.length) return;
+    el.className = "map-note";
+    el.innerHTML = `
+      <h4>${isOnly ? "Nothing on this trip is located yet" : "Unverified locations — not plotted"}</h4>
+      <p style="margin:0 0 0.5em">${isOnly
+        ? `All ${unverified.length} waypoints have <code>verified: false</code>, so there is no map to draw. That is the honest state, not a bug — a pin 200 m off can route you to a locked gate on a one-lane road with no signal. Search each one instead, and confirm it against a real source before navigating.`
+        : "Coordinates were left blank on purpose. A pin 200 m off can route you to a locked gate on a one-lane road with no signal. Confirm each against a real source before navigating."}</p>
+      <ul class="unverified-list">${unverified.map((w) => `<li>
+        <span class="u-body"><strong>${w.name}</strong> <span class="u-day">Day ${w.days}</span>${w.notes ? `<br><span class="u-note">${w.notes}</span>` : ""}</span>
+        ${mapsBtn(w.name)}
+      </li>`).join("")}</ul>`;
   }
 
   /* ---------------- Tables ---------------- */
