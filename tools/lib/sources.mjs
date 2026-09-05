@@ -41,10 +41,19 @@ async function getJson(url, { headers = {}, method = "GET", body, timeoutMs = 30
       });
       if (res.status === 429) { const e = new Error("HTTP 429 (rate limited)"); e.rateLimited = true; throw e; }
       if (res.status >= 500) throw new Error(`HTTP ${res.status}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);
+      if (!res.ok) {
+        // A 4xx is an answer, not a hiccup: a bad key, a blocked host, a
+        // malformed query. Retrying it just multiplies the wait by the
+        // backoff — with Overpass's eight-second delay a hard 403 was
+        // costing sixteen seconds per waypoint to learn nothing.
+        const e = new Error(`HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);
+        e.fatal = true;
+        throw e;
+      }
       return await res.json();
     } catch (e) {
       lastErr = e;
+      if (e.fatal) break;
     } finally {
       clearTimeout(timer);
     }
