@@ -211,10 +211,13 @@ const AVAILABILITY = {
     },
   ],
 
-  /* Hard commitments that aren't trips. Blocked the same way a class day is. */
+  /* Hard commitments that aren't trips. Blocked the same way a class day is.
+     A `confirmed: false` entry is a PLACEHOLDER — the calendar still blocks it
+     so the surrounding windows aren't overstated, but any window touching it
+     is provisional until the real dates land. */
   blocked: [
-    { start: "2026-12-25", end: "2026-12-30", name: "Frisco, CO — family" },
-    { date: "2027-05-08", name: "🎓 Commencement" },
+    { start: "2026-12-25", end: "2026-12-30", name: "Frisco, CO — family (DATES UNCONFIRMED)", confirmed: false },
+    { date: "2027-05-08", name: "🎓 Commencement", confirmed: true },
   ],
 
   /* The horizon. After this, PTO replaces the academic calendar and the

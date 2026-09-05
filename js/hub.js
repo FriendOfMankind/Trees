@@ -249,6 +249,11 @@
 
     (A.blocked || []).forEach((b) => spanDates(b).forEach((d) => blocked.set(d, b.name)));
 
+    /* A window bounded by an unconfirmed commitment is itself provisional —
+       say so rather than printing a confident day count either side of a
+       date nobody has actually checked. */
+    window.__provisional = (A.blocked || []).filter((b) => b.confirmed === false);
+
     TRIPS.filter((t) => t.start && t.days).forEach((t) => {
       const from = parseISO(t.start);
       for (let i = 0; i < t.days; i++) blocked.set(iso(addDays(from, i)), t.title);
@@ -384,6 +389,9 @@
 
       <h3 class="cal-h">Open windows${windows.length ? ` — ${windows.length}` : ""}</h3>
       <p class="section-sub">Computed from term dates and class days. Every window below costs <b>zero</b> missed classes. Candidates are filtered by season and by whether the window is long enough to be worth the mode.</p>
+      ${(window.__provisional || []).length ? `<div class="note-card" style="border-left-color: var(--warn-border)">
+        <p style="margin:0"><b>Some of these day counts are provisional.</b> ${window.__provisional.map((b) => b.name).join("; ")} — the windows either side of that move when the real dates land.</p>
+      </div>` : ""}
       ${rows || `<div class="empty-state">No free windows before the horizon.</div>`}
 
       <h3 class="cal-h">Weekly shape</h3>
