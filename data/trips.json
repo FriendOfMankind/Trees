@@ -36,7 +36,7 @@
           "system": "recreation.gov",
           "what": "Koomer Ridge (Sept 22–23)",
           "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
-          "done": true,
+          "booked": true,
           "known": true,
           "source": "derived",
           "target": "2026-09-22",
@@ -48,7 +48,7 @@
           "system": "recreation.gov",
           "what": "Bandy Creek (Sept 24–26)",
           "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
-          "done": true,
+          "booked": true,
           "known": true,
           "source": "derived",
           "target": "2026-09-24",
@@ -94,7 +94,7 @@
           "system": "private",
           "what": "Arrowhead Bike Farm (Oct 16–18)",
           "note": "Call about after-hours arrival. Office cutoffs are the most common day-one failure.",
-          "done": true,
+          "booked": true,
           "known": false,
           "why": "window varies (Usually anytime) — confirm it"
         },
@@ -102,7 +102,7 @@
           "system": "recreation.gov",
           "what": "Davidson River (Oct 18–21)",
           "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
-          "done": true,
+          "booked": true,
           "known": true,
           "source": "derived",
           "target": "2026-10-18",
@@ -114,7 +114,7 @@
           "system": "recreation.gov",
           "what": "Hurricane Campground (Oct 24)",
           "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
-          "done": true,
+          "booked": true,
           "known": true,
           "source": "derived",
           "target": "2026-10-24",
@@ -159,7 +159,7 @@
           "system": "state-park",
           "what": "Waiʻānapanapa SP camping (5/14–5/16)",
           "note": "The trip's own open question. 1 year vs 90 days is a nine-month difference in when the alarm goes off.",
-          "done": false,
+          "booked": false,
           "known": false,
           "why": "window varies (Varies wildly — 30 days to 1 year) — confirm it"
         },
@@ -167,7 +167,7 @@
           "system": "recreation.gov",
           "what": "Hosmer Grove (5/17–5/18)",
           "note": "6 sites total. Book the morning it drops.",
-          "done": false,
+          "booked": false,
           "known": true,
           "source": "derived",
           "target": "2027-05-17",
@@ -176,6 +176,68 @@
           "basis": "6 months before 2027-05-17"
         }
       ]
+    },
+    {
+      "slug": "mojave-winter-2027",
+      "title": "Mojave Winter Loop",
+      "subtitle": "Death Valley, Joshua Tree, and the desert that only exists in January",
+      "status": "outline",
+      "pinned": true,
+      "page": "trips/mojave-winter-2027/",
+      "start": null,
+      "dates": "Jan 2–15, 2027 (target, unbooked)",
+      "window": "⭐ Dec–Feb only. Every one of these is lethal or miserable May–September, which is exactly why they belong in the January window.",
+      "region": "Las Vegas → Death Valley → Mojave → Joshua Tree",
+      "country": "USA",
+      "coords": [
+        36.2,
+        -116.8
+      ],
+      "nights": "13 nights camping",
+      "distance": "~1,100 mi loop",
+      "budget": "~$1,965 excl. airfare",
+      "tags": [
+        "car camping",
+        "desert",
+        "geology",
+        "solo",
+        "winter",
+        "fly-in",
+        "open-jaw"
+      ],
+      "why": "⚠️ <b>Outline — one verification pass done, nine questions still open.</b> The January window is 19 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante's View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
+      "next": "Book Valley of Fire on reservenevada.com — the 11-month window is already open, and it is reservation-only with no first-come fallback",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "frisco-2026",
+      "title": "Frisco, Colorado",
+      "subtitle": "Family, not a plan",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": "2026-12-25",
+      "dates": "Dec 25–30, 2026 — ⚠️ APPROXIMATE, not confirmed",
+      "window": "Fixed by family, exact dates pending",
+      "region": "Summit County, Colorado",
+      "country": "USA",
+      "coords": [
+        39.57,
+        -106.1
+      ],
+      "nights": "~5 nights",
+      "distance": null,
+      "budget": "n/a",
+      "tags": [
+        "family",
+        "fixed",
+        "winter"
+      ],
+      "why": "On the calendar because it blocks a window and because it is the outbound half of the January open jaw — the Mojave loop flies DEN → LAS from here rather than routing home first.<br><br>⚠️ <b>These dates are a placeholder.</b> \"Dec 25 for maybe 5 nights\" is all that is actually known. Everything downstream moves with them: the length of the January window, the DEN → LAS leg date, and when the Mojave loop can start. <b>Get the real dates before booking anything in January.</b>",
+      "next": "Get the exact Frisco dates from family — the January trip's start date and the whole 19-day window depend on them",
+      "updated": "2026-09-04",
+      "booking": []
     },
     {
       "slug": "eastern-sierra",
@@ -293,9 +355,9 @@
         "expensive",
         "wet"
       ],
-      "why": "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.",
-      "next": "Decide whether this is a real item or a fantasy item — if real it belongs before 2029",
-      "updated": "2026-09-03",
+      "why": "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.<br><br>⭐ <b>Slotted for Aug 2027 — the last summer before full-time work.</b> This is the trip the free summer exists for: every other fly-in on this list survives a two-week PTO allowance and this one does not. A PNW bundle (CLE→SEA→ANC→CLE) was considered and <b>declined on purpose</b> — Seattle is the natural connection so the routing was sound, but North Cascades is PTO-survivable and would have made Alaska the back half of a 24-day trip, and back halves get compressed.<br><br>✅ <b>Rental cars: most Alaska companies prohibit unpaved roads outright and void insurance if you drive them</b> — but the named restrictions (Denali Hwy, McCarthy, Steese, Dalton) are all interior. The Kenai's Seward and Sterling Highways are paved, so this is the least-affected corner of the state. ⚠️ <b>Hatcher Pass is the exception and it is already in this plan</b> — it sits north of Anchorage in the Mat-Su, not on the Kenai, and the summit traverse is gravel and seasonally gated. Paved approaches from either side are fine; the through-route is likely prohibited. Resolve before building the route.",
+      "next": "Get a named rental company's restricted-roads list in writing, and decide whether Hatcher Pass means the paved approach or the gravel traverse",
+      "updated": "2026-09-05",
       "booking": []
     },
     {

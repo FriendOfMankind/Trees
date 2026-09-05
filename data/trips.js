@@ -33,6 +33,7 @@ const TRIPS = [
   /* ---------------------------------------------------------------- 2026 */
   {
     slug: "kentucky-2026",
+    months: [9], mode: "drive", days: 6,
     title: "Red River Gorge + Big South Fork",
     subtitle: "Arches, ladders, and a coal town",
     emoji: "🪨",
@@ -53,13 +54,14 @@ const TRIPS = [
     why: "Two sandstone plateaus back to back — the Gorge's arch cluster, then Honey Creek's ladders and ropes on the busiest Saturday of the season, because that's what keeps it empty.",
     next: "Re-check Tunnel Ridge Road the morning of departure — Cumberland District, 606-784-6428",
     booking: [
-      { system: "recreation.gov", what: "Koomer Ridge (Sept 22–23)", target: "2026-09-22", done: true },
-      { system: "recreation.gov", what: "Bandy Creek (Sept 24–26)", target: "2026-09-24", done: true },
+      { system: "recreation.gov", what: "Koomer Ridge (Sept 22–23)", target: "2026-09-22", booked: true },
+      { system: "recreation.gov", what: "Bandy Creek (Sept 24–26)", target: "2026-09-24", booked: true },
     ],
     updated: "2026-09-04",
   },
   {
     slug: "appalachians-2026",
+    months: [10], mode: "drive", days: 11,
     title: "Bridge Day + Southern Appalachians",
     subtitle: "Chasing color downhill, WV to VA",
     emoji: "🍂",
@@ -80,9 +82,9 @@ const TRIPS = [
     why: "BASE jumpers watched from the gorge floor, three coal ghost towns, and a sunrise on Hawksbill during peak color week — with two unreservable nights on a forest road as the price.",
     next: "Call Arrowhead 304-900-5501 — the reservation moved to Oct 16–18 by phone, leaving Oct 15 with no bed and nothing in writing",
     booking: [
-      { system: "private", what: "Arrowhead Bike Farm (Oct 16–18)", target: "2026-10-16", done: true },
-      { system: "recreation.gov", what: "Davidson River (Oct 18–21)", target: "2026-10-18", done: true },
-      { system: "recreation.gov", what: "Hurricane Campground (Oct 24)", target: "2026-10-24", done: true },
+      { system: "private", what: "Arrowhead Bike Farm (Oct 16–18)", target: "2026-10-16", booked: true },
+      { system: "recreation.gov", what: "Davidson River (Oct 18–21)", target: "2026-10-18", booked: true },
+      { system: "recreation.gov", what: "Hurricane Campground (Oct 24)", target: "2026-10-24", booked: true },
     ],
     updated: "2026-09-04",
   },
@@ -90,6 +92,7 @@ const TRIPS = [
   /* ---------------------------------------------------------------- 2027 */
   {
     slug: "maui-2027",
+    months: [5], mode: "fly", days: 8,
     title: "Full Circle Maui",
     subtitle: "Counterclockwise island loop, solo",
     emoji: "🌺",
@@ -118,10 +121,43 @@ const TRIPS = [
     updated: "2026-09-03",
   },
 
+
+  /* ------------------------------------------------- SLOTTED FOR 2026–27
+     Added 2026-09-04 while locking the shape of the last free year. Neither
+     has a page yet — `target` is the window they're aimed at, not a booking.
+     The Calendar tab renders a targeted entry as a ghost bar so the slot
+     reads as spoken-for without pretending it's planned. */
+  {
+    slug: "mojave-winter-2027", title: "Mojave Winter Loop", subtitle: "Death Valley, Joshua Tree, and the desert that only exists in January",
+    emoji: "🏜️", theme: "desert", status: "outline", pinned: true, page: "trips/mojave-winter-2027/",
+    months: [12, 1, 2], mode: "fly", target: "2027-01-02", days: 14,
+    start: null, dates: "Jan 2–15, 2027 (target, unbooked)",
+    window: "⭐ Dec–Feb only. Every one of these is lethal or miserable May–September, which is exactly why they belong in the January window.",
+    region: "Las Vegas → Death Valley → Mojave → Joshua Tree", country: "USA", coords: [36.2, -116.8],
+    nights: "13 nights camping", distance: "~1,100 mi loop", budget: "~$1,965 excl. airfare",
+    tags: ["car camping", "desert", "geology", "solo", "winter", "fly-in", "open-jaw"],
+    why: "⚠️ <b>Outline — one verification pass done, nine questions still open.</b> The January window is 19 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante\'s View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
+    next: "Book Valley of Fire on reservenevada.com — the 11-month window is already open, and it is reservation-only with no first-come fallback",
+    updated: "2026-09-04",
+  },
+  {
+    slug: "frisco-2026", title: "Frisco, Colorado", subtitle: "Family, not a plan",
+    emoji: "🎄", theme: "night", status: "wishlist", pinned: false, page: null, external: true,
+    months: [12], mode: "fly", start: "2026-12-25", days: 6,
+    dates: "Dec 25–30, 2026 — ⚠️ APPROXIMATE, not confirmed", window: "Fixed by family, exact dates pending",
+    region: "Summit County, Colorado", country: "USA", coords: [39.57, -106.1],
+    nights: "~5 nights", distance: null, budget: "n/a",
+    tags: ["family", "fixed", "winter"],
+    why: "On the calendar because it blocks a window and because it is the outbound half of the January open jaw — the Mojave loop flies DEN → LAS from here rather than routing home first.<br><br>⚠️ <b>These dates are a placeholder.</b> \"Dec 25 for maybe 5 nights\" is all that is actually known. Everything downstream moves with them: the length of the January window, the DEN → LAS leg date, and when the Mojave loop can start. <b>Get the real dates before booking anything in January.</b>",
+    next: "Get the exact Frisco dates from family — the January trip's start date and the whole 19-day window depend on them",
+    updated: "2026-09-04",
+  },
+
   /* ------------------------------------------------- WISHLIST — TIER 1
      Justifies a plane ticket. */
   {
     slug: "eastern-sierra", title: "Eastern Sierra", subtitle: "Committed — the best payoff per dollar",
+    months: [7, 8, 9, 10], mode: "fly", days: 10, target: "2027-07-15",
     emoji: "🏔️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–early October; September for aspen and fewer people",
     region: "Bishop / Mammoth, California", country: "USA", coords: [37.36, -118.55],
@@ -132,6 +168,7 @@ const TRIPS = [
   },
   {
     slug: "beartooth-plateau", title: "Beartooth Plateau", subtitle: "Paved to 9,500 ft",
+    months: [6, 7, 8, 9], mode: "drive", days: 21, target: "2027-06-14",
     emoji: "🗻", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late June–early/mid September",
     region: "Montana / Wyoming", country: "USA", coords: [45.0, -109.55],
@@ -142,6 +179,7 @@ const TRIPS = [
   },
   {
     slug: "snowy-range", title: "Snowy Range / Medicine Bow", subtitle: "The sleeper of the whole list",
+    months: [7, 8, 9, 10], mode: "fly",
     emoji: "⛰️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Mid-July–October, once the high road opens",
     region: "Centennial, Wyoming", country: "USA", coords: [41.35, -106.32],
@@ -152,13 +190,14 @@ const TRIPS = [
   },
   {
     slug: "kenai-peninsula", title: "Kenai Peninsula", subtitle: "The one that gets harder to justify, not easier",
+    months: [6, 7, 8, 9], mode: "fly", days: 14, target: "2027-08-14",
     emoji: "🧊", theme: "night", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late June for light, early September for color and fewer bugs",
     region: "Alaska", country: "USA", coords: [60.1, -149.44],
     nights: "8 nights, 4 camps", budget: "Highest on the list — flights and rentals triple a Reno rate",
     tags: ["car camping", "glacier", "bears", "expensive", "wet"],
-    why: "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.",
-    next: "Decide whether this is a real item or a fantasy item — if real it belongs before 2029", updated: "2026-09-03",
+    why: "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.<br><br>⭐ <b>Slotted for Aug 2027 — the last summer before full-time work.</b> This is the trip the free summer exists for: every other fly-in on this list survives a two-week PTO allowance and this one does not. A PNW bundle (CLE→SEA→ANC→CLE) was considered and <b>declined on purpose</b> — Seattle is the natural connection so the routing was sound, but North Cascades is PTO-survivable and would have made Alaska the back half of a 24-day trip, and back halves get compressed.<br><br>✅ <b>Rental cars: most Alaska companies prohibit unpaved roads outright and void insurance if you drive them</b> — but the named restrictions (Denali Hwy, McCarthy, Steese, Dalton) are all interior. The Kenai\'s Seward and Sterling Highways are paved, so this is the least-affected corner of the state. ⚠️ <b>Hatcher Pass is the exception and it is already in this plan</b> — it sits north of Anchorage in the Mat-Su, not on the Kenai, and the summit traverse is gravel and seasonally gated. Paved approaches from either side are fine; the through-route is likely prohibited. Resolve before building the route.",
+    next: "Get a named rental company\'s restricted-roads list in writing, and decide whether Hatcher Pass means the paved approach or the gravel traverse", updated: "2026-09-05",
   },
 
   /* ------------------------------------------------- WISHLIST — TIER 2
@@ -170,6 +209,7 @@ const TRIPS = [
      are the ones whose window is actually May. */
   {
     slug: "capitol-reef", title: "Capitol Reef", subtitle: "Maui return leg — the pick",
+    months: [5, 6, 7, 8, 9, 10], mode: "fly",
     emoji: "🧱", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⭐ May–Oct for hiking; early-to-mid May before the heat",
     region: "Torrey, Utah", country: "USA", coords: [38.29, -111.26],
@@ -180,6 +220,7 @@ const TRIPS = [
   },
   {
     slug: "dinosaur-nm", title: "Dinosaur National Monument", subtitle: "Maui return leg — the sleeper",
+    months: [4, 5, 6, 7, 8, 9, 10], mode: "fly",
     emoji: "🦕", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–Oct; May is ideal, before the summer heat",
     region: "Jensen, Utah / Colorado", country: "USA", coords: [40.44, -109.3],
@@ -190,6 +231,7 @@ const TRIPS = [
   },
   {
     slug: "black-canyon", title: "Black Canyon of the Gunnison", subtitle: "Colorado's one world-class May option",
+    months: [5, 6, 7, 8, 9], mode: "fly",
     emoji: "🕳️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⚠️ Mid-May at the earliest — the South Rim road and campground are winter-closed until then",
     region: "Montrose, Colorado", country: "USA", coords: [38.57, -107.72],
@@ -200,6 +242,7 @@ const TRIPS = [
   },
   {
     slug: "colorado-nm", title: "Colorado National Monument", subtitle: "The reliable Colorado option in May",
+    months: [3, 4, 5, 6, 7, 8, 9, 10], mode: "fly",
     emoji: "🏜️", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Mar–Oct; May is warm and snow-free",
     region: "Fruita / Grand Junction, Colorado", country: "USA", coords: [39.05, -108.7],
@@ -210,6 +253,7 @@ const TRIPS = [
   },
   {
     slug: "great-sand-dunes", title: "Great Sand Dunes", subtitle: "Maui return leg — with a real catch",
+    months: [5, 6], mode: "fly",
     emoji: "🏖️", theme: "savanna", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late May–June for Medano Creek — but see the warning",
     region: "Colorado", country: "USA", coords: [37.79, -105.59],
@@ -220,6 +264,7 @@ const TRIPS = [
   },
   {
     slug: "owens-valley", title: "Owens Valley + Alabama Hills", subtitle: "Maui bookend — the outbound leg",
+    months: [4, 5, 10], mode: "fly",
     emoji: "🪨", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⭐ Apr–May and Oct — too hot in summer, snowbound above",
     region: "Lone Pine, California", country: "USA", coords: [36.6, -118.06],
@@ -230,6 +275,7 @@ const TRIPS = [
   },
   {
     slug: "point-reyes-marin", title: "Point Reyes + Marin", subtitle: "The Maui return leg",
+    months: [4, 5, 6], mode: "fly",
     emoji: "🌁", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–Jun — spring wildflowers, before the summer fog wall thickens",
     region: "Marin County, California", country: "USA", coords: [38.05, -122.88],
@@ -240,6 +286,7 @@ const TRIPS = [
   },
   {
     slug: "pinnacles", title: "Pinnacles", subtitle: "A volcano the San Andreas tore in half",
+    months: [3, 4, 5, 10], mode: "fly",
     emoji: "🦅", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Mar–May and Oct — summer is brutal",
     region: "Central California", country: "USA", coords: [36.49, -121.16],
@@ -250,6 +297,7 @@ const TRIPS = [
   },
   {
     slug: "sequoia-kings", title: "Sequoia + Kings Canyon", subtitle: "The big-tree bookend",
+    months: [5, 6, 7, 8, 9], mode: "fly",
     emoji: "🌲", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "May works low; Mineral King road opens late May",
     region: "Central California", country: "USA", coords: [36.55, -118.75],
@@ -264,6 +312,7 @@ const TRIPS = [
      in April" — Tiers 1 and 2 are all July–September alpine. */
   {
     slug: "buffalo-river", title: "Buffalo National River", subtitle: "The penciled 2027 shoulder trip",
+    months: [4, 5, 10], mode: "drive",
     emoji: "🛶", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–May and Oct — April is waterfalls, summer is swimming",
     region: "Ponca / Jasper, Arkansas", country: "USA", coords: [36.02, -93.37],
@@ -274,6 +323,7 @@ const TRIPS = [
   },
   {
     slug: "sipsey-wilderness", title: "Sipsey Wilderness", subtitle: "Land of a Thousand Waterfalls",
+    months: [2, 3, 4], mode: "drive",
     emoji: "💦", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⭐ Best Feb–April, while the water is actually running",
     region: "Bankhead NF, Alabama", country: "USA", coords: [34.29, -87.4],
@@ -284,6 +334,7 @@ const TRIPS = [
   },
   {
     slug: "grand-staircase", title: "Grand Staircase–Escalante", subtitle: "Warm desert water, which barely exists out west",
+    months: [4, 5, 10], mode: "fly",
     emoji: "🏜️", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–May and Oct",
     region: "Escalante, Utah", country: "USA", coords: [37.5, -111.4],
@@ -294,6 +345,7 @@ const TRIPS = [
   },
   {
     slug: "sky-islands", title: "Sky Islands / Chiricahua", subtitle: "Biologically the strangest place in the US",
+    months: [11, 12, 1, 2, 3, 4], mode: "fly", days: 11, target: "2027-03-05",
     emoji: "🌵", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Nov–Apr",
     region: "Southeast Arizona", country: "USA", coords: [32.0, -109.35],
@@ -304,6 +356,7 @@ const TRIPS = [
   },
   {
     slug: "wichita-mountains", title: "Wichita Mountains", subtitle: "Free-roaming bison and granite domes",
+    months: [11, 12, 1, 2, 3, 4], mode: "drive",
     emoji: "🦬", theme: "savanna", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Nov–Apr",
     region: "Oklahoma", country: "USA", coords: [34.73, -98.72],
@@ -314,6 +367,7 @@ const TRIPS = [
   },
   {
     slug: "smokies-east", title: "Great Smokies — the east side", subtitle: "Where it stops being a traffic jam",
+    months: [4, 5, 10], mode: "drive",
     emoji: "🌫️", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late Apr–May, and Oct",
     region: "Tennessee / North Carolina", country: "USA", coords: [35.63, -83.1],
@@ -324,6 +378,7 @@ const TRIPS = [
   },
   {
     slug: "south-cumberland", title: "South Cumberland + Fall Creek Falls", subtitle: "The Plateau's real gems",
+    months: [4, 5, 10, 11], mode: "drive",
     emoji: "🪨", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–May and Oct–Nov",
     region: "Tennessee", country: "USA", coords: [35.25, -85.65],
@@ -334,6 +389,7 @@ const TRIPS = [
   },
   {
     slug: "ohiopyle", title: "Ohiopyle", subtitle: "Best swimming per mile driven on the whole list",
+    months: [5, 6, 7, 8, 9], mode: "weekend",
     emoji: "🛝", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late spring through early autumn — April is cold for the slides",
     region: "Pennsylvania", country: "USA", coords: [39.87, -79.49],
@@ -344,6 +400,7 @@ const TRIPS = [
   },
   {
     slug: "letchworth", title: "Letchworth", subtitle: "Four hours away and never once mentioned",
+    months: [4, 5, 6, 7, 8, 9, 10], mode: "weekend",
     emoji: "🌊", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–Oct; spring for waterfall volume",
     region: "New York", country: "USA", coords: [42.58, -78.05],
@@ -355,6 +412,7 @@ const TRIPS = [
 
   {
     slug: "glacier-np", title: "Glacier National Park", subtitle: "Highest hit rate, worst bureaucracy",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🏞️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Montana", country: "USA",
     coords: [48.7, -113.8], nights: null, budget: null,
@@ -364,6 +422,7 @@ const TRIPS = [
   },
   {
     slug: "north-cascades", title: "North Cascades + Methow", subtitle: "Planned once, then Hawaii took the window",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🌲", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Mid-July–September", region: "Washington", country: "USA",
     coords: [48.5, -120.7], nights: null, budget: null,
@@ -373,6 +432,7 @@ const TRIPS = [
   },
   {
     slug: "high-uintas", title: "High Uintas", subtitle: "Absurdly lake-dense, short season",
+    months: [7, 8, 9], mode: "fly",
     emoji: "💧", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late July–September", region: "Utah", country: "USA",
     coords: [40.7, -110.88], nights: null, budget: "1.5 hr from SLC",
@@ -382,6 +442,7 @@ const TRIPS = [
   },
   {
     slug: "lassen", title: "Lassen Volcanic", subtitle: "Best day-hike fit in California",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🌋", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "California", country: "USA",
     coords: [40.49, -121.42], nights: null, budget: null,
@@ -391,6 +452,7 @@ const TRIPS = [
   },
   {
     slug: "san-juans", title: "San Juans", subtitle: "Ice Lakes Basin is the marquee",
+    months: [7, 8, 9], mode: "fly",
     emoji: "⛏️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Colorado", country: "USA",
     coords: [37.81, -107.66], nights: null, budget: null,
@@ -400,6 +462,7 @@ const TRIPS = [
   },
   {
     slug: "oregon-coast-crater", title: "Oregon Coast + Crater Lake", subtitle: "Inverts the effort-equals-payoff model",
+    months: [9], mode: "fly",
     emoji: "🌊", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "September", region: "Oregon / Northern California", country: "USA",
     coords: [43.0, -124.0], nights: "12 nights, three landscapes", budget: null,
@@ -409,6 +472,7 @@ const TRIPS = [
   },
   {
     slug: "olympic-rainier", title: "Olympic + Rainier", subtitle: "Motel nights are functional here",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🏕️", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Washington", country: "USA",
     coords: [47.6, -123.2], nights: null, budget: null,
@@ -418,6 +482,7 @@ const TRIPS = [
   },
   {
     slug: "bighorns", title: "Bighorns / Cloud Peak", subtitle: "Unspent and cheap to reach",
+    months: [7, 8, 9], mode: "drive",
     emoji: "🐻", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Wyoming", country: "USA",
     coords: [44.3, -107.2], nights: null, budget: "Cheap",
@@ -427,6 +492,7 @@ const TRIPS = [
   },
   {
     slug: "ruby-mountains", title: "Ruby Mountains", subtitle: "Booked once, then pivoted away",
+    months: [7, 8, 9], mode: "fly",
     emoji: "💎", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Nevada", country: "USA",
     coords: [40.6, -115.36], nights: null, budget: "SLC airport",
@@ -436,6 +502,7 @@ const TRIPS = [
   },
   {
     slug: "great-basin", title: "Great Basin", subtitle: "Darkest sky in the lower 48",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🌲", theme: "night", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Nevada", country: "USA",
     coords: [38.98, -114.3], nights: null, budget: null,

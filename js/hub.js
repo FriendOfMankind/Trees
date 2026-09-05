@@ -61,7 +61,7 @@
 
     const decls = !t.booking ? [] : (Array.isArray(t.booking) ? t.booking : [t.booking]);
     if (!decls.length) return null;
-    return { done: decls.filter((b) => b.done).length, total: decls.length, source: "the registry" };
+    return { done: decls.filter((b) => b.booked).length, total: decls.length, source: "the registry" };
   }
 
   /* ---------------- Header ---------------- */
@@ -294,6 +294,209 @@
         <ul class="agenda-list">${undated.map(row).join("")}</ul>` : ""}`;
   }
 
+  /* ==========================================================================
+     Calendar — the gap finder.
+
+     The point of this tab is not to show you what you booked; you know that.
+     It computes the windows where you are actually free, using AVAILABILITY's
+     term dates and weekly class days, and then tells you what is IN SEASON in
+     each one. A window that costs a missed class isn't listed — deciding to
+     skip one is a judgment call this shouldn't make for you.
+     ========================================================================== */
+
+  const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const MODE_LABEL = { fly: "✈️ Fly", drive: "🚗 Drive", weekend: "🥾 Weekend" };
+
+  const iso = (d) => d.toISOString().slice(0, 10);
+  const parseISO = (s) => { const [y, m, d] = s.split("-").map(Number); return new Date(Date.UTC(y, m - 1, d)); };
+  const addDays = (d, n) => new Date(d.getTime() + n * 86400000);
+  const fmtShort = (d) => `${MONTH_ABBR[d.getUTCMonth()]} ${d.getUTCDate()}`;
+
+  /* Expand a noClass/blocked entry — they take either `date` or start+end. */
+  function spanDates(e) {
+    const out = [];
+    const from = parseISO(e.start || e.date);
+    const to = parseISO(e.end || e.date || e.start);
+    for (let d = from; d <= to; d = addDays(d, 1)) out.push(iso(d));
+    return out;
+  }
+
+  /* Every day that is spoken for: a class meeting, a fixed commitment, or a
+     trip that's actually booked (has a real `start`). */
+  function buildBlockedSet() {
+    const blocked = new Map();   // iso -> reason
+    const A = typeof AVAILABILITY !== "undefined" ? AVAILABILITY : null;
+    if (!A) return blocked;
+
+    A.terms.forEach((t) => {
+      const off = new Set();
+      (t.noClass || []).forEach((n) => spanDates(n).forEach((d) => off.add(d)));
+      const end = parseISO(t.end);
+      for (let d = parseISO(t.start); d <= end; d = addDays(d, 1)) {
+        const key = iso(d);
+        if (off.has(key)) continue;
+        if (t.classDays.includes(d.getUTCDay())) blocked.set(key, t.classNote || t.name);
+      }
+    });
+
+    (A.blocked || []).forEach((b) => spanDates(b).forEach((d) => blocked.set(d, b.name)));
+
+    /* A window bounded by an unconfirmed commitment is itself provisional —
+       say so rather than printing a confident day count either side of a
+       date nobody has actually checked. */
+    window.__provisional = (A.blocked || []).filter((b) => b.confirmed === false);
+
+    TRIPS.filter((t) => t.start && t.days).forEach((t) => {
+      const from = parseISO(t.start);
+      for (let i = 0; i < t.days; i++) blocked.set(iso(addDays(from, i)), t.title);
+    });
+
+    return blocked;
+  }
+
+  /* Runs of consecutive free days between now and the horizon. */
+  function findWindows(blocked) {
+    const A = AVAILABILITY;
+    const start = new Date();
+    const from = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()));
+    const to = parseISO(A.horizon.date);
+
+    const windows = [];
+    let run = null;
+    for (let d = from; d <= to; d = addDays(d, 1)) {
+      const key = iso(d);
+      if (blocked.has(key)) {
+        if (run) { windows.push(run); run = null; }
+      } else {
+        if (!run) run = { start: new Date(d), end: new Date(d), days: 1 };
+        else { run.end = new Date(d); run.days++; }
+      }
+    }
+    if (run) windows.push(run);
+    return windows.filter((w) => w.days >= 3);
+  }
+
+  /* Which months does a window touch? A trip is a candidate if its season
+     overlaps any of them and the window is long enough for its mode. */
+  function windowMonths(w) {
+    const set = new Set();
+    for (let d = new Date(w.start); d <= w.end; d = addDays(d, 1)) set.add(d.getUTCMonth() + 1);
+    return set;
+  }
+
+  function minDaysFor(mode) {
+    const fit = (AVAILABILITY.modeFit || []).find((m) => m.mode === mode);
+    return fit ? fit.minDays : 3;
+  }
+
+  function candidatesFor(w) {
+    const months = windowMonths(w);
+    return TRIPS.filter((t) => {
+      if (t.page || t.external || t.status === "done") return false;
+      if (!t.months || !t.months.length) return false;
+      if (!t.months.some((m) => months.has(m))) return false;
+      return w.days >= minDaysFor(t.mode || "drive");
+    }).sort((a, b) => (a.target ? -1 : 0) - (b.target ? -1 : 0));
+  }
+
+  /* Targeted (but unbuilt) trips aimed at this window. The summer is one
+     long window holding three of them, so this has to return a list. */
+  function claimantsOf(w) {
+    return TRIPS.filter((t) => {
+      if (!t.target) return false;
+      const s = parseISO(t.target);
+      return s >= w.start && s <= w.end;
+    }).sort((a, b) => a.target.localeCompare(b.target));
+  }
+
+  function renderCalendar() {
+    if (typeof AVAILABILITY === "undefined") {
+      $("#panel-calendar").innerHTML = `<div class="empty-state">No <code>AVAILABILITY</code> block in <code>data/profile.js</code> — the calendar needs term dates to compute anything.</div>`;
+      return;
+    }
+
+    const blocked = buildBlockedSet();
+    const windows = findWindows(blocked);
+    const A = AVAILABILITY;
+
+    const rows = windows.map((w) => {
+      const claims = claimantsOf(w);
+      const claimed = new Set(claims.map((t) => t.slug));
+      const cands = candidatesFor(w).filter((t) => !claimed.has(t.slug));
+      const fit = (A.modeFit || []).filter((m) => w.days >= m.minDays).map((m) => MODE_LABEL[m.mode]);
+
+      const byMode = { fly: [], drive: [], weekend: [] };
+      cands.forEach((t) => (byMode[t.mode || "drive"] || byMode.drive).push(t));
+
+      const chips = ["fly", "drive", "weekend"]
+        .filter((m) => byMode[m].length)
+        .map((m) => `
+          <div class="cand-group">
+            <span class="cand-mode">${MODE_LABEL[m]}</span>
+            <div class="cand-list">${byMode[m].slice(0, 8).map((t) =>
+              `<span class="cand" style="${cardThemeStyle(t.theme)}" title="${t.window || ""}">${t.emoji || "🧭"} ${t.title}</span>`).join("")}
+              ${byMode[m].length > 8 ? `<span class="cand more">+${byMode[m].length - 8} more</span>` : ""}
+            </div>
+          </div>`).join("");
+
+      return `
+        <div class="window-row ${claims.length ? "claimed" : ""} ${w.days >= 8 ? "big" : ""}">
+          <div class="window-when">
+            <div class="w-range">${fmtShort(w.start)} – ${fmtShort(w.end)}</div>
+            <div class="w-days">${w.days} days</div>
+            <div class="w-fit">${fit.length ? fit.join(" · ") : "too short"}</div>
+          </div>
+          <div class="window-body">
+            ${claims.map((c) => `<div class="claim" style="${cardThemeStyle(c.theme)}">
+                <span class="claim-tag">Slotted</span>
+                <b>${c.emoji || "🧭"} ${c.title}</b>
+                <span class="claim-when">${fmtShort(parseISO(c.target))}${c.days ? ` · ~${c.days} days` : ""}${c.mode ? ` · ${MODE_LABEL[c.mode]}` : ""}</span>
+                <span class="claim-next">${c.next || ""}</span>
+              </div>`).join("")}
+            ${chips || (claims.length ? "" : `<p class="section-sub" style="margin:0">Nothing on the list is in season. That's a real answer — not every gap wants filling.</p>`)}
+          </div>
+        </div>`;
+    }).join("");
+
+    const booked = TRIPS.filter((t) => t.start && t.days)
+      .sort((a, b) => a.start.localeCompare(b.start))
+      .map((t) => {
+        const s = parseISO(t.start), e = addDays(s, t.days - 1);
+        return `<li style="${cardThemeStyle(t.theme)}"><i></i>
+          <b>${t.emoji || "🧭"} ${t.page ? `<a href="${t.page}">${t.title}</a>` : t.title}</b>
+          <span>${fmtShort(s)} – ${fmtShort(e)} · ${t.days} days${t.mode ? ` · ${MODE_LABEL[t.mode]}` : ""}</span></li>`;
+      }).join("");
+
+    $("#panel-calendar").innerHTML = `
+      <h2 class="section-title">The Year Ahead</h2>
+      <p class="section-sub">${A.note}</p>
+
+      <div class="note-card" style="border-left-color: var(--warn-border)">
+        <h3>The horizon: ${A.horizon.name}, ${fmtShort(parseISO(A.horizon.date))} ${parseISO(A.horizon.date).getUTCFullYear()}</h3>
+        <p style="margin:0">Every window before that date is worth more than the same window after it. Sort by <em>how much harder does this get on two weeks of PTO</em>, not by how good it is — the trips within a five-hour drive stay available forever, and the ones that need three uninterrupted weeks do not.</p>
+      </div>
+
+      <h3 class="cal-h">Locked</h3>
+      <ul class="booked-list">${booked || "<li>Nothing booked.</li>"}</ul>
+
+      <h3 class="cal-h">Open windows${windows.length ? ` — ${windows.length}` : ""}</h3>
+      <p class="section-sub">Computed from term dates and class days. Every window below costs <b>zero</b> missed classes. Candidates are filtered by season and by whether the window is long enough to be worth the mode.</p>
+      ${(window.__provisional || []).length ? `<div class="note-card" style="border-left-color: var(--warn-border)">
+        <p style="margin:0"><b>Some of these day counts are provisional.</b> ${window.__provisional.map((b) => b.name).join("; ")} — the windows either side of that move when the real dates land.</p>
+      </div>` : ""}
+      ${rows || `<div class="empty-state">No free windows before the horizon.</div>`}
+
+      <h3 class="cal-h">Weekly shape</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Term</th><th>Dates</th><th>Anchored days</th><th>Note</th></tr></thead>
+        <tbody>${A.terms.map((t) => `<tr>
+          <td>${t.name}</td>
+          <td>${fmtShort(parseISO(t.start))} – ${fmtShort(parseISO(t.end))}</td>
+          <td>${t.classDays.map((d) => ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d]).join(", ")}</td>
+          <td>${t.classNote || ""}</td></tr>`).join("")}</tbody>
+      </table></div>`;
+  }
+
   /* ---------------- Gear ---------------- */
 
   /* Questions about the kit that only using it will answer, and the trip on
@@ -419,10 +622,14 @@
   /* ---------------- Init ---------------- */
 
   function init() {
+    // The hub wears its own palette, not a trip's. Without this it inherits
+    // base.css's defaults and ends up dressed as whichever trip those match.
+    applyTheme("basecamp");
     renderHeaderStats();
     renderFilters();
     renderTripGrid();
     renderAgenda();
+    renderCalendar();
     renderGear();
     renderPlaybook();
     tabs = initTabs({

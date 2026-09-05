@@ -44,7 +44,7 @@ function bookingDeadlines(trip, windows) {
     const label = b.system || (sys && sys.what) || "Booking";
     const what = b.what || (sys && sys.what) || label;
     const note = b.note || (sys && sys.note) || "";
-    const base = { system: label, what, note, done: !!b.done };
+    const base = { system: label, what, note, booked: !!b.booked };
 
     if (b.opens) {
       return Object.assign({}, base, { known: true, opensISO: b.opens, source: "explicit" });
@@ -111,7 +111,7 @@ function agenda(trips, windows, todayISO) {
     if (t.status === "done") continue;
 
     for (const d of bookingDeadlines(t, windows)) {
-      if (d.done) continue;                       // already booked; not a deadline
+      if (d.booked) continue;                     // already booked; not a deadline
       if (d.known) {
         items.push({
           kind: "booking", slug: t.slug, trip: t.title, emoji: t.emoji, theme: t.theme,

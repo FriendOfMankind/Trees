@@ -50,12 +50,33 @@ if (!Array.isArray(TRIPS)) {
 
     if (!validStatus.has(t.status)) fail(`${id}: status "${t.status}" is not one of planned/outline/wishlist/done`);
     if (t.theme && !THEMES[t.theme]) fail(`${id}: unknown theme "${t.theme}" (see js/themes.js)`);
+    if (t.theme === "basecamp") fail(`${id}: "basecamp" is the hub's own palette — pick a terrain theme`);
 
     if (t.coords) {
       const [lat, lng] = t.coords;
       if (typeof lat !== "number" || typeof lng !== "number") fail(`${id}: coords must be two numbers`);
       else if (lat < -90 || lat > 90 || lng < -180 || lng > 180) fail(`${id}: coords out of range`);
     }
+
+    if (t.theme === "basecamp") fail(`${id}: "basecamp" is the hub's own palette — pick a terrain theme`);
+
+    /* Calendar fields. `window` prose is for humans; `months` is what the
+       Calendar tab matches a free gap against, so a trip without it can never
+       be offered for one. */
+    if (t.months != null) {
+      if (!Array.isArray(t.months) || !t.months.length) fail(`${id}: months must be a non-empty array of 1-12`);
+      else if (t.months.some((m) => !Number.isInteger(m) || m < 1 || m > 12)) fail(`${id}: months must be integers 1-12`);
+    } else if (t.status !== "done") {
+      warn(`${id}: no "months" — the Calendar tab can't offer it for any window`);
+    }
+    if (t.mode && !["fly", "drive", "weekend"].includes(t.mode)) fail(`${id}: mode "${t.mode}" is not fly/drive/weekend`);
+    if (t.days != null && (!Number.isInteger(t.days) || t.days < 1)) fail(`${id}: days must be a positive integer`);
+    if (t.target && !/^\d{4}-\d{2}-\d{2}$/.test(t.target)) fail(`${id}: target must be YYYY-MM-DD`);
+    if (t.target && Array.isArray(t.months)) {
+      const tm = Number(t.target.slice(5, 7));
+      if (!t.months.includes(tm)) fail(`${id}: target ${t.target} is in month ${tm}, which is not in its season ${JSON.stringify(t.months)}`);
+    }
+    if (t.start && !t.days) warn(`${id}: has a start date but no "days" — it won't render a bar on the calendar`);
 
     if (t.start && !/^\d{4}-\d{2}-\d{2}$/.test(t.start)) fail(`${id}: start "${t.start}" is not YYYY-MM-DD`);
     if (t.updated && !/^\d{4}-\d{2}-\d{2}$/.test(t.updated)) fail(`${id}: updated "${t.updated}" is not YYYY-MM-DD`);
@@ -66,6 +87,21 @@ if (!Array.isArray(TRIPS)) {
     } else if (t.status === "planned" || t.status === "outline") {
       fail(`${id}: status "${t.status}" but no page — planned and outline trips need a page`);
     }
+
+    if (t.months) {
+      if (!Array.isArray(t.months) || !t.months.length) fail(`${id}: months must be a non-empty array of 1-12`);
+      else if (t.months.some((m) => !Number.isInteger(m) || m < 1 || m > 12)) fail(`${id}: months must be integers 1-12`);
+    } else if (!t.external && t.status !== "done") {
+      warn(`${id}: no "months" — the Calendar tab can't offer it for any window`);
+    }
+    if (t.mode && !["fly", "drive", "weekend"].includes(t.mode)) fail(`${id}: mode "${t.mode}" is not fly/drive/weekend`);
+    if (t.days != null && (!Number.isInteger(t.days) || t.days < 1)) fail(`${id}: days must be a positive integer`);
+    if (t.target && !/^\d{4}-\d{2}-\d{2}$/.test(t.target)) fail(`${id}: target must be YYYY-MM-DD`);
+    if (t.target && t.months) {
+      const tm = Number(t.target.slice(5, 7));
+      if (!t.months.includes(tm)) fail(`${id}: target ${t.target} is in month ${tm}, which is not in its season ${JSON.stringify(t.months)}`);
+    }
+    if (t.start && !t.days) warn(`${id}: has a start date but no "days" — it won't render a bar on the calendar`);
 
     if (!t.next) warn(`${id}: no "next" action set — the hub card will just say "Open the plan"`);
 
@@ -129,6 +165,7 @@ for (const slug of slugs) {
   if (D.meta.theme && !THEMES[D.meta.theme] && typeof D.meta.theme !== "object") {
     fail(`${rel}: unknown theme "${D.meta.theme}"`);
   }
+  if (D.meta.theme === "basecamp") fail(`${rel}: "basecamp" is the hub's own palette — pick a terrain theme`);
   if (entry && entry.theme && D.meta.theme && entry.theme !== D.meta.theme) {
     warn(`${rel}: theme "${D.meta.theme}" but the registry says "${entry.theme}" — the card and the page won't match`);
   }

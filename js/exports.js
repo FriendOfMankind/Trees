@@ -176,7 +176,7 @@ function toICS(D, trip, windows, opts) {
      will remember, the 6 AM drop you will not. */
   if (trip && typeof bookingDeadlines === "function") {
     for (const b of bookingDeadlines(trip, windows || [])) {
-      if (b.done || !b.known || !b.opensISO) continue;
+      if (b.booked || !b.known || !b.opensISO) continue;
       lines.push(
         "BEGIN:VEVENT",
         `UID:book-${b.opensISO}-${slugify(b.what)}-${uidBase}`,

@@ -8,6 +8,13 @@ If you're Claude and someone just pasted an itinerary at you: read
 instead — it's the operational version of this document. This file is the
 reference.
 
+If you want to *generate* the thing that gets pasted, that's
+[`TRIPFORMAT.md`](TRIPFORMAT.md) — the brief handed to an upstream research
+assistant. It carries the traveler profile and the three rules, and it makes
+the upstream bot tag every fact `[V]` verified / `[U]` unverified / `[?]`
+unknown. Those tags are what let the build step tell research from
+hallucination.
+
 ---
 
 ## The three rules
@@ -62,6 +69,10 @@ tools/manifest.mjs    regenerates sw-precache.js
 tools/sun.mjs         computes sun/moon tables; --check diffs a hand-typed one
 tools/export.mjs      writes GPX / ICS / plan text; --all writes data/trips.json
 docs/TRIP_SPEC.md     full schema + conventions
+docs/TRIPFORMAT.md    the upstream research brief — paste it into another
+                      chatbot, paste the filled result back here
+tools/validate.mjs    node tools/validate.mjs — run before committing
+vendor/leaflet/       Leaflet 1.9.4, vendored, no CDN
 ```
 
 No build step, no dependencies. Open `index.html` in a browser or serve the
@@ -91,7 +102,7 @@ tab. Add data → get a tab.
 | `title` | yes | |
 | `subtitle` | | one line on the shape of it |
 | `emoji` | | the card and favicon glyph |
-| `theme` | | `ocean` `desert` `alpine` `forest` `night` `autumn` `savanna` |
+| `theme` | | `ocean` `desert` `alpine` `forest` `night` `savanna` `autumn` — must match `meta.theme` on the page |
 | `status` | yes | `planned` \| `outline` \| `wishlist` \| `done` |
 | `pinned` | | floats it above everything on the hub |
 | `page` | | `"trips/<slug>/"`, or `null` for a wishlist entry |
@@ -104,6 +115,11 @@ tab. Add data → get a tab.
 | `why` | | the one-paragraph case for going |
 | `next` | | **the single next action.** This is the most useful field on the hub |
 | `updated` | | `YYYY-MM-DD` |
+| `months` | | `[7, 8, 9]` — the season, as integers. **This is what the Calendar tab matches against.** Prose lives in `window`; this is the machine-readable half |
+| `mode` | | `fly` \| `drive` \| `weekend` — decides which windows are long enough to be worth it |
+| `days` | | trip length. With `start`, it draws the bar; without, it sizes the slot |
+| `target` | | `YYYY-MM-DD` — the window this trip is *aimed* at but not yet booked. Renders as a claim on the calendar. Must fall inside `months` |
+| `external` | | a fixed commitment you aren't planning here (family, work). Blocks the calendar, exempt from the page requirement |
 
 ### Statuses
 
@@ -161,6 +177,11 @@ carries information: the first unchecked item is literally what to do next.
 Each line should say what to book, when the window opens, and what happens if
 you miss it.
 
+A row with **`booked: true`** (plus a `confirmation`) is the *durable* record.
+It lives in git, so it survives a new laptop and reads the same on a phone,
+and the page renders it as a locked ✓ that can't be un-ticked by accident.
+**When something is genuinely booked, it goes here** — not into a checkbox.
+
 **openQuestions** — required for `outline` status. Each is a real question with
 what it `blocks` and where to look for the answer. Delete the section when it
 empties and flip the status to `planned`.
@@ -187,11 +208,18 @@ forever and learn nothing — which is what it did until now.
 
 ## Themes
 
-Seven presets in `js/themes.js`, chosen by terrain rather than by country:
+Terrain presets in `js/themes.js`, chosen by terrain rather than by country:
 `ocean` (reef, wet volcanic coast), `desert` (red rock, slot canyons),
 `alpine` (granite, glacier, above treeline), `forest` (temperate rainforest),
-`night` (dark sky, aurora, winter), `autumn` (hardwood ridges at peak colour,
-rust and amber), `savanna` (grassland, dry heat).
+`night` (dark sky, aurora, winter), `savanna` (grassland, dry heat), `autumn`
+(hardwood ridges at peak color).
+
+Plus one that is not a terrain: **`basecamp`**, slate and brass, worn by the
+hub itself. The hub is an index, not a place — it shouldn't dress as one, and
+the neutral chrome is what lets the cards' terrain colors read at a glance.
+`js/hub.js` applies it explicitly and the validator rejects a trip that claims
+it. The `base.css` `:root` defaults are the same palette, so a page that
+renders before JS flashes neutral rather than flashing somebody else's ocean.
 
 Pick by what the ground looks like. Opening a page should tell you within half
 a second whether you're looking at lava or granite. Adding a preset means
@@ -200,12 +228,37 @@ one-off inline palette, so the next trip can reuse it.
 
 ---
 
+## The Calendar tab
+
+`data/profile.js` carries an `AVAILABILITY` block: term dates, which weekday
+each term's classes fall on, holidays, fixed commitments, and the horizon
+after which the planning model changes. The hub computes free windows from
+it rather than from a hand-kept list, so **when the term dates change the
+gaps recompute themselves.**
+
+A window is only listed if it costs **zero** missed classes. Deciding to skip
+one is a judgment call the tool shouldn't make for you — it can only tell you
+what the window would be worth.
+
+Candidates for a window are trips whose `months` overlap it and whose `mode`
+fits its length (`modeFit` in `AVAILABILITY` sets the thresholds: 8+ days to
+justify an airfare, 5+ for a long drive, 3+ for a weekend). This is the whole
+point of the tab: the January 2027 window sat unnoticed for months because
+nobody had ever asked the data which trips were in season in January.
+
 ## Checked state
 
 Packing, reservations and the hub's universal checklist save to
 `localStorage`, namespaced by slug. It's **per browser** — not synced, and
-gone if you clear site data. Don't treat it as a record of what's booked;
-treat it as a scratchpad. Anything that must survive goes in the data file.
+gone if you clear site data. Treat it as a scratchpad, never as a record of
+what's booked.
+
+The reservations tab now says so on the page, detects a browser that blocks
+storage outright (rather than silently reporting 0%), and carries a button
+that copies your ticked-but-not-recorded items in a form you can paste into
+`data.js`. **`booked: true` in the data file is the real record** — it's
+counted into the hub's progress bar too, so a fresh browser shows true
+progress instead of zero.
 
 Trip pages also write a small `<slug>.progress` blob so the hub can show a
 booking progress bar on the card without loading every trip's data.

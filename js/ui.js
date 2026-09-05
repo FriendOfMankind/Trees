@@ -99,11 +99,16 @@ function checkStore(key) {
   };
 }
 
+/** A checklist row. `opts.locked` means the truth lives in a data file rather
+    than in this browser — it renders ticked, disabled, and says where it came
+    from, because a checkbox you can untick implies the tick was yours. */
 function checkItemHtml(id, text, checked, opts) {
-  const locked = opts && opts.locked;
-  return `<label class="check-item ${checked ? "checked" : ""}${locked ? " locked" : ""}" data-id="${id}">
-    <input type="checkbox" ${checked ? "checked" : ""} ${locked ? "disabled" : ""} />
-    <span>${text}</span></label>`;
+  const locked = !!(opts && opts.locked);
+  const note = locked ? (opts.lockNote || "recorded in git") : "";
+  return `<label class="check-item ${checked || locked ? "checked" : ""}${locked ? " locked" : ""}" data-id="${id}"${
+    locked ? ` title="Recorded in the trip's data file — edit data.js to change it"` : ""}>
+    <input type="checkbox" ${checked || locked ? "checked" : ""} ${locked ? "disabled" : ""} />
+    <span>${text}${note ? `<span class="in-git">\u2713 ${note}</span>` : ""}</span></label>`;
 }
 
 /** Wire every .check-item inside `scope` to `store`, calling `onChange` after. */
