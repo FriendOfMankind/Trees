@@ -334,9 +334,21 @@ waypoints that beats per-request calls on every axis — no key, no rate limit,
 no round trip, and it still works on a plane. Same data either way.
 
 ```bash
-# https://ridb.recreation.gov/download → CSV or JSON → extract
-export RIDB_DATA=~/Downloads/RIDBFullExport
+# https://ridb.recreation.gov/download → "CSV Format" → extract
+export RIDB_DATA=~/Downloads/RIDBFullExport_V1_CSV
 ```
+
+**Take the CSV export, not the JSON one.** `JSON.parse` needs the whole file
+as a single string and the JSON export is far past what that can hold; the
+reader says so and skips rather than dying on an opaque out-of-memory. The
+CSV is streamed a chunk at a time. The historical *reservation* download on
+that page is booking records, not locations — it has nothing for this.
+
+The reader holds only records whose name relates to a waypoint you asked
+about, so memory tracks the number of matches, not the size of the export:
+164 MB across 2.7 M rows indexes in about 4 seconds under 10 MB of heap. It
+also reads the header of each table first and abandons any that has no
+coordinate columns, which is most of them.
 
 `data/ridb/` is picked up automatically and is gitignored — the export is
 hundreds of megabytes and isn't ours to redistribute.

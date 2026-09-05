@@ -23,47 +23,83 @@
    it does not break when a column is renamed or a file is added.
    ========================================================================== */
 
-import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, statSync, createReadStream } from "node:fs";
 import { join, extname, basename } from "node:path";
 import { haversineMeters } from "./geo.mjs";
+
+/* The full RIDB export unzips to gigabytes across many files, most of which
+   have no coordinates in them at all (attributes, permits, tours, media).
+   So: never hold a whole file in memory. Stream it, decide from the header
+   row whether it can possibly contain a place, and abandon it immediately if
+   not. A 900 MB Campsites file that we do want costs one pass and only the
+   rows that survive filtering; one we don't costs a single chunk. */
+/* The index keeps only records whose name relates to a waypoint we are
+   actually looking for. That is what makes this viable: the full export runs
+   to millions of rows — individual campsites like "Site 412, loop A" — and
+   holding them all costs gigabytes to answer forty questions. Filtering on
+   the way in makes memory a function of the matches, not the dataset, and it
+   drops the per-site noise for free, since no waypoint is ever named that. */
+const MAX_PLACES = 200_000;     // backstop if someone indexes with no names
+const MAX_JSON_BYTES = 300e6;   // JSON.parse needs the whole file as a string
 
 let INDEX = null; // built once per process
 
 /* ---------------- CSV ---------------- */
 
-/** Minimal RFC-4180 reader. RIDB's exports quote fields containing commas and
-    escape quotes by doubling them, which a naive split() silently corrupts —
-    and a corrupted row here becomes a coordinate in the wrong place. */
-function parseCsv(text) {
-  const rows = [];
+/** Streaming RFC-4180 reader.
+
+    RIDB quotes fields containing commas and escapes quotes by doubling them,
+    and a quoted field may contain a literal newline — so this is a character
+    state machine over chunks, not a split() on lines. A naive reader corrupts
+    exactly the rows with the most punctuation in them, and a corrupted row
+    here becomes a coordinate in the wrong place.
+
+    `onHeader` gets the first row and returns false to abandon the file, which
+    is how a 900 MB table with no coordinate columns costs one chunk. */
+async function streamCsv(file, onHeader, onRecord) {
+  const stream = createReadStream(file, { encoding: "utf8", highWaterMark: 1 << 20 });
+  let header = null;
   let row = [];
   let field = "";
   let quoted = false;
+  let stopped = false;
 
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (quoted) {
-      if (c === '"') {
-        if (text[i + 1] === '"') { field += '"'; i++; }
-        else quoted = false;
-      } else field += c;
-    } else if (c === '"') {
-      quoted = true;
-    } else if (c === ",") {
-      row.push(field); field = "";
-    } else if (c === "\n") {
-      row.push(field); field = "";
-      if (row.length > 1 || row[0] !== "") rows.push(row);
-      row = [];
-    } else if (c !== "\r") {
-      field += c;
+  const endRow = () => {
+    row.push(field);
+    field = "";
+    const r = row;
+    row = [];
+    if (r.length === 1 && r[0] === "") return;      // blank line
+    if (!header) {
+      header = r;
+      if (onHeader(header) === false) { stopped = true; stream.destroy(); }
+      return;
     }
-  }
-  if (field !== "" || row.length) { row.push(field); rows.push(row); }
+    onRecord(header, r);
+  };
 
-  if (!rows.length) return [];
-  const head = rows[0];
-  return rows.slice(1).map((r) => Object.fromEntries(head.map((h, i) => [h, r[i]])));
+  try {
+    for await (const chunk of stream) {
+      for (let i = 0; i < chunk.length; i++) {
+        const c = chunk[i];
+        if (quoted) {
+          if (c === '"') {
+            if (chunk[i + 1] === '"') { field += '"'; i++; }
+            else if (i === chunk.length - 1) quoted = false; // "" split across chunks is
+            else quoted = false;                             // vanishingly rare; treat as close
+          } else field += c;
+        } else if (c === '"') quoted = true;
+        else if (c === ",") { row.push(field); field = ""; }
+        else if (c === "\n") endRow();
+        else if (c !== "\r") field += c;
+      }
+      if (stopped) break;
+    }
+  } catch (e) {
+    if (!stopped) throw e;   // destroy() surfaces as an abort; anything else is real
+  }
+  if (!stopped && (field !== "" || row.length)) endRow();
+  return { header, stopped };
 }
 
 /* ---------------- shape detection ---------------- */
@@ -83,39 +119,56 @@ function arraysIn(value, depth = 0) {
   return [];
 }
 
+/** Work out, from a set of column names, which ones locate a place.
+    Returns null when this table cannot contain one. */
+function planFor(keys, sourceFile) {
+  const find = (re) => keys.find((k) => re.test(k));
+  const name = find(/Name$/i);
+  const lat  = find(/Latitude$/i);
+  const lng  = find(/Longitude$/i);
+  if (!name || !lat || !lng) return null;
+  return {
+    name, lat, lng,
+    id: find(/(Facility|RecArea|Campsite)ID$/i) || find(/ID$/i),
+    type: find(/TypeDescription$/i) || find(/Type$/i),
+    fallbackKind: basename(sourceFile, extname(sourceFile)),
+  };
+}
+
+/** One record → a place, or null. `get` reads a column by name. */
+function toPlace(plan, get) {
+  const lat = Number(get(plan.lat));
+  const lng = Number(get(plan.lng));
+  const nm = get(plan.name);
+  // RIDB stores 0,0 for facilities it has never located. That is not a place
+  // off the coast of Africa; it is missing data, and letting one through puts
+  // a pin in the Atlantic.
+  if (!nm || !Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  if (lat === 0 && lng === 0) return null;
+  if (Math.abs(lat) > 90 || Math.abs(lng) > 180) return null;
+  return {
+    name: String(nm),
+    lat, lng,
+    id: plan.id ? get(plan.id) : null,
+    kind: (plan.type ? get(plan.type) : null) || plan.fallbackKind,
+  };
+}
+
 function harvest(records, sourceFile) {
   if (!records.length) return [];
-  const sample = records[0];
-  const nameKey = findKey(sample, /Name$/i);
-  const latKey  = findKey(sample, /Latitude$/i);
-  const lngKey  = findKey(sample, /Longitude$/i);
-  if (!nameKey || !latKey || !lngKey) return [];
-
-  const idKey   = findKey(sample, /(Facility|RecArea|Campsite)ID$/i) || findKey(sample, /ID$/i);
-  const typeKey = findKey(sample, /TypeDescription$/i) || findKey(sample, /Type$/i);
-
+  const plan = planFor(Object.keys(records[0]), sourceFile);
+  if (!plan) return [];
   const out = [];
   for (const r of records) {
-    const lat = Number(r[latKey]);
-    const lng = Number(r[lngKey]);
-    const nm  = r[nameKey];
-    // RIDB stores 0,0 for facilities it has never located. Those are not a
-    // place off the coast of Africa; they are missing data, and letting one
-    // through would put a pin in the Atlantic.
-    if (!nm || !Number.isFinite(lat) || !Number.isFinite(lng)) continue;
-    if (lat === 0 && lng === 0) continue;
-    if (Math.abs(lat) > 90 || Math.abs(lng) > 180) continue;
-    out.push({
-      name: String(nm),
-      lat, lng,
-      id: idKey ? r[idKey] : null,
-      kind: typeKey ? r[typeKey] : basename(sourceFile, extname(sourceFile)),
-    });
+    const p = toPlace(plan, (k) => r[k]);
+    if (p) out.push(p);
   }
   return out;
 }
 
 /* ---------------- index ---------------- */
+
+const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
 function walk(dir, depth = 0) {
   if (depth > 3) return [];
@@ -135,37 +188,71 @@ export function ridbDataDir(root) {
   return existsSync(local) ? local : null;
 }
 
-export function buildIndex(dir, { verbose = false } = {}) {
+export async function buildIndex(dir, { verbose = false, names = [] } = {}) {
   if (INDEX) return INDEX;
-  const files = walk(dir);
+  const files = walk(dir).sort();
   const places = [];
+
+  // Pre-normalise once. Empty list = keep everything, up to MAX_PLACES.
+  const targets = names.map(norm).filter((n) => n.length > 2);
+  const wanted = (raw) => {
+    if (!targets.length) return true;
+    const n = norm(raw);
+    if (!n) return false;
+    for (const t of targets) if (n.includes(t) || t.includes(n)) return true;
+    return false;
+  };
   const report = [];
+  const say = (line) => { report.push(line); if (verbose) console.log(`    ${line}`); };
 
   for (const f of files) {
-    let found = [];
+    const size = statSync(f).size;
+    const mb = `${(size / 1e6).toFixed(1)} MB`;
+    const before = places.length;
+
     try {
-      const size = statSync(f).size;
-      const text = readFileSync(f, "utf8");
       if (extname(f).toLowerCase() === ".csv") {
-        found = harvest(parseCsv(text), f);
+        let plan = null;
+        const { stopped } = await streamCsv(
+          f,
+          (header) => { plan = planFor(header, f); return plan !== null; },
+          (header, row) => {
+            if (places.length >= MAX_PLACES) return;
+            // Check the name before building anything: it is one string read
+            // and it rejects almost every row in a multi-million-row table.
+            const nameIdx = header.indexOf(plan.name);
+            if (!wanted(row[nameIdx])) return;
+            const p = toPlace(plan, (k) => row[header.indexOf(k)]);
+            if (p) places.push(p);
+          }
+        );
+        if (stopped) { say(`${basename(f)}  ${mb}  ·  no coordinate columns, skipped after the header`); continue; }
       } else {
-        for (const arr of arraysIn(JSON.parse(text))) found.push(...harvest(arr, f));
+        // JSON.parse needs the whole file as one string. The full JSON export
+        // is far past what that can take, which is why the CSV export is the
+        // one to download — say so rather than dying on an opaque OOM.
+        if (size > MAX_JSON_BYTES) {
+          say(`${basename(f)}  ${mb}  ·  TOO BIG to parse as JSON — download the CSV export instead`);
+          continue;
+        }
+        for (const arr of arraysIn(JSON.parse(readFileSync(f, "utf8")))) {
+          for (const p of harvest(arr, f)) if (wanted(p.name)) places.push(p);
+        }
       }
-      report.push(`${basename(f)}  ${(size / 1e6).toFixed(1)} MB  →  ${found.length} located place(s)`);
+      say(`${basename(f)}  ${mb}  →  ${places.length - before} located place(s)`);
     } catch (e) {
-      report.push(`${basename(f)}  SKIPPED — ${e.message.slice(0, 80)}`);
+      say(`${basename(f)}  ${mb}  ·  SKIPPED — ${e.message.slice(0, 90)}`);
     }
-    places.push(...found);
   }
 
-  if (verbose) for (const line of report) console.log(`    ${line}`);
-  INDEX = { places, files: files.length, report };
+  if (places.length >= MAX_PLACES) {
+    say(`hit the ${MAX_PLACES.toLocaleString()} place ceiling — pass the waypoint names to narrow the index`);
+  }
+  INDEX = { places, files: files.length, report, filtered: targets.length > 0 };
   return INDEX;
 }
 
 /* ---------------- lookup ---------------- */
-
-const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
 /** Same contract as the API provider in sources.mjs: return candidates tagged
     `ridb`, which counts as official and so can reach VERIFIED on its own. */
@@ -174,7 +261,8 @@ export function lookupRidbLocal(name, { lat, lng, radiusM = 100000, root }) {
   if (!dir) {
     return { skipped: "no RIDB bulk data — set RIDB_DATA or put the extracted download in data/ridb/" };
   }
-  const idx = buildIndex(dir);
+  const idx = INDEX;
+  if (!idx) return { skipped: "RIDB index not built — call buildIndex() first" };
   if (!idx.places.length) {
     return { skipped: `RIDB data at ${dir} had no records with a name and coordinates` };
   }

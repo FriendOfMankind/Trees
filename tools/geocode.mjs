@@ -194,7 +194,8 @@ console.log(`radius ${(RADIUS / 1000).toFixed(0)} km · agreement tolerance ${TO
 const bulkDir = ridbDataDir(ROOT);
 if (bulkDir) {
   console.log(`  Recreation.gov: reading the bulk download at ${bulkDir}`);
-  const idx = buildIndex(bulkDir, { verbose: true });
+  // Hand it the names up front so the index holds only what we asked about.
+  const idx = await buildIndex(bulkDir, { verbose: true, names: targets.map((w) => w.name) });
   console.log(`  indexed ${idx.places.length} located place(s) from ${idx.files} file(s)`);
   if (!idx.places.length) {
     console.log(`  note: nothing usable found there — is it the extracted RIDB export?`);
