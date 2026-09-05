@@ -46,6 +46,7 @@
     { id: "packing",      label: "Packing",              on: has(D.packing),             render: renderPacking },
     { id: "reservations", label: "Reservations",         on: has(D.reservations),        render: renderReservations },
     { id: "questions",    label: "Open Questions",       on: has(D.openQuestions),       render: renderQuestions },
+    { id: "retro",        label: "Retro",                on: has(D.retro),               render: renderRetro },
     { id: "notes",        label: "Notes",                on: has(D.notes),               render: renderNotes },
   ].filter((s) => s.on);
 
@@ -592,6 +593,46 @@
         <h3>${q.question}</h3>
         ${q.detail ? `<p>${q.detail}</p>` : ""}
       </div>`).join("")}`;
+  }
+
+  /* ---------------- Retro ----------------
+     What the trip taught you, written after it. This site could plan
+     endlessly and learn nothing: `done` was a valid status with no place to
+     put a lesson, while the gear locker carried open questions ("note whether
+     it actually sleeps warm enough to trust at 32°F") that had nowhere to
+     land. A gear verdict here is the answer to one of those. */
+
+  const VERDICT = {
+    held: { label: "Held up", cls: "ok" },
+    failed: { label: "Failed", cls: "bad" },
+    marginal: { label: "Marginal", cls: "warn" },
+    unused: { label: "Never used", cls: "dim" },
+    replace: { label: "Replace", cls: "bad" },
+  };
+
+  function renderRetro() {
+    const R = D.retro;
+    const list = (title, items, cls) => !has(items) ? "" : `
+      <div class="note-card ${cls || ""}">
+        <h3>${title}</h3>
+        <ul class="principle-list">${items.map((i) => `<li>${i}</li>`).join("")}</ul>
+      </div>`;
+
+    $("#panel-retro").innerHTML = `
+      <h2 class="section-title">Retro</h2>
+      <p class="section-sub">Written after the trip. The gear verdicts are the part that changes future trips —
+        they are what the Gear Locker's open questions get answered with.</p>
+      ${R.verdict ? `<div class="route-banner"><p>${R.verdict}</p></div>` : ""}
+      ${list("What worked", R.worked)}
+      ${list("What didn\u2019t", R.didnt)}
+      ${has(R.gear) ? `
+        <h3 class="section-title" style="margin-top:1.5rem">Gear verdicts</h3>
+        ${tableHtml(["Item", "Verdict", "What actually happened"],
+          R.gear.map((g) => {
+            const v = VERDICT[g.verdict] || { label: g.verdict, cls: "dim" };
+            return [g.item, `<span class="verdict ${v.cls}">${v.label}</span>`, g.note || ""];
+          }))}` : ""}
+      ${list("Next time", R.nextTime)}`;
   }
 
   /* ---------------- Notes ---------------- */

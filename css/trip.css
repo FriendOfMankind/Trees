@@ -232,3 +232,19 @@
 .tile-note { font-family: var(--ui); font-size: 0.8rem; color: var(--t-ink-dim); }
 
 .chip.nosignal { background: var(--warn-bg); color: var(--warn-ink); border-color: var(--warn-border); }
+
+/* ---------- Retro ---------- */
+
+.verdict {
+  font-family: var(--ui);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+}
+.verdict.ok   { background: var(--ok-bg);   color: var(--ok-ink); }
+.verdict.bad  { background: var(--warn-bg); color: var(--warn-ink); }
+.verdict.warn { background: #fdf4e0;        color: #7a5a12; }
+.verdict.dim  { background: #eef1f6;        color: #445269; }

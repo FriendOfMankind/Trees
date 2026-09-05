@@ -296,10 +296,43 @@
 
   /* ---------------- Gear ---------------- */
 
+  /* Questions about the kit that only using it will answer, and the trip on
+     the calendar that will answer each one. This is the only place the site
+     points forward from gear to a trip and then back again — the trip's own
+     Retro tab is where the answer lands. */
+  function gearQuestionsHtml() {
+    const qs = [];
+    for (const cat of GEAR) {
+      for (const item of cat.items) {
+        if (item.question) qs.push({ item: item.name, ...item.question });
+      }
+    }
+    if (!qs.length) return "";
+
+    return `
+      <div class="note-card" style="border-left-color: var(--warn-border)">
+        <h3>Open questions about the kit</h3>
+        <p class="section-sub" style="margin:-0.2em 0 0.6em">Things no amount of research settles.
+          Each one names the trip that answers it; the answer goes in that trip's Retro tab.</p>
+        <ul class="principle-list">${qs.map((q) => {
+          const t = TRIPS.find((x) => x.slug === q.answeredBy);
+          const n = t ? daysUntil(t.start) : null;
+          const when = !t ? "no trip assigned"
+            : t.status === "done" ? `<b>${t.title} has happened — this is waiting on a retro</b>`
+            : n === null ? `${t.title}, no date yet`
+            : n >= 0 ? `${t.title}, ${relDays(n)}`
+            : `<b>${t.title} was ${relDays(n)} — answer it</b>`;
+          return `<li><b>${q.item}:</b> ${q.text}<br><span class="a-note">${
+            t && t.page ? `<a href="${t.page}">${when}</a>` : when}</span></li>`;
+        }).join("")}</ul>
+      </div>`;
+  }
+
   function renderGear() {
     $("#panel-gear").innerHTML = `
       <h2 class="section-title">Gear Locker</h2>
       <p class="section-sub">What's in the kit and what it can't do yet. Every trip's packing list is built against this — if something here says <em>replace</em>, that's a purchase with a deadline, not a nice-to-have.</p>
+      ${gearQuestionsHtml()}
       <div class="gear-grid">
         ${GEAR.map((cat) => `
           <div class="gear-card">

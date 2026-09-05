@@ -26,7 +26,7 @@ window.TRIP_DATA = {
     subtitle: "Solo, Month Year",
     dates: "Monday, May 1, 2027 – Monday, May 8, 2027",  // or null if not locked
     emoji: "🧭",
-    theme: "ocean",               // ocean | desert | alpine | forest | night | savanna
+    theme: "ocean",               // ocean | desert | alpine | forest | night | autumn | savanna
 
     // The dark banner at the top of Overview. Any of these may be omitted.
     route: "The shape of the trip in one or two sentences. Say explicitly whether any road is driven twice.",
@@ -64,6 +64,11 @@ window.TRIP_DATA = {
       type: "travel",                       // travel | activity | activity + drive | rest
       driving: "~35 min, 25 miles (A → B)", // omit if not driving
       // walking: "6 mi on foot",           // optional, for non-driving days
+
+      // Declare a stretch with no coverage. This is what the "text the plan
+      // home" export lists, and it is the one thing whoever stays behind
+      // actually needs. Say when it starts and ends, not just that it exists.
+      // noSignal: "FS 210 from the forest road turn until leaving the corridor. All day.",
 
       overnight: {
         name: "Campground Name",
@@ -161,4 +166,20 @@ window.TRIP_DATA = {
 
   // Fallback map view, used only if fewer than 2 verified waypoints exist.
   map: { center: [0, 0], zoom: 9 },
+
+  /* ---- AFTER THE TRIP -------------------------------------------------
+     Only on a trip with status "done". This is the whole reason a finished
+     trip stays on the site: the gear verdicts here are the answers to the
+     Gear Locker's open questions, and they change what the next trip packs.
+     `verdict` is one of: held | marginal | failed | unused | replace.       */
+  // retro: {
+  //   verdict: "One paragraph. Did the shape of the trip work?",
+  //   worked: ["Specific things that earned their place."],
+  //   didnt: ["Specific things that didn't. Be blunt; nobody else reads this."],
+  //   gear: [
+  //     { item: "REI Co-op Siesta 20", verdict: "held", note: "34°F at Koomer Ridge, slept warm in a base layer." },
+  //   ],
+  //   nextTime: ["The change you'd make, stated as an action."],
+  // },
+
 };

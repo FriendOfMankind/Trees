@@ -30,6 +30,7 @@ const hub = loadHub();
 const TRIPS = hub.read("TRIPS");
 const THEMES = hub.read("THEMES") || {};
 const DECLINED = hub.read("DECLINED") || [];
+const GEAR = hub.read("GEAR") || [];
 const BOOKING_WINDOWS = hub.read("BOOKING_WINDOWS") || [];
 const SYSTEMS = new Set(BOOKING_WINDOWS.map((b) => b.system).filter(Boolean));
 
@@ -141,6 +142,14 @@ for (const slug of slugs) {
   if (entry && entry.status === "outline" && !(D.openQuestions || []).length) {
     fail(`${rel}: status is "outline" but there are no openQuestions — an outline without stated gaps is just an incomplete plan`);
   }
+  /* --- A trip that happened should have taught you something --- */
+  if (entry && entry.status === "done" && !D.retro) {
+    warn(`${rel}: status is "done" but there's no retro — the gear lessons are the reason to keep a finished trip`);
+  }
+  if (D.retro && entry && entry.status !== "done") {
+    warn(`${rel}: has a retro but the status is "${entry.status}" — flip it to "done"`);
+  }
+
   if (entry && entry.status === "planned" && (D.openQuestions || []).length) {
     warn(`${rel}: status "planned" with ${D.openQuestions.length} open question(s) — fine, every real trip has some, but check the status is still honest`);
   }
@@ -245,6 +254,27 @@ for (const slug of slugs) {
         warn(`${rel}: the itinerary schedules "${term}", but "${d.what}" is on the declined list — resolve it in one direction, don't silence it`);
         break;
       }
+    }
+  }
+}
+
+// ---- The gear feedback loop -----------------------------------------------
+
+/* Questions about the kit point at the trip that answers them. A question
+   pointing at a trip that has already happened is the loop failing to close,
+   which is exactly the state this repo was in before the field existed. */
+for (const cat of GEAR) {
+  for (const item of cat.items || []) {
+    const q = item.question;
+    if (!q) continue;
+    if (!q.text) fail(`gear: "${item.name}" has a question with no text`);
+    if (!q.answeredBy) { warn(`gear: "${item.name}" has an open question with no trip assigned to answer it`); continue; }
+    const t = Array.isArray(TRIPS) ? TRIPS.find((x) => x.slug === q.answeredBy) : null;
+    if (!t) { fail(`gear: "${item.name}" is answered by "${q.answeredBy}", which is not a trip`); continue; }
+    if (t.status === "done") {
+      warn(`gear: "${item.name}" is still an open question but ${t.slug} is done — answer it in that trip's retro`);
+    } else if (t.start && t.start < TODAY) {
+      warn(`gear: "${item.name}" is answered by ${t.slug}, which started ${t.start} but isn't marked done`);
     }
   }
 }

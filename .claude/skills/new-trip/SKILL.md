@@ -5,9 +5,16 @@ description: Build a trip page for this travel hub from a pasted itinerary, spec
 
 # Build a trip page
 
-You are adding a trip to Colin's travel and camping hub. The Maui 2027 page
-(`trips/maui-2027/`) is the reference implementation — when in doubt about
-tone, density, or how blunt to be, open it and match it.
+You are adding a trip to Colin's travel and camping hub.
+
+**The reference implementation is `trips/kentucky-2026/`.** It is the newest
+page and the one that uses the current data shape: schedule rows carrying
+`kind` / `est` / `maps` / `warn`, a `places` tab, a `provisions` block, and
+`noSignal` on the days that have none. Maui 2027 was built first, is still
+the best-written page for tone and for how blunt the risk notes should be,
+and predates all of those fields — match Kentucky for structure and Maui for
+voice. Building to Maui's structure alone will produce a page worse than the
+last two.
 
 Read [`docs/TRIP_SPEC.md`](../../../docs/TRIP_SPEC.md) for the full schema.
 This file is the procedure.
@@ -66,8 +73,8 @@ Fill `trips/<slug>/data.js`. Do **not** edit `trips/<slug>/index.html` — it's 
 the data that exists.
 
 Pick a theme by terrain, not country: `ocean` `desert` `alpine` `forest`
-`night` `savanna`. If none fit, add a seventh preset to `js/themes.js` rather
-than inlining a one-off palette.
+`night` `autumn` `savanna`. If none fit, add an eighth preset to
+`js/themes.js` rather than inlining a one-off palette.
 
 ### 4. Register it
 

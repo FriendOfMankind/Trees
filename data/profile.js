@@ -7,6 +7,12 @@
    several of them wrong. This version is transcribed, not inferred.
 
    Gear `state`: "own" | "replace" | "need" | "rent"
+
+   A gear item may also carry `question: { text, answeredBy: "<slug>" }` — a
+   thing you will only find out by using it. The hub surfaces those as a
+   standing list, and the trip named in `answeredBy` answers it in its `retro`
+   block once it has happened. Before this existed the questions sat in prose
+   notes and were answered nowhere.
    ========================================================================== */
 
 const PROFILE = {
@@ -79,8 +85,10 @@ const GEAR = [
     category: "Sleep system",
     note: "Rebuilt for cold in 2026. This was the weak link and no longer is — the only open item is the liner.",
     items: [
-      { name: "REI Co-op Siesta 20 sleeping bag", state: "own", note: "New, Sept 2026. First cold-weather bag. Sept KY is the shakedown for the October 30s — note whether it actually sleeps warm enough to trust at 32°F." },
-      { name: "Sleeping bag liner", state: "need", note: "Recommended for the last three October nights (Linville and Hurricane, mid-30s). Purchase not confirmed." },
+      { name: "REI Co-op Siesta 20 sleeping bag", state: "own", note: "New, Sept 2026. First cold-weather bag. Sept KY is the shakedown for the October 30s.",
+        question: { text: "Does it actually sleep warm enough to trust at 32°F?", answeredBy: "kentucky-2026" } },
+      { name: "Sleeping bag liner", state: "need", note: "Recommended for the last three October nights (Linville and Hurricane, mid-30s). Purchase not confirmed.",
+        question: { text: "Is it needed, or does the Siesta 20 cover the mid-30s on its own?", answeredBy: "kentucky-2026" } },
       { name: "Therm-a-Rest MondoKing 3D, 25 in Large", state: "own", note: "R-7.0. Overkill for anything on the current list, which is the correct problem to have." },
       { name: "2-person tent", state: "own", note: "" },
       { name: "Puffy, hat, gloves", state: "own", note: "" },
@@ -90,7 +98,8 @@ const GEAR = [
     category: "Connectivity — the trip-critical one",
     note: "A remote lecture runs 11:00–3:00 on a Wednesday of both 2026 trips, taken at camp.",
     items: [
-      { name: "Starlink", state: "own", note: "Needs sky view. Both Koomer Ridge and Davidson River are forested. <b>Test on arrival day, not the morning of the lecture.</b>" },
+      { name: "Starlink", state: "own", note: "Needs sky view. Both Koomer Ridge and Davidson River are forested. <b>Test on arrival day, not the morning of the lecture.</b>",
+        question: { text: "Does it hold a usable link under canopy at Koomer Ridge, or does the lecture need a different plan?", answeredBy: "kentucky-2026" } },
       { name: "Portable power bank", state: "own", note: "Four hours of laptop plus Starlink is the real draw, not the phone." },
       { name: "Offline maps — Google Maps regions", state: "need", note: "Downloaded before leaving home. Covers driving only." },
       { name: "Offline maps — AllTrails or Gaia", state: "need", note: "<b>Google Maps offline does not include trails.</b> Separate download, and a GPX for anything poorly blazed." },
@@ -112,7 +121,8 @@ const GEAR = [
     items: [
       { name: "One burner, pot, pan, mug, spork", state: "own", note: "" },
       { name: "Wide-mouth thermos", state: "own", note: "Load-bearing. Hot oats on a dark ridge and hot dinner at an overlook both depend on it. A second one would unlock the pre-dawn hot chocolate." },
-      { name: "48 qt cooler", state: "own", note: "Frozen meals in flat quart bags <i>are</i> the ice. Holds ~2.5 days unaided in 75°F — buy a <b>block</b> of ice at resupply, not cubes." },
+      { name: "48 qt cooler", state: "own", note: "Frozen meals in flat quart bags <i>are</i> the ice. Holds ~2.5 days unaided in 75°F — buy a <b>block</b> of ice at resupply, not cubes.",
+        question: { text: "Does the frozen-meals-as-ice system actually reach the first resupply, and does the breakfast burrito survive to day 8?", answeredBy: "appalachians-2026" } },
       { name: "Olive oil in a squeeze bottle", state: "own", note: "One of the four things that turn a can into a meal: oil, hard cheese, crushed chips, starch pouch." },
       { name: "Fuel canisters", state: "need", note: "Cannot fly. Buy on arrival on any fly-in trip." },
     ],
