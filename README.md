@@ -79,6 +79,7 @@ beside it, because an href is invisible on paper.
 Nothing here runs in a browser and the site works without any of it.
 
 ```bash
+node --test "tools/test/*.test.mjs"   # 48 tests over the derived facts
 node tools/validate.mjs            # must exit 0 before committing; CI runs it
 node tools/manifest.mjs            # regenerate the offline precache list
 node tools/export.mjs <slug>       # GPX + ICS + plan text into exports/

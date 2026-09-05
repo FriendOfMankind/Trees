@@ -249,12 +249,20 @@ export function fmtLocal(date, minutesUTC, tz, opts) {
 }
 
 /** True when the instant lands on a different calendar day in `tz` than the
-    UTC day it was computed for — a moonset at 00:40 belongs to the next
-    morning and saying so out loud avoids a very bad kind of alarm. */
+    day the table is labelled with — a moonset at 00:40 belongs to the next
+    morning and saying so out loud avoids a very bad kind of alarm.
+
+    The comparison is against `date`'s own UTC calendar day, which is what the
+    row is labelled with. Comparing against the *local* rendering of UTC
+    midnight would be wrong everywhere west of Greenwich, since in Hawaii that
+    instant is already 2 PM the previous afternoon — every Hawaii moonset
+    would have been stamped "(next day)". */
 export function localDayOffset(date, minutesUTC, tz) {
   if (minutesUTC == null) return 0;
   const inst = new Date(date.getTime() + minutesUTC * 60000);
-  const fmt = (d) => new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
-  const a = fmt(date), b = fmt(inst);
-  return a === b ? 0 : (b > a ? 1 : -1);
+  const local = new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit",
+  }).format(inst);
+  const target = date.toISOString().slice(0, 10);
+  return local === target ? 0 : (local > target ? 1 : -1);
 }

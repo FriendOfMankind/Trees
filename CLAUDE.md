@@ -27,6 +27,7 @@ sw.js                 offline cache; sw-precache.js is GENERATED, don't edit
 trips/<slug>/         one folder per trip: index.html (shell) + data.js
 template/trip-slug/   annotated blank to copy
 tools/validate.mjs    node tools/validate.mjs
+tools/test/           node --test "tools/test/*.test.mjs"
 tools/manifest.mjs    regenerates sw-precache.js
 tools/sun.mjs         computes sun/moon tables; --check diffs a hand-typed one
 tools/export.mjs      writes GPX / ICS / plan text; --all writes data/trips.json
@@ -52,6 +53,11 @@ docs/TRIPFORMAT.md    the paste-in brief. Hand this to an upstream research
   checks the generated files are current; if it complains, run
   `node tools/manifest.mjs && node tools/export.mjs --all`. CI runs the same
   thing.
+- **Touched the astronomy, the booking arithmetic or an export format?
+  `node --test "tools/test/*.test.mjs"`.** Those tests check against
+  published almanac times and an independent lunar-phase series, so they
+  catch a wrong answer and not just a changed one. Pass the glob, not the
+  directory — `node --test tools/test` doesn't resolve here.
 - **Never hand-type a sunrise, a sunset, or a booking-window date.**
   `node tools/sun.mjs --lat .. --lng .. --tz ..` computes the first two;
   the Agenda tab derives the third from `start` and `data/profile.js`.

@@ -16,6 +16,12 @@ jobs:
         with:
           node-version: "20"
 
+      # The derived facts: sun and moon times, booking arithmetic, file
+      # formats. These are checked against published almanac values and an
+      # independent phase series, not against a previous run of themselves.
+      - name: Unit tests
+        run: node --test "tools/test/*.test.mjs"
+
       # The registry, every trip file, and the generated precache list.
       - name: Validate the site
         run: node tools/validate.mjs
