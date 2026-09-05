@@ -24,7 +24,7 @@
    ========================================================================== */
 
 import { readFileSync, readdirSync, existsSync, statSync, createReadStream } from "node:fs";
-import { join, extname, basename } from "node:path";
+import { join, extname, basename, dirname } from "node:path";
 import { haversineMeters } from "./geo.mjs";
 
 /* The full RIDB export unzips to gigabytes across many files, most of which
@@ -186,6 +186,53 @@ export function ridbDataDir(root) {
   if (process.env.RIDB_DATA) return process.env.RIDB_DATA;
   const local = join(root, "data/ridb");
   return existsSync(local) ? local : null;
+}
+
+/** Say precisely what is wrong with a data directory, because "nothing usable
+    found" covers four different mistakes and sends you looking at the wrong
+    one. Returns null when the directory is fine. */
+export function diagnose(dir) {
+  if (!existsSync(dir)) {
+    const parent = dirname(dir);
+    const leaf = basename(dir);
+    let siblings = [];
+    try { siblings = readdirSync(parent); } catch { /* parent unreadable too */ }
+
+    // The overwhelmingly likely mistake: the download is still a zip.
+    const zip = siblings.find((n) => n.toLowerCase() === `${leaf.toLowerCase()}.zip`)
+             || siblings.find((n) => /ridb.*\.zip$/i.test(n));
+    if (zip) {
+      return `that folder does not exist, but ${join(parent, zip)} does.\n` +
+             `      The download is still zipped. Extract it first — right-click → Extract All —\n` +
+             `      then point RIDB_DATA at the folder it produces.`;
+    }
+    const near = siblings.filter((n) => /ridb/i.test(n)).slice(0, 5);
+    return `that path does not exist.` +
+      (near.length ? `\n      Nearby in ${parent}: ${near.join(", ")}` : "");
+  }
+
+  let stat;
+  try { stat = statSync(dir); } catch (e) { return `cannot read it — ${e.message}`; }
+  if (!stat.isDirectory()) {
+    return /\.zip$/i.test(dir)
+      ? `that is the zip file itself, not a folder. Extract it and point at the folder.`
+      : `that is a file, not a folder.`;
+  }
+
+  const found = walk(dir);
+  if (found.length) return null;
+
+  let entries = [];
+  try { entries = readdirSync(dir); } catch { /* ignore */ }
+  if (!entries.length) return `the folder is empty — did the extraction finish?`;
+  const zipInside = entries.filter((n) => /\.zip$/i.test(n));
+  if (zipInside.length) {
+    return `it contains ${zipInside.length} zip file(s) and no .csv or .json:\n` +
+           `      ${zipInside.slice(0, 5).join(", ")}\n` +
+           `      Extract those too, or point RIDB_DATA at wherever they unpack to.`;
+  }
+  return `no .csv or .json files anywhere under it (searched 3 levels deep).\n` +
+         `      It contains: ${entries.slice(0, 8).join(", ")}${entries.length > 8 ? ` … ${entries.length - 8} more` : ""}`;
 }
 
 export async function buildIndex(dir, { verbose = false, names = [] } = {}) {

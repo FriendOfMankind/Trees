@@ -39,7 +39,7 @@ import vm from "node:vm";
 import {
   PROVIDERS, lookupOverpass, lookupNominatim, lookupRidb, lookupNps,
 } from "./lib/sources.mjs";
-import { lookupRidbLocal, ridbDataDir, buildIndex } from "./lib/ridb-local.mjs";
+import { lookupRidbLocal, ridbDataDir, buildIndex, diagnose } from "./lib/ridb-local.mjs";
 import { haversineMeters, spreadMeters, centroid } from "./lib/geo.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -191,16 +191,25 @@ const results = [];
 console.log(`\n${slug} — ${targets.length} waypoint(s) to resolve`);
 console.log(`anchor ${anchor.lat.toFixed(4)}, ${anchor.lng.toFixed(4)} (${anchorFrom})`);
 console.log(`radius ${(RADIUS / 1000).toFixed(0)} km · agreement tolerance ${TOLERANCE} m`);
-const bulkDir = ridbDataDir(ROOT);
+let bulkDir = ridbDataDir(ROOT);
 if (bulkDir) {
   console.log(`  Recreation.gov: reading the bulk download at ${bulkDir}`);
-  // Hand it the names up front so the index holds only what we asked about.
-  const idx = await buildIndex(bulkDir, { verbose: true, names: targets.map((w) => w.name) });
-  console.log(`  indexed ${idx.places.length} located place(s) from ${idx.files} file(s)`);
-  if (!idx.places.length) {
-    console.log(`  note: nothing usable found there — is it the extracted RIDB export?`);
+  const problem = diagnose(bulkDir);
+  if (problem) {
+    console.log(`  PROBLEM: ${problem}`);
+    console.log(`  Continuing without Recreation.gov — OSM alone never reaches VERIFIED.`);
+    bulkDir = null;
+  } else {
+    // Hand it the names up front so the index holds only what we asked about.
+    const idx = await buildIndex(bulkDir, { verbose: true, names: targets.map((w) => w.name) });
+    console.log(`  indexed ${idx.places.length} matching place(s) from ${idx.files} file(s)`);
+    if (!idx.places.length) {
+      console.log(`  note: files were read, but none held a place matching these waypoint names.`);
+      console.log(`        That can be right — trailheads are not Recreation.gov facilities.`);
+    }
   }
-} else if (!process.env.RIDB_API_KEY) {
+}
+if (!bulkDir && !process.env.RIDB_API_KEY) {
   console.log(`  note: Recreation.gov skipped — no RIDB_DATA download and no RIDB_API_KEY`);
 }
 if (!process.env.NPS_API_KEY) console.log(`  note: ${PROVIDERS.nps.label} skipped — NPS_API_KEY not set`);
