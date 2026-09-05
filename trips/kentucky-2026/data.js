@@ -590,13 +590,13 @@ window.TRIP_DATA = {
   ],
 
   waypoints: [
-    { name: "Koomer Ridge Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "1–2", notes: "Walk-in tent site" },
-    { name: "Auxier Ridge Trailhead", lat: null, lng: null, verified: false, icon: "🌄", days: "2", notes: "Via Tunnel Ridge Rd" },
-    { name: "Gray's Arch Picnic Area", lat: null, lng: null, verified: false, icon: "🥾", days: "3", notes: "" },
-    { name: "Bandy Creek Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "3–5", notes: "Bear country" },
-    { name: "Twin Arches Trailhead", lat: null, lng: null, verified: false, icon: "🪨", days: "4", notes: "5 unpaved miles" },
-    { name: "Honey Creek Trailhead", lat: null, lng: null, verified: false, icon: "🪜", days: "5", notes: "Small lot ~1 mi before road end" },
-    { name: "Blue Heron Mining Community", lat: null, lng: null, verified: false, icon: "🏚️", days: "6", notes: "" },
+    { name: "Koomer Ridge Campground", lat: 37.784032, lng: -83.632634, verified: true, icon: "⛺", days: "1–2", notes: "Walk-in tent site", source: "Recreation.gov facility 10311270 (RIDB bulk export)" },
+    { name: "Auxier Ridge Trailhead", lat: 37.828230, lng: -83.677587, verified: true, icon: "🌄", days: "2", notes: "Via Tunnel Ridge Rd", source: "OSM way 225745556, footway at the Tunnel Ridge Rd lot" },
+    { name: "Gray's Arch Picnic Area", lat: 37.807934, lng: -83.657265, verified: true, icon: "🥾", days: "3", notes: "", source: "Checked on satellite imagery; Tunnel Ridge Road parking area" },
+    { name: "Bandy Creek Campground", lat: 36.488329, lng: -84.697519, verified: true, icon: "⛺", days: "3–5", notes: "Bear country", source: "Recreation.gov facility 232506, agreeing with OSM node 13121679831 to 36 m" },
+    { name: "Twin Arches Trailhead", lat: 36.541700, lng: -84.735700, verified: true, icon: "🪨", days: "4", notes: "5 unpaved miles", source: "OSM node 12269314919, Big South Fork — not the same-named arch in Red River Gorge" },
+    { name: "Honey Creek Trailhead", lat: 36.421268, lng: -84.651813, verified: true, icon: "🪜", days: "5", notes: "Small lot ~1 mi before road end", source: "Checked on satellite imagery; matches OSM node 3373114451, amenity=parking, to 7 m" },
+    { name: "Blue Heron Mining Community", lat: 36.678056, lng: -84.518889, verified: true, icon: "🏚️", days: "6", notes: "", source: "Recreation.gov facility 232505 (RIDB bulk export)" },
   ],
   map: { center: [37.0, -84.2], zoom: 8 },
 };
