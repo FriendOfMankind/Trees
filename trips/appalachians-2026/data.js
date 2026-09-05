@@ -304,6 +304,7 @@ window.TRIP_DATA = {
     {
       day: 8,
       date: "Thu Oct 22, 2026",
+      noSignal: "FS 210 / Linville Gorge — no cell service from the turn onto the forest road until leaving the corridor. All day.",
       title: "The Race for FS 210",
       tagline: "Wake at a site you paid for. Sleep somewhere you have no claim on.",
       type: "transfer + the risk day",
@@ -341,6 +342,7 @@ window.TRIP_DATA = {
     {
       day: 9,
       date: "Fri Oct 23, 2026",
+      noSignal: "FS 210 / Linville Gorge — no cell service. All day.",
       title: "Hawksbill at Sunrise",
       tagline: "4,009 feet, the river 2,000 below, peak color. It costs an alarm.",
       type: "the payoff",
@@ -375,6 +377,7 @@ window.TRIP_DATA = {
     {
       day: 10,
       date: "Sat Oct 24, 2026",
+      noSignal: "Hurricane Campground, VA — no cell service at all and no pay phone. From arrival until departure the next morning.",
       title: "Mount Rogers and Fatman's Squeeze",
       tagline: "Virginia's high point, wild ponies, and a rock slot you take your pack off for.",
       type: "activity + transfer",
@@ -635,9 +638,9 @@ window.TRIP_DATA = {
     { text: "Buy pull-tab cans only — a forgotten can opener at Linville means no dinner" },
     { text: "Call Grandfather Ranger District (828) 652-2144 — FS 210 site availability, the 200-ft camping Forest Order, and Table Rock loop routing given the washed-out Spence Ridge bridge" },
     { text: "Day 1 at Canyon Rim Visitor Center: ask about Keeneys Creek Road condition for a 5.9 in clearance car" },
-    { text: "✅ Arrowhead ref ROTXCV — confirmed Oct 16–18, 2 nights, on the booking site" },
-    { text: "✅ Davidson River Oct 18–21 — recreation.gov 0864063574-1, 4 nights, campground open (phone-confirmed)" },
-    { text: "✅ Hurricane Campground Oct 24 — recreation.gov 0840120294-1, 1 night. Gate 7 AM–10 PM. No cell service — carry it on paper." },
+    { text: "✅ Arrowhead ref ROTXCV — confirmed Oct 16–18, 2 nights, on the booking site", booked: true },
+    { text: "✅ Davidson River Oct 18–21 — recreation.gov 0864063574-1, 4 nights, campground open (phone-confirmed)", booked: true },
+    { text: "✅ Hurricane Campground Oct 24 — recreation.gov 0840120294-1, 1 night. Gate 7 AM–10 PM. No cell service — carry it on paper.", booked: true },
     { text: "Decide the FS 210 bail-out BEFORE the trip: Mortimer Campground, or a motel in Newland / Linville Falls / Morganton" },
     { text: "Sleeping bag liner — decide after the September Kentucky shakedown" },
     { text: "Reserve The Falls Landing, Brevard, for Tuesday Oct 20" },

@@ -7,6 +7,12 @@
    several of them wrong. This version is transcribed, not inferred.
 
    Gear `state`: "own" | "replace" | "need" | "rent"
+
+   A gear item may also carry `question: { text, answeredBy: "<slug>" }` — a
+   thing you will only find out by using it. The hub surfaces those as a
+   standing list, and the trip named in `answeredBy` answers it in its `retro`
+   block once it has happened. Before this existed the questions sat in prose
+   notes and were answered nowhere.
    ========================================================================== */
 
 const PROFILE = {
@@ -54,18 +60,39 @@ const WORKING_RULES = [
 ];
 
 /* Considered and declined. Re-proposing these wastes his time.
-   ⚠️ Note the conflict: stargazing is on this list, but the Maui 2027 page
-   schedules a dark-sky window on the morning of 5/19. The declined list is
-   from the Sept 2026 handoff and Maui was planned earlier — worth resolving
-   rather than silently editing one of them. */
+
+   `terms` is what tools/validate.mjs greps trip content for, so a declined
+   thing reappearing in an itinerary is caught by the validator instead of by
+   reading the page. Keep terms specific enough not to fire on ordinary prose.
+
+   ⚠️ Live conflict, unresolved on purpose: stargazing is declined here, and
+   the Maui 2027 page schedules a dark-sky window on the morning of 5/19. The
+   declined list is from the Sept 2026 handoff; Maui was planned earlier. The
+   validator now reports this every run rather than leaving it as a comment
+   nobody reads. Resolve it in one direction — don't silence it. */
 const DECLINED = [
-  "Mountain biking, including renting one in Brevard",
-  "Bridge Walk, highline and zipline tickets (New River Gorge)",
-  "Big South Fork Scenic Railway",
-  "Via ferrata at Torrent Falls",
-  "The Cumberland Falls moonbow",
-  "Stargazing",
-  "Breweries",
+  { what: "Mountain biking, including renting one in Brevard", terms: ["mountain bike", "mountain biking"] },
+  { what: "Bridge Walk, highline and zipline tickets (New River Gorge)", terms: ["bridge walk", "highline", "zipline"] },
+  { what: "Big South Fork Scenic Railway", terms: ["scenic railway"] },
+  { what: "Via ferrata at Torrent Falls", terms: ["via ferrata"] },
+  { what: "The Cumberland Falls moonbow", terms: ["moonbow"] },
+  { what: "Stargazing", terms: ["stargazing", "stargaze"] },
+  { what: "Breweries", terms: ["brewery", "breweries"] },
+];
+
+/* Standing personal negatives — not activities considered and declined, but
+   things that are simply never right for this traveler. Same enforcement as
+   DECLINED: tools/validate.mjs greps a trip's schedule, reservations, hikes
+   and places for `terms` and reports a hit.
+
+   This exists because "No coffee, no beer" has been in PROFILE.food since the
+   file was written, and the Maui itinerary opened Day 3 with "Wake, coffee,
+   slow morning" the whole time. A preference stated only in prose is a
+   preference nothing checks. */
+const AVOID = [
+  { what: "Coffee", terms: ["coffee"], why: "PROFILE.food: no coffee. A named cafe as a destination is fine — ordering the coffee is not.",
+    allow: ["coffee house", "coffee shop"] },
+  { what: "Beer", terms: ["beer", "brewpub"], why: "PROFILE.food: no beer. Breweries are also on the declined list." },
 ];
 
 const GEAR = [
@@ -73,8 +100,10 @@ const GEAR = [
     category: "Sleep system",
     note: "Rebuilt for cold in 2026. This was the weak link and no longer is — the only open item is the liner.",
     items: [
-      { name: "REI Co-op Siesta 20 sleeping bag", state: "own", note: "New, Sept 2026. First cold-weather bag. Sept KY is the shakedown for the October 30s — note whether it actually sleeps warm enough to trust at 32°F." },
-      { name: "Sleeping bag liner", state: "need", note: "Recommended for the last three October nights (Linville and Hurricane, mid-30s). Purchase not confirmed." },
+      { name: "REI Co-op Siesta 20 sleeping bag", state: "own", note: "New, Sept 2026. First cold-weather bag. Sept KY is the shakedown for the October 30s.",
+        question: { text: "Does it actually sleep warm enough to trust at 32°F?", answeredBy: "kentucky-2026" } },
+      { name: "Sleeping bag liner", state: "need", note: "Recommended for the last three October nights (Linville and Hurricane, mid-30s). Purchase not confirmed.",
+        question: { text: "Is it needed, or does the Siesta 20 cover the mid-30s on its own?", answeredBy: "kentucky-2026" } },
       { name: "Therm-a-Rest MondoKing 3D, 25 in Large", state: "own", note: "R-7.0. Overkill for anything on the current list, which is the correct problem to have." },
       { name: "2-person tent", state: "own", note: "" },
       { name: "Puffy, hat, gloves", state: "own", note: "" },
@@ -84,7 +113,8 @@ const GEAR = [
     category: "Connectivity — the trip-critical one",
     note: "A remote lecture runs 11:00–3:00 on a Wednesday of both 2026 trips, taken at camp.",
     items: [
-      { name: "Starlink", state: "own", note: "Needs sky view. Both Koomer Ridge and Davidson River are forested. <b>Test on arrival day, not the morning of the lecture.</b>" },
+      { name: "Starlink", state: "own", note: "Needs sky view. Both Koomer Ridge and Davidson River are forested. <b>Test on arrival day, not the morning of the lecture.</b>",
+        question: { text: "Does it hold a usable link under canopy at Koomer Ridge, or does the lecture need a different plan?", answeredBy: "kentucky-2026" } },
       { name: "Portable power bank", state: "own", note: "Four hours of laptop plus Starlink is the real draw, not the phone." },
       { name: "Offline maps — Google Maps regions", state: "need", note: "Downloaded before leaving home. Covers driving only." },
       { name: "Offline maps — AllTrails or Gaia", state: "need", note: "<b>Google Maps offline does not include trails.</b> Separate download, and a GPX for anything poorly blazed." },
@@ -106,7 +136,8 @@ const GEAR = [
     items: [
       { name: "One burner, pot, pan, mug, spork", state: "own", note: "" },
       { name: "Wide-mouth thermos", state: "own", note: "Load-bearing. Hot oats on a dark ridge and hot dinner at an overlook both depend on it. A second one would unlock the pre-dawn hot chocolate." },
-      { name: "48 qt cooler", state: "own", note: "Frozen meals in flat quart bags <i>are</i> the ice. Holds ~2.5 days unaided in 75°F — buy a <b>block</b> of ice at resupply, not cubes." },
+      { name: "48 qt cooler", state: "own", note: "Frozen meals in flat quart bags <i>are</i> the ice. Holds ~2.5 days unaided in 75°F — buy a <b>block</b> of ice at resupply, not cubes.",
+        question: { text: "Does the frozen-meals-as-ice system actually reach the first resupply, and does the breakfast burrito survive to day 8?", answeredBy: "appalachians-2026" } },
       { name: "Olive oil in a squeeze bottle", state: "own", note: "One of the four things that turn a can into a meal: oil, hard cheese, crushed chips, starch pouch." },
       { name: "Fuel canisters", state: "need", note: "Cannot fly. Buy on arrival on any fly-in trip." },
     ],
@@ -147,15 +178,119 @@ const UNIVERSAL_CHECKLIST = [
 
 /* Booking timing. The recreation.gov row previously said "10:00 AM ET" here —
    that was invented. This version follows the Sept 2026 bucket list, which
-   marks it verified. Re-check anything that would end a trip if wrong. */
+   marks it verified. Re-check anything that would end a trip if wrong.
+
+   `system` is the id a trip's `booking` declaration references, and
+   `leadMonths` is what lets the hub work out the actual date the window opens
+   instead of leaving it as arithmetic for a human at 6 AM. Rows where the
+   window genuinely varies leave it null on purpose: the Agenda then says
+   "window unknown — confirm it" rather than inventing a date, which is the
+   same contract as `verified: false` on a waypoint.
+
+   leadMonths is counted back from the FIRST NIGHT being booked, not from the
+   trip's start date. */
 const BOOKING_WINDOWS = [
-  { what: "recreation.gov (most USFS / NPS)", when: "6-month rolling window, releases 7 AM local", note: "Small campgrounds go in seconds. Set an alarm for the exact drop." },
-  { what: "State park campgrounds", when: "Varies wildly — 30 days to 1 year", note: "Confirm the window as soon as the trip is real. Getting this wrong is the most common way to lose a site." },
-  { what: "Private campgrounds", when: "Usually anytime", note: "Call about after-hours arrival. Office cutoffs are the most common day-one failure." },
-  { what: "First-come dispersed", when: "No reservation possible", note: "Arrive early, drive the road once from the top, take the first acceptable site. Bail-out named in advance." },
-  { what: "Glacier NP", when: "Vehicle reservations are a separate system from camping", note: "You can hold one without the other. Verify the current year early." },
-  { what: "Buffalo National River", when: "6-month window, minimum 5 days in advance", note: "Reservations required at Steel Creek, Ozark, Carver, Tyler Bend and Rush since Mar 13 2026. Older first-come guidance is dead." },
-  { what: "Baxter State Park", when: "Rolling 4 months", note: "First night plus 3 consecutive nights bookable online together as of summer 2026. Separate Day Use Parking Reservation for the Katahdin trailheads." },
-  { what: "Flights", when: "~11 months when schedules open; sweet spot 2–5 months", note: "" },
-  { what: "Rental car / Turo", when: "2–3 months, re-check monthly", note: "Free cancellation means book early and rebook if the price drops." },
+  { system: "recreation.gov", leadMonths: 6,
+    what: "recreation.gov (most USFS / NPS)", when: "6-month rolling window, releases 7 AM local",
+    note: "Small campgrounds go in seconds. Set an alarm for the exact drop." },
+  { system: "reservenevada", leadMonths: 11,
+    what: "Nevada State Parks (reservenevada.com)", when: "11-month rolling window",
+    note: "Must be booked at least 72 hrs ahead; $5 non-refundable transaction fee. Valley of Fire is reservation-only — no first-come fallback." },
+  { system: "state-park", leadMonths: null,
+    what: "State park campgrounds", when: "Varies wildly — 30 days to 1 year",
+    note: "Confirm the window as soon as the trip is real. Getting this wrong is the most common way to lose a site." },
+  { system: "private", leadMonths: null,
+    what: "Private campgrounds", when: "Usually anytime",
+    note: "Call about after-hours arrival. Office cutoffs are the most common day-one failure." },
+  { system: "first-come", leadMonths: null, reservable: false,
+    what: "First-come dispersed", when: "No reservation possible",
+    note: "Arrive early, drive the road once from the top, take the first acceptable site. Bail-out named in advance." },
+  { system: "glacier-np", leadMonths: null,
+    what: "Glacier NP", when: "Vehicle reservations are a separate system from camping",
+    note: "You can hold one without the other. Verify the current year early." },
+  { system: "buffalo-nr", leadMonths: 6,
+    what: "Buffalo National River", when: "6-month window, minimum 5 days in advance",
+    note: "Reservations required at Steel Creek, Ozark, Carver, Tyler Bend and Rush since Mar 13 2026. Older first-come guidance is dead." },
+  { system: "baxter-sp", leadMonths: 4,
+    what: "Baxter State Park", when: "Rolling 4 months",
+    note: "First night plus 3 consecutive nights bookable online together as of summer 2026. Separate Day Use Parking Reservation for the Katahdin trailheads." },
+  { system: "flights", leadMonths: null,
+    what: "Flights", when: "~11 months when schedules open; sweet spot 2–5 months",
+    note: "A range, not a deadline — deliberately left underivable." },
+  { system: "rental-car", leadMonths: null,
+    what: "Rental car / Turo", when: "2–3 months, re-check monthly",
+    note: "Free cancellation means book early and rebook if the price drops." },
 ];
+
+/* ==========================================================================
+   AVAILABILITY — the calendar constraint layer.
+
+   The hub's Calendar tab computes free windows from this rather than from a
+   hand-maintained list, so when the term dates change the gaps recompute
+   themselves. `classDays` is JS getDay(): 0=Sun … 6=Sat.
+
+   SOURCE: university academic calendar, transcribed 2026-09-04. Class-day
+   pattern is Colin's own schedule, not the university's.
+   ========================================================================== */
+
+const AVAILABILITY = {
+  note:
+    "Free windows are computed from term dates and weekly class days. A window is only listed if it costs zero missed classes — deciding to skip one is a judgment call the calendar shouldn't make for you.",
+
+  terms: [
+    {
+      name: "Fall 2026",
+      start: "2026-08-31", end: "2026-12-11",
+      classDays: [1, 3],
+      classNote: "Mon in-person · Wed remote 11:00–3:00, taken from camp (needs Starlink sky view)",
+      noClass: [
+        { date: "2026-09-07", name: "Labor Day" },
+        { start: "2026-10-19", end: "2026-10-20", name: "Fall Break" },
+        { date: "2026-11-11", name: "Veterans Day" },
+        { start: "2026-11-25", end: "2026-11-27", name: "Thanksgiving Break" },
+      ],
+    },
+    {
+      name: "Fall 2026 finals",
+      start: "2026-12-14", end: "2026-12-18",
+      classDays: [1, 2, 3, 4, 5],
+      classNote: "Final exam week — treat the whole week as blocked",
+      noClass: [],
+    },
+    {
+      name: "Spring 2027",
+      start: "2027-01-19", end: "2027-04-30",
+      classDays: [2, 4],
+      classNote: "Tue + Thu in person (Senior Project). Two anchors a week means Fri–Mon is the only routine window.",
+      noClass: [{ start: "2027-03-08", end: "2027-03-12", name: "Spring Break" }],
+    },
+    {
+      name: "Spring 2027 finals",
+      start: "2027-05-03", end: "2027-05-07",
+      classDays: [1, 2, 3, 4, 5],
+      classNote: "Final exam week",
+      noClass: [],
+    },
+  ],
+
+  /* Hard commitments that aren't trips. Blocked the same way a class day is.
+     A `confirmed: false` entry is a PLACEHOLDER — the calendar still blocks it
+     so the surrounding windows aren't overstated, but any window touching it
+     is provisional until the real dates land. */
+  blocked: [
+    { start: "2026-12-25", end: "2026-12-30", name: "Frisco, CO — family (DATES UNCONFIRMED)", confirmed: false },
+    { date: "2027-05-08", name: "🎓 Commencement", confirmed: true },
+  ],
+
+  /* The horizon. After this, PTO replaces the academic calendar and the
+     whole planning model changes — which is the entire argument for
+     spending 2027's summer on the trips that a two-week allowance can't hold. */
+  horizon: { date: "2027-08-31", name: "Full-time work starts" },
+
+  /* How long a window has to be before a mode is worth it. */
+  modeFit: [
+    { mode: "fly", minDays: 8, label: "Worth an airfare" },
+    { mode: "drive", minDays: 5, label: "Long drive, 8–15 hrs each way" },
+    { mode: "weekend", minDays: 3, label: "Inside a ~5 hr radius" },
+  ],
+};

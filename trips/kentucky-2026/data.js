@@ -457,10 +457,10 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "✅ Koomer Ridge, Sept 22–23 — recreation.gov 0822210215-1, 2 nights, confirmed 9/1" },
-    { text: "✅ Bandy Creek, Sept 24–26 — recreation.gov 0895576747-1, 3 nights, confirmed 9/1" },
-    { text: "✅ Tunnel Ridge Road — confirmed OPEN by phone. The Bison Way fallback is dead." },
-    { text: "✅ Honey Creek — confirmed OPEN by phone." },
+    { text: "✅ Koomer Ridge, Sept 22–23 — recreation.gov 0822210215-1, 2 nights, confirmed 9/1", booked: true },
+    { text: "✅ Bandy Creek, Sept 24–26 — recreation.gov 0895576747-1, 3 nights, confirmed 9/1", booked: true },
+    { text: "✅ Tunnel Ridge Road — confirmed OPEN by phone. The Bison Way fallback is dead.", booked: true },
+    { text: "✅ Honey Creek — confirmed OPEN by phone.", booked: true },
     { text: "Check fire ban status, both parks" },
     { text: "Thu evening at Bandy Creek visitor center: ask about the Twin Arches forest road condition" },
     { text: "Thu evening at Bandy Creek visitor center: ask about Honey Creek ladder condition and recent rain" },

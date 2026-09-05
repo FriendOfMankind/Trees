@@ -5,9 +5,16 @@ description: Build a trip page for this travel hub from a pasted itinerary, spec
 
 # Build a trip page
 
-You are adding a trip to Colin's travel and camping hub. The Maui 2027 page
-(`trips/maui-2027/`) is the reference implementation — when in doubt about
-tone, density, or how blunt to be, open it and match it.
+You are adding a trip to Colin's travel and camping hub.
+
+**The reference implementation is `trips/kentucky-2026/`.** It is the newest
+page and the one that uses the current data shape: schedule rows carrying
+`kind` / `est` / `maps` / `warn`, a `places` tab, a `provisions` block, and
+`noSignal` on the days that have none. Maui 2027 was built first, is still
+the best-written page for tone and for how blunt the risk notes should be,
+and predates all of those fields — match Kentucky for structure and Maui for
+voice. Building to Maui's structure alone will produce a page worse than the
+last two.
 
 Read [`docs/TRIP_SPEC.md`](../../../docs/TRIP_SPEC.md) for the full schema.
 This file is the procedure.
@@ -31,6 +38,66 @@ This file is the procedure.
 
 Where the source material and your own knowledge disagree, say so in the
 chat — don't silently pick one.
+
+## Step 0: triage the intake
+
+What landed in the chat decides the procedure.
+
+**A. A filled-in TRIPFORMAT doc** (has `## TRIP`, `## DAYS`, `## OPEN
+QUESTIONS` headings and `[V]`/`[U]`/`[?]` tags — see
+[`docs/TRIPFORMAT.md`](../../../docs/TRIPFORMAT.md)). This is the happy path.
+Go to **Step 1**, then run the **confidence pass** below before writing a
+single field.
+
+**B. Raw notes, an itinerary, a wall of text.** Same procedure, but you have
+no confidence tags, so treat *everything* as `[U]` until you verify it
+yourself. Say so in the chat: "nothing in this is tagged, so I'm treating all
+of it as unverified."
+
+**C. A one-line idea** ("I want to do the Olympic Peninsula next summer").
+Don't build a page from nothing. Either:
+- add a six-line **wishlist** entry and stop, or
+- **interview him** — ask the smallest set of questions that unblock a real
+  page, in one batch, not one at a time. The questions that actually matter:
+  dates or season window, how many nights, fly or drive, what the trip is
+  *for* (a specific hike? a geology thing? a ruin?), and whether anything is
+  already booked. Then go to Step 1.
+
+Offer him `docs/TRIPFORMAT.md` if he doesn't already have it — running an
+upstream research pass through that format is faster than an interview.
+
+## The confidence pass — how tags become data
+
+This is the whole point of the pipeline. **A tag never gets upgraded by
+vibes.** Map them mechanically:
+
+| Tag in the doc | What it becomes in `data.js` |
+|---|---|
+| `[V]` **with a source you can see** | Use it. Coordinates may be `verified: true`. Keep the source in `notes`. |
+| `[V]` with no source attached | **Downgrade to `[U]`.** Say in the chat that you did. |
+| `[U]` | Usable as prose. **Never** `verified: true`, never a printed price or gate hour without the word "approx" or a "verify with X" note. |
+| `[?]` | `TBD`, `null` coordinates with `verified: false`, or an `openQuestions` entry. Never quietly filled in. |
+
+Then **try to upgrade the tags yourself** using whatever tools this session
+has. Don't skip this because it's tedious — it's the step that makes the page
+worth carrying to a trailhead:
+
+- **Trails, trailhead coordinates, distance and gain** → AllTrails tools
+  (`search_trails_by_name`, `find_trails_near_location`, `get_trail_details`)
+  if present. This is the single highest-value lookup available; it turns
+  `[?]` hike rows into real coordinates.
+- **Seasonal climate, high/low, conditions** → AccuWeather tools if present.
+  Label it a seasonal pattern, not a forecast — a trip a year out has no
+  forecast, and saying otherwise is a Rule 2 violation.
+- **Campground hours, gate cutoffs, road status, booking windows, fees** →
+  web search / fetch (Firecrawl or `WebSearch`/`WebFetch`) against the
+  operator's own site: nps.gov, recreation.gov, the state park system, the
+  ranger district. **Never a blog or an aggregator for a bookable fact.**
+- **Anything you still can't confirm** → it stays `[?]` and becomes an open
+  question. That is a successful outcome, not a failure.
+
+If none of those tools exist in this session, say so plainly in the report
+instead of quietly shipping `[U]` data as if you'd checked it.
 
 ## Procedure
 
@@ -70,8 +137,9 @@ Fill `trips/<slug>/data.js`. Do **not** edit `trips/<slug>/index.html` — it's 
 the data that exists.
 
 Pick a theme by terrain, not country: `ocean` `desert` `alpine` `forest`
-`night` `savanna`. If none fit, add a seventh preset to `js/themes.js` rather
-than inlining a one-off palette.
+`night` `savanna` `autumn`. If none fit, add a preset to `js/themes.js` rather
+than inlining a one-off palette. **`basecamp` is the hub's own palette — never
+assign it to a trip.**
 
 ### 4. Register it
 
@@ -106,12 +174,21 @@ See docs/TRIP_SPEC.md → "Maps and routing".
 
 Tell him, in the chat and briefly:
 - what you built and what status you gave it
+- **the confidence ledger**: how many facts came in `[V]` / `[U]` / `[?]`,
+  what you upgraded and with which tool, and what you had to downgrade
 - **every fact you couldn't verify**, listed plainly
-- what you'd research next, ranked
+- what you'd research next, ranked — and which of those he can only get by
+  phoning a ranger district, because those are the ones that don't resolve
+  themselves
 
 Don't bury uncertainty in the page and call it done.
 
 ## Quality bar
+
+Schedule rows carry `kind` (the icon), real `time`s, `est` where a duration
+matters, `maps` where there is a place to search for, and `warn: true` only
+where rule 3 applies. Prefer an existing `kind` over inventing one; if none
+fit, add it to `KIND_ICON` in `js/trip.js` so the next trip can reuse it.
 
 Day titles are names, not labels: "Lava Dawn, Then East", not "Day 2 — driving
 to Hāna". Schedule entries carry real times including calculated sunrise and

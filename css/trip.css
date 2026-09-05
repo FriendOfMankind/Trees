@@ -222,3 +222,97 @@
   .schedule-list .row-text { flex: 1 1 100%; }
   .maps-btn { padding: 0.35rem 0.75rem; }
 }
+
+/* ---------- Offline tiles ----------
+   Sits directly under the map, because the honest version of "download this
+   for offline" is one that tells you what it does and does not cover. */
+
+.tile-panel { margin-top: 0.75rem; }
+.tile-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.tile-note { font-family: var(--ui); font-size: 0.8rem; color: var(--t-ink-dim); }
+
+.chip.nosignal { background: var(--warn-bg); color: var(--warn-ink); border-color: var(--warn-border); }
+
+/* ---------- Retro ---------- */
+
+.verdict {
+  font-family: var(--ui);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+}
+.verdict.ok   { background: var(--ok-bg);   color: var(--ok-ink); }
+.verdict.bad  { background: var(--warn-bg); color: var(--warn-ink); }
+.verdict.warn { background: #fdf4e0;        color: #7a5a12; }
+.verdict.dim  { background: #eef1f6;        color: #445269; }
+/* ---------- Durable vs scratch checklist state ----------
+   A tick in this browser is a scratchpad. A `booked: true` in data.js is a
+   fact that survives a new laptop, so it renders locked and visually
+   different — you should never be able to un-tick a booking by accident. */
+
+.storage-note { margin: 0.4rem 0 1.1rem; }
+.storage-note p { font-family: var(--ui); font-size: 0.84rem; line-height: 1.5; }
+
+.check-item.locked {
+  cursor: default;
+  background: var(--ok-bg);
+  border-color: var(--ok-border);
+}
+.check-item.locked input { cursor: default; }
+.check-item.locked span { color: var(--ok-ink); }
+
+.in-git {
+  display: inline-block;
+  margin-left: 0.5em;
+  font-family: var(--ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ok-border);
+  padding: 0.1rem 0.42rem;
+  border-radius: 3px;
+  vertical-align: 1px;
+}
+
+.promote-btn {
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: #fff;
+  color: var(--t-800);
+  border: 1px solid var(--t-500);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+}
+.promote-btn:hover { background: var(--t-800); border-color: var(--t-800); color: #fff; }
+.promote-btn code { font-size: 0.95em; background: none; color: inherit; }
+
+.promote-out {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  color: var(--t-ink-dim);
+  white-space: pre-wrap;
+}
+
+/* An unverified waypoint is still a place you have to get to. The list gets
+   the same Maps search the Places tab uses, rather than being a dead end. */
+.unverified-list { list-style: none; margin: 0; padding: 0; }
+.unverified-list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed currentColor;
+}
+.unverified-list li:last-child { border-bottom: none; }
+.unverified-list .u-day { font-family: var(--ui); font-size: 0.72rem; opacity: 0.75; }
+.unverified-list .u-note { font-size: 0.85rem; opacity: 0.85; }

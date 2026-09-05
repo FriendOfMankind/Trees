@@ -1,0 +1,164 @@
+/* ==========================================================================
+   print.css — the paper copy.
+
+   The universal checklist says "Permits and reservations printed on paper,
+   plus photo ID. Some entrance stations require paper plus photo ID and have
+   no signal to look you up." Until this file existed, printing a trip page
+   produced whichever single tab happened to be open, cut off at the table.
+
+   What this does: unfolds every tab into one linear document, drops the
+   chrome and the map, turns the Maps buttons back into the search strings
+   they encode, and stops day cards from breaking across pages.
+   ========================================================================== */
+
+@media print {
+  @page {
+    margin: 14mm 12mm;
+  }
+
+  :root {
+    --t-paper: #fff;
+    --t-ink: #000;
+    --t-ink-dim: #333;
+    --t-line: #999;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10.5pt;
+  }
+
+  /* ---- Unfold every tab ---- */
+
+  .panel,
+  .panel[hidden] {
+    display: block !important;
+    animation: none !important;
+    page-break-before: always;
+  }
+  .panel:first-of-type { page-break-before: avoid; }
+  main { max-width: none !important; padding: 0 !important; }
+
+  /* ---- Chrome off ---- */
+
+  .tabs,
+  .filter-bar,
+  .progress-bar-wrap,
+  .progress-label,
+  .net-state,
+  .tool-bar,
+  .map-legend,
+  #map,
+  #hub-map-wrap,
+  .tile-panel,
+  .site-footer .no-print,
+  [data-no-print] {
+    display: none !important;
+  }
+
+  .site-header {
+    position: static !important;
+    background: none !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.4rem;
+  }
+  .site-header h1,
+  .header-text h1 { color: #000 !important; font-size: 18pt; }
+  .eyebrow, .subtitle, .header-stats .stat .lbl { color: #444 !important; }
+  .header-stats .stat .num { color: #000 !important; }
+
+  /* ---- Cards and blocks: ink, not fills ---- */
+
+  .info-card, .note-card, .day-card, .gear-card, .pack-card, .question-card,
+  .trip-card, .table-wrap, .flat-list .check-item {
+    border: 1px solid #999 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .day-card-head, .route-banner {
+    background: none !important;
+    color: #000 !important;
+    border-bottom: 1px solid #999;
+  }
+  .day-card-head h2, .day-card-head .d-label, .day-card-head .tagline,
+  .route-banner strong { color: #000 !important; }
+  .route-banner { border: 1px solid #999; }
+
+  .day-card { page-break-inside: auto; }        /* a long day may span pages */
+  .day-card-head { page-break-after: avoid; }
+  h2, h3, h4 { page-break-after: avoid; }
+
+  /* ---- Warnings stay findable in greyscale ---- */
+
+  .callout.warning, .map-note {
+    background: none !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    border-left: 5px solid #000 !important;
+  }
+  .callout.highlight { background: none !important; color: #000 !important; border: 1px solid #777 !important; }
+  .callout strong, .map-note h4 { color: #000 !important; }
+  .schedule-list .warn-row { border-left: 3px solid #000; padding-left: 0.4em; }
+
+  /* ---- Tables fit the page ---- */
+
+  .table-wrap { overflow: visible !important; }
+  table { min-width: 0 !important; width: 100% !important; font-size: 9pt; }
+  thead th {
+    background: none !important;
+    color: #000 !important;
+    border-bottom: 2px solid #000;
+    position: static !important;
+  }
+  tbody tr:hover { background: none !important; }
+  tfoot td { background: none !important; border-top: 2px solid #000; }
+
+  /* ---- Checkboxes become boxes you can actually tick with a pen ---- */
+
+  .check-item input { -webkit-appearance: none; appearance: none; }
+  .check-item input::before {
+    content: "";
+    display: inline-block;
+    width: 9pt; height: 9pt;
+    border: 1px solid #000;
+    vertical-align: -1px;
+  }
+  .check-item.checked span { text-decoration: none !important; opacity: 1 !important; color: #000 !important; }
+  .check-item.checked input::before { content: "\2713"; font-size: 9pt; line-height: 9pt; text-align: center; }
+
+  /* ---- Links: a paper map query is only useful if you can read it ---- */
+
+  a { color: #000 !important; text-decoration: none; }
+  .maps-btn {
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+    font-size: 8.5pt;
+    color: #333 !important;
+  }
+  .maps-btn { font-size: 0; }                    /* hide the "Maps ↗" label */
+  .maps-btn::after {
+    content: "\21B3 " attr(data-q);
+    font-size: 8.5pt;
+    font-style: italic;
+    display: block;
+  }
+  .maps-btn:not([data-q]) { display: none !important; }
+
+  /* ---- Grids collapse to something printable ---- */
+
+  .day-columns { grid-template-columns: 1fr !important; }
+  .card-grid, .pack-grid, .gear-grid, .trip-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  .mini-days { display: none !important; }        /* the full itinerary follows */
+
+  .site-footer { border-top: 1px solid #999; color: #333 !important; font-size: 8.5pt; }
+}

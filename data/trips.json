@@ -1,0 +1,1275 @@
+{
+  "generated": "tools/export.mjs",
+  "trips": [
+    {
+      "slug": "kentucky-2026",
+      "title": "Red River Gorge + Big South Fork",
+      "subtitle": "Arches, ladders, and a coal town",
+      "status": "planned",
+      "pinned": true,
+      "page": "trips/kentucky-2026/",
+      "start": "2026-09-22",
+      "dates": "Sept 22–27, 2026",
+      "window": "Late September — before the leaves, after the heat",
+      "region": "Slade KY → Bandy Creek TN",
+      "country": "USA",
+      "coords": [
+        37,
+        -84.2
+      ],
+      "nights": "5 nights camping",
+      "distance": "~1,000 mi round trip",
+      "budget": "TBD",
+      "tags": [
+        "car camping",
+        "arches",
+        "scrambling",
+        "ruins",
+        "solo",
+        "lecture day"
+      ],
+      "why": "Two sandstone plateaus back to back — the Gorge's arch cluster, then Honey Creek's ladders and ropes on the busiest Saturday of the season, because that's what keeps it empty.",
+      "next": "Re-check Tunnel Ridge Road the morning of departure — Cumberland District, 606-784-6428",
+      "updated": "2026-09-04",
+      "booking": [
+        {
+          "system": "recreation.gov",
+          "what": "Koomer Ridge (Sept 22–23)",
+          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "booked": true,
+          "known": true,
+          "source": "derived",
+          "target": "2026-09-22",
+          "leadMonths": 6,
+          "opensISO": "2026-03-22",
+          "basis": "6 months before 2026-09-22"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Bandy Creek (Sept 24–26)",
+          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "booked": true,
+          "known": true,
+          "source": "derived",
+          "target": "2026-09-24",
+          "leadMonths": 6,
+          "opensISO": "2026-03-24",
+          "basis": "6 months before 2026-09-24"
+        }
+      ]
+    },
+    {
+      "slug": "appalachians-2026",
+      "title": "Bridge Day + Southern Appalachians",
+      "subtitle": "Chasing color downhill, WV to VA",
+      "status": "planned",
+      "pinned": true,
+      "page": "trips/appalachians-2026/",
+      "start": "2026-10-15",
+      "dates": "Oct 15–25, 2026",
+      "window": "Mid-late October — peak color moves down the elevation band",
+      "region": "New River Gorge → Pisgah → Linville → Mount Rogers",
+      "country": "USA",
+      "coords": [
+        37.2,
+        -81.4
+      ],
+      "nights": "10 nights — 7 confirmed, 1 uncovered",
+      "distance": "~1,600 mi round trip",
+      "budget": "TBD",
+      "tags": [
+        "car camping",
+        "fall color",
+        "ruins",
+        "BASE jumping",
+        "first-come",
+        "solo",
+        "lodging gap"
+      ],
+      "why": "BASE jumpers watched from the gorge floor, three coal ghost towns, and a sunrise on Hawksbill during peak color week — with two unreservable nights on a forest road as the price.",
+      "next": "Call Arrowhead 304-900-5501 — the reservation moved to Oct 16–18 by phone, leaving Oct 15 with no bed and nothing in writing",
+      "updated": "2026-09-04",
+      "booking": [
+        {
+          "system": "private",
+          "what": "Arrowhead Bike Farm (Oct 16–18)",
+          "note": "Call about after-hours arrival. Office cutoffs are the most common day-one failure.",
+          "booked": true,
+          "known": false,
+          "why": "window varies (Usually anytime) — confirm it"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Davidson River (Oct 18–21)",
+          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "booked": true,
+          "known": true,
+          "source": "derived",
+          "target": "2026-10-18",
+          "leadMonths": 6,
+          "opensISO": "2026-04-18",
+          "basis": "6 months before 2026-10-18"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Hurricane Campground (Oct 24)",
+          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "booked": true,
+          "known": true,
+          "source": "derived",
+          "target": "2026-10-24",
+          "leadMonths": 6,
+          "opensISO": "2026-04-24",
+          "basis": "6 months before 2026-10-24"
+        }
+      ]
+    },
+    {
+      "slug": "maui-2027",
+      "title": "Full Circle Maui",
+      "subtitle": "Counterclockwise island loop, solo",
+      "status": "planned",
+      "pinned": false,
+      "page": "trips/maui-2027/",
+      "start": "2027-05-13",
+      "dates": "May 13–20, 2027",
+      "window": "May — dry season leeward, before summer crowds",
+      "region": "Maui, Hawaii",
+      "country": "USA",
+      "coords": [
+        20.79,
+        -156.32
+      ],
+      "nights": "7 nights camping",
+      "distance": "~400 mi driving",
+      "budget": "~$1,362",
+      "tags": [
+        "car camping",
+        "volcanic",
+        "snorkeling",
+        "solo",
+        "road loop",
+        "altitude"
+      ],
+      "why": "Every major Maui landscape in one counterclockwise loop — reef, lava field, rainforest, and a 10,000 ft summit.",
+      "next": "Confirm the Waiʻānapanapa booking window (1 year vs 90 days) so the alarm is set correctly",
+      "updated": "2026-09-03",
+      "booking": [
+        {
+          "system": "state-park",
+          "what": "Waiʻānapanapa SP camping (5/14–5/16)",
+          "note": "The trip's own open question. 1 year vs 90 days is a nine-month difference in when the alarm goes off.",
+          "booked": false,
+          "known": false,
+          "why": "window varies (Varies wildly — 30 days to 1 year) — confirm it"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Hosmer Grove (5/17–5/18)",
+          "note": "6 sites total. Book the morning it drops.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-05-17",
+          "leadMonths": 6,
+          "opensISO": "2026-11-17",
+          "basis": "6 months before 2027-05-17"
+        }
+      ]
+    },
+    {
+      "slug": "mojave-winter-2027",
+      "title": "Mojave Winter Loop",
+      "subtitle": "Death Valley, Joshua Tree, and the desert that only exists in January",
+      "status": "outline",
+      "pinned": true,
+      "page": "trips/mojave-winter-2027/",
+      "start": null,
+      "dates": "Jan 2–15, 2027 (target, unbooked)",
+      "window": "⭐ Dec–Feb only. Every one of these is lethal or miserable May–September, which is exactly why they belong in the January window.",
+      "region": "Las Vegas → Death Valley → Mojave → Joshua Tree",
+      "country": "USA",
+      "coords": [
+        36.2,
+        -116.8
+      ],
+      "nights": "13 nights camping",
+      "distance": "~1,100 mi loop",
+      "budget": "~$2,033 excl. airfare",
+      "tags": [
+        "car camping",
+        "desert",
+        "geology",
+        "solo",
+        "winter",
+        "fly-in",
+        "open-jaw"
+      ],
+      "why": "🚨 <b>All four campground booking windows are ALREADY OPEN</b> — Valley of Fire since Feb, the three federal ones since July. Two verification passes done; six questions left, and the campground ones are all closed. The January window is 19 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante's View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
+      "next": "Book all four campgrounds — every window is open and Furnace Creek books to capacity most days. Valley of Fire (reservenevada) is reservation-only with no fallback; start there",
+      "updated": "2026-09-04",
+      "booking": [
+        {
+          "system": "reservenevada",
+          "what": "Valley of Fire, Atlatl Rock (Jan 2–3)",
+          "note": "Must be booked at least 72 hrs ahead; $5 non-refundable transaction fee. Valley of Fire is reservation-only — no first-come fallback.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-01-02",
+          "leadMonths": 11,
+          "opensISO": "2026-02-02",
+          "basis": "11 months before 2027-01-02"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Furnace Creek (Jan 4–9)",
+          "note": "NPS: booked to capacity most days in recent years. 136 sites, 45 tent-only.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-01-04",
+          "leadMonths": 6,
+          "opensISO": "2026-07-04",
+          "basis": "6 months before 2027-01-04"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Hole-in-the-Wall (Jan 10–11)",
+          "note": "Reservation-only. 38 sites. Preserve info (760) 252-6100.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-01-10",
+          "leadMonths": 6,
+          "opensISO": "2026-07-10",
+          "basis": "6 months before 2027-01-10"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Jumbo Rocks, Joshua Tree (Jan 12–14)",
+          "note": "Reservable year-round. NPS: park campgrounds usually full on weekends Sept–May.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-01-12",
+          "leadMonths": 6,
+          "opensISO": "2026-07-12",
+          "basis": "6 months before 2027-01-12"
+        }
+      ]
+    },
+    {
+      "slug": "frisco-2026",
+      "title": "Frisco, Colorado",
+      "subtitle": "Family, not a plan",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": "2026-12-25",
+      "dates": "Dec 25–30, 2026 — ⚠️ APPROXIMATE, not confirmed",
+      "window": "Fixed by family, exact dates pending",
+      "region": "Summit County, Colorado",
+      "country": "USA",
+      "coords": [
+        39.57,
+        -106.1
+      ],
+      "nights": "~5 nights",
+      "distance": null,
+      "budget": "n/a",
+      "tags": [
+        "family",
+        "fixed",
+        "winter"
+      ],
+      "why": "On the calendar because it blocks a window and because it is the outbound half of the January open jaw — the Mojave loop flies DEN → LAS from here rather than routing home first.<br><br>⚠️ <b>These dates are a placeholder.</b> \"Dec 25 for maybe 5 nights\" is all that is actually known. Everything downstream moves with them: the length of the January window, the DEN → LAS leg date, and when the Mojave loop can start. <b>Get the real dates before booking anything in January.</b>",
+      "next": "Get the exact Frisco dates from family — the January trip's start date and the whole 19-day window depend on them",
+      "updated": "2026-09-05",
+      "booking": []
+    },
+    {
+      "slug": "eastern-sierra",
+      "title": "Eastern Sierra",
+      "subtitle": "Committed — the best payoff per dollar",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–early October; September for aspen and fewer people",
+      "region": "Bishop / Mammoth, California",
+      "country": "USA",
+      "coords": [
+        37.36,
+        -118.55
+      ],
+      "nights": "~8 nights",
+      "distance": null,
+      "budget": "Cheap flights (Reno), cheap car",
+      "tags": [
+        "car camping",
+        "alpine",
+        "paved trailheads",
+        "committed"
+      ],
+      "why": "✅ Four Jeffrey CG at 8,100 ft with bear boxes and a trailhead under a mile up the road. Little Lakes Valley from Mosquito Flat is the highest paved trailhead in the Sierra — the single best expression of the car-camping rule set.",
+      "next": "Pick a September week and check Four Jeffrey's reservable/FCFS split",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "beartooth-plateau",
+      "title": "Beartooth Plateau",
+      "subtitle": "Paved to 9,500 ft",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Late June–early/mid September",
+      "region": "Montana / Wyoming",
+      "country": "USA",
+      "coords": [
+        45,
+        -109.55
+      ],
+      "nights": "~7 nights",
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "alpine",
+        "high camps",
+        "wildlife"
+      ],
+      "why": "📋 US-212 is paved above 9,500 ft, so you get emptiness and short approaches — everywhere else those two trade off. Island Lake CG sits at 9,518 ft. Pairs with Yellowstone's northeast corner for Lamar Valley wildlife with zero hiking.",
+      "next": "Decide between this and Snowy Range for the 2028 alpine slot",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "snowy-range",
+      "title": "Snowy Range / Medicine Bow",
+      "subtitle": "The sleeper of the whole list",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Mid-July–October, once the high road opens",
+      "region": "Centennial, Wyoming",
+      "country": "USA",
+      "coords": [
+        41.35,
+        -106.32
+      ],
+      "nights": "~6 nights",
+      "distance": null,
+      "budget": "Denver flights, ~2.5 hr drive",
+      "tags": [
+        "car camping",
+        "alpine",
+        "no permits",
+        "10,000 ft camps"
+      ],
+      "why": "✅ 29 paved miles topping out above 10,000 ft at Libby Flats, a 12,013 ft peak inside the day-hike ceiling, campgrounds above 10,000 ft, and no hiking permits of any kind. A fraction of Colorado's crowds two hours north of Denver.",
+      "next": "Verify Medicine Bow Peak loop stats and the Brooklyn Lake reservation window",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "kenai-peninsula",
+      "title": "Kenai Peninsula",
+      "subtitle": "The one that gets harder to justify, not easier",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Late June for light, early September for color and fewer bugs",
+      "region": "Alaska",
+      "country": "USA",
+      "coords": [
+        60.1,
+        -149.44
+      ],
+      "nights": "8 nights, 4 camps",
+      "distance": null,
+      "budget": "Highest on the list — flights and rentals triple a Reno rate",
+      "tags": [
+        "car camping",
+        "glacier",
+        "bears",
+        "expensive",
+        "wet"
+      ],
+      "why": "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.<br><br>⭐ <b>Slotted for Aug 2027 — the last summer before full-time work.</b> This is the trip the free summer exists for: every other fly-in on this list survives a two-week PTO allowance and this one does not. A PNW bundle (CLE→SEA→ANC→CLE) was considered and <b>declined on purpose</b> — Seattle is the natural connection so the routing was sound, but North Cascades is PTO-survivable and would have made Alaska the back half of a 24-day trip, and back halves get compressed.<br><br>✅ <b>Rental cars: most Alaska companies prohibit unpaved roads outright and void insurance if you drive them</b> — but the named restrictions (Denali Hwy, McCarthy, Steese, Dalton) are all interior. The Kenai's Seward and Sterling Highways are paved, so this is the least-affected corner of the state. ⚠️ <b>Hatcher Pass is the exception and it is already in this plan</b> — it sits north of Anchorage in the Mat-Su, not on the Kenai, and the summit traverse is gravel and seasonally gated. Paved approaches from either side are fine; the through-route is likely prohibited. Resolve before building the route.",
+      "next": "Get a named rental company's restricted-roads list in writing, and decide whether Hatcher Pass means the paved approach or the gravel traverse",
+      "updated": "2026-09-05",
+      "booking": []
+    },
+    {
+      "slug": "capitol-reef",
+      "title": "Capitol Reef",
+      "subtitle": "Maui return leg — the pick",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "⭐ May–Oct for hiking; early-to-mid May before the heat",
+      "region": "Torrey, Utah",
+      "country": "USA",
+      "coords": [
+        38.29,
+        -111.26
+      ],
+      "nights": "3–4 nights",
+      "distance": null,
+      "budget": "~3.5 hr drive from SLC",
+      "tags": [
+        "car camping",
+        "geology",
+        "red rock",
+        "may",
+        "maui bookend",
+        "uncrowded"
+      ],
+      "why": "The <b>Waterpocket Fold is a 100-mile wrinkle in the Earth's crust</b> — a monocline about as well exposed as any on the planet, and the entire reason the park exists. ✅ <b>Least-visited of Utah's Mighty Five</b>, so it passes the crowd test that Zion and Arches fail outright: no shuttle, no timed entry, no permit lottery.<br><br>✅ <b>Fruita Campground</b> — 71 sites in a historic orchard on the Fremont River, drive-up, reservable year-round on recreation.gov on a 6-month rolling window. The only established campground in the park, so book it.<br><br>Every hike fits the ceiling: Cassidy Arch (3.1 mi, ~850 ft), Chimney Rock, Grand Wash (flat, through the Fold itself), Hickman Bridge, Cohab Canyon. The Scenic Drive is paved; <b>Cathedral Valley is the high-clearance half and you would simply skip it</b>. ⚠️ Late May gets into the upper 80s — earlier in the month is better.",
+      "next": "Fruita books 6 months out and has 71 sites — that is the only real constraint here",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "dinosaur-nm",
+      "title": "Dinosaur National Monument",
+      "subtitle": "Maui return leg — the sleeper",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Apr–Oct; May is ideal, before the summer heat",
+      "region": "Jensen, Utah / Colorado",
+      "country": "USA",
+      "coords": [
+        40.44,
+        -109.3
+      ],
+      "nights": "3 nights",
+      "distance": null,
+      "budget": "✅ 191 mi, just over 3 hr from SLC — the shortest transfer of any option",
+      "tags": [
+        "car camping",
+        "geology",
+        "fossils",
+        "river",
+        "may",
+        "maui bookend",
+        "empty"
+      ],
+      "why": "The <b>Quarry Exhibit Hall is a rock face with roughly 1,500 dinosaur bones still embedded in it</b> — an in-situ Jurassic bone bed under a building, not a museum with casts. Then <b>Split Mountain</b>, where the Green River cuts <i>straight through</i> an anticline instead of going around it, which is the textbook example of an antecedent stream.<br><br>✅ <b>Green River Campground</b>: $12/night, open April–October with drinking water and flush toilets, on the riverbank under Split Mountain, five miles from the Quarry. ⚠️ Split Mountain Campground is group-only in peak season, so Green River is the one.<br><br>If the through-line is genuinely 'why does this landscape look like this', this is the most concentrated answer on the whole list — and almost nobody goes. Smaller than Capitol Reef, so three nights, not four.",
+      "next": "Confirm Green River Campground's April–October dates cover your week",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "black-canyon",
+      "title": "Black Canyon of the Gunnison",
+      "subtitle": "Colorado's one world-class May option",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "⚠️ Mid-May at the earliest — the South Rim road and campground are winter-closed until then",
+      "region": "Montrose, Colorado",
+      "country": "USA",
+      "coords": [
+        38.57,
+        -107.72
+      ],
+      "nights": "2 nights",
+      "distance": null,
+      "budget": "~5 hr from DEN, ~1.5 hr from Montrose",
+      "tags": [
+        "car camping",
+        "geology",
+        "slot canyons",
+        "may",
+        "maui bookend",
+        "rim park"
+      ],
+      "why": "<b>Precambrian gneiss and schist, roughly 1.7–2 billion years old</b> — the oldest rock you can stand next to in the region, and the Gunnison cut 2,000+ ft straight down into it. Narrow enough that parts of the floor get about half an hour of sun a day. The Painted Wall is Colorado's tallest cliff.<br><br>⚠️ <b>Timing is razor-thin for a mid-May return.</b> In 2026 the South Rim Campground opened <b>May 18</b>, and <b>Loops B and C were closed by wildfire damage, leaving Loop A only</b>. The South Rim Road is winter-closed and reopens in May. East Portal opens Apr 15 but sits at the bottom of a 16% grade; North Rim opens May 1 with 13 sites down a remote gravel road.<br><br>⚠️ <b>It is a rim park</b> — you look into it rather than walk it. The inner-canyon routes are unmaintained, brutally steep and permit-required, so the hiking is short rim trails. Two nights, not four.",
+      "next": "Check whether the South Rim opening date and the wildfire loop closures still apply before counting on it",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "colorado-nm",
+      "title": "Colorado National Monument",
+      "subtitle": "The reliable Colorado option in May",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Mar–Oct; May is warm and snow-free",
+      "region": "Fruita / Grand Junction, Colorado",
+      "country": "USA",
+      "coords": [
+        39.05,
+        -108.7
+      ],
+      "nights": "2–3 nights",
+      "distance": null,
+      "budget": "~4 hr from DEN, 20 min from Grand Junction",
+      "tags": [
+        "car camping",
+        "red rock",
+        "geology",
+        "may",
+        "maui bookend"
+      ],
+      "why": "Sheer red rock canyons and monoliths off Rim Rock Drive, at 4,700–6,600 ft — <b>low enough to be snow-free in May when the Colorado mountains are still unusable</b>. Monument Canyon, Window Rock, Canyon Rim and the Alcove Nature Trail all leave from near the visitor center.<br><br>✅ <b>Saddlehorn Campground</b>: 79 sites, March–October, $22, reservable on recreation.gov, four miles from the Fruita entrance. <b>Loop C is tents and small campers only</b> — that is the one to want. The only established campground in the monument.<br><br>Pairs naturally with Black Canyon, 2.5 hours away, for a Western Slope loop out of Grand Junction.",
+      "next": "Book Loop C at Saddlehorn if this becomes the plan",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "great-sand-dunes",
+      "title": "Great Sand Dunes",
+      "subtitle": "Maui return leg — with a real catch",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Late May–June for Medano Creek — but see the warning",
+      "region": "Colorado",
+      "country": "USA",
+      "coords": [
+        37.79,
+        -105.59
+      ],
+      "nights": "2–3 nights",
+      "distance": null,
+      "budget": "~4 hr from DEN",
+      "tags": [
+        "car camping",
+        "dunes",
+        "swimming",
+        "may",
+        "maui bookend"
+      ],
+      "why": "Tallest dunes in North America — 750 ft of sand piled against the Sangre de Cristos. Your bucket list flags late May for Medano Creek: sand plus water, a completely different kind of day.<br><br>⚠️ <b>Do not build a trip around the creek.</b> It is entirely snowpack-fed and it fails. In <b>May 2026 it ran at 5–10% of normal — near record low — with reporting that it likely would not flow at all</b>, after an abnormally dry winter. Check the March–April snowpack before committing, and be content with just dunes if it does not come.<br><br>✅ Piñon Flats: 88 sites, $20, reservable 6 months out, drive-up.",
+      "next": "Check Sangre de Cristo snowpack in March before this becomes a plan",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "owens-valley",
+      "title": "Owens Valley + Alabama Hills",
+      "subtitle": "Maui bookend — the outbound leg",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "⭐ Apr–May and Oct — too hot in summer, snowbound above",
+      "region": "Lone Pine, California",
+      "country": "USA",
+      "coords": [
+        36.6,
+        -118.06
+      ],
+      "nights": "3–4 nights",
+      "distance": null,
+      "budget": "3.5 hr drive from LAX or Burbank",
+      "tags": [
+        "car camping",
+        "geology",
+        "granite",
+        "ruins",
+        "may",
+        "maui bookend"
+      ],
+      "why": "The Sierra escarpment is about <b>10,000 ft of relief in a few horizontal miles</b> — one of the great normal-fault fronts on Earth — and the 1872 Lone Pine earthquake scarp is walkable at the valley floor. Weathered granite at Alabama Hills, basalt scoured by the Owens River at Fossil Falls, and Manzanar for the ruins. <b>This is also the only piece of the Eastern Sierra that works in May</b>, so it doubles as a scouting trip for the committed summer version. ⚠️ Alabama Hills is now <b>designated sites only</b> (~50, first-come) plus a <b>free one-year permit</b>; no camping west of Movie Road. Tuttle Creek BLM — already on your Eastern Sierra list as the bad-weather fallback — is the drive-up base.",
+      "next": "Get the free Alabama Hills permit online, and check whether AAA waives the young-renter fee on a second and third rental",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "point-reyes-marin",
+      "title": "Point Reyes + Marin",
+      "subtitle": "The Maui return leg",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Apr–Jun — spring wildflowers, before the summer fog wall thickens",
+      "region": "Marin County, California",
+      "country": "USA",
+      "coords": [
+        38.05,
+        -122.88
+      ],
+      "nights": "3–4 nights",
+      "distance": null,
+      "budget": "1h 15m from SFO",
+      "tags": [
+        "car camping",
+        "geology",
+        "coast",
+        "redwoods",
+        "wildlife",
+        "may",
+        "maui bookend"
+      ],
+      "why": "The San Andreas runs straight through it — the Earthquake Trail has a fence line <b>offset about 20 feet by the 1906 rupture</b>, and the whole peninsula is a slab of granite rafted roughly 300 miles north from the southern Sierra. Tule elk at Tomales Point (~9.4 mi, nearly flat), Bear Valley out to Arch Rock, Chimney Rock. <b>Maximally unlike Maui</b> — cold fog, dairy ranches and a transform fault, three days after a shield volcano.<br><br>⚠️ <b>NPS is explicit: there is no car camping inside the Seashore.</b> All four in-park campgrounds are hike-in. The base is <b>Samuel P. Taylor SP</b> — 60 developed plus 16 tent-only sites in redwoods on Lagunitas Creek, reservable through ReserveCalifornia, about 35 min from Bear Valley. Treat it as a redwood basecamp with coastal day trips rather than a compromise.<br><br>⚠️ <b>May fog and wind are the real risk</b> — the outer point is one of the windiest, foggiest places on the Pacific coast. Keep Chimney Rock and the lighthouse flexible; Bear Valley, Olema Valley and Samuel P. Taylor stay clear when the point is socked in. ✅ Elk: fence removal began Dec 2024 but most of the herd still holds the Tomales Point reserve, so the viewing stands.<br><br>Food: <b>Point Reyes Station</b> — Cowgirl Creamery, Bovine Bakery, and Tomales Bay oysters as the regional dish.",
+      "next": "Check Samuel P. Taylor May availability — ReserveCalifornia, 6 months out",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "pinnacles",
+      "title": "Pinnacles",
+      "subtitle": "A volcano the San Andreas tore in half",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Mar–May and Oct — summer is brutal",
+      "region": "Central California",
+      "country": "USA",
+      "coords": [
+        36.49,
+        -121.16
+      ],
+      "nights": "2–3 nights",
+      "distance": null,
+      "budget": "~2 hr from San Jose",
+      "tags": [
+        "car camping",
+        "geology",
+        "talus caves",
+        "condors",
+        "may",
+        "maui bookend"
+      ],
+      "why": "⚠️ A 23-million-year-old volcanic field split by the San Andreas and carried <b>195 miles north</b> from where it erupted — the other half is still down at Neenach. Talus caves, rhyolite spires, condors. ⚠️ Two real problems for May: <b>over 80% of annual visitation happens in spring</b> with long queues 10 AM–3 PM, and <b>Bear Gulch Cave closes mid-May to mid-July</b> for bat pupping. Midweek only, and check which caves are open.",
+      "next": "Only if you can go midweek — otherwise it fails the crowd test outright",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "sequoia-kings",
+      "title": "Sequoia + Kings Canyon",
+      "subtitle": "The big-tree bookend",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "May works low; Mineral King road opens late May",
+      "region": "Central California",
+      "country": "USA",
+      "coords": [
+        36.55,
+        -118.75
+      ],
+      "nights": "3–4 nights",
+      "distance": null,
+      "budget": "~4 hr from LAX, ~1.5 hr from Fresno",
+      "tags": [
+        "car camping",
+        "old growth",
+        "granite",
+        "may",
+        "maui bookend"
+      ],
+      "why": "⚠️ Giant Forest and Grant Grove are reachable in May when the high country is not. The largest trees on Earth by volume, plus glaciated granite. ⚠️ <b>Mineral King — the quiet corner — is a narrow 25-mile road that usually opens late May</b>, so an early-May trip gets the busy half of the park. Fits the outbound leg from LAX better than the return.",
+      "next": "Check the Mineral King road opening date against your dates before choosing this over Owens Valley",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "buffalo-river",
+      "title": "Buffalo National River",
+      "subtitle": "The penciled 2027 shoulder trip",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Apr–May and Oct — April is waterfalls, summer is swimming",
+      "region": "Ponca / Jasper, Arkansas",
+      "country": "USA",
+      "coords": [
+        36.02,
+        -93.37
+      ],
+      "nights": "5–7 nights",
+      "distance": null,
+      "budget": "Drive, ~11 hrs from Avon",
+      "tags": [
+        "car camping",
+        "waterfalls",
+        "swimming",
+        "bluffs",
+        "april",
+        "shoulder season"
+      ],
+      "why": "✅ The only dam-free river of its kind and the best warm swimming on the whole list. April is peak waterfall and wildflower season and the upper river is only navigable in spring. Hemmed-In Hollow is the tallest waterfall between the Rockies and the Appalachians; Whitaker Point, Big Bluff and Lost Valley all day-hike from a drive-up base. ⚠️ <b>Kyles Landing fails the clearance test</b> — 3 miles of very steep gravel, 4WD recommended. Steel Creek is the base: 26 tent-only sites under Roark Bluff, water and flush restrooms roughly Mar 15–Nov 15.",
+      "next": "Reservations required since Mar 2026 at Steel Creek and four others — 6-month window, so an early-April 2027 trip books around early October 2026",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "sipsey-wilderness",
+      "title": "Sipsey Wilderness",
+      "subtitle": "Land of a Thousand Waterfalls",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "⭐ Best Feb–April, while the water is actually running",
+      "region": "Bankhead NF, Alabama",
+      "country": "USA",
+      "coords": [
+        34.29,
+        -87.4
+      ],
+      "nights": "4–5 nights",
+      "distance": null,
+      "budget": "Drive, ~9.5 hrs from Avon",
+      "tags": [
+        "car camping",
+        "waterfalls",
+        "old growth",
+        "swimming",
+        "april",
+        "empty"
+      ],
+      "why": "⚠️ The largest designated wilderness east of the Mississippi, with dozens of waterfalls, sandstone box canyons, huge old growth and swimming holes. <b>The one place on the whole list whose peak window is early April specifically</b> — its waterfalls only run with the water. Clear Creek and Corinth are drive-up bases open April–October and reservable on recreation.gov; day-hike into the wilderness from there rather than backpacking it.",
+      "next": "Check Clear Creek's April opening date and whether it covers the first week",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "grand-staircase",
+      "title": "Grand Staircase–Escalante",
+      "subtitle": "Warm desert water, which barely exists out west",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Apr–May and Oct",
+      "region": "Escalante, Utah",
+      "country": "USA",
+      "coords": [
+        37.5,
+        -111.4
+      ],
+      "nights": "6–8 nights",
+      "distance": null,
+      "budget": "Fly-in, SLC or Vegas",
+      "tags": [
+        "car camping",
+        "slot canyons",
+        "swimming",
+        "april",
+        "shoulder season"
+      ],
+      "why": "⚠️ Lower Calf Creek, the Zebra and Tunnel slots, Devil's Garden and Willis Creek all still work as day hikes. Warm swimmable desert water is genuinely rare out west, where most water is 37–50°F. ⚠️ The centrepiece — Coyote Gulch via Hurricane Wash — is out under the no-backpacking rule, so this is a lesser version of the trip that was researched.",
+      "next": "Decide whether the day-hike version is still worth a plane ticket",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "sky-islands",
+      "title": "Sky Islands / Chiricahua",
+      "subtitle": "Biologically the strangest place in the US",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Nov–Apr",
+      "region": "Southeast Arizona",
+      "country": "USA",
+      "coords": [
+        32,
+        -109.35
+      ],
+      "nights": "6–8 nights",
+      "distance": null,
+      "budget": "Fly-in, Tucson",
+      "tags": [
+        "car camping",
+        "desert",
+        "geology",
+        "birding",
+        "april",
+        "shoulder season"
+      ],
+      "why": "⚠️ Bonita Canyon CG, Rustler Park, and Stewart / Sunny Flat in Cave Creek. Heart of Rocks and Echo Canyon are the marquee day hikes through rhyolite hoodoo forests. Mountain ranges rising out of desert as isolated ecological islands — the geology-as-through-line trip.",
+      "next": "April is the tail of the window — check how hot the low desert approach gets",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "wichita-mountains",
+      "title": "Wichita Mountains",
+      "subtitle": "Free-roaming bison and granite domes",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Nov–Apr",
+      "region": "Oklahoma",
+      "country": "USA",
+      "coords": [
+        34.73,
+        -98.72
+      ],
+      "nights": "3–4 nights",
+      "distance": null,
+      "budget": "Drive, ~14 hrs — or fly to OKC",
+      "tags": [
+        "car camping",
+        "bison",
+        "granite",
+        "april",
+        "obscure"
+      ],
+      "why": "⚠️ Doris CG, free-roaming bison, granite domes, Elk Mountain and Charons Garden. Almost nobody outside Oklahoma has heard of it. Small enough to pair with something rather than carry a trip alone.",
+      "next": "Probably a pairing, not a destination — decide what it pairs with",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "smokies-east",
+      "title": "Great Smokies — the east side",
+      "subtitle": "Where it stops being a traffic jam",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Late Apr–May, and Oct",
+      "region": "Tennessee / North Carolina",
+      "country": "USA",
+      "coords": [
+        35.63,
+        -83.1
+      ],
+      "nights": "4–6 nights",
+      "distance": null,
+      "budget": "Drive, ~9 hrs from Avon",
+      "tags": [
+        "car camping",
+        "old growth",
+        "waterfalls",
+        "april",
+        "crowd escape"
+      ],
+      "why": "⚠️ Cataloochee, Big Creek, Balsam Mountain and Deep Creek — the east side is the crowd escape. Mount Cammerer and Ramsey Cascades are the day hikes; Gregory Bald is a June thing. ⚠️ <b>Late</b> April, not early — the higher country and some roads are still shut at the start of the month.",
+      "next": "Only worth it after ~April 20 — check road and campground opening dates",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "south-cumberland",
+      "title": "South Cumberland + Fall Creek Falls",
+      "subtitle": "The Plateau's real gems",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Apr–May and Oct–Nov",
+      "region": "Tennessee",
+      "country": "USA",
+      "coords": [
+        35.25,
+        -85.65
+      ],
+      "nights": "4–5 nights",
+      "distance": null,
+      "budget": "Drive, ~7 hrs from Avon",
+      "tags": [
+        "car camping",
+        "waterfalls",
+        "gorges",
+        "april",
+        "close"
+      ],
+      "why": "⚠️ Foster Falls, Savage Gulf and the Stone Door, plus Fall Creek Falls SP. Same Cumberland Plateau geology as the Sept 2026 Big South Fork trip but a completely separate area — worth knowing you will have just seen this rock type six months earlier.",
+      "next": "Decide whether it is too soon after Big South Fork",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "ohiopyle",
+      "title": "Ohiopyle",
+      "subtitle": "Best swimming per mile driven on the whole list",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Late spring through early autumn — April is cold for the slides",
+      "region": "Pennsylvania",
+      "country": "USA",
+      "coords": [
+        39.87,
+        -79.49
+      ],
+      "nights": "2–3 nights",
+      "distance": null,
+      "budget": "~$150. Tank of gas, 3.5 hrs.",
+      "tags": [
+        "car camping",
+        "swimming",
+        "weekend",
+        "cheap",
+        "close"
+      ],
+      "why": "⚠️ <b>Meadow Run natural waterslides</b> — actual sliding on rock, not a novelty plunge. Ferncliff Peninsula, Baughman Rock, the Youghiogheny. Kentuck Campground. Ranked #2 on the swimming list and it is three and a half hours from your door.",
+      "next": "The obvious cheap counterweight to an expensive year — but the water is cold before May",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "letchworth",
+      "title": "Letchworth",
+      "subtitle": "Four hours away and never once mentioned",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Apr–Oct; spring for waterfall volume",
+      "region": "New York",
+      "country": "USA",
+      "coords": [
+        42.58,
+        -78.05
+      ],
+      "nights": "2–3 nights",
+      "distance": null,
+      "budget": "~$150. Tank of gas, 4 hrs.",
+      "tags": [
+        "car camping",
+        "waterfalls",
+        "gorges",
+        "weekend",
+        "cheap",
+        "april"
+      ],
+      "why": "⚠️ The Grand Canyon of the East — three major waterfalls, 600 ft gorge walls, drive-up camping. Spring is when the falls actually have volume. Four hours from your door and it has never come up once in your planning history.",
+      "next": "A two-night April shakedown that costs a tank of gas",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "glacier-np",
+      "title": "Glacier National Park",
+      "subtitle": "Highest hit rate, worst bureaucracy",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–September",
+      "region": "Montana",
+      "country": "USA",
+      "coords": [
+        48.7,
+        -113.8
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "alpine",
+        "reservation system"
+      ],
+      "why": "⚠️ Best hikes per day of anywhere on the list. 📋 The vehicle reservation is a separate system from camping and you can hold one without the other — verify the current year early.",
+      "next": "Check the current year's vehicle reservation rules before anything else",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "north-cascades",
+      "title": "North Cascades + Methow",
+      "subtitle": "Planned once, then Hawaii took the window",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Mid-July–September",
+      "region": "Washington",
+      "country": "USA",
+      "coords": [
+        48.5,
+        -120.7
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "alpine",
+        "already researched"
+      ],
+      "why": "📋 Maple Pass, Cutthroat, Blue Lake, Easy Pass. Fully planned for Aug 2026 before it was swapped out — the research is already done. 📋 Cascade Pass road conflicts with rental agreements; recurring campfire bans.",
+      "next": "Recover the Aug 2026 plan rather than re-researching it",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "high-uintas",
+      "title": "High Uintas",
+      "subtitle": "Absurdly lake-dense, short season",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "Late July–September",
+      "region": "Utah",
+      "country": "USA",
+      "coords": [
+        40.7,
+        -110.88
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": "1.5 hr from SLC",
+      "tags": [
+        "car camping",
+        "alpine",
+        "lakes"
+      ],
+      "why": "📋 The only major east-west range in the lower 48. Mirror Lake Highway is the spine — Trial Lake, Butterfly and Mirror Lake campgrounds string along it. Naturalist Basin, Ibantik, Bald Mountain, Notch Mountain.",
+      "next": "Check the Mirror Lake Hwy opening date against a July–Aug window",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "lassen",
+      "title": "Lassen Volcanic",
+      "subtitle": "Best day-hike fit in California",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–September",
+      "region": "California",
+      "country": "USA",
+      "coords": [
+        40.49,
+        -121.42
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "volcanic",
+        "uncrowded"
+      ],
+      "why": "📋 Cinder Cone 4 mi, Kings Creek Falls 2.8, Echo/Twin Lakes 8 — every hike lands inside the ceiling. The least-visited real national park in California.",
+      "next": "Pair it with Eastern Sierra or treat it as its own trip",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "san-juans",
+      "title": "San Juans",
+      "subtitle": "Ice Lakes Basin is the marquee",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–September",
+      "region": "Colorado",
+      "country": "USA",
+      "coords": [
+        37.81,
+        -107.66
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "alpine",
+        "ruins"
+      ],
+      "why": "⚠️ South Mineral CG puts you at the Ice Lakes trailhead. Ranked lower purely because you're Colorado-saturated — be suspicious of Colorado ideas that arrive feeling easy.",
+      "next": "Only if it beats Snowy Range on its merits, not on familiarity",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "oregon-coast-crater",
+      "title": "Oregon Coast + Crater Lake",
+      "subtitle": "Inverts the effort-equals-payoff model",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "September",
+      "region": "Oregon / Northern California",
+      "country": "USA",
+      "coords": [
+        43,
+        -124
+      ],
+      "nights": "12 nights, three landscapes",
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "coast",
+        "old growth",
+        "low effort"
+      ],
+      "why": "⚠️ Redwoods, coast and Crater Lake in one run. But the best thing in Jedediah Smith is 200 ft from the road and the only real climb on the northern Oregon coast is Saddle Mountain. Do this one on purpose, not by accident.",
+      "next": "Decide whether a low-effort trip is what you actually want that year",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "olympic-rainier",
+      "title": "Olympic + Rainier",
+      "subtitle": "Motel nights are functional here",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–September",
+      "region": "Washington",
+      "country": "USA",
+      "coords": [
+        47.6,
+        -123.2
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "rainforest",
+        "motel nights"
+      ],
+      "why": "📋 Neither park has real shower access, so the Port Angeles motel night is a function rather than a luxury. Verify Ohanapecosh — closed for 2026.",
+      "next": "Verify Ohanapecosh status and Cougar Rock availability",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "bighorns",
+      "title": "Bighorns / Cloud Peak",
+      "subtitle": "Unspent and cheap to reach",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–September",
+      "region": "Wyoming",
+      "country": "USA",
+      "coords": [
+        44.3,
+        -107.2
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": "Cheap",
+      "tags": [
+        "car camping",
+        "dispersed",
+        "alpine"
+      ],
+      "why": "📋 Crazy Woman Canyon Road dispersed camping — creek, canyon walls, the best-reviewed sites in the range. Cut from the overlanding trip and never reallocated.",
+      "next": "Check Crazy Woman Canyon Rd against 5.9 in of clearance",
+      "updated": "2026-09-03",
+      "booking": []
+    },
+    {
+      "slug": "ruby-mountains",
+      "title": "Ruby Mountains",
+      "subtitle": "Booked once, then pivoted away",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–September",
+      "region": "Nevada",
+      "country": "USA",
+      "coords": [
+        40.6,
+        -115.36
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": "SLC airport",
+      "tags": [
+        "car camping",
+        "alpine",
+        "empty",
+        "already researched"
+      ],
+      "why": "📋 A paved canyon road to a glacial cirque with near-zero people. Thomas Canyon CG in Lamoille Canyon. Booked for Sept 2026, then pivoted to Colorado — those reservations were cancelled and refunded. Still owed a visit.",
+      "next": "Recover the Sept 2026 booking research rather than starting over",
+      "updated": "2026-09-04",
+      "booking": []
+    },
+    {
+      "slug": "great-basin",
+      "title": "Great Basin",
+      "subtitle": "Darkest sky in the lower 48",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "July–September",
+      "region": "Nevada",
+      "country": "USA",
+      "coords": [
+        38.98,
+        -114.3
+      ],
+      "nights": null,
+      "distance": null,
+      "budget": null,
+      "tags": [
+        "car camping",
+        "bristlecones",
+        "empty"
+      ],
+      "why": "⚠️ Wheeler Peak, bristlecone groves, and functionally nobody there. Considered once and dropped. Note the tension: the dark sky is the headline draw and stargazing is on the declined list.",
+      "next": "Decide if it earns a trip without the stargazing angle",
+      "updated": "2026-09-03",
+      "booking": []
+    }
+  ]
+}

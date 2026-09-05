@@ -4,9 +4,22 @@
 
    Pick by terrain, not by country. The point is that when you open a page you
    know within half a second whether you're looking at lava, granite or sand.
+
+   `basecamp` is the exception: it is the hub's own palette and belongs to no
+   terrain. Don't assign it to a trip.
    ========================================================================== */
 
 const THEMES = {
+  // The hub's own skin. Deliberately NOT a terrain — the hub is an index, not
+  // a place. Slate and brass, so the trip cards' terrain colors are the only
+  // saturated thing on the page. Trips should not use this.
+  basecamp: {
+    c950: "#12171c", c900: "#1b232b", c800: "#2b3742", c700: "#3c4b59",
+    c500: "#6d8193", c300: "#a8bcca",
+    sand: "#e8d9b4", sandDim: "#b8a87e",
+    paper: "#f6f5f2", ink: "#1b2026", inkDim: "#58636d", line: "#d9d6ce",
+  },
+
   // Reef, deep water, wet volcanic coast. (Maui)
   ocean: {
     c950: "#071f21", c900: "#0a2e31", c800: "#0f5257", c700: "#146b71",
@@ -58,10 +71,10 @@ const THEMES = {
   },
 };
 
-/** Resolve a theme name or inline object into a palette. Falls back to ocean. */
+/** Resolve a theme name or inline object into a palette. Falls back to basecamp. */
 function resolveTheme(theme) {
-  if (theme && typeof theme === "object") return Object.assign({}, THEMES.ocean, theme);
-  return THEMES[theme] || THEMES.ocean;
+  if (theme && typeof theme === "object") return Object.assign({}, THEMES.basecamp, theme);
+  return THEMES[theme] || THEMES.basecamp;
 }
 
 /** Write a palette onto an element's inline custom properties. */

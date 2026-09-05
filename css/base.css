@@ -1,23 +1,24 @@
 /* ==========================================================================
    base.css — shared tokens + primitives for the hub and every trip page.
    Theme colors are CSS custom properties (--t-*) so a trip can re-skin the
-   whole site by setting them on :root. Defaults below are the "ocean" theme.
-   See js/themes.js for the presets.
+   whole site by setting them on :root. Defaults below are the neutral
+   "basecamp" palette — the hub's own, and a deliberately place-less
+   pre-JS fallback. applyTheme() overwrites these. See js/themes.js.
    ========================================================================== */
 
 :root {
-  --t-950: #071f21;
-  --t-900: #0a2e31;
-  --t-800: #0f5257;
-  --t-700: #146b71;
-  --t-500: #1f8f96;
-  --t-300: #6fc4c9;
-  --t-sand: #e8dfc8;
-  --t-sand-dim: #cbc0a1;
-  --t-paper: #fbfaf6;
-  --t-ink: #16211f;
-  --t-ink-dim: #4a5a57;
-  --t-line: #dcd4bd;
+  --t-950: #12171c;
+  --t-900: #1b232b;
+  --t-800: #2b3742;
+  --t-700: #3c4b59;
+  --t-500: #6d8193;
+  --t-300: #a8bcca;
+  --t-sand: #e8d9b4;
+  --t-sand-dim: #b8a87e;
+  --t-paper: #f6f5f2;
+  --t-ink: #1b2026;
+  --t-ink-dim: #58636d;
+  --t-line: #d9d6ce;
 
   --warn-bg: #fdece4;
   --warn-border: #c9581f;
@@ -27,7 +28,7 @@
   --ok-ink: #1f5e39;
 
   --radius: 10px;
-  --shadow: 0 2px 10px rgba(7, 31, 33, 0.12);
+  --shadow: 0 2px 10px rgba(18, 23, 28, 0.13);
   --ui: system-ui, -apple-system, "Segoe UI", sans-serif;
 
   font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
@@ -342,8 +343,57 @@ tfoot td { font-weight: 700; padding: 0.65rem 0.9rem; background: var(--t-paper)
   font-size: 0.8rem;
 }
 
+/* ---------- Buttons, network state, locked checks ---------- */
+
+.btn {
+  font-family: var(--ui);
+  font-size: 0.84rem;
+  font-weight: 600;
+  background: var(--t-800);
+  color: #fff;
+  border: 1px solid var(--t-800);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.btn:hover { background: var(--t-700); }
+.btn:disabled { opacity: 0.55; cursor: default; }
+.btn.ghost { background: #fff; color: var(--t-800); }
+.btn.ghost:hover { background: var(--t-paper); }
+
+.tool-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0 0 1.2rem; }
+.tool-bar .tool-note { font-family: var(--ui); font-size: 0.78rem; color: var(--t-ink-dim); }
+
+/* Offline is a fact worth stating on a page whose whole premise is being
+   readable without signal. Hidden while online; it is not decoration. */
+.net-state {
+  font-family: var(--ui);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border: 1px solid var(--warn-border);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  align-self: center;
+}
+
+/* A reservation confirmed in the data file. Not a checkbox you can change
+   from here, because the data file is the record and this isn't. */
+.check-item.locked { cursor: default; opacity: 0.95; }
+.check-item.locked input { accent-color: var(--ok-border); }
+.check-item.locked span { color: var(--ok-ink); }
+
 @media (max-width: 600px) {
   .header-inner { padding: 1.2rem 1.1rem 0.8rem; }
   .tabs { padding: 0 1.1rem; }
   main { padding: 1.25rem 1.1rem 2.5rem; }
 }
+
+/* A booking window that has already opened is the one header number worth
+   shouting about — every other stat is a count or a countdown. */
+.header-stats .stat.warn .num { color: #ffd7a8; }
+.header-stats .stat.warn .lbl { color: #ffd7a8; opacity: 0.85; }
