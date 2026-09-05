@@ -328,14 +328,37 @@ Every tool previews by default and only touches `data.js` with `--write`.
 `route.mjs` chains verified waypoints in array order, which is itinerary order
 by convention.
 
-Optional free keys, set as environment variables. Without them you get OSM
-only, which is never enough to reach VERIFIED on its own:
+Federal data. **Prefer the bulk download over the API**: Recreation.gov
+publishes its whole database as a daily CSV/JSON dump, and for a few dozen
+waypoints that beats per-request calls on every axis — no key, no rate limit,
+no round trip, and it still works on a plane. Same data either way.
+
+```bash
+# https://ridb.recreation.gov/download → CSV or JSON → extract
+export RIDB_DATA=~/Downloads/RIDBFullExport
+```
+
+`data/ridb/` is picked up automatically and is gitignored — the export is
+hundreds of megabytes and isn't ours to redistribute.
+
+Everything else is an optional free key. Without at least one federal source
+you get OSM only, which never reaches VERIFIED on its own:
 
 | Variable | Get one at | Covers |
 |---|---|---|
-| `RIDB_API_KEY` | ridb.recreation.gov/profile | federal campgrounds, USFS/NPS/BLM/Corps facilities |
+| `RIDB_DATA` | ridb.recreation.gov/download | **preferred** — the whole federal facility database, offline |
+| `RIDB_API_KEY` | ridb.recreation.gov/profile | the same data over HTTP. The key is a **long hex UUID on your profile page, not your username** |
 | `NPS_API_KEY` | nps.gov/subjects/developer | park campgrounds, visitor centers, places |
 | `ORS_API_KEY` | openrouteservice.org/dev | driving and hiking routing, 2000/day |
+
+The bulk download and the API are one provider, not two — `geocode.mjs` uses
+whichever is configured and never both, because querying each would count
+Recreation.gov twice and fake the corroboration the VERIFIED rule depends on.
+
+**Set the radius to cover the whole trip.** Kentucky spans 170 km from Red
+River Gorge to Big South Fork, so a 60 km circle around either one silently
+misses the other. When a name matches outside the radius the tool says so and
+gives you the coordinates to re-anchor on, rather than reporting NONE.
 
 `route.mjs --engine osrm` needs no key at all but is driving-only, and OSRM's
 public demo server asks you not to build on it.

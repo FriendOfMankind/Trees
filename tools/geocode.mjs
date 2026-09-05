@@ -9,10 +9,16 @@
      node tools/geocode.mjs kentucky-2026 --near 37.78,-83.63 --radius 25000
      node tools/geocode.mjs kentucky-2026 --park biso --write
 
-   Keys (all free, all optional — without them you only get OSM, which is
-   never enough on its own to reach VERIFIED):
-     export RIDB_API_KEY=…   https://ridb.recreation.gov/profile
+   Federal data — pick either, the bulk download is the better one:
+     export RIDB_DATA=~/Downloads/RIDBFullExport   (no key; get the CSV or
+       JSON dump from https://ridb.recreation.gov/download and extract it.
+       Also picked up automatically from data/ridb/.)
+     export RIDB_API_KEY=…   https://ridb.recreation.gov/profile — the key is
+       a long hex string on your profile page, NOT your username.
      export NPS_API_KEY=…    https://www.nps.gov/subjects/developer/get-started.htm
+
+   Without one of these you only get OSM, which is never enough on its own to
+   reach VERIFIED.
 
    THE RULE (non-negotiable 1, mechanised):
      VERIFIED  an official agency dataset has it, OR two independent
@@ -33,6 +39,7 @@ import vm from "node:vm";
 import {
   PROVIDERS, lookupOverpass, lookupNominatim, lookupRidb, lookupNps,
 } from "./lib/sources.mjs";
+import { lookupRidbLocal, ridbDataDir, buildIndex } from "./lib/ridb-local.mjs";
 import { haversineMeters, spreadMeters, centroid } from "./lib/geo.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -184,19 +191,30 @@ const results = [];
 console.log(`\n${slug} — ${targets.length} waypoint(s) to resolve`);
 console.log(`anchor ${anchor.lat.toFixed(4)}, ${anchor.lng.toFixed(4)} (${anchorFrom})`);
 console.log(`radius ${(RADIUS / 1000).toFixed(0)} km · agreement tolerance ${TOLERANCE} m`);
-for (const p of Object.values(PROVIDERS)) {
-  if (p.env && !process.env[p.env]) console.log(`  note: ${p.label} skipped — ${p.env} not set`);
+const bulkDir = ridbDataDir(ROOT);
+if (bulkDir) {
+  console.log(`  Recreation.gov: reading the bulk download at ${bulkDir}`);
+  const idx = buildIndex(bulkDir, { verbose: true });
+  console.log(`  indexed ${idx.places.length} located place(s) from ${idx.files} file(s)`);
+  if (!idx.places.length) {
+    console.log(`  note: nothing usable found there — is it the extracted RIDB export?`);
+  }
+} else if (!process.env.RIDB_API_KEY) {
+  console.log(`  note: Recreation.gov skipped — no RIDB_DATA download and no RIDB_API_KEY`);
 }
+if (!process.env.NPS_API_KEY) console.log(`  note: ${PROVIDERS.nps.label} skipped — NPS_API_KEY not set`);
 console.log("");
 
 for (const w of targets) {
   const cands = [];
   const errors = [];
 
+  const hints = [];
   const collect = async (label, fn) => {
     try {
       const r = await fn();
       if (r && r.skipped) return;
+      if (r && r.hint) hints.push(r.hint);
       cands.push(...(r || []));
     } catch (e) {
       errors.push(`${label}: ${e.message}`);
@@ -206,7 +224,11 @@ for (const w of targets) {
   await collect("overpass", () => lookupOverpass(w.name, { ...anchor, radiusM: RADIUS }));
   await sleep(1100); // Nominatim asks for <= 1 req/sec, and means it
   await collect("nominatim", () => lookupNominatim(w.name, { ...anchor, radiusM: RADIUS }));
-  await collect("ridb", () => lookupRidb(w.name, { ...anchor, radiusM: RADIUS }));
+  // The bulk download and the API are the same dataset, so use one or the
+  // other — querying both would double-count Recreation.gov as if it were two
+  // sources, which is exactly the mistake the provider ids exist to prevent.
+  if (bulkDir) await collect("ridb", () => lookupRidbLocal(w.name, { ...anchor, radiusM: RADIUS, root: ROOT }));
+  else await collect("ridb", () => lookupRidb(w.name, { ...anchor, radiusM: RADIUS }));
   await collect("nps", () => lookupNps(w.name, { parkCode: PARK }));
 
   // Anything absurdly far from the trip is a name collision, not our place.
@@ -215,7 +237,7 @@ for (const w of targets) {
   const { verdict, why } = verdictFor(cluster);
   const coords = cluster && cluster.members.length ? pickCoords(cluster) : null;
 
-  results.push({ w, verdict, why, coords, cluster, near, errors });
+  results.push({ w, verdict, why, coords, cluster, near, errors, hints });
 
   const mark = { VERIFIED: "✓", REVIEW: "?", NONE: "×" }[verdict];
   console.log(`${mark} ${w.name}`);
@@ -228,6 +250,7 @@ for (const w of targets) {
     if (c.url) console.log(`          ${c.url}`);
   }
   if (near.length > 8) console.log(`        … ${near.length - 8} more`);
+  for (const h of hints) console.log(`      → ${h}`);
   for (const e of errors) console.log(`      ! ${e}`);
   console.log("");
 }

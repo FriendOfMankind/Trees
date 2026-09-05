@@ -32,6 +32,7 @@ tools/manifest.mjs    regenerates sw-precache.js
 tools/sun.mjs         computes sun/moon tables; --check diffs a hand-typed one
 tools/export.mjs      writes GPX / ICS / plan text; --all writes data/trips.json
 tools/geocode.mjs     find + verify waypoint coordinates (never invents one)
+                      prefers the RIDB bulk download ($RIDB_DATA) over the API
 tools/route.mjs       bake driving geometry between verified waypoints
 tools/trail.mjs       transcribe a hike's real shape from OSM
 tools/lib/            shared: site loader, astro, polyline codec, geo lookups

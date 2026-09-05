@@ -1,3 +1,7 @@
 .DS_Store
 *.log
 exports/
+
+# RIDB bulk download — hundreds of MB, and not ours to redistribute.
+# Get it from https://ridb.recreation.gov/download
+data/ridb/
