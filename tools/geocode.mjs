@@ -41,6 +41,7 @@ import {
 } from "./lib/sources.mjs";
 import { lookupRidbLocal, ridbDataDir, buildIndex, diagnose, searchedPaths } from "./lib/ridb-local.mjs";
 import { haversineMeters, spreadMeters, centroid } from "./lib/geo.mjs";
+import { bestCluster } from "./lib/rank.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -137,26 +138,6 @@ if (!targets.length) {
 
 /* ---------------- evidence → verdict ---------------- */
 
-/** Greedy clustering: for every candidate, gather everything within tolerance
-    of it, then keep the cluster backed by the most distinct providers. Ties go
-    to the cluster containing an official source, then to the tightest one. */
-function bestCluster(cands, toleranceM) {
-  let best = null;
-  for (const seed of cands) {
-    const members = cands.filter((c) => haversineMeters(seed, c) <= toleranceM);
-    const providers = new Set(members.map((m) => m.provider));
-    const officials = members.filter((m) => PROVIDERS[m.provider]?.official);
-    const spread = spreadMeters(members);
-    const score = [providers.size, officials.length, -spread];
-    if (!best || score[0] > best.score[0] ||
-       (score[0] === best.score[0] && score[1] > best.score[1]) ||
-       (score[0] === best.score[0] && score[1] === best.score[1] && score[2] > best.score[2])) {
-      best = { members, providers, officials, spread, score };
-    }
-  }
-  return best;
-}
-
 function verdictFor(cluster) {
   if (!cluster || !cluster.members.length) return { verdict: "NONE", why: "nothing found" };
   if (cluster.officials.length) {
@@ -251,7 +232,7 @@ for (const w of targets) {
 
   // Anything absurdly far from the trip is a name collision, not our place.
   const near = cands.filter((c) => haversineMeters(anchor, c) <= RADIUS * 1.5);
-  const cluster = bestCluster(near, TOLERANCE);
+  const cluster = bestCluster(near, TOLERANCE, anchor);
   const { verdict, why } = verdictFor(cluster);
   const coords = cluster && cluster.members.length ? pickCoords(cluster) : null;
 
@@ -261,6 +242,18 @@ for (const w of targets) {
   console.log(`${mark} ${w.name}`);
   console.log(`    ${verdict} — ${why}`);
   if (coords) console.log(`    ${coords.lat.toFixed(6)}, ${coords.lng.toFixed(6)}`);
+
+  // Two places sharing a name is common and the distance between them is the
+  // giveaway: "Twin Arches" is an arch in Red River Gorge AND the landmark in
+  // Big South Fork, 166 km apart. Printing one coordinate under a REVIEW made
+  // an arbitrary pick look like an answer.
+  if (verdict !== "VERIFIED" && near.length > 1) {
+    const apart = spreadMeters(near);
+    if (apart > 5000) {
+      console.log(`    ! candidates are spread over ${(apart / 1000).toFixed(0)} km — more than one place answers to this name.`);
+      console.log(`      The coordinate above is the best of them, not a decision. Pick from the list yourself.`);
+    }
+  }
   for (const c of near.slice(0, 8)) {
     const d = coords ? `${Math.round(haversineMeters(coords, c))} m` : "";
     const inCluster = cluster && cluster.members.includes(c) ? " *" : "  ";
@@ -283,18 +276,50 @@ if (!has("write")) {
   process.exit(0);
 }
 
+/** The span of the waypoints array in the source, by bracket counting.
+
+    A place name is NOT unique in a trip file — the same campground appears in
+    the lodging rows, in the Places tab and in the waypoints, so a search for
+    `name: "X"` across the whole file finds the Places entry first, which has
+    no coordinates to rewrite. Scoping to the array is the difference between
+    editing the right line and quietly editing nothing. */
+function waypointsSpan(text) {
+  const open = /(?:^|\n)\s*(?:waypoints:|const\s+WAYPOINTS\s*=)\s*\[/.exec(text);
+  if (!open) return null;
+  const start = open.index + open[0].length - 1;   // at the "["
+  let depth = 0;
+  for (let i = start; i < text.length; i++) {
+    const c = text[i];
+    if (c === "[") depth++;
+    else if (c === "]") { if (--depth === 0) return { start, end: i + 1 }; }
+  }
+  return null;
+}
+
 let out = source;
 let written = 0;
 const skipped = [];
 
+const span = waypointsSpan(out);
+if (!span) {
+  console.log(`Could not locate the waypoints array in ${rel} — nothing written.`);
+  process.exit(1);
+}
+let region = out.slice(span.start, span.end);
+
 for (const r of writable) {
   // Waypoints are single-line objects by convention. Rewrite only the three
-  // fields on the line that carries this exact name; if the entry does not
-  // look like that, say so rather than guessing at the file's structure.
+  // fields on the line carrying this name, and only inside the waypoints
+  // array. Requiring lat/lng on the line too, so a differently shaped entry
+  // is reported rather than mangled.
   const nameLit = r.w.name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const lineRe = new RegExp(`^([ \\t]*\\{[^\\n]*name:\\s*"${nameLit}"[^\\n]*\\},?)$`, "m");
-  const m = out.match(lineRe);
-  if (!m) { skipped.push(`${r.w.name} — could not find a single-line entry to rewrite`); continue; }
+  const lineRe = new RegExp(
+    `^([ \\t]*\\{[^\\n]*name:\\s*"${nameLit}"[^\\n]*lat:[^\\n]*\\},?)$`, "m");
+  const m = region.match(lineRe);
+  if (!m) {
+    skipped.push(`${r.w.name} — no single-line waypoint entry with a lat field to rewrite`);
+    continue;
+  }
 
   let line = m[1];
   if (!/lat:\s*[^,]+,\s*lng:\s*[^,]+,/.test(line) || !/verified:\s*(true|false)/.test(line)) {
@@ -305,9 +330,11 @@ for (const r of writable) {
     .replace(/lat:\s*[^,]+,/, `lat: ${r.coords.lat.toFixed(6)},`)
     .replace(/lng:\s*[^,]+,/, `lng: ${r.coords.lng.toFixed(6)},`)
     .replace(/verified:\s*(true|false)/, "verified: true");
-  out = out.replace(lineRe, line);
+  region = region.replace(lineRe, line);
   written++;
 }
+
+out = out.slice(0, span.start) + region + out.slice(span.end);
 
 if (written) writeFileSync(file, out);
 console.log(`Wrote ${written} coordinate(s) into ${rel}.`);

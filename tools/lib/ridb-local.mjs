@@ -200,8 +200,14 @@ const sigTokens = (s) => norm(s).split(" ").filter((t) => t.length > 1 && !GENER
     Arch" (gray) reach RIDB's "Grays Arch" (grays). */
 function tokenMatch(a, b) {
   if (a === b) return true;
-  if (a.length >= 4 && b.startsWith(a)) return true;
-  if (b.length >= 4 && a.startsWith(b)) return true;
+  // A prefix match is for an inflection — a plural or a possessive — not for
+  // any word that happens to start the same way. Capping the difference at
+  // two characters keeps gray/grays and arch/arches while rejecting the
+  // matches the first real run threw up: "Gray's Arch" reaching NATIONAL
+  // ARCHIVES, GRAYLING and GRAYBACK, and "Auxier Ridge" reaching Ridgeway
+  // Park. Those were all one word prefixing a longer, unrelated one.
+  const [shortT, longT] = a.length <= b.length ? [a, b] : [b, a];
+  if (shortT.length >= 4 && longT.startsWith(shortT) && longT.length - shortT.length <= 2) return true;
   return false;
 }
 
