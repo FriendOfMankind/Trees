@@ -303,6 +303,32 @@ tfoot td { font-weight: 700; padding: 0.65rem 0.9rem; background: var(--t-paper)
 }
 .map-note ul { margin: 0; padding-left: 1.1rem; }
 
+/* Legend for baked route geometry. Every swatch corresponds to something the
+   authoring tools actually put in data.js, so an absent row means absent data
+   rather than a styling gap. */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.25rem;
+  margin-top: 0.75rem;
+  font-family: var(--ui);
+  font-size: 0.8rem;
+  color: var(--t-ink-dim);
+}
+.map-legend > span { display: inline-flex; align-items: center; gap: 0.45rem; }
+.map-legend i { display: inline-block; width: 18px; height: 10px; flex: none; }
+.map-legend .map-legend-note {
+  flex: 1 1 100%;
+  display: block;
+  color: var(--t-ink-dim);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  border-top: 1px solid var(--t-line);
+  padding-top: 0.5rem;
+  margin-top: 0.1rem;
+}
+
 .leaflet-popup-content b { color: var(--t-800); }
 .leaflet-popup-content a { color: var(--t-700); }
 

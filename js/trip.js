@@ -34,7 +34,7 @@
     { id: "overview",     label: "Overview",             on: true,                       render: renderOverview },
     { id: "itinerary",    label: "Itinerary",            on: has(D.days),                render: renderItinerary },
     { id: "places",       label: "Places",               on: has(D.places),              render: renderPlaces },
-    { id: "map",          label: "Map",                  on: has(D.waypoints),           render: renderMapPanel },
+    { id: "map",          label: "Map",                  on: has(D.waypoints) || has(D.routes) || has(D.trails), render: renderMapPanel },
     { id: "lodging",      label: "Lodging",              on: has(D.lodging && D.lodging.rows), render: renderLodging },
     { id: "hikes",        label: (M.labels && M.labels.hikes) || "Hikes", on: has(D.hikes && D.hikes.rows), render: renderHikes },
     { id: "conditions",   label: "Sun / Moon / Weather", on: has(D.sunMoon) || has(D.weather), render: renderConditions },
@@ -87,7 +87,17 @@
     $$(".panel").forEach((p) => p.classList.toggle("active", p.id === `panel-${name}`));
     history.replaceState(null, "", `#${name}`);
     if (name === "map" && window.__tripMap) {
-      requestAnimationFrame(() => window.__tripMap.invalidateSize());
+      requestAnimationFrame(() => {
+        window.__tripMap.invalidateSize();
+        // The map is built during init(), while its panel is still hidden, so
+        // Leaflet measures a 0x0 container and any fitBounds against it
+        // collapses to maximum zoom over the centre of the bounds — a
+        // street-level view of the empty space between your waypoints. Frame
+        // it on first reveal instead, when the container has a real size.
+        // Once only: re-framing on every visit would throw away the pan and
+        // zoom you just did.
+        if (window.__tripFrame) { window.__tripFrame(); window.__tripFrame = null; }
+      });
     }
   }
 
@@ -250,14 +260,43 @@
   /* ---------------- Map ---------------- */
 
   function renderMapPanel() {
-    $("#panel-map").innerHTML = `<div id="map"></div><div id="map-unverified"></div>`;
+    $("#panel-map").innerHTML =
+      `<div id="map"></div><div id="map-legend"></div><div id="map-unverified"></div>`;
   }
 
-  function initMap() {
-    if (!has(D.waypoints) || typeof L === "undefined") return;
+  /* Encoded polyline (Google algorithm, precision 5) — the same codec
+     tools/lib/geo.mjs writes with. Route geometry is stored encoded because a
+     raw [lat,lng] array is roughly ten times the bytes and turns data.js into
+     a wall of numbers. Decoding a thousand-mile route is well under a
+     millisecond, so this costs nothing at load. */
+  function decodePolyline(str) {
+    const points = [];
+    let i = 0, lat = 0, lng = 0;
+    while (i < str.length) {
+      let shift = 0, result = 0, byte;
+      do { byte = str.charCodeAt(i++) - 63; result |= (byte & 0x1f) << shift; shift += 5; } while (byte >= 0x20);
+      lat += result & 1 ? ~(result >> 1) : result >> 1;
+      shift = 0; result = 0;
+      do { byte = str.charCodeAt(i++) - 63; result |= (byte & 0x1f) << shift; shift += 5; } while (byte >= 0x20);
+      lng += result & 1 ? ~(result >> 1) : result >> 1;
+      points.push([lat / 1e5, lng / 1e5]);
+    }
+    return points;
+  }
 
-    const verified = D.waypoints.filter((w) => w.verified && w.lat != null && w.lng != null);
-    const unverified = D.waypoints.filter((w) => !(w.verified && w.lat != null && w.lng != null));
+  /* `geometry` is one encoded string, or an array of them. A driving leg is a
+     single line; a trail is usually several OSM ways kept as separate segments
+     rather than stitched, because guessing the join order can draw a line
+     through a cliff. */
+  const geometrySegments = (g) => (Array.isArray(g) ? g : [g]).filter(Boolean).map(decodePolyline);
+
+  function initMap() {
+    const anyGeometry = has(D.routes) || has(D.trails);
+    if ((!has(D.waypoints) && !anyGeometry) || typeof L === "undefined") return;
+
+    const wps = D.waypoints || [];
+    const verified = wps.filter((w) => w.verified && w.lat != null && w.lng != null);
+    const unverified = wps.filter((w) => !(w.verified && w.lat != null && w.lng != null));
 
     const map = L.map("map", { scrollWheelZoom: false });
     window.__tripMap = map;
@@ -267,7 +306,39 @@
       maxZoom: 18,
     }).addTo(map);
 
-    const accent = resolveTheme(M.theme).c800;
+    const palette = resolveTheme(M.theme);
+    const accent = palette.c800;
+
+    /* ---- Routes and trails ----
+       Drawn under the pins so a marker is never hidden by a line, and cased in
+       white so the line stays readable over both forest and desert tiles.
+       Every line here was baked at authoring time by tools/route.mjs or
+       tools/trail.mjs — nothing is fetched at load, because the moment you
+       need this map is the moment you have no signal. */
+    const drawn = [];
+
+    const drawGeometry = (item, style) => {
+      geometrySegments(item.geometry).forEach((pts) => {
+        if (pts.length < 2) return;
+        L.polyline(pts, { color: "#ffffff", weight: style.weight + 3, opacity: 0.75 }).addTo(map);
+        const line = L.polyline(pts, style).addTo(map);
+        const bits = [
+          item.distanceMi != null ? `${item.distanceMi} mi` : null,
+          item.durationMin != null ? `${Math.floor(item.durationMin / 60)}h ${item.durationMin % 60}m` : null,
+          item.days ? `Day ${item.days}` : null,
+        ].filter(Boolean).join(" · ");
+        line.bindPopup(
+          `<b>${item.label || item.id}</b>${bits ? `<br>${bits}` : ""}` +
+          (item.source ? `<br><small>source: ${item.source}</small>` : "")
+        );
+        drawn.push(...pts);
+      });
+    };
+
+    (D.routes || []).forEach((r) =>
+      drawGeometry(r, { color: accent, weight: 4, opacity: 0.9 }));
+    (D.trails || []).forEach((t) =>
+      drawGeometry(t, { color: palette.c500, weight: 3, opacity: 0.95, dashArray: "6 5" }));
 
     verified.forEach((w) => {
       const icon = L.divIcon({
@@ -281,16 +352,50 @@
       );
     });
 
-    // Fit to what we actually know. Only fall back to a fixed view if we
-    // don't have enough verified points to frame the trip.
-    if (verified.length >= 2) {
-      map.fitBounds(verified.map((w) => [w.lat, w.lng]), { padding: [40, 40] });
-    } else if (verified.length === 1) {
-      map.setView([verified[0].lat, verified[0].lng], 11);
-    } else if (D.map && D.map.center) {
-      map.setView(D.map.center, D.map.zoom || 9);
-    } else {
-      map.setView([0, 0], 2);
+    // Fit to what we actually know — pins AND route geometry, since a leg can
+    // run well outside the box its two endpoints make. Only fall back to a
+    // fixed view when there is nothing real to frame.
+    const framePoints = verified.map((w) => [w.lat, w.lng]).concat(drawn);
+
+    const frame = () => {
+      if (framePoints.length >= 2) {
+        map.fitBounds(framePoints, { padding: [40, 40] });
+      } else if (framePoints.length === 1) {
+        map.setView(framePoints[0], 11);
+      } else if (D.map && D.map.center) {
+        map.setView(D.map.center, D.map.zoom || 9);
+      } else {
+        map.setView([0, 0], 2);
+      }
+    };
+
+    // Leaflet needs a view set before it will render anything at all, so take
+    // the cheap fallback now and re-frame properly once the panel is visible
+    // (see activateTab). If the map panel is already on screen — a #map deep
+    // link, or the only tab — do the real framing immediately.
+    if (D.map && D.map.center) map.setView(D.map.center, D.map.zoom || 9);
+    else if (framePoints.length) map.setView(framePoints[0], 9);
+    else map.setView([0, 0], 2);
+
+    if ($("#map").getBoundingClientRect().height > 0) frame();
+    else window.__tripFrame = frame;
+
+    const legend = [];
+    if (verified.length) legend.push(`<span><i style="background:${accent};border-radius:50%"></i>${verified.length} verified location${verified.length === 1 ? "" : "s"}</span>`);
+    if (has(D.routes)) {
+      const mi = (D.routes || []).reduce((s2, r) => s2 + (r.distanceMi || 0), 0);
+      legend.push(`<span><i style="background:${accent};height:4px;border-radius:2px"></i>driving${mi ? ` · ${mi.toFixed(0)} mi` : ""}</span>`);
+    }
+    if (has(D.trails)) {
+      const mi = (D.trails || []).reduce((s2, t) => s2 + (t.distanceMi || 0), 0);
+      legend.push(`<span><i style="background:${palette.c500};height:3px;border-radius:2px"></i>trail, as mapped in OSM${mi ? ` · ${mi.toFixed(1)} mi` : ""}</span>`);
+    }
+    if (legend.length) {
+      $("#map-legend").className = "map-legend";
+      $("#map-legend").innerHTML =
+        legend.join("") +
+        `<span class="map-legend-note">Lines are baked into this page — nothing loads from a routing service. ` +
+        `Map tiles still need signal, so download an offline region before you go.</span>`;
     }
 
     if (unverified.length) {

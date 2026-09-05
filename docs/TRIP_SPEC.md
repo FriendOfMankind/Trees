@@ -140,6 +140,9 @@ at the gate: hours, phone number, road condition.
 **hikes** — `notes` is for surface, shade, water and turnaround logic, not
 scenery. "Zero shade, closed-toe shoes mandatory, dawn start" beats "gorgeous".
 
+**routes / trails** — the lines on the map. Both are generated; see "Maps and
+routing" below. Never hand-write geometry.
+
 **budget** — line items must add to `subtotal`; the validator checks this.
 Add a buffer of 10–15%. `note` says what's excluded (usually airfare).
 
@@ -171,6 +174,132 @@ Pick by what the ground looks like. Opening a page should tell you within half
 a second whether you're looking at lava or granite. Adding a preset means
 adding twelve hex values to `THEMES` — do that rather than inventing a
 one-off inline palette, so the next trip can reuse it.
+
+---
+
+## Maps and routing
+
+The map draws three things: verified waypoints as pins, `routes` as solid
+lines, `trails` as dashed ones. All three are static data in `data.js`. **The
+page never calls a routing service at load**, and that's deliberate — a route
+you fetch on demand is a route you don't have in a hollow with no bars, which
+is the one place you need it. Baking it also makes the line reviewable in a
+diff instead of trusting a service to answer the same way next time.
+
+### Being honest about offline
+
+Leaflet is vendored so the library works without signal. **Map tiles are not.**
+They stream from `tile.openstreetmap.org`, so offline you get your pins and
+your lines floating on grey. That is worth knowing before you rely on it:
+
+- The map is a **planning tool** — used at a table, with signal.
+- In the field, the Maps deep links and a downloaded offline region in a real
+  navigation app do the work. `offlineRegions` on a trip says which to grab.
+
+Pre-rendering tiles into the repo was considered and rejected: OSM's tile
+policy forbids bulk downloading, and it would add tens of megabytes per trip.
+
+### The shape
+
+```js
+routes: [                        // driving legs — tools/route.mjs
+  {
+    id: "camp-olowalu--la-perouse-bay",   // unique within the trip
+    label: "Camp Olowalu → La Pérouse Bay",
+    mode: "driving",             // "driving" | "hiking"
+    days: "2",
+    distanceMi: 21.4,
+    durationMin: 47,             // driving only
+    source: "openrouteservice/driving-car",   // REQUIRED — see below
+    generated: "2026-09-05",
+    geometry: "…encoded polyline…",
+  },
+],
+trails: [                        // hikes as mapped — tools/trail.mjs
+  {
+    id: "auxier-ridge",
+    label: "Auxier Ridge Trail",
+    mode: "hiking",
+    days: "2",
+    distanceMi: 4.28,
+    source: "osm/way 12345,12346",
+    generated: "2026-09-05",
+    geometry: ["…seg…", "…seg…"],  // one string, or an array of them
+  },
+],
+```
+
+`geometry` is an [encoded polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
+at precision 5 (~1 m). Raw `[lat,lng]` arrays are roughly ten times the bytes
+and turn `data.js` into a wall of numbers. A trail is usually several OSM ways
+kept as separate segments rather than stitched, because guessing the join order
+can draw a line through a cliff.
+
+`source` is **required** and the validator enforces it. A line is more
+persuasive than a pin — it looks surveyed even when it isn't — so every one has
+to say which tool and service drew it. A line nobody can trace back is a line
+nobody can re-check when a road closes.
+
+### Generating it
+
+```bash
+node tools/geocode.mjs kentucky-2026 --near 37.78,-83.63   # find coordinates
+node tools/geocode.mjs kentucky-2026 --near 37.78,-83.63 --write
+node tools/route.mjs   kentucky-2026 --write                # driving legs
+node tools/trail.mjs   kentucky-2026 --near 37.78,-83.63 --write
+node tools/validate.mjs
+```
+
+Every tool previews by default and only touches `data.js` with `--write`.
+`route.mjs` chains verified waypoints in array order, which is itinerary order
+by convention.
+
+Optional free keys, set as environment variables. Without them you get OSM
+only, which is never enough to reach VERIFIED on its own:
+
+| Variable | Get one at | Covers |
+|---|---|---|
+| `RIDB_API_KEY` | ridb.recreation.gov/profile | federal campgrounds, USFS/NPS/BLM/Corps facilities |
+| `NPS_API_KEY` | nps.gov/subjects/developer | park campgrounds, visitor centers, places |
+| `ORS_API_KEY` | openrouteservice.org/dev | driving and hiking routing, 2000/day |
+
+`route.mjs --engine osrm` needs no key at all but is driving-only, and OSRM's
+public demo server asks you not to build on it.
+
+### When a coordinate earns `verified: true`
+
+Rule 1 says never invent a coordinate. `geocode.mjs` mechanises the bar:
+
+- **VERIFIED** — an official agency dataset has it, **or** two *independent*
+  providers agree within `--tolerance` (150 m default).
+- **REVIEW** — something was found but not enough to trust. Printed for you to
+  judge. **Never written**, whatever `--write` says.
+- **NONE** — nothing found. The waypoint stays null, which is a correct answer.
+
+**Independence is the whole game.** Overpass and Nominatim are both
+OpenStreetMap — Nominatim is a geocoder built on OSM data — so they share the
+provider id `osm` and count once between them. Two OSM lookups agreeing is one
+source agreeing with itself. RIDB and NPS are separate federal datasets and
+each count on their own. OSM alone is REVIEW, never VERIFIED: it is often more
+precise than the official number, but it is community-edited.
+
+This is not paranoia. Searching for one campground turned up
+`37.787058, -83.623989` (a day-use lot) and `37.7840317, -83.6326338` (the
+campground) — **833 m apart**, both real, both plausible, and one of them will
+route you to the wrong turning in the dark.
+
+### Trails are transcribed, not routed
+
+`trail.mjs` pulls the named way's actual geometry out of OSM rather than asking
+a foot-routing engine to find a path. A router given two ends of a trail always
+returns *a* path — down a service road, across a different trail, the long way
+round a ridge — whether or not the real one is mapped. Transcribing gives you
+the true line or nothing, and "this trail isn't mapped" is information.
+
+Page names and OSM names differ ("Auxier Ridge out-and-back" vs "Auxier Ridge
+Trail"), so the tool tries progressively looser forms and tells you which one
+matched. Check that it matched the trail you meant — it also cross-checks the
+mapped length against the `distance` in your `hikes` row and flags a big gap.
 
 ---
 

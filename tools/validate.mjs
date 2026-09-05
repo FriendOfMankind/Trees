@@ -9,12 +9,14 @@
      - a slug mismatch between the registry and the trip's own data
      - a waypoint marked verified:true with no coordinates (or vice versa)
      - a coordinate outside the possible range
+     - route geometry that doesn't decode, or that wanders off the trip
    ========================================================================== */
 
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { decodePolyline, haversineMeters } from "./lib/geo.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const problems = [];
@@ -108,6 +110,84 @@ for (const slug of slugs) {
     if (w.verified && !hasCoords) fail(`${rel}: "${w.name}" is verified:true but has no coordinates`);
     if (!w.verified && hasCoords) warn(`${rel}: "${w.name}" has coordinates but verified:false — confirm it and flip the flag, or drop the numbers`);
     if (hasCoords && (Math.abs(w.lat) > 90 || Math.abs(w.lng) > 180)) fail(`${rel}: "${w.name}" coordinates out of range`);
+  }
+
+  /* ---- Baked route geometry ----
+     A drawn line is more persuasive than a pin: it looks surveyed even when
+     it isn't. So the bar is provenance plus plausibility — every line says
+     which tool and service produced it, and lands where the trip is. */
+
+  const verifiedPts = (D.waypoints || [])
+    .filter((w) => w.verified && w.lat != null && w.lng != null)
+    .map((w) => ({ lat: w.lat, lng: w.lng }));
+
+  const geoIds = new Set();
+
+  for (const [field, items] of [["routes", D.routes], ["trails", D.trails]]) {
+    if (items == null) continue;
+    if (!Array.isArray(items)) { fail(`${rel}: ${field} must be an array`); continue; }
+
+    for (const r of items) {
+      const id = r.id || r.label || "(unnamed)";
+
+      if (!r.id) fail(`${rel}: ${field}: an entry has no id`);
+      else if (geoIds.has(r.id)) fail(`${rel}: duplicate route/trail id "${r.id}"`);
+      geoIds.add(r.id);
+
+      if (!["driving", "hiking"].includes(r.mode)) {
+        fail(`${rel}: ${id}: mode "${r.mode}" is not "driving" or "hiking"`);
+      }
+
+      // Provenance is not paperwork. A line you cannot trace back to a service
+      // and a date is a line nobody can re-check when a road closes.
+      if (!r.source) fail(`${rel}: ${id}: no source — say which tool and service drew this`);
+      if (!r.generated) warn(`${rel}: ${id}: no generated date — you won't know when it goes stale`);
+
+      const segs = (Array.isArray(r.geometry) ? r.geometry : [r.geometry]).filter(Boolean);
+      if (!segs.length) { fail(`${rel}: ${id}: no geometry`); continue; }
+
+      let points = [];
+      let bad = false;
+      for (const seg of segs) {
+        if (typeof seg !== "string") { fail(`${rel}: ${id}: geometry segments must be encoded polyline strings`); bad = true; break; }
+        let decoded;
+        try {
+          decoded = decodePolyline(seg);
+        } catch (e) {
+          fail(`${rel}: ${id}: geometry failed to decode — ${e.message}`);
+          bad = true;
+          break;
+        }
+        if (decoded.length < 2) { fail(`${rel}: ${id}: a geometry segment has fewer than 2 points`); bad = true; break; }
+        points.push(...decoded);
+      }
+      if (bad) continue;
+
+      const outOfRange = points.find(([lat, lng]) => Math.abs(lat) > 90 || Math.abs(lng) > 180);
+      if (outOfRange) {
+        fail(`${rel}: ${id}: decoded geometry leaves the planet at ${outOfRange[0]}, ${outOfRange[1]}`);
+        continue;
+      }
+
+      // Does the line land where the trip is? A routing engine handed a bad
+      // coordinate returns a confident route to the wrong place, and that is
+      // exactly the failure a map is worst at showing you.
+      if (verifiedPts.length) {
+        const far = points.find((p) =>
+          verifiedPts.every((w) => haversineMeters(w, { lat: p[0], lng: p[1] }) > 200000));
+        if (far) {
+          fail(`${rel}: ${id}: geometry passes ${far[0].toFixed(3)}, ${far[1].toFixed(3)} — over 200 km from every verified waypoint. Wrong polyline, or wrong coordinates fed to the router.`);
+        }
+      }
+
+      if (r.distanceMi != null && !(r.distanceMi > 0)) {
+        fail(`${rel}: ${id}: distanceMi is ${r.distanceMi}`);
+      }
+    }
+  }
+
+  if ((D.routes || D.trails) && !verifiedPts.length) {
+    warn(`${rel}: has route geometry but no verified waypoints — nothing anchors those lines to a real place`);
   }
 
   const b = D.budget;

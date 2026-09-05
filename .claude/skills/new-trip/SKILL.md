@@ -18,6 +18,10 @@ This file is the procedure.
    the correct answer when you don't know. The renderer lists those under a
    warning instead of plotting them. Only set `verified: true` for a
    coordinate you actually looked up this session.
+   Don't do it by hand — `node tools/geocode.mjs <slug> --near lat,lng` looks
+   them up and applies the bar for you: official source, or two *independent*
+   providers agreeing. It will not promote a single OSM hit, and it never
+   writes anything it marked REVIEW. Same rule if you look them up yourself.
 2. **Never invent a bookable fact.** Confirmation numbers, prices, opening
    hours, permit windows. Write `TBD`, an explicit `approx` range, or name the
    source to check. A blank makes him look it up; a fabricated hour doesn't.
@@ -86,6 +90,17 @@ node tools/validate.mjs
 
 Must exit clean. Then actually open the page — check the tabs render, the map
 has pins, the day cards aren't empty.
+
+If the trip has two or more verified waypoints, draw the lines too:
+
+```
+node tools/route.mjs <slug> --write              # driving legs
+node tools/trail.mjs <slug> --near lat,lng --write   # hikes, as mapped in OSM
+```
+
+Both preview by default. `trail.mjs` reporting "not mapped in OSM" is a real
+answer — leave the trail off the map rather than drawing a guessed line.
+See docs/TRIP_SPEC.md → "Maps and routing".
 
 ### 6. Report
 

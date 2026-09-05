@@ -18,6 +18,10 @@ js/trip.js            shared trip renderer — every trip page uses it unmodifie
 trips/<slug>/         one folder per trip: index.html (shell) + data.js (everything)
 template/trip-slug/   annotated blank to copy
 tools/validate.mjs    node tools/validate.mjs
+tools/geocode.mjs     find + verify waypoint coordinates (never invents one)
+tools/route.mjs       bake driving geometry between verified waypoints
+tools/trail.mjs       transcribe a hike's real shape from OSM
+tools/lib/            shared: polyline codec, distance, provider lookups
 docs/TRIP_SPEC.md     full schema + conventions
 ```
 
@@ -30,7 +34,14 @@ docs/TRIP_SPEC.md     full schema + conventions
   from whichever data sections exist.
 - **Run `node tools/validate.mjs` before committing.** Must exit 0.
 - Leaflet is vendored in `vendor/leaflet/`. Don't add a CDN dependency —
-  these pages get used where there's no signal.
+  these pages get used where there's no signal. Note the limit of that: the
+  *library* works offline, the *tiles* don't — they stream from OSM. So the
+  map is a planning tool, and the field answer is the Maps links plus a
+  downloaded offline region. Don't imply otherwise on a page.
+- **Map lines are generated, never hand-written.** `routes` and `trails` come
+  from `tools/route.mjs` and `tools/trail.mjs` and are baked into `data.js`;
+  nothing is fetched at page load. A drawn line looks surveyed even when it
+  isn't, so every one carries a `source` and the validator enforces it.
 
 ## Non-negotiables
 

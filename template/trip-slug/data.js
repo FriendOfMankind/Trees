@@ -98,12 +98,61 @@ window.TRIP_DATA = {
   },
 
   // Map pins. verified:true ONLY if you actually looked it up.
+  // `node tools/geocode.mjs <slug>` does the looking up and will not mark
+  // anything verified on one community source alone.
   waypoints: [
     { name: "Confirmed Place", lat: 20.80951, lng: -156.616477, verified: true,
       icon: "⛺", days: "1, 7", notes: "Hours, phone number, anything you'd want at the gate." },
     { name: "Unconfirmed Place", lat: null, lng: null, verified: false,
       icon: "🏖️", days: "2", notes: "Listed as not-plotted until someone verifies it." },
   ],
+
+  // ---- Lines on the map. BOTH SECTIONS ARE GENERATED — never hand-write
+  // geometry, and delete these blocks entirely if you have no lines yet.
+  //
+  //   node tools/route.mjs <slug> --write     driving legs between waypoints
+  //   node tools/trail.mjs <slug> --write     hikes, as mapped in OSM
+  //
+  // Keep the >>> / <<< marker lines. That is how --write finds the block to
+  // replace next time; without them the tool prints the block for you to
+  // paste instead. Everything between the markers is overwritten.
+  //
+  // Nothing here is fetched at page load. See docs/TRIP_SPEC.md → "Maps and
+  // routing" for why, and for what `source` has to say.
+
+  // >>> ROUTES
+  routes: [
+    {
+      id: "confirmed-place--somewhere-else",
+      label: "Confirmed Place → Somewhere Else",
+      mode: "driving",
+      days: "2",
+      distanceMi: 21.4,
+      durationMin: 47,
+      source: "openrouteservice/driving-car",
+      generated: "2026-01-01",
+      geometry: "encoded polyline, precision 5",
+    },
+  ],
+  // <<< ROUTES
+
+  // >>> TRAILS
+  trails: [
+    {
+      id: "some-ridge-trail",
+      label: "Some Ridge Trail",
+      mode: "hiking",
+      days: "3",
+      distanceMi: 4.28,
+      source: "osm/way 12345,12346",
+      generated: "2026-01-01",
+      // A trail is usually several OSM ways. They stay separate segments
+      // rather than stitched — guessing the join order can draw a line
+      // through a cliff.
+      geometry: ["first segment", "second segment"],
+    },
+  ],
+  // <<< TRAILS
 
   hikes: {
     title: "Hikes &amp; Trails",
