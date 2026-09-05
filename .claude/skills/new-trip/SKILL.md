@@ -170,6 +170,11 @@ Don't bury uncertainty in the page and call it done.
 
 ## Quality bar
 
+Schedule rows carry `kind` (the icon), real `time`s, `est` where a duration
+matters, `maps` where there is a place to search for, and `warn: true` only
+where rule 3 applies. Prefer an existing `kind` over inventing one; if none
+fit, add it to `KIND_ICON` in `js/trip.js` so the next trip can reuse it.
+
 Day titles are names, not labels: "Lava Dawn, Then East", not "Day 2 — driving
 to Hāna". Schedule entries carry real times including calculated sunrise and
 sunset. Trail notes describe surface, shade, water and turnaround logic, not

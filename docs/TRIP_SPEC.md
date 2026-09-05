@@ -186,6 +186,14 @@ and the page renders it as a locked ✓ that can't be un-ticked by accident.
 what it `blocks` and where to look for the answer. Delete the section when it
 empties and flip the status to `planned`.
 
+**schedule** — each row is `{ kind, time, text }` plus optional `est`, `maps`
+and `warn: true`. `kind` picks the leading icon and is one of: `drive` `stop`
+`hike` `swim` `camp` `wake` `food` `dessert` `shop` `view` `ruins` `sunrise`
+`sunset` `moon` `lecture` `shuttle` `event` (see `KIND_ICON` in `js/trip.js`).
+`maps` is a Google Maps *search string* — prefer the exact name of a waypoint
+already in the file, so the two agree. `warn: true` follows rule 3: it is for
+what can hurt you or kill the day, not for a bakery that sells out.
+
 **noSignal** — a per-day string naming the stretch with no coverage and when
 it starts and ends. Optional, but it's what the "text the plan home" export
 lists, and it's the only part of a trip plan the person staying behind can

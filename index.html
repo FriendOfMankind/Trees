@@ -36,6 +36,12 @@
   <section id="panel-trips" class="panel active">
     <h2 class="section-title">Trips</h2>
     <p class="section-sub">Pinned first, then whatever's closest to real. The <b>Next</b> line on each card is the single thing standing between it and being booked.</p>
+    <div class="search-row">
+      <input type="search" id="trip-search" class="search-box" autocomplete="off" spellcheck="false"
+             placeholder="Search trips — name, region, tag, or why (press /)"
+             aria-label="Search trips" />
+      <span class="search-count" id="search-count" aria-live="polite"></span>
+    </div>
     <div class="filter-bar" id="filter-bar"></div>
     <div class="trip-grid" id="trip-grid"></div>
   </section>

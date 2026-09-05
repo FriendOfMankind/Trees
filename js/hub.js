@@ -11,6 +11,7 @@
 
   let activeFilter = "all";
   let activeTag = null;      // set by clicking a tag on any card
+  let query = "";
   let tabs = null;
 
   /* ---------------- Sorting ----------------
@@ -35,11 +36,61 @@
     return n !== null && n >= 0 ? n : null;
   }
 
+  /* ---------------- Search ----------------
+     Registry text only — title, subtitle, region, tags, the case for going,
+     the next action. It deliberately does NOT reach inside a trip's data.js:
+     that would mean loading every trip's file to type one character, and the
+     hub's whole job is to be the thing that opens instantly.
+
+     Terms are ANDed, so "alpine july" narrows rather than widens, which is
+     what you want at 37 entries and more so past that. */
+  function haystack(t) {
+    if (!t.__hay) {
+      t.__hay = [
+        t.title, t.subtitle, t.region, t.country, t.window, t.dates,
+        t.why, t.next, t.nights, t.budget, t.status, t.mode,
+        ...(t.tags || []),
+      ].filter(Boolean).join(" ").toLowerCase();
+    }
+    return t.__hay;
+  }
+
+  function matchesQuery(t) {
+    if (!query) return true;
+    const hay = haystack(t);
+    return query.split(/\s+/).filter(Boolean).every((term) => hay.includes(term));
+  }
+
   function matches(t) {
+    if (!matchesQuery(t)) return false;
     if (activeTag && !(t.tags || []).includes(activeTag)) return false;
     if (activeFilter === "all") return true;
     if (activeFilter === "pinned") return !!t.pinned;
     return t.status === activeFilter;
+  }
+
+  function initSearch() {
+    const box = $("#trip-search");
+    if (!box) return;
+    box.addEventListener("input", () => {
+      query = box.value.trim().toLowerCase();
+      renderFilters();
+      renderTripGrid();
+    });
+    /* Escape clears rather than just blurring — a search box you can't empty
+       without selecting the text is why people reload the page instead. */
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") { box.value = ""; box.dispatchEvent(new Event("input")); }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+      const el = document.activeElement;
+      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+      e.preventDefault();
+      if (tabs) tabs.activate("trips");
+      box.focus();
+      box.select();
+    });
   }
 
   /* How far along the booking is.
@@ -168,9 +219,18 @@
   function renderTripGrid() {
     const list = sortTrips(TRIPS.filter(matches));
     const el = $("#trip-grid");
+
+    const count = $("#search-count");
+    if (count) {
+      const narrowed = query || activeTag || activeFilter !== "all";
+      count.textContent = narrowed ? `${list.length} of ${TRIPS.length}` : "";
+    }
+
     if (!list.length) {
       el.innerHTML = `<div class="empty-state">Nothing matches that combination.
-        ${activeTag ? `Try clearing the <b>${activeTag}</b> tag.` : "Add an entry to <code>data/trips.js</code> — a wishlist entry takes about six lines."}</div>`;
+        ${query ? `No trip mentions <b>${query}</b>. ` : ""}${
+        activeTag ? `Try clearing the <b>${activeTag}</b> tag.`
+                  : "Add an entry to <code>data/trips.js</code> — a wishlist entry takes about six lines."}</div>`;
     } else {
       el.innerHTML = list.map(tripCardHtml).join("");
     }
@@ -628,6 +688,7 @@
     renderHeaderStats();
     renderFilters();
     renderTripGrid();
+    initSearch();
     renderAgenda();
     renderCalendar();
     renderGear();

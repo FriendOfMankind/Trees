@@ -178,6 +178,10 @@
     dessert: "\u{1F366}", shop: "\u{1F6D2}", sunrise: "\u{1F304}", sunset: "\u{1F305}",
     lecture: "\u{1F4E1}", ruins: "\u{1F3DA}\uFE0F", view: "\u{1F440}", camp: "\u26FA",
     shuttle: "\u{1F68C}", event: "\u{1F336}\uFE0F",
+    /* Added when Maui was brought onto this shape. All three are reusable:
+       every trip here starts before dawn, half of them touch water, and the
+       moon decides whether a night is dark on any trip that cares. */
+    wake: "\u23F0", swim: "\u{1F93F}", moon: "\u{1F319}",
   };
 
   /* Google Maps search deep link. The query string is what survives offline —

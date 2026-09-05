@@ -31,6 +31,7 @@ const TRIPS = hub.read("TRIPS");
 const THEMES = hub.read("THEMES") || {};
 const DECLINED = hub.read("DECLINED") || [];
 const GEAR = hub.read("GEAR") || [];
+const AVOID = hub.read("AVOID") || [];
 const BOOKING_WINDOWS = hub.read("BOOKING_WINDOWS") || [];
 const SYSTEMS = new Set(BOOKING_WINDOWS.map((b) => b.system).filter(Boolean));
 
@@ -285,10 +286,30 @@ for (const slug of slugs) {
      notes with a space invents phrases that are in neither ("Sky Bridge" +
      "walk over the top" is not a Bridge Walk). */
 
+  const hasTerm = (term) =>
+    new RegExp(`\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(committed);
+
   for (const d of DECLINED) {
     for (const term of (d.terms || [])) {
-      if (new RegExp(`\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(committed)) {
+      if (hasTerm(term)) {
         warn(`${rel}: the itinerary schedules "${term}", but "${d.what}" is on the declined list — resolve it in one direction, don't silence it`);
+        break;
+      }
+    }
+  }
+
+  /* Standing personal negatives. `allow` covers the case where the word is
+     part of a place name rather than an order — Grandma's Coffee House is a
+     destination on the Maui page and buying coffee there is not the plan.
+     Allowed phrases are removed from the text first, so a place name excuses
+     itself and nothing else. */
+  for (const a of AVOID) {
+    const text = (a.allow || []).reduce(
+      (acc, phrase) => acc.split(phrase.toLowerCase()).join(" "), committed);
+    for (const term of (a.terms || [])) {
+      const re = new RegExp(`\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`);
+      if (re.test(text)) {
+        warn(`${rel}: the itinerary mentions "${term}" — ${a.why}`);
         break;
       }
     }

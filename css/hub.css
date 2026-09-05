@@ -378,3 +378,33 @@
   .window-when { flex: none; display: flex; align-items: baseline; gap: 0.6rem; }
   .cand-group { flex-direction: column; gap: 0.2rem; }
 }
+
+/* ---------- Search ----------
+   Sits above the status filters because it is the coarser instrument: you
+   usually know roughly what you're looking for before you know what state
+   it's in. */
+
+.search-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
+
+.search-box {
+  flex: 1 1 auto;
+  max-width: 30rem;
+  font-family: var(--ui);
+  font-size: 0.92rem;
+  color: var(--t-ink);
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+}
+.search-box::placeholder { color: var(--t-ink-dim); opacity: 0.8; }
+.search-box:focus {
+  outline: none;
+  border-color: var(--t-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--t-500) 22%, transparent);
+}
+.search-count { font-family: var(--ui); font-size: 0.8rem; color: var(--t-ink-dim); white-space: nowrap; }
+
+@media (max-width: 600px) {
+  .search-box { max-width: none; }
+}

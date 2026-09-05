@@ -80,6 +80,21 @@ const DECLINED = [
   { what: "Breweries", terms: ["brewery", "breweries"] },
 ];
 
+/* Standing personal negatives — not activities considered and declined, but
+   things that are simply never right for this traveler. Same enforcement as
+   DECLINED: tools/validate.mjs greps a trip's schedule, reservations, hikes
+   and places for `terms` and reports a hit.
+
+   This exists because "No coffee, no beer" has been in PROFILE.food since the
+   file was written, and the Maui itinerary opened Day 3 with "Wake, coffee,
+   slow morning" the whole time. A preference stated only in prose is a
+   preference nothing checks. */
+const AVOID = [
+  { what: "Coffee", terms: ["coffee"], why: "PROFILE.food: no coffee. A named cafe as a destination is fine — ordering the coffee is not.",
+    allow: ["coffee house", "coffee shop"] },
+  { what: "Beer", terms: ["beer", "brewpub"], why: "PROFILE.food: no beer. Breweries are also on the declined list." },
+];
+
 const GEAR = [
   {
     category: "Sleep system",
