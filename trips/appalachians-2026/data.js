@@ -304,6 +304,7 @@ window.TRIP_DATA = {
     {
       day: 8,
       date: "Thu Oct 22, 2026",
+      noSignal: "FS 210 / Linville Gorge — no cell service from the turn onto the forest road until leaving the corridor. All day.",
       title: "The Race for FS 210",
       tagline: "Wake at a site you paid for. Sleep somewhere you have no claim on.",
       type: "transfer + the risk day",
@@ -341,6 +342,7 @@ window.TRIP_DATA = {
     {
       day: 9,
       date: "Fri Oct 23, 2026",
+      noSignal: "FS 210 / Linville Gorge — no cell service. All day.",
       title: "Hawksbill at Sunrise",
       tagline: "4,009 feet, the river 2,000 below, peak color. It costs an alarm.",
       type: "the payoff",
@@ -375,6 +377,7 @@ window.TRIP_DATA = {
     {
       day: 10,
       date: "Sat Oct 24, 2026",
+      noSignal: "Hurricane Campground, VA — no cell service at all and no pay phone. From arrival until departure the next morning.",
       title: "Mount Rogers and Fatman's Squeeze",
       tagline: "Virginia's high point, wild ponies, and a rock slot you take your pack off for.",
       type: "activity + transfer",

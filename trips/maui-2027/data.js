@@ -62,6 +62,7 @@ const DAYS = [
     tagline: "Youngest rock on Maui at first light, oldest road on Maui by dusk.",
     type: "activity + drive",
     driving: "~4 hrs total, ~115 miles (Olowalu → La Pérouse → Paia → Waiʻānapanapa)",
+    noSignal: "La Pérouse Bay — no service on the last mile in, or at the trailhead. Back in range returning through Kīhei.",
     overnight: {
       name: "Waiʻānapanapa State Park",
       place: "Hāna",
@@ -157,6 +158,7 @@ const DAYS = [
     tagline: "Flex day, then across the far side of the volcano.",
     type: "drive / rest valve",
     driving: "~4 hrs, ~80 miles (Waiʻānapanapa → Kīpahulu → Piʻilani Hwy → ʻUlupalakua → Kula → Hosmer)",
+    noSignal: "Piʻilani Highway, Kīpahulu to ʻUlupalakua — zero cell service the whole way. Roughly 09:00 to 14:00.",
     overnight: {
       name: "Hosmer Grove Campground",
       place: "Haleakalā NP, 6,800 ft",

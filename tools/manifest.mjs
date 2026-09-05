@@ -31,6 +31,7 @@ function assetList() {
     "css/print.css",
     "js/themes.js",
     "js/derive.js",
+    "js/exports.js",
     "js/ui.js",
     "js/offline.js",
     "js/hub.js",

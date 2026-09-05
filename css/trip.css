@@ -230,3 +230,5 @@
 .tile-panel { margin-top: 0.75rem; }
 .tile-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
 .tile-note { font-family: var(--ui); font-size: 0.8rem; color: var(--t-ink-dim); }
+
+.chip.nosignal { background: var(--warn-bg); color: var(--warn-ink); border-color: var(--warn-border); }

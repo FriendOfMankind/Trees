@@ -21,6 +21,12 @@
 
   const M = D.meta;
   const SLUG = M.slug;
+
+  /* Trip pages load the registry too, so an export can reach `start`, the
+     booking declarations and the profile. Guarded because a trip page opened
+     without them should still render — it just can't build a calendar. */
+  const ENTRY = (typeof TRIPS !== "undefined" && TRIPS.find((t) => t.slug === SLUG)) || null;
+  const WINDOWS = typeof BOOKING_WINDOWS !== "undefined" ? BOOKING_WINDOWS : [];
   const has = (v) => Array.isArray(v) ? v.length > 0 : !!v;
 
   applyTheme(M.theme);
@@ -93,8 +99,11 @@
       <div class="card-grid">
         ${(M.overviewCards || []).map((c) => `<div class="info-card"><h3>${c.h}</h3><p>${c.p}</p></div>`).join("")}
       </div>
+      <div class="tool-bar" id="export-bar" data-no-print></div>
       ${has(D.days) ? `<h3 class="section-title" style="margin-top:1.5rem;">Days at a glance</h3><div class="mini-days" id="mini-days"></div>` : ""}
     `;
+
+    renderExportBar();
 
     if (!has(D.days)) return;
     $("#mini-days").innerHTML = D.days.map(
@@ -113,6 +122,43 @@
           if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
+    });
+  }
+
+  /* ---------------- Exports ----------------
+     The site used to be one-way: everything went in, nothing came out. The
+     gear locker lists a GPX as a `need` and the universal checklist says to
+     text the plan home, and neither had a button. */
+
+  function renderExportBar() {
+    const el = $("#export-bar");
+    if (!el) return;
+
+    const verified = (D.waypoints || []).filter((w) => w.verified && w.lat != null && w.lng != null);
+    const unverified = (D.waypoints || []).length - verified.length;
+
+    el.innerHTML = [
+      verified.length
+        ? `<button class="btn ghost" id="dl-gpx">Download GPX (${verified.length} pins)</button>`
+        : `<span class="tool-note">No GPX — this trip has no verified coordinates yet.</span>`,
+      ENTRY && ENTRY.start ? `<button class="btn ghost" id="dl-ics">Add to calendar (.ics)</button>` : "",
+      `<button class="btn ghost" id="copy-plan">Copy the plan to text home</button>`,
+      `<button class="btn ghost" id="do-print">Print</button>`,
+      unverified ? `<span class="tool-note">${unverified} unverified waypoint${unverified === 1 ? "" : "s"} left out of the GPX on purpose.</span>` : "",
+    ].filter(Boolean).join("");
+
+    const on = (id, fn) => { const b = $(id); if (b) b.addEventListener("click", fn); };
+
+    on("#dl-gpx", () => download(`${SLUG}.gpx`, toGPX(D), "application/gpx+xml"));
+    on("#dl-ics", () => download(`${SLUG}.ics`, toICS(D, ENTRY, WINDOWS), "text/calendar"));
+    on("#do-print", () => window.print());
+    on("#copy-plan", async () => {
+      const btn = $("#copy-plan");
+      const text = toPlanText(D, ENTRY, typeof PROFILE !== "undefined" ? PROFILE : null);
+      const ok = await copyText(text);
+      btn.textContent = ok ? "Copied — paste it into a message" : "Couldn't copy; downloading instead";
+      if (!ok) download(`${SLUG}-plan.txt`, text, "text/plain");
+      setTimeout(() => { btn.textContent = "Copy the plan to text home"; }, 4000);
     });
   }
 
@@ -177,6 +223,7 @@
       d.type ? `<span class="chip">${d.type}</span>` : "",
       d.driving ? `<span class="chip">🚗 ${d.driving}</span>` : "",
       d.walking ? `<span class="chip">🥾 ${d.walking}</span>` : "",
+      d.noSignal ? `<span class="chip nosignal">📵 No signal</span>` : "",
     ].filter(Boolean).join("");
 
     const slack = d.slack
@@ -208,6 +255,7 @@
               ${overnight ? `<div class="side-block"><h4>Overnight</h4>${overnight}</div>` : ""}
               ${meals ? `<div class="side-block"><h4>Meals</h4>${meals}</div>` : ""}
               ${d.highlights ? `<div class="callout highlight"><strong>Highlights</strong>${d.highlights}</div>` : ""}
+              ${d.noSignal ? `<div class="callout warning"><strong>No signal</strong>${d.noSignal}</div>` : ""}
               ${d.warnings ? `<div class="callout warning"><strong>Warnings</strong>${d.warnings}</div>` : ""}
             </div>
           </div>

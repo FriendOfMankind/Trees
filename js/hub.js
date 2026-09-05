@@ -346,7 +346,7 @@
 
       <div class="note-card" style="border-left-color: var(--warn-border)">
         <h3>Considered and declined — do not re-propose</h3>
-        <div class="tag-row" style="margin-top:0.5em">${DECLINED.map((d) => `<span class="tag">${d}</span>`).join("")}</div>
+        <div class="tag-row" style="margin-top:0.5em">${DECLINED.map((d) => `<span class="tag" style="cursor:default">${d.what || d}</span>`).join("")}</div>
       </div>
 
       <h2 class="section-title" style="margin-top:2rem">Every-Trip Checklist</h2>

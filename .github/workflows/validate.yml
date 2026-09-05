@@ -1,0 +1,32 @@
+# "Run node tools/validate.mjs before committing. Must exit 0" appears in
+# CLAUDE.md, the README, the trip spec and the new-trip skill. Until this file
+# existed, nothing enforced it — which makes it a convention, not a rule.
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # The registry, every trip file, and the generated precache list.
+      - name: Validate the site
+        run: node tools/validate.mjs
+
+      # Regenerating must be a no-op on a clean tree. If it isn't, someone
+      # edited a generated file by hand or forgot to run the tool.
+      - name: Generated files are current
+        run: |
+          node tools/manifest.mjs
+          node tools/export.mjs --all
+          git diff --exit-code || {
+            echo "::error::A generated file is out of date. Run: node tools/manifest.mjs && node tools/export.mjs --all"
+            exit 1
+          }
