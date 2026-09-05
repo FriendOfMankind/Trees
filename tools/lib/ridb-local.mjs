@@ -182,10 +182,64 @@ function walk(dir, depth = 0) {
   });
 }
 
+/* Names that only ever appear inside an extracted RIDB export. Finding one of
+   these is proof we are looking at the right folder. */
+const EXPORT_MARKERS = [/^Facilities_API_v\d+\.csv$/i, /^RecAreas_API_v\d+\.csv$/i,
+                        /^Facilities_API_v\d+\.json$/i];
+
+/** Look for an extracted export under `start`, breadth-first to `maxDepth`.
+    Returns the folder containing the marker file, or null. */
+function findExportUnder(start, maxDepth = 3) {
+  if (!existsSync(start)) return null;
+  let level = [start];
+  for (let depth = 0; depth <= maxDepth && level.length; depth++) {
+    const next = [];
+    for (const dir of level) {
+      let entries;
+      try { entries = readdirSync(dir, { withFileTypes: true }); } catch { continue; }
+      if (entries.some((e) => e.isFile() && EXPORT_MARKERS.some((re) => re.test(e.name)))) return dir;
+      for (const e of entries) {
+        // Don't wander into places an export is never unpacked to. A blind
+        // walk of a home directory is slow and can hit permission errors on
+        // every OneDrive and AppData folder on the way.
+        if (e.isDirectory() && !e.name.startsWith(".") &&
+            !/^(node_modules|AppData|Library|Windows|Program Files.*|\$Recycle\.Bin)$/i.test(e.name)) {
+          next.push(join(dir, e.name));
+        }
+      }
+    }
+    level = next;
+  }
+  return null;
+}
+
+/** Where the bulk export is. Explicit setting wins; otherwise go looking,
+    because "point an environment variable at the right folder" turned out to
+    be the single hardest step in this whole pipeline and it does not need to
+    be a step at all. */
 export function ridbDataDir(root) {
   if (process.env.RIDB_DATA) return process.env.RIDB_DATA;
+
   const local = join(root, "data/ridb");
-  return existsSync(local) ? local : null;
+  if (existsSync(local)) return local;
+
+  const home = process.env.USERPROFILE || process.env.HOME || "";
+  const candidates = [
+    root,
+    join(root, ".."),
+    home && join(home, "Downloads"),
+    home && join(home, "Desktop"),
+    home && join(home, "Documents"),
+    home && join(home, "OneDrive", "Downloads"),
+    home && join(home, "OneDrive", "Desktop"),
+    home,
+  ].filter(Boolean);
+
+  for (const c of candidates) {
+    const found = findExportUnder(c, c === home ? 2 : 3);
+    if (found) return found;
+  }
+  return null;
 }
 
 /** Say precisely what is wrong with a data directory, because "nothing usable
