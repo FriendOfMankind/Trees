@@ -150,7 +150,10 @@ if (!has("check")) {
     + `   Moon rise/set ±~4 min. Illumination read at local midday. */`);
   console.log("  sunMoon: [");
   for (const r of rows) {
-    const moon = `${r.moonPercent}%${r.moonset ? ` — moonset ${r.moonset}` : ""}`;
+    /* Whole percent in the table: the series is good to a fraction of a
+       point, but a tenth of a percent of moonlight is not a thing anyone
+       plans around. The exact figure is in --check. */
+    const moon = `${Math.round(r.moonPercent)}%${r.moonset ? ` — moonset ${r.moonset}` : ""}`;
     console.log(`    { date: ${JSON.stringify(dayLabel(r.dateISO, r.tz))}, location: ${JSON.stringify(r.label)}, `
       + `firstLight: ${JSON.stringify(r.firstLight)}, sunrise: ${JSON.stringify(r.sunrise)}, `
       + `sunset: ${JSON.stringify(r.sunset)}, dark: ${JSON.stringify(r.dark)}, moon: ${JSON.stringify(moon)} },`);

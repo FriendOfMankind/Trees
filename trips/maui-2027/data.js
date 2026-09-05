@@ -207,7 +207,7 @@ const DAYS = [
       { time: "2:00 PM", text: "Hosmer Grove Nature Trail loop (0.5 mi, endemic birds — ʻiʻiwi, ʻapapane)" },
       { time: "4:00 PM", text: "Camp, layer up, early dinner" },
       { time: "7:01 PM", text: "Sunset" },
-      { time: "3:45 AM (5/19)", text: "Set alarm. Moonset 4:17 AM. Dark sky window 4:17–5:15 AM. This is your only real stargazing." },
+      { time: "3:45 AM (5/19)", text: "Set alarm for the summit run. ⚠️ <b>Not a dark-sky window.</b> The moon is 100% lit and does not set until 5:11 AM — eleven minutes before first light. Full moon is 1:00 AM on 5/20. See <b>The moon</b> in Notes." },
     ],
     meals: { b: "made", l: "packed", d: "made" },
     highlights: "The Halemauʻu switchbacks are the most dramatic trail feature on the island. Silverswords, cinder cones, nēnē.",
@@ -231,8 +231,8 @@ const DAYS = [
       notes: null,
     },
     schedule: [
-      { time: "3:45 AM", text: "Wake. Moonset 4:17 AM." },
-      { time: "4:20–5:10 AM", text: "Stargazing from camp or a summit pullout — the one dark window of the trip" },
+      { time: "3:45 AM", text: "Wake. The moon is up and effectively full for the whole drive — moonset is 5:11 AM at the summit." },
+      { time: "5:11–5:22 AM", text: "Moonset to first light: <b>eleven minutes</b> of genuine dark, most of which you spend parking. A bonus if you catch it, not a reason to be up." },
       { time: "4:45 AM", text: "Drive to summit (~30 min, 11 miles up Crater Road)" },
       { time: "5:40 AM", text: "Sunrise at Puʻu ʻUlaʻula / Haleakalā Visitor Center (elevation-corrected; 7 min earlier than sea level)" },
       { time: "6:30–11:30 AM", text: "Keoneheʻeheʻe (Sliding Sands) down toward the first cinder cones and back. Cold, empty, perfect light." },
@@ -326,15 +326,20 @@ const SUN_MOON_SITES = [
   { date: "2027-05-20", label: "Olowalu", waypoint: "Camp Olowalu", tz: "Pacific/Honolulu" },
 ];
 
+/* GENERATED — regenerate with `node tools/sun.mjs maui-2027`, check with --check.
+   NOAA solar position, refraction and horizon dip included. Civil twilight is a
+   fixed 6° solar depression, so unlike sunrise it does NOT shift with elevation —
+   the earlier hand-typed table moved it, which is why the summit rows changed by
+   eight minutes. Moon rise/set ±~4 min; illumination read at local midday. */
 const SUN_MOON = [
-  { date: "Thu 5/13", location: "Olowalu", firstLight: "5:25 AM", sunrise: "5:49 AM", sunset: "6:56 PM", dark: "7:20 PM", moon: "52%" },
-  { date: "Fri 5/14", location: "La Pérouse → Hāna", firstLight: "5:24 AM", sunrise: "5:48 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "59%" },
-  { date: "Sat 5/15", location: "Hāna", firstLight: "5:22 AM", sunrise: "5:46 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "66%" },
-  { date: "Sun 5/16", location: "Hāna", firstLight: "5:21 AM", sunrise: "5:45 AM", sunset: "6:55 PM", dark: "7:19 PM", moon: "73%" },
-  { date: "Mon 5/17", location: "Hosmer (6,800 ft)", firstLight: "5:15 AM", sunrise: "5:41 AM", sunset: "7:01 PM", dark: "7:27 PM", moon: "80% — moonset 3:38 AM" },
-  { date: "Tue 5/18", location: "Hosmer (6,800 ft)", firstLight: "5:15 AM", sunrise: "5:41 AM", sunset: "7:01 PM", dark: "7:27 PM", moon: "87% — moonset 4:17 AM" },
-  { date: "Wed 5/19", location: "Summit (10,023 ft)", firstLight: "5:13 AM", sunrise: "5:40 AM", sunset: "7:03 PM", dark: "7:29 PM", moon: "94%" },
-  { date: "Thu 5/20", location: "Olowalu", firstLight: "5:22 AM", sunrise: "5:47 AM", sunset: "6:59 PM", dark: "7:23 PM", moon: "Full moon" },
+  { date: "Thu 5/13", location: "Olowalu", firstLight: "5:26 AM", sunrise: "5:49 AM", sunset: "6:55 PM", dark: "7:19 PM", moon: "60% — moonset 1:14 AM" },
+  { date: "Fri 5/14", location: "La Pérouse → Hāna", firstLight: "5:25 AM", sunrise: "5:49 AM", sunset: "6:55 PM", dark: "7:19 PM", moon: "70% — moonset 1:52 AM" },
+  { date: "Sat 5/15", location: "Hāna", firstLight: "5:22 AM", sunrise: "5:46 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "80% — moonset 2:27 AM" },
+  { date: "Sun 5/16", location: "Hāna", firstLight: "5:22 AM", sunrise: "5:46 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "88% — moonset 3:03 AM" },
+  { date: "Mon 5/17", location: "Hosmer (6,800 ft)", firstLight: "5:23 AM", sunrise: "5:40 AM", sunset: "7:02 PM", dark: "7:19 PM", moon: "94% — moonset 3:47 AM" },
+  { date: "Tue 5/18", location: "Hosmer (6,800 ft)", firstLight: "5:22 AM", sunrise: "5:40 AM", sunset: "7:02 PM", dark: "7:20 PM", moon: "98% — moonset 4:27 AM" },
+  { date: "Wed 5/19", location: "Summit (10,023 ft)", firstLight: "5:22 AM", sunrise: "5:38 AM", sunset: "7:04 PM", dark: "7:20 PM", moon: "100% — moonset 5:11 AM" },
+  { date: "Thu 5/20", location: "Olowalu", firstLight: "5:23 AM", sunrise: "5:47 AM", sunset: "6:58 PM", dark: "7:22 PM", moon: "100% — moonset 5:51 AM" },
 ];
 
 const WEATHER = [
@@ -438,7 +443,7 @@ const RESERVATIONS = [
   { text: "Flights CLE→OGG — target ~3:00 PM arrival 5/13 — book when schedules open (~11 months out)" },
   { text: "Confirm Waiʻānapanapa camping booking window (1 year vs 90 days) — do this NOW so the alarm is set correctly" },
   { text: "Camp Olowalu 5/13 + 5/19 — book direct anytime — call about the 6 PM check-in cutoff" },
-  { text: "Hosmer Grove 5/17 + 5/18 — recreation.gov opens ~Nov 13, 2026 (6 months out) — 6 sites total, book the morning it drops" },
+  { text: "Hosmer Grove 5/17 + 5/18 — recreation.gov opens <b>Nov 17, 2026</b>: six months before the first night booked, not before the trip starts. (This said Nov 13, counted from the 5/13 arrival — four days early, which loses nothing but is the wrong date to set an alarm for.) 6 sites total, book the morning it drops" },
   { text: "Waiʻānapanapa camping 5/14–5/16 — ~Feb 2027 if 90-day window" },
   { text: "Waiʻānapanapa day-use entry — opens ~Apr 13, 2027 (30 days out) — verify if camping permit already covers entry" },
   { text: "AAA membership — before booking the car" },
@@ -462,7 +467,11 @@ const NOTES = [
   {
     heading: "The moon",
     body:
-      "Nights of 5/17 and 5/18 have a bright waxing gibbous (80–87% lit) up nearly all night. Hosmer is not a stargazing destination on these dates. The only genuinely dark windows are 4:17–5:15 AM on 5/19 (after moonset, before twilight) — which is scheduled. A trip shifted to ~May 6–13 would have hit near new moon; Colin chose to keep the original dates knowingly.",
+      "<b>Corrected Sept 2026 against computed values</b> (<code>node tools/sun.mjs maui-2027 --check</code>); the earlier numbers on this page were about two days behind the actual cycle.<br><br>" +
+      "Full moon is <b>1:00 AM on 5/20</b>, in the middle of the trip. That makes 5/17 and 5/18 a 94–98% waxing gibbous up nearly all night, not the 80–87% this page used to claim. Hosmer is not a dark-sky site on these dates and no amount of altitude changes that.<br><br>" +
+      "The window scheduled as 4:17–5:15 AM on 5/19 does not exist. Moonset that morning is <b>5:11 AM</b> at the summit (later than at sea level — a 10,000 ft observer sees over the horizon), and civil twilight starts at <b>5:22 AM</b>. That is an eleven-minute gap, under a moon that was 100% lit until the moment it set. The 4:17 AM figure was the moonset for the morning of 5/18, used a day late.<br><br>" +
+      "⚠️ <b>Unresolved, and deliberately left that way:</b> stargazing is on the declined list in the Playbook, and this itinerary schedules it. The declined list is from the Sept 2026 handoff and this page was written earlier. Resolve it in one direction — the validator reports it on every run. Given the real numbers, dropping it costs nothing.<br><br>" +
+      "A trip shifted to ~May 6–13 would have hit near new moon. Colin chose to keep the original dates knowingly; that decision still stands, it was just made against optimistic numbers.",
   },
   {
     heading: "Waioka Pond (Day 4)",
@@ -541,7 +550,7 @@ window.TRIP_DATA = {
   hikes: { title: "Hikes &amp; Trails", rows: HIKES },
   sunMoon: SUN_MOON,
   sunMoonSites: SUN_MOON_SITES,
-  sunMoonNote: "Calculated, elevation-corrected. ~13 hours of daylight daily.",
+  sunMoonNote: "Computed, not transcribed — <code>node tools/sun.mjs maui-2027</code>. Sunrise and sunset carry the horizon dip for elevation (the summit gains about seven minutes); first light and dark do not, because civil twilight is a fixed solar depression. ~13 hours of daylight daily.",
   weather: WEATHER,
   budget: {
     rows: BUDGET,
