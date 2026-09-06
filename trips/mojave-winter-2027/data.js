@@ -1,5 +1,15 @@
 /* ==========================================================================
-   Mojave Winter Loop — Jan 2027.  STATUS: OUTLINE.
+   Mojave Winter Loop.  STATUS: OUTLINE, DEFERRED.
+
+   DEFERRED 2026-09-06. Not happening in January 2027 — the money is going to
+   better places at better times of year instead. Winter 2026-27 is Frisco
+   with family and nothing else.
+
+   Nothing below has been deleted, because none of it is wrong; it is just
+   dated. Every date, day number and sunrise time in this file is computed for
+   Jan 2-15 2027 and is now fiction. When this trip comes back, re-run the
+   dates and re-verify every campground rule rather than trusting a row here
+   that was true for a January that did not happen.
 
    Built 2026-09-04 from a verification pass, not from an upstream brief.
    What that pass could and could not reach is recorded honestly:
@@ -27,8 +37,8 @@ window.TRIP_DATA = {
   meta: {
     slug: "mojave-winter-2027",
     title: "Mojave Winter Loop",
-    subtitle: "Solo, January 2027 — the desert that only exists in winter",
-    dates: "Sat Jan 2 – Fri Jan 15, 2027 (target, unbooked)",
+    subtitle: "Solo — the desert that only exists in winter. Deferred; not a live plan.",
+    dates: "⚠️ DEFERRED — the Jan 2–15 2027 dates below are kept for structure, not as a plan",
     emoji: "🏜️",
     theme: "desert",
 
