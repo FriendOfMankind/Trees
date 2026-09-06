@@ -3,7 +3,7 @@
    The version is a hash of every listed file, so editing any of them changes
    the cache name and retires the old cache automatically. */
 
-self.PRECACHE_VERSION = "3e72f64317cd";
+self.PRECACHE_VERSION = "a622d84575bc";
 self.PRECACHE_FILES = [
   "index.html",
   "css/base.css",
