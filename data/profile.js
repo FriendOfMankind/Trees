@@ -72,7 +72,8 @@ const WORKING_RULES = [
    nobody reads. Resolve it in one direction — don't silence it. */
 const DECLINED = [
   { what: "Mountain biking, including renting one in Brevard", terms: ["mountain bike", "mountain biking"] },
-  { what: "Bridge Walk, highline and zipline tickets (New River Gorge)", terms: ["bridge walk", "highline", "zipline"] },
+  { what: "Bridge Walk, highline and zipline tickets (New River Gorge)", terms: ["bridge walk", "highline", "zipline"],
+    allow: ["highline trail"] },
   { what: "Big South Fork Scenic Railway", terms: ["scenic railway"] },
   { what: "Via ferrata at Torrent Falls", terms: ["via ferrata"] },
   { what: "The Cumberland Falls moonbow", terms: ["moonbow"] },

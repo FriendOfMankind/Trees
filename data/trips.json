@@ -240,6 +240,97 @@
       "booking": []
     },
     {
+      "slug": "northern-rockies-2027",
+      "title": "The Long Way to Glacier",
+      "subtitle": "The July road trip — Badlands, Bighorns, Beartooth, and seven nights at Glacier",
+      "status": "outline",
+      "pinned": true,
+      "page": "trips/northern-rockies-2027/",
+      "start": null,
+      "dates": "Jul 6–30, 2027 (target, unbooked)",
+      "window": "July–August. ⭐ July specifically — June was checked destination by destination and every anchor here is out of season in it.",
+      "region": "Avon OH → SD → WY → MT → ND → home",
+      "country": "USA",
+      "coords": [
+        46,
+        -106.5
+      ],
+      "nights": "24 nights",
+      "distance": "~4,400 mi loop",
+      "budget": "~$2,038 — no airfare, no rental",
+      "tags": [
+        "car camping",
+        "alpine",
+        "road trip",
+        "bears",
+        "solo",
+        "july",
+        "long haul",
+        "reservation race"
+      ],
+      "why": "⭐ <b>The trigger is Glacier.</b> ✅ It <b>eliminated its timed-entry vehicle reservation for 2026</b> — first time in five years, across Going-to-the-Sun, Many Glacier, Two Medicine and North Fork. The registry entry for that park used to be subtitled \"worst bureaucracy\"; that objection is gone, and <b>a system dropped after five years can come back</b>. Beartooth will be just as good in 2031. Nobody knows what Glacier's entry rules look like then.<br><br>✅ <b>June was checked and rejected on the facts.</b> US-212 opened May 23 2026 and was closed again by snow until June 9. Snowy Range's campgrounds open July 4. The San Juans hold snow into early July. Moving the trip three weeks fixed more than any destination swap did — <b>every anchor on this route is comfortably in season in mid-July and none of them was in June.</b><br><br>Six anchors out on I-90 and home on I-94, so no road is driven twice: Badlands, Black Elk Peak, Devils Tower, the Cloud Peak Skyway, the Beartooth Plateau at 9,518 ft, then <b>seven nights at Glacier</b>, with Theodore Roosevelt catching the drive home.<br><br>🚨 <b>The real risk is length, not any single day.</b> The profile says 2–5 campgrounds and 5–10 nights; this is <b>25 nights across ~11 places to sleep</b>, more than double the longest trip on record. Every day is inside the ceiling or carries a written bail-out; cumulatively it is an unknown. A 21-day version that drops Theodore Roosevelt and one Bighorn night is written into the page as a live option.<br><br>⚠️ Ends July 30 on purpose — <b>fifteen days of turnaround before Kenai on Aug 14.</b> The PNW alternative left six, which is why it was dropped.",
+      "next": "Glacier camping is a 6-month rolling window released daily and Many Glacier and Apgar both go the day they open — that is <b>mid-January 2027</b>, and it is the only date on this trip that cannot be moved. Re-verify the vehicle reservation is still gone for 2027 before booking",
+      "updated": "2026-09-06",
+      "booking": [
+        {
+          "system": "recreation.gov",
+          "what": "Slough Creek, Yellowstone (Jul 18)",
+          "note": "16 sites, fills within minutes. Check first whether Pebble Creek has reopened — it is the better base and has been closed for flood recovery since 2022.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-07-18",
+          "leadMonths": 6,
+          "opensISO": "2027-01-18",
+          "basis": "6 months before 2027-07-18"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Many Glacier, Glacier NP (Jul 19–21)",
+          "note": "One of the three Glacier campgrounds that go the day the window opens. No realistic walk-up fallback in July.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-07-19",
+          "leadMonths": 6,
+          "opensISO": "2027-01-19",
+          "basis": "6 months before 2027-07-19"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Apgar / Avalanche, Glacier NP (Jul 22–25)",
+          "note": "Second competitive Glacier booking — do both halves in the same January sitting.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-07-22",
+          "leadMonths": 6,
+          "opensISO": "2027-01-22",
+          "basis": "6 months before 2027-07-22"
+        },
+        {
+          "system": "recreation.gov",
+          "what": "Cedar Pass, Badlands (Jul 7–8)",
+          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-07-07",
+          "leadMonths": 6,
+          "opensISO": "2027-01-07",
+          "basis": "6 months before 2027-07-07"
+        },
+        {
+          "system": "state-park",
+          "what": "Custer State Park, SD (Jul 9–10)",
+          "note": "⚠️ South Dakota's window was NOT verified. State parks are the most common way to lose a site.",
+          "booked": false,
+          "known": false,
+          "why": "window varies (Varies wildly — 30 days to 1 year) — confirm it"
+        }
+      ]
+    },
+    {
       "slug": "eastern-sierra",
       "title": "Eastern Sierra",
       "subtitle": "Committed — the best payoff per dollar",

@@ -362,9 +362,18 @@ for (const slug of slugs) {
   const hasTerm = (term) =>
     new RegExp(`\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(committed);
 
+  /* `allow` works the same way it does for AVOID below: a phrase that
+     contains the term but plainly is not the declined thing. Glacier's
+     Highline Trail is a named hiking trail; the declined "highline" is the
+     aerial one at New River Gorge. Allowed phrases are removed from the text
+     first, so the phrase excuses itself and nothing else — a trip that
+     actually booked a highline ticket still fires. */
   for (const d of DECLINED) {
+    const text = (d.allow || []).reduce(
+      (acc, phrase) => acc.split(phrase.toLowerCase()).join(" "), committed);
     for (const term of (d.terms || [])) {
-      if (hasTerm(term)) {
+      const re = new RegExp(`\\b${term.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`);
+      if (re.test(text)) {
         warn(`${rel}: the itinerary schedules "${term}", but "${d.what}" is on the declined list — resolve it in one direction, don't silence it`);
         break;
       }
