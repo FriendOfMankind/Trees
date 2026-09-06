@@ -29,8 +29,8 @@
         "lecture day"
       ],
       "why": "Two sandstone plateaus back to back — the Gorge's arch cluster, then Honey Creek's ladders and ropes on the busiest Saturday of the season, because that's what keeps it empty.",
-      "next": "Re-check Tunnel Ridge Road the morning of departure — Cumberland District, 606-784-6428",
-      "updated": "2026-09-04",
+      "next": "~Sept 16: first forecast that reaches Honey Creek Saturday. No Honey Creek after rain.",
+      "updated": "2026-09-06",
       "booking": [
         {
           "system": "recreation.gov",
@@ -182,10 +182,10 @@
       "title": "Mojave Winter Loop",
       "subtitle": "Death Valley, Joshua Tree, and the desert that only exists in January",
       "status": "outline",
-      "pinned": true,
+      "pinned": false,
       "page": "trips/mojave-winter-2027/",
       "start": null,
-      "dates": "Jan 2–15, 2027 (target, unbooked)",
+      "dates": null,
       "window": "⭐ Dec–Feb only. Every one of these is lethal or miserable May–September, which is exactly why they belong in the January window.",
       "region": "Las Vegas → Death Valley → Mojave → Joshua Tree",
       "country": "USA",
@@ -205,59 +205,10 @@
         "fly-in",
         "open-jaw"
       ],
-      "why": "🚨 <b>All four campground booking windows are ALREADY OPEN</b> — Valley of Fire since Feb, the three federal ones since July. Two verification passes done; six questions left, and the campground ones are all closed. The January window is 19 days long and was written off as dead until the calendar math said otherwise. Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante's View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
-      "next": "Book all four campgrounds — every window is open and Furnace Creek books to capacity most days. Valley of Fire (reservenevada) is reservation-only with no fallback; start there",
-      "updated": "2026-09-04",
-      "booking": [
-        {
-          "system": "reservenevada",
-          "what": "Valley of Fire, Atlatl Rock (Jan 2–3)",
-          "note": "Must be booked at least 72 hrs ahead; $5 non-refundable transaction fee. Valley of Fire is reservation-only — no first-come fallback.",
-          "booked": false,
-          "known": true,
-          "source": "derived",
-          "target": "2027-01-02",
-          "leadMonths": 11,
-          "opensISO": "2026-02-02",
-          "basis": "11 months before 2027-01-02"
-        },
-        {
-          "system": "recreation.gov",
-          "what": "Furnace Creek (Jan 4–9)",
-          "note": "NPS: booked to capacity most days in recent years. 136 sites, 45 tent-only.",
-          "booked": false,
-          "known": true,
-          "source": "derived",
-          "target": "2027-01-04",
-          "leadMonths": 6,
-          "opensISO": "2026-07-04",
-          "basis": "6 months before 2027-01-04"
-        },
-        {
-          "system": "recreation.gov",
-          "what": "Hole-in-the-Wall (Jan 10–11)",
-          "note": "Reservation-only. 38 sites. Preserve info (760) 252-6100.",
-          "booked": false,
-          "known": true,
-          "source": "derived",
-          "target": "2027-01-10",
-          "leadMonths": 6,
-          "opensISO": "2026-07-10",
-          "basis": "6 months before 2027-01-10"
-        },
-        {
-          "system": "recreation.gov",
-          "what": "Jumbo Rocks, Joshua Tree (Jan 12–14)",
-          "note": "Reservable year-round. NPS: park campgrounds usually full on weekends Sept–May.",
-          "booked": false,
-          "known": true,
-          "source": "derived",
-          "target": "2027-01-12",
-          "leadMonths": 6,
-          "opensISO": "2026-07-12",
-          "basis": "6 months before 2027-01-12"
-        }
-      ]
+      "why": "🛑 <b>Deferred, Sept 6 2026 — not happening in January 2027.</b> His call, and it is not a scheduling problem: he would rather put the money into better places at better times of year than into the one window that happened to be free. Winter 2026–27 is Frisco with family and nothing else. <b>The page is kept, not deleted</b> — this is a Dec–Feb loop for whichever winter it lands in, and two verification passes are already done. The dates, the pin and the four booking rows are gone so the hub stops counting down to a trip nobody is taking; whenever it comes back, every one of those windows recomputes from new dates anyway.<br><br>⚠️ <b>Rebuilding it later is not free.</b> January 2027 was the only 19-day winter window before the horizon. After Aug 31 2027 a PTO allowance has to cover a 14-day loop plus travel, so the version that comes back will be a shorter one. That is the real cost of this decision and it is worth paying with open eyes.<br><br>Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante's View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
+      "next": "Nothing. Deferred by choice — do not book anything. Revisit when a winter window turns up that is worth the airfare, and re-verify every campground rule from scratch when it does",
+      "updated": "2026-09-06",
+      "booking": []
     },
     {
       "slug": "frisco-2026",
@@ -283,9 +234,9 @@
         "fixed",
         "winter"
       ],
-      "why": "On the calendar because it blocks a window and because it is the outbound half of the January open jaw — the Mojave loop flies DEN → LAS from here rather than routing home first.<br><br>⚠️ <b>These dates are a placeholder.</b> \"Dec 25 for maybe 5 nights\" is all that is actually known. Everything downstream moves with them: the length of the January window, the DEN → LAS leg date, and when the Mojave loop can start. <b>Get the real dates before booking anything in January.</b>",
-      "next": "Get the exact Frisco dates from family — the January trip's start date and the whole 19-day window depend on them",
-      "updated": "2026-09-05",
+      "why": "<b>This is the whole winter now.</b> The Mojave loop was deferred on Sept 6 2026, so Frisco is no longer the outbound half of an open jaw — it is a round trip to Colorado and back, and it stands on its own.<br><br>⚠️ <b>The dates are still a placeholder.</b> \"Dec 25 for maybe 5 nights\" is all that is actually known. Less rides on them now — no connecting flight, no campground window — but they are still the difference between a booked fare and a guess, and holiday fares into DEN do not improve with waiting.<br><br>Not a hiking trip and not planned here: Summit County in late December is a family condo at 9,100 ft. If it turns into something — a snowshoe day, Sapphire Point, an afternoon on the Blue — it can get a page then.",
+      "next": "Get the exact dates from family, then price CLE → DEN. The trip that depended on these dates is gone, so this is now only about not overpaying for the fare",
+      "updated": "2026-09-06",
       "booking": []
     },
     {
@@ -313,9 +264,9 @@
         "paved trailheads",
         "committed"
       ],
-      "why": "✅ Four Jeffrey CG at 8,100 ft with bear boxes and a trailhead under a mile up the road. Little Lakes Valley from Mosquito Flat is the highest paved trailhead in the Sierra — the single best expression of the car-camping rule set.",
-      "next": "Pick a September week and check Four Jeffrey's reservable/FCFS split",
-      "updated": "2026-09-03",
+      "why": "✅ Four Jeffrey CG at 8,100 ft with bear boxes and a trailhead under a mile up the road. Little Lakes Valley from Mosquito Flat is the highest paved trailhead in the Sierra — the single best expression of the car-camping rule set.<br><br>🔻 <b>Confirmed Sept 6 2026 as the flex — the first of the three summer trips to drop.</b> Not because it is the weakest; it is arguably the best value on the list. Because it is the only one that <b>survives the horizon</b>. Ten days on cheap Reno flights and a cheap car is a trip a two-week PTO allowance still holds in 2028 and every year after. <a href=\"#kenai-peninsula\">Kenai</a> and a three-week drive are not. Spending the last free summer on the one trip that keeps is the trade this whole plan exists to avoid.",
+      "next": "Hold the July slot but plan it last — if June and August both grow, this is what gets cut, and that is the correct outcome",
+      "updated": "2026-09-06",
       "booking": []
     },
     {
@@ -343,9 +294,9 @@
         "high camps",
         "wildlife"
       ],
-      "why": "📋 US-212 is paved above 9,500 ft, so you get emptiness and short approaches — everywhere else those two trade off. Island Lake CG sits at 9,518 ft. Pairs with Yellowstone's northeast corner for Lamar Valley wildlife with zero hiking.",
-      "next": "Decide between this and Snowy Range for the 2028 alpine slot",
-      "updated": "2026-09-03",
+      "why": "📋 US-212 is paved above 9,500 ft, so you get emptiness and short approaches — everywhere else those two trade off. Island Lake CG sits at 9,518 ft. Pairs with Yellowstone's northeast corner for Lamar Valley wildlife with zero hiking.<br><br>🛑 <b>The June 14 2027 target was removed Sept 6 2026, because it contradicted this entry's own window.</b> \"Late June–early/mid September\" was already written here and a June 14 start is not late June. The verified detail is worse than the window suggests: ✅ <b>US-212 opens around Memorial Day but does not stay open</b> — in 2026 it opened May 23 and was <b>closed again by snow at the Montana/Wyoming line, reopening June 9</b>, then ran night closures 7 PM–7 AM Mon–Thu from Pilot Index east to Beartooth Lake. ✅ <b>Beartooth Lake CG typically opens late June</b>; sources on Island Lake disagree outright — one says late May, another says <b>July 1 or earlier depending on snowpack</b> — and a 9,518 ft campground is exactly where that disagreement is decided by the winter. Snow commonly lingers up high into <b>early-to-mid July</b>.<br><br>So a mid-June arrival buys a maybe-open road, probably-shut campgrounds and trails under snow. <b>The plateau is a late-June-at-the-earliest trip and honestly a July one.</b><br><br>⚠️ <b>`days` was 21 against `nights: ~7` in the same entry.</b> The 21 was the road-trip container, not this trip. It is now 12 — seven nights on the plateau plus roughly 2.5 days of driving each way from Avon, which is ~1,700 mi. If a 21-day June road trip happens, this is one anchor inside it, not the whole thing.",
+      "next": "Do not target June again without calling Shoshone NF for Island Lake and Beartooth Lake opening dates — two published sources contradict each other by five weeks, and the answer decides whether the trip exists",
+      "updated": "2026-09-06",
       "booking": []
     },
     {
@@ -737,7 +688,7 @@
       "page": null,
       "start": null,
       "dates": null,
-      "window": "⭐ Best Feb–April, while the water is actually running",
+      "window": "⭐ Feb–April for water — but the drive-up bases do not open until March. See below.",
       "region": "Bankhead NF, Alabama",
       "country": "USA",
       "coords": [
@@ -752,12 +703,13 @@
         "waterfalls",
         "old growth",
         "swimming",
+        "march",
         "april",
         "empty"
       ],
-      "why": "⚠️ The largest designated wilderness east of the Mississippi, with dozens of waterfalls, sandstone box canyons, huge old growth and swimming holes. <b>The one place on the whole list whose peak window is early April specifically</b> — its waterfalls only run with the water. Clear Creek and Corinth are drive-up bases open April–October and reservable on recreation.gov; day-hike into the wilderness from there rather than backpacking it.",
-      "next": "Check Clear Creek's April opening date and whether it covers the first week",
-      "updated": "2026-09-04",
+      "why": "⚠️ The largest designated wilderness east of the Mississippi, with dozens of waterfalls, sandstone box canyons, huge old growth and swimming holes. <b>The one place on the whole list whose peak window is early spring specifically</b> — its waterfalls only run with the water. Day-hike into the wilderness from a drive-up base rather than backpacking it.<br><br>✅ <b>Corrected Sept 2026 — the earlier \"open April–October\" note here was wrong.</b> <b>Clear Creek opens the second Friday of March</b> and closes Oct 31; reservation-only via recreation.gov. <b>Corinth ran Mar 8–Oct 31 in 2026</b>, part reservable and part first-come. So the season starts in early-to-mid March, not April — but a trip starting in the first week of March has <b>no open established campground in Bankhead</b>.",
+      "next": "Second Friday of March 2027 is the 12th — a Mar 5–15 window only catches Clear Creek for three nights. Confirm Corinth's 2027 opening date by phone (205-300-1463) before this becomes an early-March plan.",
+      "updated": "2026-09-06",
       "booking": []
     },
     {
@@ -792,36 +744,52 @@
       "booking": []
     },
     {
-      "slug": "sky-islands",
-      "title": "Sky Islands / Chiricahua",
-      "subtitle": "Biologically the strangest place in the US",
-      "status": "wishlist",
-      "pinned": false,
-      "page": null,
+      "slug": "sky-islands-2027",
+      "title": "Sky Islands",
+      "subtitle": "Spring break — the strangest biology in the US, and one eruption weathered three ways",
+      "status": "outline",
+      "pinned": true,
+      "page": "trips/sky-islands-2027/",
       "start": null,
-      "dates": null,
-      "window": "Nov–Apr",
-      "region": "Southeast Arizona",
+      "dates": "Mar 5–15, 2027 (target, unbooked)",
+      "window": "Nov–Apr — ⭐ Feb, March and April are the good months, and they are also the full ones",
+      "region": "Tucson → Dragoons → Chiricahua → Cave Creek",
       "country": "USA",
       "coords": [
         32,
         -109.35
       ],
-      "nights": "6–8 nights",
-      "distance": null,
-      "budget": "Fly-in, Tucson",
+      "nights": "10 nights camping",
+      "distance": "~700 mi loop",
+      "budget": "~$1,076 excl. airfare",
       "tags": [
         "car camping",
         "desert",
         "geology",
+        "ruins",
         "birding",
-        "april",
-        "shoulder season"
+        "solo",
+        "fly-in",
+        "march",
+        "reservation race"
       ],
-      "why": "⚠️ Bonita Canyon CG, Rustler Park, and Stewart / Sunny Flat in Cave Creek. Heart of Rocks and Echo Canyon are the marquee day hikes through rhyolite hoodoo forests. Mountain ranges rising out of desert as isolated ecological islands — the geology-as-through-line trip.",
-      "next": "April is the tail of the window — check how hot the low desert approach gets",
-      "updated": "2026-09-04",
-      "booking": []
+      "why": "⚠️ Heart of Rocks and Echo Canyon are the marquee day hikes through rhyolite hoodoo forests — welded ash from the Turkey Creek caldera, so the geology is the whole point rather than a footnote. The Dragoons are the counterpoint at 1.4 billion years, and you can see one range from the other.<br><br>✅ <b>Verified Sept 2026 — the facts that decide whether March works:</b> <b>Chiricahua charges no entrance fee.</b> <b>Bonita Canyon (~5,400 ft) is year-round, 23–26 sites, all reservable, no walk-ups, 6-month rolling window</b>, full most nights in its Feb–April peak. <b>Sunny Flat is year-round first-come — but potable water is off until April</b>, and <b>Cochise Stronghold has none at any time of year</b>: four of ten nights are haul-your-own. 🚨 <b>Rustler Park and FR 42D are closed Nov–March and unplowed</b>, so the eight miles between the monument and Portal cost 2h 35m around on I-10, and the high country is off the trip.<br><br>⚠️ <b>Turn your own rule on this before booking it.</b> \"Actively avoids crowds\" is the profile, and March is the monument's busiest month; a reservation removes the lottery, not the people. The itinerary answers that with a split — <b>3 nights in the monument, 7 outside it</b> — and puts the two hardest days on a Wednesday and a Saturday.",
+      "next": "Bonita Canyon is 23–26 sites on a 6-month rolling window and there is no walk-up fallback inside the monument — Mar 8 released around Sept 8 2026 and each later night releases one day at a time. Then price CLE → TUS, which is the only number on the page that could swing $400",
+      "updated": "2026-09-06",
+      "booking": [
+        {
+          "system": "recreation.gov",
+          "what": "Bonita Canyon, Chiricahua NM (Mar 8–10)",
+          "note": "All sites reservable, no first-come option, full most nights Feb–April. If this fails, the middle of the trip fails.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-03-08",
+          "leadMonths": 6,
+          "opensISO": "2026-09-08",
+          "basis": "6 months before 2027-03-08"
+        }
+      ]
     },
     {
       "slug": "wichita-mountains",

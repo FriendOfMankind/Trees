@@ -3,7 +3,7 @@
    The version is a hash of every listed file, so editing any of them changes
    the cache name and retires the old cache automatically. */
 
-self.PRECACHE_VERSION = "ab64e5ec303c";
+self.PRECACHE_VERSION = "72af0f140e78";
 self.PRECACHE_FILES = [
   "index.html",
   "css/base.css",
@@ -34,4 +34,6 @@ self.PRECACHE_FILES = [
   "trips/maui-2027/data.js",
   "trips/mojave-winter-2027/index.html",
   "trips/mojave-winter-2027/data.js",
+  "trips/sky-islands-2027/index.html",
+  "trips/sky-islands-2027/data.js",
 ];

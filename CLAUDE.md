@@ -134,7 +134,12 @@ is written on the `kenai-peninsula` entry. Don't re-open it cold.
    open-jaw routings nobody has costed.
 
 **Known environment limit:** `nps.gov` and `recreation.gov` are blocked by
-the network egress policy in Claude Code sessions on this repo. Firecrawl
+the network egress policy in Claude Code sessions on this repo. So are
+`overpass-api.de` and `nominatim.openstreetmap.org`, which means
+`tools/geocode.mjs`, `tools/route.mjs` and `tools/trail.mjs` return nothing
+unless `$RIDB_DATA` or an API key is set — a trip built in one of these
+sessions ships with unverified waypoints and no map lines, and that is the
+correct output, not a step that was skipped. Firecrawl
 search returns their pages *quoted in results*, which is how the Mojave page
 got its campground facts — better than a blog, worse than the page, and
 labelled as such. AllTrails and AccuWeather MCP tools work directly. If a fee

@@ -47,8 +47,11 @@ test("inserting into a real trip file produces something that still parses", () 
   // The geometry must survive the round trip through the file verbatim.
   assert.deepEqual(decodePolyline(D.routes[0].geometry).map((p) => p.map((n) => +n.toFixed(3))),
                    PTS.map((p) => [+p.lat.toFixed(3), +p.lng.toFixed(3)]));
-  // And everything else in the file must be untouched.
-  assert.equal(D.waypoints.length, 7);
+  // And everything else in the file must be untouched. Compare against the
+  // source's own count rather than a literal: this assertion is about splice
+  // not disturbing the rest of the file, and hard-coding the number made it
+  // fail the next time a waypoint was legitimately added to the trip.
+  assert.equal(D.waypoints.length, evalTrip(src).waypoints.length);
   assert.ok(D.days.length > 0);
 });
 
