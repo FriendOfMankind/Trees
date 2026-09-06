@@ -52,12 +52,12 @@ const TRIPS = [
     budget: "TBD",
     tags: ["car camping", "arches", "scrambling", "ruins", "solo", "lecture day"],
     why: "Two sandstone plateaus back to back — the Gorge's arch cluster, then Honey Creek's ladders and ropes on the busiest Saturday of the season, because that's what keeps it empty.",
-    next: "Re-check Tunnel Ridge Road the morning of departure — Cumberland District, 606-784-6428",
+    next: "~Sept 16: first forecast that reaches Honey Creek Saturday. No Honey Creek after rain.",
     booking: [
       { system: "recreation.gov", what: "Koomer Ridge (Sept 22–23)", target: "2026-09-22", booked: true },
       { system: "recreation.gov", what: "Bandy Creek (Sept 24–26)", target: "2026-09-24", booked: true },
     ],
-    updated: "2026-09-04",
+    updated: "2026-09-06",
   },
   {
     slug: "appalachians-2026",
