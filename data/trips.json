@@ -948,6 +948,41 @@
       "booking": []
     },
     {
+      "slug": "newfoundland",
+      "title": "Newfoundland",
+      "subtitle": "The Earth's mantle, a Viking hall, and icebergs — the June trip that actually is a June trip",
+      "status": "wishlist",
+      "pinned": false,
+      "page": null,
+      "start": null,
+      "dates": null,
+      "window": "June–September. ⭐ June is genuinely peak here rather than a compromise — icebergs, 17-hour days, no heat.",
+      "region": "Newfoundland, via the Maritimes",
+      "country": "Canada",
+      "coords": [
+        49,
+        -56
+      ],
+      "nights": "~22 nights",
+      "distance": "~4,500 mi + two ferry crossings",
+      "budget": "Ferry ~$350–400 USD round trip; no airfare at all",
+      "tags": [
+        "car camping",
+        "geology",
+        "ruins",
+        "icebergs",
+        "coast",
+        "june",
+        "passport",
+        "ferry",
+        "long haul"
+      ],
+      "why": "⭐ <b>The single best geology destination on this list, and it is not close.</b> The <b>Tablelands</b> at Gros Morne is exposed oceanic <b>mantle</b> — peridotite obducted onto the continent — and it is the reason the park is a UNESCO World Heritage Site: it is the physical evidence that confirmed plate tectonics. ✅ AllTrails: <b>4.9 mi, 705 ft, Moderate</b>, and open all of June. Everything else on the geology-as-through-line list is rock; this is the layer underneath the rock.<br><br>✅ <b>L'Anse aux Meadows opens June 1.</b> North America's only confirmed Norse settlement, c. 1000 AD. \"Ruins count as scenery\" has no better answer anywhere on the continent.<br><br>✅ <b>Icebergs peak late May–early June</b> and are present to early July — Twillingate, Bonavista, St. Anthony. Icebergs and whales on the same boat is routine in that window. ✅ <b>Mid-June daylight at Gros Morne runs first light 4:30 AM to dark 10:13 PM</b> — about 17 usable hours, computed. That is most of the \"late June for light\" argument that justifies <a href=\"#kenai-peninsula\">Kenai</a>, for a tenth of the money.<br><br>🚨 <b>The trip does not fit in 21 days and Newfoundland + the Maritimes does not fit at all.</b> Cleveland → Nova Scotia is ~1,250–1,290 mi and ~23 hrs, and North Sydney is further out Cape Breton — call it 3 days each way at the +15% rule. Six of 21 days are transit before the ferry. <b>Pick Newfoundland or pick the Maritimes; both is a fantasy.</b><br><br>✅ <b>The routing that fixes it:</b> ferry North Sydney → <b>Argentia</b> (14–16 hrs, lands near St. John's), drive the island east to west, ferry home from Port aux Basques (7 hrs). No road driven twice, and it saves ~900 km of backtracking. ⚠️ <b>Argentia is seasonal — June 19 to Sept 30 in 2026</b> (Mon/Thu/Sat, 5:30 PM), so this routing does not exist before about June 19. Verify the 2027 dates.<br><br>⚠️ <b>Three dates fight each other:</b> peak icebergs (late May–early June), the Argentia ferry (June 19+), and the Gros Morne Mountain summit (closed May 1–June 27 for caribou calving). You cannot have the first two together. <b>The summit is the cheapest thing to lose</b> — AllTrails puts it at <b>10.8 mi / 3,044 ft</b>, which is over the day ceiling on both counts, and it is the crowded one. Tablelands, Green Gardens (6.6 mi / 1,266 ft) and the Tablelands Off-Trail Loop (7.4 mi / 1,925 ft) are all open in June and all fit inside the ceiling.<br><br>⚠️ <b>It is cold and wet, not cool and pleasant.</b> Rocky Harbour June normals are 40–44°F low / 64–68°F high, but 2026 actuals ran highs of <b>49–67°F, consistently under normal</b>, with coastal fog. The Siesta 20 is the right bag; the failure mode is twelve days of rain, not one cold night. ✅ Blackflies exist but coastal wind holds them down — Gros Morne is reported as usually fine, unlike the Lake Superior option this replaced.<br><br>⚠️ <b>Needs a valid passport</b>, which is a months-long lead time if there isn't one. ⚠️ Ferry: roughly $60/adult + $120–180 vehicle one-way plus a 13% fuel surcharge, after the federal rate cut of Aug 2025 — call it $350–400 USD round trip, and note that a rate cut is a policy that can lapse before 2027. ⚠️ The Western Brook Pond boat ($99 in 2026) <b>needs 15 people to run</b>, which is a real risk for a solo traveller in shoulder-season June.<br><br>⭐ <b>Passes the horizon test better than anything else on the list.</b> A 26-day drive from Ohio to Newfoundland is precisely what a two-week PTO allowance can never hold. You can fly to Deer Lake later; you cannot do this later.",
+      "next": "Decide the trade first — Newfoundland or the Maritimes, and peak icebergs or the Argentia no-backtrack routing. Then check whether a valid passport exists, because that has the longest lead time of anything here",
+      "updated": "2026-09-06",
+      "booking": []
+    },
+    {
       "slug": "glacier-np",
       "title": "Glacier National Park",
       "subtitle": "Highest hit rate, worst bureaucracy",

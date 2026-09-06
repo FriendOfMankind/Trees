@@ -137,7 +137,9 @@ is written on the `kenai-peninsula` entry. Don't re-open it cold.
 the network egress policy in Claude Code sessions on this repo. So are
 `overpass-api.de` and `nominatim.openstreetmap.org`, which means
 `tools/geocode.mjs`, `tools/route.mjs` and `tools/trail.mjs` return nothing
-unless `$RIDB_DATA` or an API key is set — a trip built in one of these
+unless `$RIDB_DATA` or an API key is set. `parks.canada.ca` and
+`marineatlantic.ca` are blocked too, so Canadian trips have the same problem:
+season dates and fares come back only as search-result quotes — a trip built in one of these
 sessions ships with unverified waypoints and no map lines, and that is the
 correct output, not a step that was skipped. Firecrawl
 search returns their pages *quoted in results*, which is how the Mojave page
