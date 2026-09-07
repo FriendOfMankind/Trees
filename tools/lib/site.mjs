@@ -25,9 +25,9 @@ export function evalScripts(files) {
   return sandbox;
 }
 
-/** The hub's own data: TRIPS, THEMES, PROFILE, GEAR, BOOKING_WINDOWS, MEALS, … */
+/** The hub's own data: TRIPS, THEMES, PROFILE, GEAR, BOOKING_WINDOWS, MEALS, DISH_GROUPS, … */
 export function loadHub() {
-  return evalScripts(["js/themes.js", "data/profile.js", "data/meals.js", "data/trips.js"]);
+  return evalScripts(["js/themes.js", "data/profile.js", "data/meals.js", "data/dishes.js", "data/trips.js"]);
 }
 
 /** Every folder under trips/ that looks like a trip page. */

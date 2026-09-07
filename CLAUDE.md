@@ -35,6 +35,9 @@ tools/export.mjs      writes GPX / ICS / plan text; --all writes data/trips.json
 tools/geocode.mjs     find + verify waypoint coordinates (never invents one)
                       prefers the RIDB bulk download ($RIDB_DATA) over the API
 tools/setcoord.mjs    record a coordinate you looked up yourself (needs --source)
+data/dishes.js        candidate dishes for the Menu Bench. NOT recipes — an
+                      intake list. `mealId` claims are validator-checked
+menubench.html        browser workbench for voting dishes yes/no/maybe
 mapbench.html         browser workbench for locating + reviewing waypoints.
 js/coordcheck.js      the placement sanity checks, DOM-free so they're tested
 tools/route.mjs       bake driving geometry between verified waypoints
@@ -59,6 +62,11 @@ docs/ROADMAP.md       what to build next, and what not to
 - **Content changes are data changes.** A trip's `data.js` holds everything;
   its `index.html` is a shell that must not be edited per-trip. Tabs generate
   from whichever data sections exist.
+- **Colin has oral allergy syndrome.** Raw fruit and vegetables irritate;
+  **roasted nuts are confirmed fine**, so every nut is a buying instruction,
+  not a restriction. Raw and dried fruit are still open — recipes carrying
+  them are flagged `review: {code:"oas"}` and the validator reports them every
+  run. Don't clear a flag by deleting it. Spice ceiling is 1–2 of 5.
 - **Reusing a meal?** It belongs in `data/meals.js`, not re-typed into a trip.
   Add the trip slot to that recipe's `usedOn` and the trip page links itself.
 - **Run `node tools/validate.mjs` before committing.** Must exit 0. It also

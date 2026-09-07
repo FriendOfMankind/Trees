@@ -103,6 +103,18 @@ plan said 6:52", which is a four-minute error caught by luck. Sites resolve
 through *verified* waypoints only; there is no computing a sunset for a place
 nobody has located.
 
+## The two benches
+
+Both follow the same shape: pick from a list, decide in the browser, get one
+block to paste back. Neither writes to a data file.
+
+[`menubench.html`](menubench.html) votes yes/no/maybe on 88 candidate dishes.
+A rejection is worth as much as an approval — the repo has no dislikes list,
+and the "no" column is how it gets one. Candidates claiming to be in the
+library carry a `mealId` the validator resolves, and every recipe in
+`data/meals.js` has to appear somewhere in the candidate list, so nothing
+silently never gets voted on.
+
 ## Locating waypoints — the Map Bench
 
 Every geocoding host (Nominatim, Overpass, Recreation.gov, the RIDB API) is

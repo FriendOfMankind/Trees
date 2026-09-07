@@ -694,6 +694,14 @@
         <div class="info-card"><h3>Off the list</h3><p>${KITCHEN.excluded}</p></div>
       </div>
 
+      <h2 class="section-title" style="margin-top:2rem">Hard Constraints</h2>
+      <p class="section-sub">Not preferences. A recipe that breaks one of these needs a written reason, not a quiet exception.</p>
+      ${(typeof CONSTRAINTS !== "undefined" ? CONSTRAINTS : []).map((c) => `
+        <div class="note-card" style="border-left-color:${c.level === "blocking" ? "var(--warn-border)" : "var(--t-700)"}">
+          <h3>${c.what} <span class="wp-status ${c.level === "blocking" ? "todo" : "new"}">${c.level}</span></h3>
+          <p>${c.rule}</p>
+        </div>`).join("")}
+
       <h2 class="section-title" style="margin-top:2rem">Cooler Zones</h2>
       <p class="section-sub">The model every trip's provisions section is built on. Zone 2 is the one that ruins trips.</p>
       <div class="table-wrap"><table>
@@ -704,6 +712,7 @@
 
       <h2 class="section-title" style="margin-top:2rem">The Recipe Library <span class="count-note" id="meal-count"></span></h2>
       <p class="section-sub">Sorted by cleanup, lightest first — because cleanup is what decides which campsite a meal can happen at, not how good it is. Each card links to every day it has actually filled.</p>
+      <p class="section-sub" style="margin-top:-0.6em"><a href="menubench.html">Open the Menu Bench &rarr;</a> to vote yes/no on 88 candidate dishes — the rejections are what build the dislikes list.</p>
       <div class="filter-bar" id="kitchen-filter-bar"></div>
       <div class="meal-grid" id="meal-grid"></div>
 

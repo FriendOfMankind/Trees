@@ -41,7 +41,54 @@ const KITCHEN = {
   portions: "Solo. Every quantity in this file is one serving. Nothing here scales without re-checking pot volume.",
   cooler: "48 qt, pre-chilled. ~2.5 days unaided at 75°F. Frozen meals in flat quart bags ARE the ice.",
   excluded: "No coffee, no alcohol. Hot chocolate does the pre-dawn job caffeine would.",
+  spice: "1–2 of 5. Background heat is welcome; heat as the point of the dish is not. Chorizo, salsa and taco seasoning stay, but at the mild end and never stacked.",
+  calories: "~3,000 kcal/day on a hiking trip, confirmed rather than assumed. Portions here are sized to that.",
+  thermos: "One wide-mouth thermos, and staying at one. The routine it serves is snack → hike → hot meal at the turnaround → hike out.",
 };
+
+/* Hard constraints. These are enforced, not advisory — the same standing as
+   DECLINED and AVOID in data/profile.js.
+
+   ⚠️ OPEN: oral allergy syndrome is food-specific, not category-wide. Which
+   pollens someone reacts to decides which foods cross-react, so "raw fruit"
+   is the shape of the problem, not the list. The affected recipes below are
+   flagged `review: "oas"` until Colin names the specific triggers. Cooking
+   and roasting are the ordinary workaround because the proteins involved are
+   heat-labile.
+
+   RESOLVED Sept 2026: <b>roasted nuts are fine.</b> Every nut in this library
+   is therefore a buying instruction — roasted, not raw — and not a problem.
+
+   STILL OPEN: raw fruit (the apples in two lunches) and dried fruit. Drying is
+   not cooking, so dried apricots, figs, mango and banana chips are flagged
+   rather than assumed safe either way. */
+const CONSTRAINTS = [
+  {
+    what: "Oral allergy syndrome — raw fruit and vegetables",
+    rule: "Raw is the problem, not the ingredient. <b>Roasted nuts are confirmed fine</b>, so every nut here is a buying instruction rather than a restriction. Cooked vegetables and cooked fruit are the workaround on that side. <b>Raw fruit and dried fruit are still open</b> — the recipes carrying them stay flagged until Colin says which are actually a problem.",
+    level: "blocking",
+  },
+  {
+    what: "Spice ceiling 1–2 of 5",
+    rule: "Background heat only. Do not stack chorizo + salsa + hot sauce in one meal, and never make heat the reason a dish is interesting.",
+    level: "firm",
+  },
+  {
+    what: "No near-zero-calorie filler",
+    rule: "<b>His rule, verbatim in spirit:</b> an ingredient that only tastes acceptable once seasoned, sauced and cooked isn't worth carrying. Vegetables earn their place by carrying calories or flavour — peppers, onion, potato — not by being vegetables. Celery, lettuce and courgette do not.",
+    level: "firm",
+  },
+  {
+    what: "Simple over clever",
+    rule: "Fewer components, fewer steps. Speed is a feature in its own right, separately from cleanup — a good meal that is also quick scores higher than a good meal that isn't.",
+    level: "preference",
+  },
+  {
+    what: "No coffee, no alcohol",
+    rule: "Standing. See AVOID in data/profile.js, which the validator enforces.",
+    level: "blocking",
+  },
+];
 
 /* The reusable technique. These are the things that took a trip to learn and
    should never have to be learned twice. */
@@ -52,7 +99,10 @@ const KITCHEN_DOCTRINE = [
   "<b>The boil-bag primitive.</b> Boil water, pour into a labeled bag mixed at home, roll, wait, eat from the bag. Zero cookware touches food; the pot only ever held water, so a bandana wipe is the whole wash-up. This is what makes a waterless campsite survivable.",
   "<b>Pre-mix at the kitchen table, not at the trailhead.</b> Every boil-bag meal only works if the bag already exists. Five bags mixed in October solved the entire Linville leg before the car left the driveway.",
   "<b>The four things that turn a can into a meal:</b> olive oil in a squeeze bottle, hard cheese, crushed chips, a starch pouch. Carry all four and no dinner is ever just a can.",
-  "<b>The wide-mouth thermos is load-bearing.</b> Hot oats on a dark ridge and a hot dinner at an overlook are the same trick. A second thermos would unlock the pre-dawn hot chocolate on the same morning as the oats — currently they compete.",
+  "<b>The routine is snack → hike → hot thermos meal at the turnaround → hike out.</b> That is the shape most days want, and it is why the thermos matters more than a stove at the destination. Build the day's one hot carried meal around it.",
+  "<b>A dinner can repeat, just not back to back.</b> Corrected Sept 2026 — the earlier library assumed no dinner ever repeats on a trip and built around a constraint that was never real. Two nights apart is fine, which makes a long trip much easier to provision.",
+  "<b>Raw is the constraint, not the ingredient.</b> Oral allergy syndrome means raw nuts, fruit and vegetables can irritate where the cooked or roasted version doesn't. Roasted nuts are confirmed fine, so nuts are a buying instruction, not a restriction. Raw and dried fruit are still open — reach for cooked fruit rather than dropping the calories.",
+  "<b>The wide-mouth thermos is load-bearing.</b> Hot oats on a dark ridge and a hot dinner at an overlook are the same trick. There is one and there will be one — so on a pre-dawn morning the hot meal wins and the hot chocolate gets dropped. Plan for that rather than around a second flask.",
   "<b>Cured, aged and oil-packed food does not need a cooler.</b> Salami, capicola, provolone, olive salad, oil-packed tomato. This is why a pressed sandwich survives ten hours in a pack and why the lunch slot rarely touches Zone 2.",
   "<b>A pressed sandwich gets better squashed.</b> Build it the night before, wrap in parchment then foil, put it under the cooler lid. The weight is the recipe.",
   "<b>Cook double the starch whenever the pot is already dirty.</b> Friday's potatoes are Saturday's breakfast, and Saturday drops from 25 minutes to 14.",
@@ -79,7 +129,7 @@ const PANTRY = [
   { item: "Peanut butter packets + honey", why: "The last 200 kcal of any breakfast, stirred in off-heat." },
   { item: "Whole milk powder", why: "Goes in every pre-mixed oats and hot chocolate bag. The fat is the point at 50°F." },
   { item: "Instant oats packets", why: "Base of the single most-used recipe in this file." },
-  { item: "Bars, jerky, trail mix, dried fruit, nuts", why: "The lunch slot's back half, every trip." },
+  { item: "Bars, jerky, trail mix, dried fruit, roasted nuts", why: "The lunch slot's back half, every trip. Buy <b>roasted</b> nuts, always — raw is the oral-allergy trigger and standard trail mix is raw. Roasted is confirmed fine, so this costs nothing." },
 ];
 
 /* ---------------------------------------------------------------- RECIPES */
@@ -88,6 +138,7 @@ const MEALS = [
   /* ============================================================ BREAKFAST */
   {
     id: "oats-plus",
+    review: { code: "oas", why: "Dried fruit — dates, apricots, banana chips — is unresolved. Pecans are fine: buy them <b>roasted</b>." },
     name: "Hot oats+",
     type: "breakfast",
     method: "boil",
@@ -202,6 +253,7 @@ const MEALS = [
   },
   {
     id: "cold-bagel-plate",
+    review: { code: "oas", why: "Dried apricots. Unresolved." },
     name: "Cold bagel plate",
     type: "breakfast",
     method: "no-cook",
@@ -225,6 +277,7 @@ const MEALS = [
   /* ================================================================ LUNCH */
   {
     id: "sourdough-sub",
+    review: { code: "oas", why: "The whole raw apple. Raw fruit is the trigger — swap it for a roasted-nut bar or cooked fruit." },
     name: "Sourdough sub, built at home",
     type: "lunch",
     method: "assemble",
@@ -245,6 +298,7 @@ const MEALS = [
   },
   {
     id: "pressed-sandwich",
+    review: { code: "oas", why: "Dried apricots. The marcona almonds are fine — marconas are fried or roasted by definition." },
     name: "Pressed muffuletta",
     type: "lunch",
     method: "assemble",
@@ -268,6 +322,7 @@ const MEALS = [
   },
   {
     id: "charcuterie-tortillas",
+    review: { code: "oas", why: "Dried figs or mango. Buy the almonds <b>roasted</b> and that half is settled." },
     name: "Salami, aged cheddar and tortillas",
     type: "lunch",
     method: "no-cook",
@@ -309,6 +364,7 @@ const MEALS = [
   },
   {
     id: "pouch-plate-no-water",
+    review: { code: "oas", why: "Dried apricots. Unresolved." },
     name: "Waterless pouch plate",
     type: "lunch",
     method: "no-cook",
@@ -349,6 +405,7 @@ const MEALS = [
   },
   {
     id: "pb-honey-roll",
+    review: { code: "oas", why: "The whole raw apple, and trail mix unless it is a roasted-nut mix." },
     name: "PB-and-honey roll, built the night before",
     type: "lunch",
     method: "assemble",

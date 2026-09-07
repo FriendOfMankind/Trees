@@ -37,6 +37,7 @@ const BOOKING_WINDOWS = hub.read("BOOKING_WINDOWS") || [];
 const SYSTEMS = new Set(BOOKING_WINDOWS.map((b) => b.system).filter(Boolean));
 
 const MEALS = hub.read("MEALS");
+const DISH_GROUPS = hub.read("DISH_GROUPS");
 
 const tagUse = new Map();
 
@@ -468,6 +469,14 @@ if (!Array.isArray(MEALS)) {
       fail(`meals/${id}: cleanup "${m.cleanup}" with water "none" — a meal that dirties cookware needs somewhere to wash it`);
     }
 
+    /* A recipe carrying an unresolved dietary flag is reported every run. It
+       is not a failure — the meal is still cookable — but it must not go
+       quiet, because the whole point is that nobody re-discovers it in a
+       campsite. Clear it by naming the trigger or swapping the ingredient. */
+    if (m.review && m.review.code) {
+      warn(`meals/${id}: unresolved "${m.review.code}" flag — ${m.review.why}`);
+    }
+
     if (!Array.isArray(m.usedOn)) { fail(`meals/${id}: usedOn must be an array`); continue; }
     if (!m.usedOn.length && m.type !== "drink") warn(`meals/${id}: not used on any trip — an orphan recipe`);
 
@@ -521,6 +530,38 @@ for (const slug of slugs) {
         }
       }
     }
+  }
+}
+
+// ---- Dish candidates -----------------------------------------------------
+// data/dishes.js is an intake list, not a plan, so most of it isn't the
+// validator's business. Two things are: a candidate claiming "already in the
+// library" has to actually resolve, and every library recipe has to appear
+// somewhere in the list — otherwise a recipe silently never gets voted on and
+// the intake looks complete when it isn't. That's how my own first pass
+// missed two of them.
+
+if (Array.isArray(DISH_GROUPS)) {
+  const mealIds = new Set((Array.isArray(MEALS) ? MEALS : []).map((m) => m.id));
+  const dishes = DISH_GROUPS.flatMap((g) => g.dishes || []);
+  const seenDish = new Set();
+  const covered = new Set();
+
+  for (const d of dishes) {
+    if (!d.id) { fail(`dishes: an entry has no id (name: ${d.name})`); continue; }
+    if (seenDish.has(d.id)) fail(`dishes: duplicate id "${d.id}"`);
+    seenDish.add(d.id);
+
+    if (d.have && !d.mealId) fail(`dishes/${d.id}: claims have:true with no mealId to check it against`);
+    if (d.mealId) {
+      if (!mealIds.has(d.mealId)) fail(`dishes/${d.id}: mealId "${d.mealId}" is not a recipe in data/meals.js`);
+      else covered.add(d.mealId);
+    }
+    if (typeof d.kcal !== "number") warn(`dishes/${d.id}: no kcal estimate — it can't be sorted by density`);
+  }
+
+  for (const id of mealIds) {
+    if (!covered.has(id)) warn(`dishes: no candidate points at the "${id}" recipe — it will never get voted on`);
   }
 }
 

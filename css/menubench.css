@@ -1,0 +1,85 @@
+/* ==========================================================================
+   menubench.css — the dish picker. Voting 86 things has to feel fast, so the
+   row is compact and the vote buttons are the only large targets.
+   ========================================================================== */
+
+.dish-group { margin-bottom: 1.8rem; }
+.dish-group > h3 { font-size: 1.1rem; margin: 0 0 0.15em; }
+.dish-group > .gnote { font-size: 0.9rem; color: var(--t-ink-dim); margin: 0 0 0.8rem; }
+
+.dish-row {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-left: 4px solid var(--t-line);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 0.45rem;
+}
+.dish-row.vote-yes   { border-left-color: var(--ok-border, #7fb894); background: var(--ok-bg); }
+.dish-row.vote-no    { border-left-color: var(--warn-border); opacity: 0.55; }
+.dish-row.vote-maybe { border-left-color: #d8a83a; }
+.dish-row.next       { box-shadow: 0 0 0 2px var(--t-500); }
+
+.dish-main { flex: 1; min-width: 0; }
+.dish-name { font-weight: 600; font-size: 0.95rem; }
+.dish-blurb { font-size: 0.84rem; color: var(--t-ink-dim); margin-top: 0.1em; }
+.dish-facts {
+  font-family: var(--ui);
+  font-size: 0.7rem;
+  color: var(--t-ink-dim);
+  margin-top: 0.25em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.have-pill, .oas-pill {
+  font-family: var(--ui);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  margin-left: 0.4em;
+  white-space: nowrap;
+}
+.have-pill { background: #eef1f6;        color: #445269; }
+.oas-pill  { background: var(--warn-bg); color: var(--warn-ink); }
+
+.vote-btns { display: flex; gap: 0.3rem; flex: 0 0 auto; }
+.vote-btn {
+  font-family: var(--ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  width: 2.3rem;
+  padding: 0.4rem 0;
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--t-ink-dim);
+}
+.vote-btn:hover { border-color: var(--t-500); color: var(--t-800); }
+.vote-btn.on.yes   { background: #2f6d43; border-color: #2f6d43; color: #fff; }
+.vote-btn.on.no    { background: #a8412a; border-color: #a8412a; color: #fff; }
+.vote-btn.on.maybe { background: #b58a1e; border-color: #b58a1e; color: #fff; }
+
+kbd {
+  font-family: var(--ui);
+  font-size: 0.75rem;
+  border: 1px solid var(--t-line);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  background: #fff;
+}
+
+@media (max-width: 600px) {
+  .dish-row { flex-wrap: wrap; }
+  .vote-btns { width: 100%; }
+  .vote-btn { flex: 1; width: auto; }
+}

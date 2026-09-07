@@ -27,7 +27,7 @@ const PROFILE = {
     "Welcomes sustained low-consequence difficulty — scrambles, ladders, route-finding, wet rock. More cautious about single high-consequence moves.",
   crowds: 'Actively avoids them. "Empty is cool if it\'s worth it."',
   food:
-    "Cooks at camp by default. Restaurants are for specific named dishes, not for convenience. Wants high-value authentic local food and fresh dessert. <b>No coffee, no beer.</b>",
+    "Cooks at camp by default. <b>Oral allergy syndrome</b> — raw nuts, fruit and vegetables can irritate; cooked and roasted forms are the usual workaround, but which specific foods trigger it is not yet recorded. Restaurants are for high value, not convenience — a reputable place with a big menu is worth choosing from, a mediocre one is worth skipping entirely. Wants authentic local food and fresh dessert, bought rather than made. Spice <b>1–2 of 5</b>: background heat, not the point of the dish. Target <b>~3,000 kcal/day</b> on a hiking trip, confirmed. <b>No coffee, no beer.</b>",
   driverNote:
     "Under 25 — the young-renter surcharge runs $15–35/day, up to ~$245 on a week. AAA membership is the standard workaround; also check whether the credit card already covers rental collision before buying the counter product.",
   tripShape:
@@ -136,7 +136,7 @@ const GEAR = [
     note: "One burner, one pot, one pan. The meal plans are built to that exact constraint.",
     items: [
       { name: "One burner, pot, pan, mug, spork", state: "own", note: "" },
-      { name: "Wide-mouth thermos", state: "own", note: "Load-bearing. Hot oats on a dark ridge and hot dinner at an overlook both depend on it. A second one would unlock the pre-dawn hot chocolate." },
+      { name: "Wide-mouth thermos", state: "own", note: "<b>One, and staying at one — decided Sept 2026.</b> Load-bearing: the standing routine is snack → hike → hot thermos meal at the turnaround → hike out. Because there is only one, hot oats and hot chocolate compete on any pre-dawn morning; the meal wins and the drink gets dropped. Plan around that rather than around a second flask. A second one would unlock the pre-dawn hot chocolate." },
       { name: "48 qt cooler", state: "own", note: "Frozen meals in flat quart bags <i>are</i> the ice. Holds ~2.5 days unaided in 75°F — buy a <b>block</b> of ice at resupply, not cubes.",
         question: { text: "Does the frozen-meals-as-ice system actually reach the first resupply, and does the breakfast burrito survive to day 8?", answeredBy: "appalachians-2026" } },
       { name: "Olive oil in a squeeze bottle", state: "own", note: "One of the four things that turn a can into a meal: oil, hard cheese, crushed chips, starch pouch." },
