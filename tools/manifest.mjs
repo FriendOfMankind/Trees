@@ -23,6 +23,10 @@ const OUT = join(ROOT, "sw-precache.js");
 
 /* Everything the site needs to open with no network. Order is cosmetic. */
 function assetList() {
+  /* mapbench.html is deliberately NOT here. It's a desk tool for locating
+     waypoints, it only works with live map tiles and a browser that can reach
+     Google Maps, and precaching it would promise an offline capability it
+     cannot deliver. Field pages go offline; workbenches don't. */
   const files = [
     "index.html",
     "css/base.css",

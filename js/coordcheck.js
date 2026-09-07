@@ -1,0 +1,111 @@
+/* ==========================================================================
+   coordcheck.js — the sanity checks a coordinate has to survive before it is
+   allowed into a data file.
+
+   Kept separate from mapbench.js and free of any DOM so it can be run two
+   ways: loaded as a plain script by mapbench.html, and evaluated in a Node
+   sandbox by tools/test/coordcheck.test.mjs the same way the site's other
+   browser data files are.
+
+   These are the checks that catch a real mistake with a real cost. Each one
+   corresponds to something that has actually gone wrong somewhere:
+
+     swapped   — 37.8,-83.6 is Kentucky; -83.6,37.8 is the Indian Ocean.
+                 The most common paste error there is.
+     sign      — a positive longitude in North America puts the pin in Asia.
+     precision — 2 decimal places is ~1.1 km. Too coarse to navigate to, and
+                 the signature of a number rounded from memory rather than
+                 read off a map.
+     far       — measured against the trip's own region centroid.
+     split     — two stops on the same day 150 km apart is either a wrong pin
+                 or a day that doesn't work. Both worth saying out loud.
+     duplicate — identical coordinates mean a paste that didn't refresh.
+
+   Levels: "stop" blocks the placement, "warn" is shown and allowed. A warning
+   you cannot override is one people learn to route around, so the overridable
+   ones stay overridable.
+   ========================================================================== */
+
+(function (root) {
+  "use strict";
+
+  function haversineKm(a, b) {
+    const R = 6371, rad = (d) => (d * Math.PI) / 180;
+    const dLat = rad(b[0] - a[0]), dLng = rad(b[1] - a[1]);
+    const s = Math.sin(dLat / 2) ** 2 +
+      Math.cos(rad(a[0])) * Math.cos(rad(b[0])) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(s));
+  }
+
+  /** Decimal places actually present in a number as written. */
+  function precisionOf(n) {
+    const s = String(n);
+    const i = s.indexOf(".");
+    return i === -1 ? 0 : s.length - i - 1;
+  }
+
+  /**
+   * @param {object} o
+   * @param {string} o.name        waypoint being placed
+   * @param {number} o.lat
+   * @param {number} o.lng
+   * @param {Array}  o.others      [{ name, days, lat, lng }] — everything else with a coordinate
+   * @param {string} o.days        the day(s) this waypoint belongs to
+   * @param {Array}  [o.tripCoords] [lat,lng] region centroid from the registry
+   * @param {string} [o.country]   "USA" | "Canada" | other
+   * @returns {Array<{level:"stop"|"warn", code:string, msg:string}>}
+   */
+  function coordChecks(o) {
+    const out = [];
+    const { name, lat, lng } = o;
+    const others = o.others || [];
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+      return [{ level: "stop", code: "nan", msg: "Not two numbers." }];
+    }
+    if (Math.abs(lat) > 90 || Math.abs(lng) > 180) {
+      return [{ level: "stop", code: "range", msg: `${lat}, ${lng} is off the planet.` }];
+    }
+
+    const country = o.country || "USA";
+    const inAmericas = country === "USA" || country === "Canada";
+
+    if (inAmericas && lng > 0) {
+      const swapped = lat < 0 && Math.abs(lat) > 24;
+      out.push(swapped
+        ? { level: "stop", code: "swapped", msg: "Latitude and longitude look swapped — in North America longitude is the negative one." }
+        : { level: "stop", code: "sign", msg: `Longitude ${lng} is positive. In North America it should be negative — this pin is in Asia.` });
+    }
+
+    const p = Math.min(precisionOf(lat), precisionOf(lng));
+    if (p <= 2) {
+      const slop = p === 0 ? "~111 km" : p === 1 ? "~11 km" : "~1.1 km";
+      out.push({ level: "warn", code: "precision", msg: `Only ${p} decimal place(s) — that's ${slop} of slop. Read it off a map rather than rounding.` });
+    }
+
+    if (Array.isArray(o.tripCoords) && o.tripCoords.length === 2) {
+      const km = haversineKm([lat, lng], o.tripCoords);
+      if (km > 800) out.push({ level: "stop", code: "far", msg: `${Math.round(km)} km from the trip's region centre. That is not this trip.` });
+      else if (km > 300) out.push({ level: "warn", code: "far", msg: `${Math.round(km)} km from the trip's region centre — worth confirming it's the right one.` });
+    }
+
+    for (const other of others) {
+      if (other.name === name || other.lat == null || other.lng == null) continue;
+      if (other.lat === lat && other.lng === lng) {
+        out.push({ level: "stop", code: "duplicate", msg: `Identical to "${other.name}" — the paste probably didn't refresh.` });
+        continue;
+      }
+      if (o.days && other.days && other.days === o.days) {
+        const km = haversineKm([lat, lng], [other.lat, other.lng]);
+        if (km > 150) {
+          out.push({ level: "warn", code: "split", msg: `${Math.round(km)} km from "${other.name}", which is on the same day (${o.days}).` });
+        }
+      }
+    }
+    return out;
+  }
+
+  root.coordChecks = coordChecks;
+  root.coordPrecisionOf = precisionOf;
+  root.coordHaversineKm = haversineKm;
+})(typeof globalThis !== "undefined" ? globalThis : this);

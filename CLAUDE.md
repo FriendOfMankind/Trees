@@ -35,6 +35,8 @@ tools/export.mjs      writes GPX / ICS / plan text; --all writes data/trips.json
 tools/geocode.mjs     find + verify waypoint coordinates (never invents one)
                       prefers the RIDB bulk download ($RIDB_DATA) over the API
 tools/setcoord.mjs    record a coordinate you looked up yourself (needs --source)
+mapbench.html         browser workbench for locating + reviewing waypoints.
+js/coordcheck.js      the placement sanity checks, DOM-free so they're tested
 tools/route.mjs       bake driving geometry between verified waypoints
 tools/trail.mjs       transcribe a hike's real shape from OSM
 tools/lib/            shared: site loader, astro, polyline codec, geo lookups
@@ -153,3 +155,6 @@ search returns their pages *quoted in results*, which is how the Mojave page
 got its campground facts — better than a blog, worse than the page, and
 labelled as such. AllTrails and AccuWeather MCP tools work directly. If a fee
 or booking window matters, say which of the two it is.
+  **Don't ask Colin to run geocode/route/trail — they cannot work here.** Send
+  him to `mapbench.html`, which is built for exactly this handoff, and take
+  the JSON block it produces.

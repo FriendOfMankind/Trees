@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Map Bench — Trail Notes</title>
+<meta name="description" content="Locate and review trip waypoints in the browser, then hand the results back as one paste." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📍</text></svg>" />
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/mapbench.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-text">
+      <p class="eyebrow"><a href="index.html">&larr; All trips</a></p>
+      <h1>Map Bench</h1>
+      <p class="subtitle">Locate what the tools can't reach, review what they did.</p>
+    </div>
+    <div class="header-stats" id="header-stats"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel active">
+    <div class="bench-intro note-card">
+      <h3>Why this page exists</h3>
+      <p><b>Every geocoding host is blocked inside a Claude Code session</b> —
+      Nominatim, Overpass, Recreation.gov, the RIDB API. Not rate-limited:
+      unreachable. So Claude cannot look up a coordinate, at all, ever, and no
+      amount of asking changes that. <b>Your browser can.</b> This page is the
+      half of the job that has to happen here, built so it takes seconds per
+      waypoint instead of a hand-edit, and so nothing lands in a data file
+      without a source attached to it.</p>
+    </div>
+
+    <div class="bench-bar">
+      <label class="bench-field">
+        <span>Trip</span>
+        <select id="trip-select"></select>
+      </label>
+      <label class="bench-field grow">
+        <span>Source — where this coordinate came from <b>(required)</b></span>
+        <input id="source-input" type="text" placeholder="e.g. Google Maps satellite, gate at the end of FS 210" />
+      </label>
+      <div class="bench-field">
+        <span>&nbsp;</span>
+        <button class="promote-btn" id="clear-btn">Clear placements</button>
+      </div>
+    </div>
+
+    <div id="bench-status" class="bench-status"></div>
+
+    <div class="bench-cols">
+      <div>
+        <h2 class="section-title">Waypoints</h2>
+        <p class="section-sub">Click a row to select it, then click the map or paste coordinates. Google Maps right-click &rarr; the top item copies as <code>37.828230, -83.677587</code>, which pastes straight in.</p>
+        <div id="worklist"></div>
+      </div>
+      <div>
+        <h2 class="section-title">Map</h2>
+        <p class="section-sub" id="map-hint">Pick a trip to begin.</p>
+        <div id="bench-map"></div>
+        <div class="bench-legend">
+          <span><i class="dot ok"></i>Already verified</span>
+          <span><i class="dot new"></i>Placed this session</span>
+          <span><i class="dot sel"></i>Selected</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top:2rem">Hand it back</h2>
+    <p class="section-sub">Nothing here writes to a file. Copy one of these — the JSON is the one to paste to Claude; the commands are if you'd rather do it yourself.</p>
+    <div class="bench-out" id="bench-out"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Placements live in this browser only until you paste them somewhere. Nothing on this page edits <code>data.js</code>.</p>
+</footer>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="js/themes.js"></script>
+<script src="data/profile.js"></script>
+<script src="data/meals.js"></script>
+<script src="data/trips.js"></script>
+<script src="js/coordcheck.js"></script>
+<script src="js/mapbench.js"></script>
+</body>
+</html>

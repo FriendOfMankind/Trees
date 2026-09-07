@@ -103,6 +103,27 @@ plan said 6:52", which is a four-minute error caught by luck. Sites resolve
 through *verified* waypoints only; there is no computing a sunset for a place
 nobody has located.
 
+## Locating waypoints — the Map Bench
+
+Every geocoding host (Nominatim, Overpass, Recreation.gov, the RIDB API) is
+unreachable from a Claude Code session on this repo, so `tools/geocode.mjs`,
+`route.mjs` and `trail.mjs` return nothing there. That is a hard split, not a
+bug to route around: Claude has the itinerary, the schema and the validator;
+your browser has a map.
+
+[`mapbench.html`](mapbench.html) is the half that has to happen in a browser.
+Pick a trip, click a waypoint, then click the map or paste what Google Maps
+gives you on right-click. Every placement is checked as it lands — swapped
+lat/lng, a positive longitude in North America, a coordinate too coarse to
+navigate to, a pin in the wrong state, two stops on one day 150 km apart, an
+exact duplicate. A source string is required, exactly as `tools/setcoord.mjs`
+requires one, because a coordinate with no provenance can't be re-checked by
+anyone. The page writes nothing; it hands you one block to paste back.
+
+It also reviews what's already in a trip's file, running the same checks over
+coordinates that shipped earlier. The rules live in `js/coordcheck.js` with no
+DOM attached, so the code the page runs is the code the tests exercise.
+
 ## Adding a trip
 
 ```bash

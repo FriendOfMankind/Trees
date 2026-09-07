@@ -560,7 +560,8 @@
       <ul class="unverified-list">${unverified.map((w) => `<li>
         <span class="u-body"><strong>${w.name}</strong> <span class="u-day">Day ${w.days}</span>${w.notes ? `<br><span class="u-note">${w.notes}</span>` : ""}</span>
         ${mapsBtn(w.name)}
-      </li>`).join("")}</ul>`;
+      </li>`).join("")}</ul>
+      <p style="margin:0.7em 0 0"><a href="../../mapbench.html">Open the Map Bench &rarr;</a> to locate ${unverified.length === 1 ? "it" : "these"} and hand the coordinates back in one paste.</p>`;
   }
 
   /* ---------------- Tables ---------------- */
