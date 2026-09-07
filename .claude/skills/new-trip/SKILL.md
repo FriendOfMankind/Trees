@@ -69,7 +69,23 @@ Pick a theme by terrain, not country: `ocean` `desert` `alpine` `forest`
 `night` `savanna`. If none fit, add a seventh preset to `js/themes.js` rather
 than inlining a one-off palette.
 
-### 4. Register it
+### 4. Wire up the meals
+
+Before writing a meal into a day, open `data/meals.js`. If the meal already
+exists there — and after two trips most breakfasts and lunches do — **do not
+re-type the recipe into the trip file.** Add the trip's day and slot to that
+recipe's `usedOn` array and the trip page links itself.
+
+The day's meal string still carries the trip-specific coaching ("buy the block
+ice today", "both Zone 1 dinners now gone"). What moves to `meals.js` is the
+part that would be identical on any trip: method, ingredients, cleanup level,
+water requirement, what gets pre-mixed at home.
+
+A genuinely new meal gets a new recipe. Set `cleanup` honestly — it decides
+which campsite the meal can happen at, and the validator rejects a `med` or
+`high` cleanup meal that claims to need no water.
+
+### 5. Register it
 
 Add an entry to `data/trips.js`. The `next` field matters most — it's the
 single action standing between this trip and being booked, and it's what shows
@@ -78,7 +94,7 @@ on the hub card. "Enter the permit lottery, opens January" beats "plan more".
 Order `reservations` by booking window, earliest first, so the first unchecked
 box is always the next thing to do.
 
-### 5. Validate and look at it
+### 6. Validate and look at it
 
 ```
 node tools/validate.mjs
@@ -87,7 +103,7 @@ node tools/validate.mjs
 Must exit clean. Then actually open the page — check the tabs render, the map
 has pins, the day cards aren't empty.
 
-### 6. Report
+### 7. Report
 
 Tell him, in the chat and briefly:
 - what you built and what status you gave it

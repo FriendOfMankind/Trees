@@ -42,6 +42,7 @@ for the tone.
 index.html            the hub — renders from data/trips.js + data/profile.js
 data/trips.js         THE REGISTRY. every trip, planned or dreamed
 data/profile.js       traveler profile, gear locker, universal checklist, booking windows
+data/meals.js         camp kitchen — recipes, cooler doctrine, standing pantry
 css/base.css          shared tokens + primitives (theme lives in --t-* vars)
 css/hub.css           hub only
 css/trip.css          trip pages only
@@ -159,6 +160,24 @@ empties and flip the status to `planned`.
 food strategy, gear reasoning. This is where the page earns its keep.
 
 ---
+
+## Meals
+
+A meal that will ever be cooked twice belongs in `data/meals.js`, not re-typed
+into a trip. Each recipe carries the reusable half — method, cleanup level,
+water requirement, cookware, what's pre-mixed at home, the technique — and a
+`usedOn` array naming every trip day and slot it fills.
+
+The day's own `meals.{b,l,d}` string keeps the trip-specific coaching, because
+"shrimp 2 min a side, do not walk away" belongs next to the day it happens on.
+The renderer appends a link to the recipe automatically for any slot a recipe
+claims, so **existing trip files need no edit** — the cross-reference lives in
+`meals.js` and `tools/validate.mjs` verifies it in both directions.
+
+`cleanup` is the load-bearing field. It decides *where* a meal can be
+scheduled, not how good it is: a `high`-cleanup meal is only legal at a site
+with potable water. The validator rejects `cleanup: "med"` or `"high"` paired
+with `water: "none"`.
 
 ## Themes
 

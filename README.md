@@ -9,12 +9,16 @@ serve the folder. GitHub Pages works out of the box.
 
 ## The hub
 
-`index.html` is the front door. Four tabs:
+`index.html` is the front door. Five tabs:
 
 - **Trips** — every trip as a card, pinned first, then by how real it is.
   Filter by Pinned / Planned / Needs work / Wishlist / Done. Each card shows
   the single **next action** standing between that trip and being booked.
 - **Map** — every trip pinned on one world map, colored by theme.
+- **Camp Kitchen** — the recipe library. 23 meals filling 39 slots across the
+  planned trips, 9 of them reused on more than one. Filter by what actually
+  decides scheduling: needs no water, no cleanup, made at home. Plus the
+  cooler zone model and the technique that cost a trip to learn.
 - **Gear Locker** — what's in the kit and, more usefully, what it can't do
   yet. Anything marked *replace* is a purchase with a deadline.
 - **Playbook** — the planning principles every itinerary here is built to, the
@@ -28,6 +32,10 @@ data sections exist — a trip with no hikes has no Hikes tab:
 
 Overview · Itinerary · Map · Lodging · Hikes · Sun/Moon/Weather · Budget ·
 Packing · Reservations · Open Questions · Notes
+
+A day's meal slot links to its recipe in the Camp Kitchen wherever
+`data/meals.js` records one — the trip files themselves need no edit, because
+the cross-reference lives in the recipe and the validator checks it both ways.
 
 Packing and reservations are interactive checklists saved to `localStorage`
 (per browser — a scratchpad, not a record). Maps use Leaflet, vendored
@@ -58,4 +66,9 @@ applies to confirmation numbers, prices and opening hours — a blank makes you
 look it up, a fabricated one doesn't.
 
 `node tools/validate.mjs` checks registry/page consistency, coordinate sanity,
-verified-flag mismatches, and that budget line items actually add up.
+verified-flag mismatches, that budget line items actually add up, and that
+every recipe's claimed meal slot exists on the day it names (and that every
+meal code printed on a trip page is claimed by a recipe).
+
+[`docs/ROADMAP.md`](docs/ROADMAP.md) is what to build next — and, more
+usefully, what not to.

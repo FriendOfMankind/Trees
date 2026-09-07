@@ -166,6 +166,36 @@
     </li>`;
   }
 
+
+  /* ---------------- Meals ----------------
+     A meal slot is either a plain string (every trip written before the camp
+     kitchen existed) or { ref, text }. Either way the link back to the recipe
+     comes from data/meals.js, which records the slots each recipe fills and
+     is cross-checked by tools/validate.mjs — so existing trip files get the
+     link without being edited. If meals.js isn't loaded, this all no-ops. */
+
+  const MEAL_BY_SLOT = (() => {
+    const map = new Map();
+    if (typeof MEALS === "undefined") return map;
+    for (const m of MEALS) {
+      for (const u of m.usedOn || []) {
+        if (u.slug === SLUG) map.set(`${u.day}:${u.meal}`, m);
+      }
+    }
+    return map;
+  })();
+
+  function mealText(v) {
+    if (v == null) return "—";
+    return typeof v === "object" ? (v.text || "") : v;
+  }
+
+  function kitchenLink(day, key) {
+    const m = MEAL_BY_SLOT.get(`${day}:${key}`);
+    if (!m) return "";
+    return ` <a class="kitchen-link" href="../../index.html#kitchen=${m.id}" title="${m.name} — camp kitchen">${m.name} &#8599;</a>`;
+  }
+
   function dayCardHtml(d) {
     const o = d.overnight;
     const overnight = o
@@ -179,7 +209,9 @@
       : "";
 
     const meals = d.meals
-      ? `<div class="meals-row"><span>🍳 B: ${d.meals.b}</span><span>🥪 L: ${d.meals.l}</span><span>🍽️ D: ${d.meals.d}</span></div>`
+      ? `<div class="meals-row">${[["b", "🍳", "B"], ["l", "🥪", "L"], ["d", "🍽️", "D"]]
+          .map(([k, icon, label]) => `<span>${icon} ${label}: ${mealText(d.meals[k])}${kitchenLink(d.day, k)}</span>`)
+          .join("")}</div>`
       : "";
 
     const chips = [

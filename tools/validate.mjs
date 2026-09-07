@@ -9,6 +9,8 @@
      - a slug mismatch between the registry and the trip's own data
      - a waypoint marked verified:true with no coordinates (or vice versa)
      - a coordinate outside the possible range
+     - a meal in data/meals.js claiming a trip slot that doesn't exist, or a
+       meal code on a trip page that no recipe claims
    ========================================================================== */
 
 import { readFileSync, existsSync, readdirSync } from "node:fs";
@@ -39,9 +41,10 @@ function evalScripts(files) {
 
 // ---- Registry -------------------------------------------------------------
 
-const hub = evalScripts(["js/themes.js", "data/profile.js", "data/trips.js"]);
+const hub = evalScripts(["js/themes.js", "data/profile.js", "data/meals.js", "data/trips.js"]);
 const TRIPS = hub.read("TRIPS");
 const THEMES = hub.read("THEMES") || {};
+const MEALS = hub.read("MEALS");
 
 if (!Array.isArray(TRIPS)) {
   fail("data/trips.js did not define a TRIPS array");
@@ -120,13 +123,109 @@ for (const slug of slugs) {
   }
 }
 
+
+// ---- Camp kitchen ---------------------------------------------------------
+// The recipe library is only worth anything if `usedOn` is true. Checked in
+// both directions: every claimed slot must exist on the trip, and every meal
+// code printed on a trip page must be claimed by a recipe. A dangling code is
+// how a "reusable" library quietly becomes a second copy of the same prose.
+
+const MEAL_TYPES = new Set(["breakfast", "lunch", "dinner", "drink"]);
+const MEAL_METHODS = new Set(["bag", "boil", "one-pot", "pan", "assemble", "no-cook", "thermos"]);
+const MEAL_CLEANUP = new Set(["none", "low", "med", "high"]);
+const MEAL_WATER = new Set(["none", "boil-only", "wash-needed"]);
+const MEAL_KEYS = { b: "breakfast", l: "lunch", d: "dinner" };
+
+const claimedCodes = new Set();
+
+if (!Array.isArray(MEALS)) {
+  fail("data/meals.js did not define a MEALS array");
+} else {
+  const seenMeal = new Set();
+  for (const m of MEALS) {
+    const id = m.id || "(no id)";
+    if (!m.id) fail(`meals: an entry has no id (name: ${m.name})`);
+    if (seenMeal.has(m.id)) fail(`meals: duplicate id "${m.id}"`);
+    seenMeal.add(m.id);
+
+    if (!MEAL_TYPES.has(m.type)) fail(`meals/${id}: type "${m.type}" is not one of ${[...MEAL_TYPES].join("/")}`);
+    if (!MEAL_METHODS.has(m.method)) fail(`meals/${id}: method "${m.method}" is not one of ${[...MEAL_METHODS].join("/")}`);
+    if (!MEAL_CLEANUP.has(m.cleanup)) fail(`meals/${id}: cleanup "${m.cleanup}" is not one of ${[...MEAL_CLEANUP].join("/")}`);
+    if (!MEAL_WATER.has(m.water)) fail(`meals/${id}: water "${m.water}" is not one of ${[...MEAL_WATER].join("/")}`);
+
+    // A meal that needs washing up but claims no water is a scheduling bug
+    // waiting to happen at a dry campsite.
+    if ((m.cleanup === "med" || m.cleanup === "high") && m.water === "none") {
+      fail(`meals/${id}: cleanup "${m.cleanup}" with water "none" — a meal that dirties cookware needs somewhere to wash it`);
+    }
+
+    if (!Array.isArray(m.usedOn)) { fail(`meals/${id}: usedOn must be an array`); continue; }
+    if (!m.usedOn.length && m.type !== "drink") warn(`meals/${id}: not used on any trip — an orphan recipe`);
+
+    for (const u of m.usedOn) {
+      if (u.code) claimedCodes.add(`${u.slug}:${u.code}`);
+      if (Array.isArray(TRIPS) && !TRIPS.some((t) => t.slug === u.slug)) {
+        fail(`meals/${id}: usedOn references unknown trip "${u.slug}"`);
+      }
+      if (!MEAL_KEYS[u.meal]) fail(`meals/${id}: usedOn meal slot "${u.meal}" must be b, l or d`);
+      if (u.meal && MEAL_KEYS[u.meal] && m.type !== "drink" && MEAL_KEYS[u.meal] !== m.type) {
+        warn(`meals/${id}: a ${m.type} recipe is filling the "${u.meal}" slot on ${u.slug} day ${u.day}`);
+      }
+    }
+  }
+}
+
+// Now walk the trip files and check the claims land on real days.
+for (const slug of slugs) {
+  const rel = `trips/${slug}/data.js`;
+  let D;
+  try {
+    D = evalScripts(["js/themes.js", rel]).window.TRIP_DATA;
+  } catch (e) { continue; }
+  if (!D || !Array.isArray(D.days)) continue;
+
+  const dayByNum = new Map(D.days.map((d) => [d.day, d]));
+
+  for (const m of Array.isArray(MEALS) ? MEALS : []) {
+    for (const u of m.usedOn || []) {
+      if (u.slug !== slug) continue;
+      const day = dayByNum.get(u.day);
+      if (!day) { fail(`meals/${m.id}: claims ${slug} day ${u.day}, which has no such day`); continue; }
+      if (!day.meals || day.meals[u.meal] == null) {
+        fail(`meals/${m.id}: claims ${slug} day ${u.day} slot "${u.meal}", which has no meal there`);
+        continue;
+      }
+      const text = String(typeof day.meals[u.meal] === "object" ? day.meals[u.meal].text || "" : day.meals[u.meal]);
+      if (u.code && !text.includes(u.code)) {
+        fail(`meals/${m.id}: claims code ${u.code} on ${slug} day ${u.day} "${u.meal}", but that slot's text doesn't mention it`);
+      }
+    }
+  }
+
+  // Reverse direction: a code printed on the page that no recipe claims.
+  for (const day of D.days) {
+    if (!day.meals) continue;
+    for (const key of ["b", "l", "d"]) {
+      const raw = day.meals[key];
+      if (raw == null) continue;
+      const text = String(typeof raw === "object" ? raw.text || "" : raw);
+      for (const code of text.match(/\b[A-Z]-[BLD]\d+\b/g) || []) {
+        if (!claimedCodes.has(`${slug}:${code}`)) {
+          warn(`${rel}: day ${day.day} "${key}" prints meal code ${code}, which no recipe in data/meals.js claims`);
+        }
+      }
+    }
+  }
+}
+
 // ---- Report ---------------------------------------------------------------
 
 for (const w of warnings) console.log(`  warn  ${w}`);
 for (const p of problems) console.log(`  FAIL  ${p}`);
 
 console.log(
-  `\n${slugs.length} trip page(s), ${TRIPS ? TRIPS.length : 0} registry entr(ies) — ` +
+  `\n${slugs.length} trip page(s), ${TRIPS ? TRIPS.length : 0} registry entr(ies), ` +
+  `${MEALS ? MEALS.length : 0} recipe(s) — ` +
   `${problems.length} problem(s), ${warnings.length} warning(s)`
 );
 process.exit(problems.length ? 1 : 0);
