@@ -530,3 +530,13 @@ tr.zone-none td { background: var(--ok-bg); }
 @media (max-width: 600px) {
   .meal-grid { grid-template-columns: 1fr; }
 }
+
+/* A recipe written from a Menu Bench vote rather than transcribed from a trip
+   that happened. The distinction matters: one has had its quantities cooked,
+   the other has not. */
+.draft-tag {
+  text-transform: none;
+  letter-spacing: 0;
+  font-style: italic;
+  color: #7a5a12;
+}

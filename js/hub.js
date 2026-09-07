@@ -585,6 +585,8 @@
     ["low-cleanup", "🧼 Cleanup none/low"],
     ["make-ahead", "🏠 Made at home"],
     ["reused", "♻️ Used on 2+ trips"],
+    ["cooked", "✅ Actually cooked"],
+    ["draft", "📝 Drafts"],
   ];
 
   function mealMatches(m, f) {
@@ -593,6 +595,8 @@
     if (f === "low-cleanup") return m.cleanup === "none" || m.cleanup === "low";
     if (f === "make-ahead") return !!m.prepAtHome;
     if (f === "reused") return new Set(m.usedOn.map((u) => u.slug)).size > 1;
+    if (f === "cooked") return !m.draft;
+    if (f === "draft") return !!m.draft;
     return m.type === f;
   }
 
@@ -621,7 +625,7 @@
         <div class="meal-head">
           <div>
             <h3>${m.name}</h3>
-            <div class="meal-sub">${MEAL_TYPE_LABEL[m.type] || m.type}${trips > 1 ? ` · <b>reused on ${trips} trips</b>` : ""}</div>
+            <div class="meal-sub">${MEAL_TYPE_LABEL[m.type] || m.type}${trips > 1 ? ` · <b>reused on ${trips} trips</b>` : ""}${m.draft ? ` · <span class="draft-tag">draft — not cooked yet</span>` : ""}</div>
           </div>
           <span class="cleanup-pill ${m.cleanup}">${m.cleanup === "none" ? "no cleanup" : `${m.cleanup} cleanup`}</span>
         </div>
@@ -680,10 +684,12 @@
 
     const slots = MEALS.reduce((n, m) => n + m.usedOn.length, 0);
     const reused = MEALS.filter((m) => new Set(m.usedOn.map((u) => u.slug)).size > 1).length;
+    const drafts = MEALS.filter((m) => m.draft).length;
+    const cooked = MEALS.length - drafts;
 
     $("#panel-kitchen").innerHTML = `
       <h2 class="section-title">Camp Kitchen</h2>
-      <p class="section-sub">Recipes, technique and cooler doctrine that outlive any one trip. ${MEALS.length} recipes filling ${slots} meal slots across the planned trips — <b>${reused} of them appear on more than one trip</b>, which is the whole reason this file exists. A destination changes; one burner, one pot, one pan and one portion do not.</p>
+      <p class="section-sub">Recipes, technique and cooler doctrine that outlive any one trip. <b>${MEALS.length} recipes.</b> ${cooked} were transcribed from trips that actually happened and fill ${slots} real meal slots — ${reused} of those appear on more than one trip, which is the whole reason this file exists. The other <b>${drafts} are drafts</b> from the <a href="menubench.html">Menu Bench</a> vote: the method is sound, the quantities are estimates until one gets cooked. A destination changes; one burner, one pot, one pan and one portion do not.</p>
 
       <div id="kitchen-intro">
       <div class="card-grid">
@@ -832,6 +838,13 @@
         <h3>Considered and declined — do not re-propose</h3>
         <div class="tag-row" style="margin-top:0.5em">${DECLINED.map((d) => `<span class="tag" style="cursor:default">${d.what || d}</span>`).join("")}</div>
       </div>
+
+      ${typeof DISLIKES !== "undefined" && DISLIKES.length ? `
+      <div class="note-card" style="border-left-color: var(--warn-border)">
+        <h3>Food voted down — do not re-propose</h3>
+        <p class="section-sub" style="margin:-0.2em 0 0.6em">From the <a href="menubench.html">Menu Bench</a>, Sept 2026. The validator greps every trip's meals for these, so a rejected dish can't quietly reappear.</p>
+        <div class="tag-row">${DISLIKES.map((d) => `<span class="tag">${d.what}</span>`).join("")}</div>
+      </div>` : ""}
 
       <h2 class="section-title" style="margin-top:2rem">Every-Trip Checklist</h2>
       <p class="section-sub">Destination-independent. The trip's own Reservations tab covers the rest.</p>

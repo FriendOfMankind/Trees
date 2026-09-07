@@ -37,6 +37,7 @@ const BOOKING_WINDOWS = hub.read("BOOKING_WINDOWS") || [];
 const SYSTEMS = new Set(BOOKING_WINDOWS.map((b) => b.system).filter(Boolean));
 
 const MEALS = hub.read("MEALS");
+const DISLIKES = hub.read("DISLIKES") || [];
 const DISH_GROUPS = hub.read("DISH_GROUPS");
 
 const tagUse = new Map();
@@ -478,7 +479,9 @@ if (!Array.isArray(MEALS)) {
     }
 
     if (!Array.isArray(m.usedOn)) { fail(`meals/${id}: usedOn must be an array`); continue; }
-    if (!m.usedOn.length && m.type !== "drink") warn(`meals/${id}: not used on any trip — an orphan recipe`);
+    if (!m.usedOn.length && m.type !== "drink" && !m.draft) {
+      warn(`meals/${id}: not used on any trip — an orphan recipe`);
+    }
 
     for (const u of m.usedOn) {
       if (u.code) claimedCodes.add(`${u.slug}:${u.code}`);
@@ -533,6 +536,34 @@ for (const slug of slugs) {
   }
 }
 
+// ---- Rejected food still on a plate --------------------------------------
+// A dish voted down on the Menu Bench that is still scheduled on a trip is the
+// exact failure this list exists to prevent. Reported loudly rather than
+// fixed, because swapping a meal changes a day and that is not the
+// validator's call to make.
+
+if (DISLIKES.length && Array.isArray(MEALS)) {
+  for (const slug of slugs) {
+    const D = loadTrip(slug);
+    if (!D || !Array.isArray(D.days)) continue;
+    for (const day of D.days) {
+      if (!day.meals) continue;
+      for (const key of ["b", "l", "d"]) {
+        const raw = day.meals[key];
+        if (raw == null) continue;
+        const text = String(typeof raw === "object" ? raw.text || "" : raw).toLowerCase();
+        for (const d of DISLIKES) {
+          for (const term of d.terms || []) {
+            if (text.includes(term.toLowerCase())) {
+              warn(`trips/${slug}/data.js: day ${day.day} "${key}" still serves "${d.what}", which was voted down on the Menu Bench`);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 // ---- Dish candidates -----------------------------------------------------
 // data/dishes.js is an intake list, not a plan, so most of it isn't the
 // validator's business. Two things are: a candidate claiming "already in the
@@ -553,11 +584,13 @@ if (Array.isArray(DISH_GROUPS)) {
     seenDish.add(d.id);
 
     if (d.have && !d.mealId) fail(`dishes/${d.id}: claims have:true with no mealId to check it against`);
-    if (d.mealId) {
-      if (!mealIds.has(d.mealId)) fail(`dishes/${d.id}: mealId "${d.mealId}" is not a recipe in data/meals.js`);
-      else covered.add(d.mealId);
+    for (const link of [d.mealId, d.becameMealId]) {
+      if (!link) continue;
+      if (!mealIds.has(link)) fail(`dishes/${d.id}: "${link}" is not a recipe in data/meals.js`);
+      else covered.add(link);
     }
     if (typeof d.kcal !== "number") warn(`dishes/${d.id}: no kcal estimate — it can't be sorted by density`);
+    if (d.vote === "yes" && !d.mealId && !d.becameMealId) warn(`dishes/${d.id}: voted yes but no recipe was ever written for it`);
   }
 
   for (const id of mealIds) {
@@ -566,6 +599,11 @@ if (Array.isArray(DISH_GROUPS)) {
 }
 
 // ---- Report ---------------------------------------------------------------
+
+const drafts = (Array.isArray(MEALS) ? MEALS : []).filter((m) => m.draft);
+if (drafts.length) {
+  console.log(`  note  ${drafts.length} recipe(s) marked draft — written from a Menu Bench vote, not yet cooked. Quantities are estimates.`);
+}
 
 for (const w of warnings) console.log(`  warn  ${w}`);
 for (const p of problems) console.log(`  FAIL  ${p}`);

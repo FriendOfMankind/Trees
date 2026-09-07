@@ -652,6 +652,11 @@ window.TRIP_DATA = {
 
   openQuestions: [
     {
+      question: "Three October meals were voted down on the Menu Bench and are still on the plan.",
+      blocks: "Day 5 lunch, day 5 dinner and day 8 lunch. None is urgent — this trip is Oct 15 — but day 8 is the one that matters.",
+      detail: "The Sept 2026 vote rejected 20 of 88 candidate dishes, and three of them are scheduled here. The validator reports all three every run.<br><br><b>O-L7, day 8 lunch — the important one.</b> It is the waterless pouch plate, on a site with nothing to wash with, and \"eating a pouch straight as the meal\" was a no. <b>Summer sausage and cheese board</b> is the clean swap: voted yes, Zone 3 only, zero cleanup, no water, and it holds up on day 8 when the ice is gone.<br><br><b>O-D2, day 5 dinner</b> — white chicken chili, voted no. The beef-and-bean version of the same frozen-flat bag was voted yes, so the swap costs nothing structurally: same Zone 1 behaviour, same prep, same night. Beef stew and lentil-and-sausage stew were also both yes.<br><br><b>O-L4, day 5 lunch</b> — the hummus cups. Only that component was rejected; the tortillas, salami and thermos of hot soup were not. Swap the hummus for hard cheese and the meal survives intact.<br><br>Not changed automatically: swapping a meal changes a day, and this is a planned trip with a written cooler timeline behind it."
+    },
+    {
       question: "Oct 15 is now a first-come primitive site, and that is the one thing left to get right.",
       blocks: "Day 1",
       detail:

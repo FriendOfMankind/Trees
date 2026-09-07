@@ -96,6 +96,50 @@ const AVOID = [
   { what: "Beer", terms: ["beer", "brewpub"], why: "PROFILE.food: no beer. Breweries are also on the declined list." },
 ];
 
+/* Foods rejected on the Menu Bench, Sept 2026 — 20 of 88 candidates.
+   Enforced exactly like DECLINED and AVOID: tools/validate.mjs greps a trip's
+   meals for `terms` and reports a hit, so a rejected dish cannot quietly
+   reappear in an itinerary a year from now.
+
+   ⚠️ These are the SPECIFIC dishes he said no to. The patterns underneath are
+   inference and are NOT enforced — they are written down as hypotheses to be
+   confirmed or knocked down, because acting on an unconfirmed pattern is how
+   a preference list starts banning food nobody objected to:
+     - grits, congee and rice pudding all rejected → savoury or sweet porridge
+       is out, even though oats are in. Oats may simply be the exception.
+     - both ramen entries rejected → ramen is out as a format.
+     - tuna salad, egg salad and bánh mì all rejected → possibly mayonnaise.
+     - hummus, refried beans, white chicken chili and gumbo rejected → possibly
+       beans as the centre of a dish. Note lentil stew and cannellini pasta
+       were both YES, so it is not legumes in general.
+     - cold pizza, rice balls and egg salad rejected → leftovers repurposed as
+       a cold lunch may be the objection, not the food.
+     - pork chop with apple AND griddled banana both rejected → <b>cooked fruit
+       may be out too</b>, which matters: cooked fruit was the proposed
+       workaround for the raw-fruit allergy. If both are out, fruit leaves the
+       plan entirely and the two raw apples need a non-fruit replacement. */
+const DISLIKES = [
+  { what: "Sausage gravy over biscuits", terms: ["sausage gravy", "biscuits and gravy"] },
+  { what: "Grits, in any form", terms: ["grits"] },
+  { what: "Savoury rice porridge / congee", terms: ["congee", "rice porridge"] },
+  { what: "Eggs poached in tomato sauce (shakshuka)", terms: ["shakshuka"] },
+  { what: "Eating a pouch straight as the meal", terms: ["pouch plate", "straight from the pouch"] },
+  { what: "Bánh mì-style cold cut rolls", terms: ["banh mi", "bánh mì"] },
+  { what: "Tuna or chicken salad", terms: ["tuna salad", "chicken salad"] },
+  { what: "Cold leftover pizza as a lunch", terms: ["cold pizza", "leftover pizza"] },
+  { what: "Hummus as a meal component", terms: ["hummus"] },
+  { what: "Egg salad", terms: ["egg salad"] },
+  { what: "Rice balls / onigiri", terms: ["rice ball", "onigiri"] },
+  { what: "Ramen, both instant and upgraded", terms: ["ramen"] },
+  { what: "Pork chop with cooked apple", terms: ["pork chop"] },
+  { what: "White chicken chili", terms: ["white chicken chili", "white chili"] },
+  { what: "Gumbo", terms: ["gumbo"] },
+  { what: "Cheese grits in a boil bag", terms: ["cheese grits"] },
+  { what: "Refried beans", terms: ["refried bean"] },
+  { what: "Rice pudding", terms: ["rice pudding"] },
+  { what: "Griddled banana with chocolate", terms: ["banana boat", "griddled banana"] },
+];
+
 const GEAR = [
   {
     category: "Sleep system",

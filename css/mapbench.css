@@ -167,3 +167,17 @@
   .bench-cols { grid-template-columns: 1fr; }
   #bench-map { height: 380px; }
 }
+
+/* A placement that would overwrite a sourced coordinate. Deliberately not
+   styled as an error — it is often the right thing to do, it just has to be
+   a decision rather than a side effect of pasting. */
+.chk.confirm { background: #fdf4e0; color: #7a5a12; }
+.chk.confirm-row {
+  background: none;
+  padding: 0.5rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  color: var(--t-ink-dim);
+}

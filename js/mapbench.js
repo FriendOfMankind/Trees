@@ -40,6 +40,8 @@
     placements: {},   // slug -> { name -> { lat, lng, source } }
     map: null,
     layer: null,
+    pendingConfirm: null,  // "name:lat,lng" awaiting a deliberate overwrite
+    confirmed: {},         // name -> "lat,lng" the user explicitly approved
   };
 
   /* ---------------- Persistence ----------------
@@ -78,8 +80,14 @@
       })
       .filter(Boolean);
 
+    /* What's already on file, so the checks can tell a first placement from an
+       overwrite of something sourced. */
+    const existing = wp && wp.lat != null && wp.lng != null && !placed()[name]
+      ? { lat: wp.lat, lng: wp.lng, verified: wp.verified, source: wp.source }
+      : null;
+
     return coordChecks({
-      name, lat, lng, others,
+      name, lat, lng, others, existing,
       days: wp && wp.days,
       tripCoords: state.trip && state.trip.coords,
       country: state.trip && state.trip.country,
@@ -192,10 +200,30 @@
     }
     const lat = Number(nums[0]), lng = Number(nums[1]);
     const problems = checkPlacement(name, lat, lng);
+    const icon = { stop: "✕", confirm: "!", warn: "⚠" };
     if (box) {
-      box.innerHTML = problems.map((p) => `<div class="chk ${p.level}">${p.level === "stop" ? "✕" : "⚠"} ${esc(p.msg)}</div>`).join("");
+      box.innerHTML = problems.map((p) => `<div class="chk ${p.level}">${icon[p.level] || "⚠"} ${esc(p.msg)}</div>`).join("");
     }
     if (problems.some((p) => p.level === "stop")) return;
+
+    /* A "confirm" means this would overwrite a coordinate that already has a
+       named source. One deliberate click, not a stray paste. Pending state is
+       keyed on the exact numbers so editing the box clears it. */
+    const needsConfirm = problems.filter((p) => p.level === "confirm");
+    if (needsConfirm.length && state.pendingConfirm !== `${name}:${lat},${lng}`) {
+      state.pendingConfirm = `${name}:${lat},${lng}`;
+      if (box) {
+        box.insertAdjacentHTML("beforeend",
+          `<div class="chk confirm-row">
+             <button class="promote-btn" data-confirm="${esc(name)}">Replace it anyway</button>
+             <span>or leave it — the existing coordinate stays and nothing is lost.</span>
+           </div>`);
+        const btn = box.querySelector("[data-confirm]");
+        if (btn) btn.addEventListener("click", () => { state.confirmed[name] = `${lat},${lng}`; tryPlace(name, `${lat},${lng}`); });
+      }
+      return;
+    }
+    if (needsConfirm.length && state.confirmed[name] !== `${lat},${lng}`) return;
 
     setPlacement(name, { lat, lng, source });
     state.selected = name;

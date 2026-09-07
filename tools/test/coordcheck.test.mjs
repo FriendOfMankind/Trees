@@ -109,3 +109,47 @@ test("haversine agrees with a known distance", () => {
   const km = coordHaversineKm([41.4993, -81.6944], [37.8, -83.65]);
   assert.ok(km > 435 && km < 455, `got ${km}`);
 });
+
+/* ---- Replacing a coordinate that already has a source -------------------
+   Added after seven already-verified Kentucky pins were re-placed from Google
+   Maps in a single pass. Six were harmless; one disagreed by 2.7 km and would
+   have silently overwritten a Recreation.gov facility ID. */
+
+test("a near-identical re-placement reads as corroboration, not a correction", () => {
+  const r = coordChecks({
+    name: "Honey Creek Trailhead", lat: 36.421256, lng: -84.651842, tripCoords: RRG, others: [],
+    existing: { lat: 36.421268, lng: -84.651813, verified: true, source: "OSM node 3373114451" },
+  });
+  const c = r.find((x) => x.code === "corroborates");
+  assert.ok(c, `expected corroboration, got ${JSON.stringify(codes(r))}`);
+  assert.equal(c.level, "warn");
+  assert.match(c.msg, /corroboration/);
+});
+
+test("a moderate re-placement needs an explicit confirm and names the source it would lose", () => {
+  const r = coordChecks({
+    name: "Koomer Ridge Campground", lat: 37.781011, lng: -83.636170, tripCoords: RRG, others: [],
+    existing: { lat: 37.784032, lng: -83.632634, verified: true, source: "Recreation.gov facility 10311270" },
+  });
+  const c = r.find((x) => x.code === "replace");
+  assert.ok(c, `expected a replace confirm, got ${JSON.stringify(codes(r))}`);
+  assert.equal(c.level, "confirm");
+  assert.match(c.msg, /Recreation\.gov facility 10311270/);
+});
+
+test("a far re-placement is flagged as two different places", () => {
+  const r = coordChecks({
+    name: "Blue Heron Mining Community", lat: 36.671249, lng: -84.547903,
+    tripCoords: [36.5, -84.6], others: [],
+    existing: { lat: 36.678056, lng: -84.518889, verified: true, source: "Recreation.gov facility 232505" },
+  });
+  const c = r.find((x) => x.code === "replace-far");
+  assert.ok(c, `expected replace-far, got ${JSON.stringify(codes(r))}`);
+  assert.equal(c.level, "confirm");
+  assert.match(c.msg, /2696 m|about a different place/);
+});
+
+test("no existing coordinate means no replace finding at all", () => {
+  const r = coordChecks({ name: "x", lat: 36.476828, lng: -84.667818, tripCoords: [36.5, -84.6], others: [] });
+  assert.ok(!codes(r).some((c) => c.startsWith("replace") || c === "corroborates"));
+});

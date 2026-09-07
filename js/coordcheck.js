@@ -20,10 +20,17 @@
      split     — two stops on the same day 150 km apart is either a wrong pin
                  or a day that doesn't work. Both worth saying out loud.
      duplicate — identical coordinates mean a paste that didn't refresh.
+     replace   — the waypoint ALREADY has a verified coordinate from a named
+                 source, and this placement would overwrite it. Added after a
+                 real session where seven already-verified pins were re-placed
+                 from Google Maps in one pass, silently downgrading provenance
+                 from Recreation.gov facility IDs and OSM node IDs. One of the
+                 seven disagreed by 2.7 km and nobody would have seen it.
 
-   Levels: "stop" blocks the placement, "warn" is shown and allowed. A warning
-   you cannot override is one people learn to route around, so the overridable
-   ones stay overridable.
+   Levels: "stop" blocks, "confirm" needs an explicit override, "warn" is shown
+   and allowed. A warning you cannot override is one people learn to route
+   around, so the overridable ones stay overridable — but overwriting a
+   sourced coordinate should cost one deliberate click.
    ========================================================================== */
 
 (function (root) {
@@ -53,6 +60,7 @@
    * @param {string} o.days        the day(s) this waypoint belongs to
    * @param {Array}  [o.tripCoords] [lat,lng] region centroid from the registry
    * @param {string} [o.country]   "USA" | "Canada" | other
+   * @param {object} [o.existing]  { lat, lng, verified, source } already on file
    * @returns {Array<{level:"stop"|"warn", code:string, msg:string}>}
    */
   function coordChecks(o) {
@@ -87,6 +95,23 @@
       const km = haversineKm([lat, lng], o.tripCoords);
       if (km > 800) out.push({ level: "stop", code: "far", msg: `${Math.round(km)} km from the trip's region centre. That is not this trip.` });
       else if (km > 300) out.push({ level: "warn", code: "far", msg: `${Math.round(km)} km from the trip's region centre — worth confirming it's the right one.` });
+    }
+
+    /* Replacing something already sourced. Distance decides how loud: a near
+       match is corroboration and worth keeping as a note, a far one is the
+       interesting case and must not go through on a stray click. */
+    const ex = o.existing;
+    if (ex && ex.lat != null && ex.lng != null) {
+      const km = haversineKm([lat, lng], [ex.lat, ex.lng]);
+      const m = Math.round(km * 1000);
+      const src = ex.source ? `"${ex.source}"` : "an unnamed source";
+      if (m <= 50) {
+        out.push({ level: "warn", code: "corroborates", msg: `Matches the existing pin to ${m} m. That is corroboration, not a correction — keep the stronger source (${src}) and record the agreement instead of overwriting.` });
+      } else if (m <= 500) {
+        out.push({ level: "confirm", code: "replace", msg: `${m} m from the existing coordinate, which came from ${src}. Replacing it downgrades the provenance to whatever you type here.` });
+      } else {
+        out.push({ level: "confirm", code: "replace-far", msg: `${m} m from the existing coordinate, which came from ${src}. That is far enough that one of the two is about a different place — worth resolving rather than overwriting.` });
+      }
     }
 
     for (const other of others) {
