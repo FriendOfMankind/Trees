@@ -26,7 +26,7 @@ window.TRIP_DATA = {
     subtitle: "Solo, Month Year",
     dates: "Monday, May 1, 2027 – Monday, May 8, 2027",  // or null if not locked
     emoji: "🧭",
-    theme: "ocean",               // ocean | desert | alpine | forest | night | savanna
+    theme: "ocean",               // ocean | desert | alpine | forest | night | autumn | savanna
 
     // The dark banner at the top of Overview. Any of these may be omitted.
     route: "The shape of the trip in one or two sentences. Say explicitly whether any road is driven twice.",
@@ -65,6 +65,11 @@ window.TRIP_DATA = {
       driving: "~35 min, 25 miles (A → B)", // omit if not driving
       // walking: "6 mi on foot",           // optional, for non-driving days
 
+      // Declare a stretch with no coverage. This is what the "text the plan
+      // home" export lists, and it is the one thing whoever stays behind
+      // actually needs. Say when it starts and ends, not just that it exists.
+      // noSignal: "FS 210 from the forest road turn until leaving the corridor. All day.",
+
       overnight: {
         name: "Campground Name",
         place: "Nearest town",
@@ -98,12 +103,61 @@ window.TRIP_DATA = {
   },
 
   // Map pins. verified:true ONLY if you actually looked it up.
+  // `node tools/geocode.mjs <slug>` does the looking up and will not mark
+  // anything verified on one community source alone.
   waypoints: [
     { name: "Confirmed Place", lat: 20.80951, lng: -156.616477, verified: true,
       icon: "⛺", days: "1, 7", notes: "Hours, phone number, anything you'd want at the gate." },
     { name: "Unconfirmed Place", lat: null, lng: null, verified: false,
       icon: "🏖️", days: "2", notes: "Listed as not-plotted until someone verifies it." },
   ],
+
+  // ---- Lines on the map. BOTH SECTIONS ARE GENERATED — never hand-write
+  // geometry, and delete these blocks entirely if you have no lines yet.
+  //
+  //   node tools/route.mjs <slug> --write     driving legs between waypoints
+  //   node tools/trail.mjs <slug> --write     hikes, as mapped in OSM
+  //
+  // Keep the >>> / <<< marker lines. That is how --write finds the block to
+  // replace next time; without them the tool prints the block for you to
+  // paste instead. Everything between the markers is overwritten.
+  //
+  // Nothing here is fetched at page load. See docs/TRIP_SPEC.md → "Maps and
+  // routing" for why, and for what `source` has to say.
+
+  // >>> ROUTES
+  routes: [
+    {
+      id: "confirmed-place--somewhere-else",
+      label: "Confirmed Place → Somewhere Else",
+      mode: "driving",
+      days: "2",
+      distanceMi: 21.4,
+      durationMin: 47,
+      source: "openrouteservice/driving-car",
+      generated: "2026-01-01",
+      geometry: "encoded polyline, precision 5",
+    },
+  ],
+  // <<< ROUTES
+
+  // >>> TRAILS
+  trails: [
+    {
+      id: "some-ridge-trail",
+      label: "Some Ridge Trail",
+      mode: "hiking",
+      days: "3",
+      distanceMi: 4.28,
+      source: "osm/way 12345,12346",
+      generated: "2026-01-01",
+      // A trail is usually several OSM ways. They stay separate segments
+      // rather than stitched — guessing the join order can draw a line
+      // through a cliff.
+      geometry: ["first segment", "second segment"],
+    },
+  ],
+  // <<< TRAILS
 
   hikes: {
     title: "Hikes &amp; Trails",
@@ -143,8 +197,15 @@ window.TRIP_DATA = {
 
   // In booking order, earliest window first. The first unchecked item is
   // literally what to do next, so the order carries information.
+  //
+  // `booked: true` is the DURABLE record — it lives in git, survives a new
+  // laptop, and is the same on your phone. It renders as a locked ✓ that
+  // cannot be un-ticked in the browser. Ticking a box on the page only writes
+  // to that browser's localStorage and is explicitly a scratchpad.
+  // When something is actually booked, put it here with its number.
   reservations: [
     { text: "Thing to book — when the window opens — what happens if you miss it" },
+    { text: "Something already locked in", booked: true, confirmation: "ABC-123456" },
   ],
 
   // For trips that aren't finished. Delete when the list empties.
@@ -161,4 +222,20 @@ window.TRIP_DATA = {
 
   // Fallback map view, used only if fewer than 2 verified waypoints exist.
   map: { center: [0, 0], zoom: 9 },
+
+  /* ---- AFTER THE TRIP -------------------------------------------------
+     Only on a trip with status "done". This is the whole reason a finished
+     trip stays on the site: the gear verdicts here are the answers to the
+     Gear Locker's open questions, and they change what the next trip packs.
+     `verdict` is one of: held | marginal | failed | unused | replace.       */
+  // retro: {
+  //   verdict: "One paragraph. Did the shape of the trip work?",
+  //   worked: ["Specific things that earned their place."],
+  //   didnt: ["Specific things that didn't. Be blunt; nobody else reads this."],
+  //   gear: [
+  //     { item: "REI Co-op Siesta 20", verdict: "held", note: "34°F at Koomer Ridge, slept warm in a base layer." },
+  //   ],
+  //   nextTime: ["The change you'd make, stated as an action."],
+  // },
+
 };

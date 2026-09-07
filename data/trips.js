@@ -16,6 +16,14 @@
            Navigation-grade coordinates live in each trip's WAYPOINTS, where
            the verified flag applies.
 
+   booking: what has to be reserved and through which system. The Agenda tab
+            counts back from `target` — the FIRST NIGHT of that booking, not
+            the trip's start — using the lead time in data/profile.js, so
+            nobody does six-month arithmetic in their head at 6 AM. Declare a
+            booking when it has a real window or a real unknown; a private
+            campground you can call any time is not a deadline. `done: true`
+            keeps it in the record and out of the Agenda.
+
    Wishlist entries below are transcribed from the Sept 3 2026 bucket list,
    Tiers 1 and 2. Their confidence marks are preserved in `why`: ✅ verified
    Sept 2026, 📋 verified in an earlier 2026 session, ⚠️ unverified lead.
@@ -25,6 +33,7 @@ const TRIPS = [
   /* ---------------------------------------------------------------- 2026 */
   {
     slug: "kentucky-2026",
+    months: [9], mode: "drive", days: 6,
     title: "Red River Gorge + Big South Fork",
     subtitle: "Arches, ladders, and a coal town",
     emoji: "🪨",
@@ -43,11 +52,16 @@ const TRIPS = [
     budget: "TBD",
     tags: ["car camping", "arches", "scrambling", "ruins", "solo", "lecture day"],
     why: "Two sandstone plateaus back to back — the Gorge's arch cluster, then Honey Creek's ladders and ropes on the busiest Saturday of the season, because that's what keeps it empty.",
-    next: "Re-check Tunnel Ridge Road the morning of departure — Cumberland District, 606-784-6428",
-    updated: "2026-09-04",
+    next: "~Sept 16: first forecast that reaches Honey Creek Saturday. No Honey Creek after rain.",
+    booking: [
+      { system: "recreation.gov", what: "Koomer Ridge (Sept 22–23)", target: "2026-09-22", booked: true },
+      { system: "recreation.gov", what: "Bandy Creek (Sept 24–26)", target: "2026-09-24", booked: true },
+    ],
+    updated: "2026-09-06",
   },
   {
     slug: "appalachians-2026",
+    months: [10], mode: "drive", days: 11,
     title: "Bridge Day + Southern Appalachians",
     subtitle: "Chasing color downhill, WV to VA",
     emoji: "🍂",
@@ -67,12 +81,18 @@ const TRIPS = [
     tags: ["car camping", "fall color", "ruins", "BASE jumping", "first-come", "solo", "lodging gap"],
     why: "BASE jumpers watched from the gorge floor, three coal ghost towns, and a sunrise on Hawksbill during peak color week — with two unreservable nights on a forest road as the price.",
     next: "Call Arrowhead 304-900-5501 — the reservation moved to Oct 16–18 by phone, leaving Oct 15 with no bed and nothing in writing",
+    booking: [
+      { system: "private", what: "Arrowhead Bike Farm (Oct 16–18)", target: "2026-10-16", booked: true },
+      { system: "recreation.gov", what: "Davidson River (Oct 18–21)", target: "2026-10-18", booked: true },
+      { system: "recreation.gov", what: "Hurricane Campground (Oct 24)", target: "2026-10-24", booked: true },
+    ],
     updated: "2026-09-04",
   },
 
   /* ---------------------------------------------------------------- 2027 */
   {
     slug: "maui-2027",
+    months: [5], mode: "fly", days: 8,
     title: "Full Circle Maui",
     subtitle: "Counterclockwise island loop, solo",
     emoji: "🌺",
@@ -89,53 +109,120 @@ const TRIPS = [
     nights: "7 nights camping",
     distance: "~400 mi driving",
     budget: "~$1,362",
-    tags: ["camping", "volcanic", "snorkeling", "solo", "road loop", "altitude"],
+    tags: ["car camping", "volcanic", "snorkeling", "solo", "road loop", "altitude"],
     why: "Every major Maui landscape in one counterclockwise loop — reef, lava field, rainforest, and a 10,000 ft summit.",
     next: "Confirm the Waiʻānapanapa booking window (1 year vs 90 days) so the alarm is set correctly",
+    booking: [
+      { system: "state-park", what: "Waiʻānapanapa SP camping (5/14–5/16)", target: "2027-05-14",
+        note: "The trip's own open question. 1 year vs 90 days is a nine-month difference in when the alarm goes off." },
+      { system: "recreation.gov", what: "Hosmer Grove (5/17–5/18)", target: "2027-05-17",
+        note: "6 sites total. Book the morning it drops." },
+    ],
     updated: "2026-09-03",
+  },
+
+
+  /* ------------------------------------------------- SLOTTED FOR 2026–27
+     Added 2026-09-04 while locking the shape of the last free year. Neither
+     has a page yet — `target` is the window they're aimed at, not a booking.
+     The Calendar tab renders a targeted entry as a ghost bar so the slot
+     reads as spoken-for without pretending it's planned. */
+  {
+    slug: "mojave-winter-2027", title: "Mojave Winter Loop", subtitle: "Death Valley, Joshua Tree, and the desert that only exists in January",
+    emoji: "🏜️", theme: "desert", status: "outline", pinned: false, page: "trips/mojave-winter-2027/",
+    months: [12, 1, 2], mode: "fly", days: 14,
+    start: null, dates: null,
+    window: "⭐ Dec–Feb only. Every one of these is lethal or miserable May–September, which is exactly why they belong in the January window.",
+    region: "Las Vegas → Death Valley → Mojave → Joshua Tree", country: "USA", coords: [36.2, -116.8],
+    nights: "13 nights camping", distance: "~1,100 mi loop", budget: "~$2,033 excl. airfare",
+    tags: ["car camping", "desert", "geology", "solo", "winter", "fly-in", "open-jaw"],
+    why: "🛑 <b>Deferred, Sept 6 2026 — not happening in January 2027.</b> His call, and it is not a scheduling problem: he would rather put the money into better places at better times of year than into the one window that happened to be free. Winter 2026–27 is Frisco with family and nothing else. <b>The page is kept, not deleted</b> — this is a Dec–Feb loop for whichever winter it lands in, and two verification passes are already done. The dates, the pin and the four booking rows are gone so the hub stops counting down to a trip nobody is taking; whenever it comes back, every one of those windows recomputes from new dates anyway.<br><br>⚠️ <b>Rebuilding it later is not free.</b> January 2027 was the only 19-day winter window before the horizon. After Aug 31 2027 a PTO allowance has to cover a 14-day loop plus travel, so the version that comes back will be a shorter one. That is the real cost of this decision and it is worth paying with open eyes.<br><br>Four low-elevation desert units inside one loop out of Las Vegas, all reachable on pavement, all in season only in winter: <b>Valley of Fire</b> (Aztec sandstone, ~1 hr from LAS), <b>Death Valley</b> (arguably the best-exposed geology in North America — Badwater, Zabriskie, Dante\'s View, Golden Canyon, Mesquite Dunes), <b>Mojave National Preserve</b> (Kelso Dunes, cinder cones, dispersed camping), and <b>Joshua Tree</b>.<br><br>⚠️ <b>Racetrack Playa is out</b> — it needs real clearance. ⚠️ <b>Telescope Peak is 14 mi / ~3,000 ft</b>, over the day ceiling. ⚠️ Every campground, fee and reservation rule here is <b>unverified</b> and must be checked before this becomes a page.<br><br>Routing is an open jaw off the family trip: CLE → DEN, Frisco Dec 25–30, DEN → LAS ~Jan 2, loop, LAS → CLE ~Jan 15. <b>Ship a gear duffel to Las Vegas</b> rather than hauling a tent and the MondoKing through a family Christmas; buy fuel canisters on arrival.",
+    next: "Nothing. Deferred by choice — do not book anything. Revisit when a winter window turns up that is worth the airfare, and re-verify every campground rule from scratch when it does",
+    updated: "2026-09-06",
+  },
+  {
+    slug: "frisco-2026", title: "Frisco, Colorado", subtitle: "Family, not a plan",
+    emoji: "🎄", theme: "night", status: "wishlist", pinned: false, page: null, external: true,
+    months: [12], mode: "fly", start: "2026-12-25", days: 6,
+    dates: "Dec 25–30, 2026 — ⚠️ APPROXIMATE, not confirmed", window: "Fixed by family, exact dates pending",
+    region: "Summit County, Colorado", country: "USA", coords: [39.57, -106.1],
+    nights: "~5 nights", distance: null, budget: "n/a",
+    tags: ["family", "fixed", "winter"],
+    why: "<b>This is the whole winter now.</b> The Mojave loop was deferred on Sept 6 2026, so Frisco is no longer the outbound half of an open jaw — it is a round trip to Colorado and back, and it stands on its own.<br><br>⚠️ <b>The dates are still a placeholder.</b> \"Dec 25 for maybe 5 nights\" is all that is actually known. Less rides on them now — no connecting flight, no campground window — but they are still the difference between a booked fare and a guess, and holiday fares into DEN do not improve with waiting.<br><br>Not a hiking trip and not planned here: Summit County in late December is a family condo at 9,100 ft. If it turns into something — a snowshoe day, Sapphire Point, an afternoon on the Blue — it can get a page then.",
+    next: "Get the exact dates from family, then price CLE → DEN. The trip that depended on these dates is gone, so this is now only about not overpaying for the fare",
+    updated: "2026-09-06",
+  },
+
+  {
+    slug: "northern-rockies-2027", title: "The Long Way to Glacier", subtitle: "The July road trip — Badlands, Bighorns, Beartooth, and seven nights at Glacier",
+    months: [7, 8], mode: "drive", days: 21, target: "2027-07-06",
+    emoji: "🏔️", theme: "alpine", status: "outline", pinned: true, page: "trips/northern-rockies-2027/",
+    start: null, dates: "Jul 6–26, 2027 (target, unbooked)",
+    window: "July–August. ⭐ July specifically — June was checked destination by destination and every anchor here is out of season in it.",
+    region: "Avon OH → SD → WY → MT → ND → home", country: "USA", coords: [46.0, -106.5],
+    nights: "20 nights", distance: "~4,300 mi loop", budget: "~$1,790 — no airfare, no rental",
+    tags: ["car camping", "alpine", "road trip", "bears", "solo", "july", "long haul", "reservation race"],
+    why: "⭐ <b>The trigger is Glacier.</b> ✅ <b>No timed-entry vehicle reservation</b> — it was eliminated for 2026 after five years, across Going-to-the-Sun, Many Glacier, Two Medicine and North Fork. That park\'s entry on this list used to be subtitled \"worst bureaucracy\" and the objection is simply gone. Entry pass only.<br><br>✅ <b>June was checked and rejected on the facts.</b> US-212 opened May 23 2026 and was closed again by snow until June 9. Snowy Range\'s campgrounds open July 4. The San Juans hold snow into early July. Moving the trip three weeks fixed more than any destination swap did — <b>every anchor on this route is comfortably in season in mid-July and none of them was in June.</b><br><br>Out on I-90 and home on I-94, so no road is driven twice: Badlands, the Cloud Peak Skyway, the Beartooth Plateau at 9,518 ft, Lamar Valley, then <b>seven nights at Glacier</b>, with Theodore Roosevelt catching the drive home.<br><br>✂️ <b>Cut from 25 days to 21, and the cut came off the front end.</b> Custer State Park and Devils Tower are gone; Badlands runs straight into the Bighorns. Chosen over trimming Theodore Roosevelt or a Glacier night, and it is the better trade — <b>it bought Glacier a seventh night rather than costing one</b>, which is what lets the two hardest hikes land on a Sunday and a Monday instead of a weekend. The costs are real and on the page: Black Elk Peak was the best hike on the eastern half, the altitude now goes 2,500 ft → 9,100 ft in a single day, and <b>the first shower is now day fifteen.</b><br><br>🚨 <b>The remaining risk is length, not any single day.</b> The profile says 2–5 campgrounds and 5–10 nights; this is <b>20 nights across 9 places to sleep</b>, still roughly double the longest trip on record. <b>Days 6 and 17 are deliberately soft</b> and that is the mitigation.<br><br>⚠️ Ends July 26 on purpose — <b>nineteen days of turnaround before Kenai on Aug 14.</b>",
+    next: "Three consecutive hard bookings all open in <b>mid-January 2027</b> — Slough Creek (16 sites, gone in minutes), then Many Glacier and Apgar. Book them in one sitting with the fallbacks already written. Before that, one phone call to Yellowstone: if Pebble Creek has reopened, the worst risk on the trip halves",
+    booking: [
+      { system: "recreation.gov", what: "Cedar Pass, Badlands (Jul 7–8)", target: "2027-07-07" },
+      { system: "recreation.gov", what: "Slough Creek, Yellowstone (Jul 15)", target: "2027-07-15",
+        note: "16 sites, fills within minutes — the tightest booking on the trip. Check first whether Pebble Creek has reopened; it has been closed for flood recovery since 2022 and is the better, closer base." },
+      { system: "recreation.gov", what: "Many Glacier, Glacier NP (Jul 16–19)", target: "2027-07-16",
+        note: "One of the three Glacier campgrounds that go the day the window opens. No realistic walk-up fallback in July." },
+      { system: "recreation.gov", what: "Apgar / Avalanche, Glacier NP (Jul 20–22)", target: "2027-07-20",
+        note: "Second competitive Glacier booking — do both halves in the same January sitting." },
+      { system: "recreation.gov", what: "Cottonwood, Theodore Roosevelt (Jul 23–24)", target: "2027-07-23",
+        note: "Part reservable, part first-come. The easiest booking on the trip." },
+    ],
+    updated: "2026-09-06",
   },
 
   /* ------------------------------------------------- WISHLIST — TIER 1
      Justifies a plane ticket. */
   {
     slug: "eastern-sierra", title: "Eastern Sierra", subtitle: "Committed — the best payoff per dollar",
+    months: [7, 8, 9, 10], mode: "fly", days: 10,
     emoji: "🏔️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–early October; September for aspen and fewer people",
     region: "Bishop / Mammoth, California", country: "USA", coords: [37.36, -118.55],
     nights: "~8 nights", budget: "Cheap flights (Reno), cheap car",
     tags: ["car camping", "alpine", "paved trailheads", "committed"],
-    why: "✅ Four Jeffrey CG at 8,100 ft with bear boxes and a trailhead under a mile up the road. Little Lakes Valley from Mosquito Flat is the highest paved trailhead in the Sierra — the single best expression of the car-camping rule set.",
-    next: "Pick a September week and check Four Jeffrey's reservable/FCFS split", updated: "2026-09-03",
+    why: "✅ Four Jeffrey CG at 8,100 ft with bear boxes and a trailhead under a mile up the road. Little Lakes Valley from Mosquito Flat is the highest paved trailhead in the Sierra — the single best expression of the car-camping rule set.<br><br>🔻 <b>Confirmed Sept 6 2026 as the flex — the first of the three summer trips to drop.</b> Not because it is the weakest; it is arguably the best value on the list. Because it is the only one that <b>survives the horizon</b>. Ten days on cheap Reno flights and a cheap car is a trip a two-week PTO allowance still holds in 2028 and every year after. <a href=\"#kenai-peninsula\">Kenai</a> and a three-week drive are not. Spending the last free summer on the one trip that keeps is the trade this whole plan exists to avoid.<br><br>🔻 <b>Dropped from 2027, Sept 6 2026.</b> \"I can do the Sierras some other time\" — and that is exactly right, because it is the one trip on this list where \"some other time\" is genuinely available. The July target is removed, freeing the whole month for the road trip. <b>This entry is not weaker for it; it is the plan working as designed.</b> September for the aspen, whenever the PTO year allows.",
+    next: "Nothing until 2028+. When it comes back, aim September for aspen and fewer people, and check Four Jeffrey's reservable/first-come split", updated: "2026-09-06",
   },
   {
     slug: "beartooth-plateau", title: "Beartooth Plateau", subtitle: "Paved to 9,500 ft",
+    months: [6, 7, 8, 9], mode: "drive", days: 12,
     emoji: "🗻", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late June–early/mid September",
     region: "Montana / Wyoming", country: "USA", coords: [45.0, -109.55],
     nights: "~7 nights", budget: null,
     tags: ["car camping", "alpine", "high camps", "wildlife"],
-    why: "📋 US-212 is paved above 9,500 ft, so you get emptiness and short approaches — everywhere else those two trade off. Island Lake CG sits at 9,518 ft. Pairs with Yellowstone's northeast corner for Lamar Valley wildlife with zero hiking.",
-    next: "Decide between this and Snowy Range for the 2028 alpine slot", updated: "2026-09-03",
+    why: "📋 US-212 is paved above 9,500 ft, so you get emptiness and short approaches — everywhere else those two trade off. Island Lake CG sits at 9,518 ft. Pairs with Yellowstone's northeast corner for Lamar Valley wildlife with zero hiking.<br><br>🛑 <b>The June 14 2027 target was removed Sept 6 2026, because it contradicted this entry's own window.</b> \"Late June–early/mid September\" was already written here and a June 14 start is not late June. The verified detail is worse than the window suggests: ✅ <b>US-212 opens around Memorial Day but does not stay open</b> — in 2026 it opened May 23 and was <b>closed again by snow at the Montana/Wyoming line, reopening June 9</b>, then ran night closures 7 PM–7 AM Mon–Thu from Pilot Index east to Beartooth Lake. ✅ <b>Beartooth Lake CG typically opens late June</b>; sources on Island Lake disagree outright — one says late May, another says <b>July 1 or earlier depending on snowpack</b> — and a 9,518 ft campground is exactly where that disagreement is decided by the winter. Snow commonly lingers up high into <b>early-to-mid July</b>.<br><br>So a mid-June arrival buys a maybe-open road, probably-shut campgrounds and trails under snow. <b>The plateau is a late-June-at-the-earliest trip and honestly a July one.</b><br><br>⚠️ <b>`days` was 21 against `nights: ~7` in the same entry.</b> The 21 was the road-trip container, not this trip. It is now 12 — seven nights on the plateau plus roughly 2.5 days of driving each way from Avon, which is ~1,700 mi. If a 21-day June road trip happens, this is one anchor inside it, not the whole thing.<br><br>⚠️ <b>The Yellowstone pairing has a lodging problem.</b> <b>Pebble Creek</b> — 27 sites at the foot of the Beartooth Highway and the obvious base for a Lamar Valley dawn — has been <b>closed for flood recovery</b> since the June 2022 damage and was still listed closed for 2025; its 2027 status is unknown. The fallback, <b>Slough Creek, is 16 sites and fills within minutes</b> of its window opening. Do not assume the Lamar half of this trip has a bed.",
+    next: "July resolves the snow question — by early July the plateau campgrounds are open. What replaces it: confirm whether Pebble Creek has reopened, because 16 sites at Slough Creek is not a plan", updated: "2026-09-06",
   },
   {
     slug: "snowy-range", title: "Snowy Range / Medicine Bow", subtitle: "The sleeper of the whole list",
+    months: [7, 8, 9, 10], mode: "fly",
     emoji: "⛰️", theme: "alpine", status: "wishlist", pinned: false, page: null,
-    start: null, dates: null, window: "Mid-July–October, once the high road opens",
+    start: null, dates: null, window: "Early July–October — set by the campgrounds, not by the road",
     region: "Centennial, Wyoming", country: "USA", coords: [41.35, -106.32],
-    nights: "~6 nights", budget: "Denver flights, ~2.5 hr drive",
-    tags: ["car camping", "alpine", "no permits", "10,000 ft camps"],
-    why: "✅ 29 paved miles topping out above 10,000 ft at Libby Flats, a 12,013 ft peak inside the day-hike ceiling, campgrounds above 10,000 ft, and no hiking permits of any kind. A fraction of Colorado's crowds two hours north of Denver.",
-    next: "Verify Medicine Bow Peak loop stats and the Brooklyn Lake reservation window", updated: "2026-09-03",
+    nights: "~6 nights", budget: "Denver flights, ~2.5 hr drive — or a stop on a Wyoming drive loop",
+    tags: ["car camping", "alpine", "no permits", "10,000 ft camps", "july"],
+    why: "✅ 29 paved miles topping out above 10,000 ft at Libby Flats, a 12,013 ft peak inside the day-hike ceiling, campgrounds above 10,000 ft, and no hiking permits of any kind. A fraction of Colorado's crowds two hours north of Denver.<br><br>✅ <b>Corrected Sept 6 2026 — this said \"mid-July, once the high road opens\", and the road was never the constraint.</b> <b>WY-130 over Libby Flats opened around May 7 in 2026</b>, fifteen days earlier than the year before, and in the three years before that it opened by late May. What actually gates the trip is where you sleep: <b>Brooklyn Lake Campground opens around July 4</b> and runs to mid-October, and the high-elevation campgrounds are snow-affected through June. For a car-camping trip the camps are the season, so <b>early July is the honest start</b> — a week earlier than this entry used to claim, and for a completely different reason.",
+    next: "Verify the Medicine Bow Peak loop stats and Brooklyn Lake's booking window. On a Wyoming drive loop this is the last stop before the run home, which is the cheapest way to reach it", updated: "2026-09-06",
   },
   {
     slug: "kenai-peninsula", title: "Kenai Peninsula", subtitle: "The one that gets harder to justify, not easier",
+    months: [6, 7, 8, 9], mode: "fly", days: 14, target: "2027-08-14",
     emoji: "🧊", theme: "night", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late June for light, early September for color and fewer bugs",
     region: "Alaska", country: "USA", coords: [60.1, -149.44],
     nights: "8 nights, 4 camps", budget: "Highest on the list — flights and rentals triple a Reno rate",
     tags: ["car camping", "glacier", "bears", "expensive", "wet"],
-    why: "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.",
-    next: "Decide whether this is a real item or a fantasy item — if real it belongs before 2029", updated: "2026-09-03",
+    why: "📋 Harding Icefield is the best single payoff on the entire bucket list. Four camps from Hatcher Pass to Exit Glacier, with a ~20% washout rate budgeted and the boat tour held back as a weather hedge.<br><br>⭐ <b>Slotted for Aug 2027 — the last summer before full-time work.</b> This is the trip the free summer exists for: every other fly-in on this list survives a two-week PTO allowance and this one does not. A PNW bundle (CLE→SEA→ANC→CLE) was considered and <b>declined on purpose</b> — Seattle is the natural connection so the routing was sound, but North Cascades is PTO-survivable and would have made Alaska the back half of a 24-day trip, and back halves get compressed.<br><br>✅ <b>Rental cars: most Alaska companies prohibit unpaved roads outright and void insurance if you drive them</b> — but the named restrictions (Denali Hwy, McCarthy, Steese, Dalton) are all interior. The Kenai\'s Seward and Sterling Highways are paved, so this is the least-affected corner of the state. ⚠️ <b>Hatcher Pass is the exception and it is already in this plan</b> — it sits north of Anchorage in the Mat-Su, not on the Kenai, and the summit traverse is gravel and seasonally gated. Paved approaches from either side are fine; the through-route is likely prohibited. Resolve before building the route.",
+    next: "Get a named rental company\'s restricted-roads list in writing, and decide whether Hatcher Pass means the paved approach or the gravel traverse", updated: "2026-09-05",
   },
 
   /* ------------------------------------------------- WISHLIST — TIER 2
@@ -147,6 +234,7 @@ const TRIPS = [
      are the ones whose window is actually May. */
   {
     slug: "capitol-reef", title: "Capitol Reef", subtitle: "Maui return leg — the pick",
+    months: [5, 6, 7, 8, 9, 10], mode: "fly",
     emoji: "🧱", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⭐ May–Oct for hiking; early-to-mid May before the heat",
     region: "Torrey, Utah", country: "USA", coords: [38.29, -111.26],
@@ -157,6 +245,7 @@ const TRIPS = [
   },
   {
     slug: "dinosaur-nm", title: "Dinosaur National Monument", subtitle: "Maui return leg — the sleeper",
+    months: [4, 5, 6, 7, 8, 9, 10], mode: "fly",
     emoji: "🦕", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–Oct; May is ideal, before the summer heat",
     region: "Jensen, Utah / Colorado", country: "USA", coords: [40.44, -109.3],
@@ -167,16 +256,18 @@ const TRIPS = [
   },
   {
     slug: "black-canyon", title: "Black Canyon of the Gunnison", subtitle: "Colorado's one world-class May option",
+    months: [5, 6, 7, 8, 9], mode: "fly",
     emoji: "🕳️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⚠️ Mid-May at the earliest — the South Rim road and campground are winter-closed until then",
     region: "Montrose, Colorado", country: "USA", coords: [38.57, -107.72],
     nights: "2 nights", budget: "~5 hr from DEN, ~1.5 hr from Montrose",
-    tags: ["car camping", "geology", "canyon", "may", "maui bookend", "rim park"],
+    tags: ["car camping", "geology", "slot canyons", "may", "maui bookend", "rim park"],
     why: "<b>Precambrian gneiss and schist, roughly 1.7–2 billion years old</b> — the oldest rock you can stand next to in the region, and the Gunnison cut 2,000+ ft straight down into it. Narrow enough that parts of the floor get about half an hour of sun a day. The Painted Wall is Colorado's tallest cliff.<br><br>⚠️ <b>Timing is razor-thin for a mid-May return.</b> In 2026 the South Rim Campground opened <b>May 18</b>, and <b>Loops B and C were closed by wildfire damage, leaving Loop A only</b>. The South Rim Road is winter-closed and reopens in May. East Portal opens Apr 15 but sits at the bottom of a 16% grade; North Rim opens May 1 with 13 sites down a remote gravel road.<br><br>⚠️ <b>It is a rim park</b> — you look into it rather than walk it. The inner-canyon routes are unmaintained, brutally steep and permit-required, so the hiking is short rim trails. Two nights, not four.",
     next: "Check whether the South Rim opening date and the wildfire loop closures still apply before counting on it", updated: "2026-09-04",
   },
   {
     slug: "colorado-nm", title: "Colorado National Monument", subtitle: "The reliable Colorado option in May",
+    months: [3, 4, 5, 6, 7, 8, 9, 10], mode: "fly",
     emoji: "🏜️", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Mar–Oct; May is warm and snow-free",
     region: "Fruita / Grand Junction, Colorado", country: "USA", coords: [39.05, -108.7],
@@ -187,16 +278,18 @@ const TRIPS = [
   },
   {
     slug: "great-sand-dunes", title: "Great Sand Dunes", subtitle: "Maui return leg — with a real catch",
+    months: [5, 6], mode: "fly",
     emoji: "🏖️", theme: "savanna", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late May–June for Medano Creek — but see the warning",
     region: "Colorado", country: "USA", coords: [37.79, -105.59],
     nights: "2–3 nights", budget: "~4 hr from DEN",
     tags: ["car camping", "dunes", "swimming", "may", "maui bookend"],
-    why: "Tallest dunes in North America — 750 ft of sand piled against the Sangre de Cristos. Your bucket list flags late May for Medano Creek: sand plus water, a completely different kind of day.<br><br>⚠️ <b>Do not build a trip around the creek.</b> It is entirely snowpack-fed and it fails. In <b>May 2026 it ran at 5–10% of normal — near record low — with reporting that it likely would not flow at all</b>, after an abnormally dry winter. Check the March–April snowpack before committing, and be content with just dunes if it does not come.<br><br>✅ Piñon Flats: 88 sites, $20, reservable 6 months out, drive-up.",
-    next: "Check Sangre de Cristo snowpack in March before this becomes a plan", updated: "2026-09-04",
+    why: "Tallest dunes in North America — 750 ft of sand piled against the Sangre de Cristos. Your bucket list flags late May for Medano Creek: sand plus water, a completely different kind of day.<br><br>🛑 <b>Do not build a trip around the creek. 2026 is no longer a forecast — it is a result.</b> This entry previously said the creek \"likely would not flow at all\"; it didn't. ✅ <b>Peak flow came in around 4 cfs against a 40 cfs average</b>, the NPS called watershed snowpack <b>near record low</b>, and by <b>May 21 2026 the creek was dry at the main Dunes Parking Area</b>, petering out roughly 1.5 miles up the creekbed. Anyone who booked late May 2026 for surge flow got sand.<br><br>So the creek is a <b>coin flip decided in March</b>, and it is the only thing that makes this a June destination rather than a two-hour stop. 2027 is unknowable until that winter happens. Be content with just dunes, or do not come for the water.<br><br>✅ Piñon Flats: 88 sites, $20, reservable 6 months out, drive-up.",
+    next: "Check Sangre de Cristo snowpack in March 2027 before this becomes a plan — and note that the 6-month booking window for a late-May trip closes before you would know the answer", updated: "2026-09-06",
   },
   {
     slug: "owens-valley", title: "Owens Valley + Alabama Hills", subtitle: "Maui bookend — the outbound leg",
+    months: [4, 5, 10], mode: "fly",
     emoji: "🪨", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "⭐ Apr–May and Oct — too hot in summer, snowbound above",
     region: "Lone Pine, California", country: "USA", coords: [36.6, -118.06],
@@ -207,6 +300,7 @@ const TRIPS = [
   },
   {
     slug: "point-reyes-marin", title: "Point Reyes + Marin", subtitle: "The Maui return leg",
+    months: [4, 5, 6], mode: "fly",
     emoji: "🌁", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–Jun — spring wildflowers, before the summer fog wall thickens",
     region: "Marin County, California", country: "USA", coords: [38.05, -122.88],
@@ -217,6 +311,7 @@ const TRIPS = [
   },
   {
     slug: "pinnacles", title: "Pinnacles", subtitle: "A volcano the San Andreas tore in half",
+    months: [3, 4, 5, 10], mode: "fly",
     emoji: "🦅", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Mar–May and Oct — summer is brutal",
     region: "Central California", country: "USA", coords: [36.49, -121.16],
@@ -227,6 +322,7 @@ const TRIPS = [
   },
   {
     slug: "sequoia-kings", title: "Sequoia + Kings Canyon", subtitle: "The big-tree bookend",
+    months: [5, 6, 7, 8, 9], mode: "fly",
     emoji: "🌲", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "May works low; Mineral King road opens late May",
     region: "Central California", country: "USA", coords: [36.55, -118.75],
@@ -241,6 +337,7 @@ const TRIPS = [
      in April" — Tiers 1 and 2 are all July–September alpine. */
   {
     slug: "buffalo-river", title: "Buffalo National River", subtitle: "The penciled 2027 shoulder trip",
+    months: [4, 5, 10], mode: "drive",
     emoji: "🛶", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–May and Oct — April is waterfalls, summer is swimming",
     region: "Ponca / Jasper, Arkansas", country: "USA", coords: [36.02, -93.37],
@@ -251,16 +348,18 @@ const TRIPS = [
   },
   {
     slug: "sipsey-wilderness", title: "Sipsey Wilderness", subtitle: "Land of a Thousand Waterfalls",
+    months: [2, 3, 4], mode: "drive",
     emoji: "💦", theme: "forest", status: "wishlist", pinned: false, page: null,
-    start: null, dates: null, window: "⭐ Best Feb–April, while the water is actually running",
+    start: null, dates: null, window: "⭐ Feb–April for water — but the drive-up bases do not open until March. See below.",
     region: "Bankhead NF, Alabama", country: "USA", coords: [34.29, -87.4],
     nights: "4–5 nights", budget: "Drive, ~9.5 hrs from Avon",
-    tags: ["car camping", "waterfalls", "old growth", "swimming holes", "april", "empty"],
-    why: "⚠️ The largest designated wilderness east of the Mississippi, with dozens of waterfalls, sandstone box canyons, huge old growth and swimming holes. <b>The one place on the whole list whose peak window is early April specifically</b> — its waterfalls only run with the water. Clear Creek and Corinth are drive-up bases open April–October and reservable on recreation.gov; day-hike into the wilderness from there rather than backpacking it.",
-    next: "Check Clear Creek's April opening date and whether it covers the first week", updated: "2026-09-04",
+    tags: ["car camping", "waterfalls", "old growth", "swimming", "march", "april", "empty"],
+    why: "⚠️ The largest designated wilderness east of the Mississippi, with dozens of waterfalls, sandstone box canyons, huge old growth and swimming holes. <b>The one place on the whole list whose peak window is early spring specifically</b> — its waterfalls only run with the water. Day-hike into the wilderness from a drive-up base rather than backpacking it.<br><br>✅ <b>Corrected Sept 2026 — the earlier \"open April–October\" note here was wrong.</b> <b>Clear Creek opens the second Friday of March</b> and closes Oct 31; reservation-only via recreation.gov. <b>Corinth ran Mar 8–Oct 31 in 2026</b>, part reservable and part first-come. So the season starts in early-to-mid March, not April — but a trip starting in the first week of March has <b>no open established campground in Bankhead</b>.",
+    next: "Second Friday of March 2027 is the 12th — a Mar 5–15 window only catches Clear Creek for three nights. Confirm Corinth's 2027 opening date by phone (205-300-1463) before this becomes an early-March plan.", updated: "2026-09-06",
   },
   {
     slug: "grand-staircase", title: "Grand Staircase–Escalante", subtitle: "Warm desert water, which barely exists out west",
+    months: [4, 5, 10], mode: "fly",
     emoji: "🏜️", theme: "desert", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–May and Oct",
     region: "Escalante, Utah", country: "USA", coords: [37.5, -111.4],
@@ -270,17 +369,25 @@ const TRIPS = [
     next: "Decide whether the day-hike version is still worth a plane ticket", updated: "2026-09-04",
   },
   {
-    slug: "sky-islands", title: "Sky Islands / Chiricahua", subtitle: "Biologically the strangest place in the US",
-    emoji: "🌵", theme: "desert", status: "wishlist", pinned: false, page: null,
-    start: null, dates: null, window: "Nov–Apr",
-    region: "Southeast Arizona", country: "USA", coords: [32.0, -109.35],
-    nights: "6–8 nights", budget: "Fly-in, Tucson",
-    tags: ["car camping", "desert", "geology", "birding", "april", "shoulder season"],
-    why: "⚠️ Bonita Canyon CG, Rustler Park, and Stewart / Sunny Flat in Cave Creek. Heart of Rocks and Echo Canyon are the marquee day hikes through rhyolite hoodoo forests. Mountain ranges rising out of desert as isolated ecological islands — the geology-as-through-line trip.",
-    next: "April is the tail of the window — check how hot the low desert approach gets", updated: "2026-09-04",
+    slug: "sky-islands-2027", title: "Sky Islands", subtitle: "Spring break — the strangest biology in the US, and one eruption weathered three ways",
+    months: [11, 12, 1, 2, 3, 4], mode: "fly", days: 11, target: "2027-03-05",
+    emoji: "🌵", theme: "desert", status: "outline", pinned: true, page: "trips/sky-islands-2027/",
+    start: null, dates: "Mar 5–15, 2027 (target, unbooked)",
+    window: "Nov–Apr — ⭐ Feb, March and April are the good months, and they are also the full ones",
+    region: "Tucson → Dragoons → Chiricahua → Cave Creek", country: "USA", coords: [32.0, -109.35],
+    nights: "10 nights camping", distance: "~700 mi loop", budget: "~$1,076 excl. airfare",
+    tags: ["car camping", "desert", "geology", "ruins", "birding", "solo", "fly-in", "march", "reservation race"],
+    why: "⚠️ Heart of Rocks and Echo Canyon are the marquee day hikes through rhyolite hoodoo forests — welded ash from the Turkey Creek caldera, so the geology is the whole point rather than a footnote. The Dragoons are the counterpoint at 1.4 billion years, and you can see one range from the other.<br><br>✅ <b>Verified Sept 2026 — the facts that decide whether March works:</b> <b>Chiricahua charges no entrance fee.</b> <b>Bonita Canyon (~5,400 ft) is year-round, 23–26 sites, all reservable, no walk-ups, 6-month rolling window</b>, full most nights in its Feb–April peak. <b>Sunny Flat is year-round first-come — but potable water is off until April</b>, and <b>Cochise Stronghold has none at any time of year</b>: four of ten nights are haul-your-own. 🚨 <b>Rustler Park and FR 42D are closed Nov–March and unplowed</b>, so the eight miles between the monument and Portal cost 2h 35m around on I-10, and the high country is off the trip.<br><br>⚠️ <b>Turn your own rule on this before booking it.</b> \"Actively avoids crowds\" is the profile, and March is the monument's busiest month; a reservation removes the lottery, not the people. The itinerary answers that with a split — <b>3 nights in the monument, 7 outside it</b> — and puts the two hardest days on a Wednesday and a Saturday.",
+    next: "Bonita Canyon is 23–26 sites on a 6-month rolling window and there is no walk-up fallback inside the monument — Mar 8 released around Sept 8 2026 and each later night releases one day at a time. Then price CLE → TUS, which is the only number on the page that could swing $400",
+    booking: [
+      { system: "recreation.gov", what: "Bonita Canyon, Chiricahua NM (Mar 8–10)", target: "2027-03-08",
+        note: "All sites reservable, no first-come option, full most nights Feb–April. If this fails, the middle of the trip fails." },
+    ],
+    updated: "2026-09-06",
   },
   {
     slug: "wichita-mountains", title: "Wichita Mountains", subtitle: "Free-roaming bison and granite domes",
+    months: [11, 12, 1, 2, 3, 4], mode: "drive",
     emoji: "🦬", theme: "savanna", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Nov–Apr",
     region: "Oklahoma", country: "USA", coords: [34.73, -98.72],
@@ -291,16 +398,18 @@ const TRIPS = [
   },
   {
     slug: "smokies-east", title: "Great Smokies — the east side", subtitle: "Where it stops being a traffic jam",
+    months: [4, 5, 10], mode: "drive",
     emoji: "🌫️", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late Apr–May, and Oct",
     region: "Tennessee / North Carolina", country: "USA", coords: [35.63, -83.1],
     nights: "4–6 nights", budget: "Drive, ~9 hrs from Avon",
-    tags: ["car camping", "old growth", "waterfalls", "late april", "crowd escape"],
+    tags: ["car camping", "old growth", "waterfalls", "april", "crowd escape"],
     why: "⚠️ Cataloochee, Big Creek, Balsam Mountain and Deep Creek — the east side is the crowd escape. Mount Cammerer and Ramsey Cascades are the day hikes; Gregory Bald is a June thing. ⚠️ <b>Late</b> April, not early — the higher country and some roads are still shut at the start of the month.",
     next: "Only worth it after ~April 20 — check road and campground opening dates", updated: "2026-09-04",
   },
   {
     slug: "south-cumberland", title: "South Cumberland + Fall Creek Falls", subtitle: "The Plateau's real gems",
+    months: [4, 5, 10, 11], mode: "drive",
     emoji: "🪨", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–May and Oct–Nov",
     region: "Tennessee", country: "USA", coords: [35.25, -85.65],
@@ -311,6 +420,7 @@ const TRIPS = [
   },
   {
     slug: "ohiopyle", title: "Ohiopyle", subtitle: "Best swimming per mile driven on the whole list",
+    months: [5, 6, 7, 8, 9], mode: "weekend",
     emoji: "🛝", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late spring through early autumn — April is cold for the slides",
     region: "Pennsylvania", country: "USA", coords: [39.87, -79.49],
@@ -321,26 +431,43 @@ const TRIPS = [
   },
   {
     slug: "letchworth", title: "Letchworth", subtitle: "Four hours away and never once mentioned",
+    months: [4, 5, 6, 7, 8, 9, 10], mode: "weekend",
     emoji: "🌊", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Apr–Oct; spring for waterfall volume",
     region: "New York", country: "USA", coords: [42.58, -78.05],
     nights: "2–3 nights", budget: "~$150. Tank of gas, 4 hrs.",
-    tags: ["car camping", "waterfalls", "gorge", "weekend", "cheap", "april"],
+    tags: ["car camping", "waterfalls", "gorges", "weekend", "cheap", "april"],
     why: "⚠️ The Grand Canyon of the East — three major waterfalls, 600 ft gorge walls, drive-up camping. Spring is when the falls actually have volume. Four hours from your door and it has never come up once in your planning history.",
     next: "A two-night April shakedown that costs a tank of gas", updated: "2026-09-04",
   },
 
   {
-    slug: "glacier-np", title: "Glacier National Park", subtitle: "Highest hit rate, worst bureaucracy",
+    slug: "newfoundland", title: "Newfoundland", subtitle: "The Earth's mantle, a Viking hall, and icebergs — the June trip that actually is a June trip",
+    months: [6, 7, 8, 9], mode: "drive", days: 26,
+    emoji: "🐋", theme: "ocean", status: "wishlist", pinned: false, page: null,
+    start: null, dates: null,
+    window: "June–September. ⭐ June is genuinely peak here rather than a compromise — icebergs, 17-hour days, no heat.",
+    region: "Newfoundland, via the Maritimes", country: "Canada", coords: [49.0, -56.0],
+    nights: "~22 nights", distance: "~4,500 mi + two ferry crossings", budget: "Ferry ~$350–400 USD round trip; no airfare at all",
+    tags: ["car camping", "geology", "ruins", "icebergs", "coast", "june", "passport", "ferry", "long haul"],
+    why: "⭐ <b>The single best geology destination on this list, and it is not close.</b> The <b>Tablelands</b> at Gros Morne is exposed oceanic <b>mantle</b> — peridotite obducted onto the continent — and it is the reason the park is a UNESCO World Heritage Site: it is the physical evidence that confirmed plate tectonics. ✅ AllTrails: <b>4.9 mi, 705 ft, Moderate</b>, and open all of June. Everything else on the geology-as-through-line list is rock; this is the layer underneath the rock.<br><br>✅ <b>L'Anse aux Meadows opens June 1.</b> North America's only confirmed Norse settlement, c. 1000 AD. \"Ruins count as scenery\" has no better answer anywhere on the continent.<br><br>✅ <b>Icebergs peak late May–early June</b> and are present to early July — Twillingate, Bonavista, St. Anthony. Icebergs and whales on the same boat is routine in that window. ✅ <b>Mid-June daylight at Gros Morne runs first light 4:30 AM to dark 10:13 PM</b> — about 17 usable hours, computed. That is most of the \"late June for light\" argument that justifies <a href=\"#kenai-peninsula\">Kenai</a>, for a tenth of the money.<br><br>🚨 <b>The trip does not fit in 21 days and Newfoundland + the Maritimes does not fit at all.</b> Cleveland → Nova Scotia is ~1,250–1,290 mi and ~23 hrs, and North Sydney is further out Cape Breton — call it 3 days each way at the +15% rule. Six of 21 days are transit before the ferry. <b>Pick Newfoundland or pick the Maritimes; both is a fantasy.</b><br><br>✅ <b>The routing that fixes it:</b> ferry North Sydney → <b>Argentia</b> (14–16 hrs, lands near St. John's), drive the island east to west, ferry home from Port aux Basques (7 hrs). No road driven twice, and it saves ~900 km of backtracking. ⚠️ <b>Argentia is seasonal — June 19 to Sept 30 in 2026</b> (Mon/Thu/Sat, 5:30 PM), so this routing does not exist before about June 19. Verify the 2027 dates.<br><br>⚠️ <b>Three dates fight each other:</b> peak icebergs (late May–early June), the Argentia ferry (June 19+), and the Gros Morne Mountain summit (closed May 1–June 27 for caribou calving). You cannot have the first two together. <b>The summit is the cheapest thing to lose</b> — AllTrails puts it at <b>10.8 mi / 3,044 ft</b>, which is over the day ceiling on both counts, and it is the crowded one. Tablelands, Green Gardens (6.6 mi / 1,266 ft) and the Tablelands Off-Trail Loop (7.4 mi / 1,925 ft) are all open in June and all fit inside the ceiling.<br><br>⚠️ <b>It is cold and wet, not cool and pleasant.</b> Rocky Harbour June normals are 40–44°F low / 64–68°F high, but 2026 actuals ran highs of <b>49–67°F, consistently under normal</b>, with coastal fog. The Siesta 20 is the right bag; the failure mode is twelve days of rain, not one cold night. ✅ Blackflies exist but coastal wind holds them down — Gros Morne is reported as usually fine, unlike the Lake Superior option this replaced.<br><br>⚠️ <b>Needs a valid passport</b>, which is a months-long lead time if there isn't one. ⚠️ Ferry: roughly $60/adult + $120–180 vehicle one-way plus a 13% fuel surcharge, after the federal rate cut of Aug 2025 — call it $350–400 USD round trip, and note that a rate cut is a policy that can lapse before 2027. ⚠️ The Western Brook Pond boat ($99 in 2026) <b>needs 15 people to run</b>, which is a real risk for a solo traveller in shoulder-season June.<br><br>⭐ <b>Passes the horizon test better than anything else on the list.</b> A 26-day drive from Ohio to Newfoundland is precisely what a two-week PTO allowance can never hold. You can fly to Deer Lake later; you cannot do this later.",
+    next: "Decide the trade first — Newfoundland or the Maritimes, and peak icebergs or the Argentia no-backtrack routing. Then check whether a valid passport exists, because that has the longest lead time of anything here",
+    updated: "2026-09-06",
+  },
+  {
+    slug: "glacier-np", title: "Glacier National Park", subtitle: "Highest hit rate — and the bureaucracy just went away",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🏞️", theme: "alpine", status: "wishlist", pinned: false, page: null,
-    start: null, dates: null, window: "July–September", region: "Montana", country: "USA",
+    start: null, dates: null, window: "July–September; Going-to-the-Sun opened June 22 in 2026",
+    region: "Montana", country: "USA",
     coords: [48.7, -113.8], nights: null, budget: null,
-    tags: ["car camping", "alpine", "reservation system"],
-    why: "⚠️ Best hikes per day of anywhere on the list. 📋 The vehicle reservation is a separate system from camping and you can hold one without the other — verify the current year early.",
-    next: "Check the current year's vehicle reservation rules before anything else", updated: "2026-09-03",
+    tags: ["car camping", "alpine", "july", "reservation race"],
+    why: "⚠️ Best hikes per day of anywhere on the list.<br><br>⭐ <b>The subtitle used to say \"worst bureaucracy\" and that is no longer true.</b> ✅ <b>Glacier eliminated the timed-entry vehicle reservation for 2026</b> — the first time in five years — across Going-to-the-Sun, Many Glacier, Two Medicine and North Fork. You still need an entry pass; you no longer need a slot to drive in. The single largest objection to this park is gone.<br><br>⚠️ <b>What replaced it is smaller but real:</b> a <b>3-hour parking limit at Logan Pass from July 1</b>, and a new <b>$1 ticketed shuttle</b> instead of the free hop-on service — a portion of tickets on a 60-day rolling window, the majority released 7 PM the night before. ⚠️ <b>Camping is still the race:</b> 6-month rolling window on recreation.gov released daily, and Apgar, Avalanche and Many Glacier go the day they open. A mid-July 2027 trip books around mid-January 2027.<br><br>✅ <b>Confirmed still gone, Sept 2026.</b> This entry previously carried a re-check on whether 2026\'s rules would hold; that is closed. The remaining work is entirely the campground race.<br><br>⭐ <b>Scheduled:</b> seven nights, July 16–22 2027, inside <a href=\"trips/northern-rockies-2027/\">The Long Way to Glacier</a>.",
+    next: "Nothing to verify — the vehicle reservation is gone. <b>Mid-January 2027</b> is the campground booking date for the July 16–22 stay, and Many Glacier and Apgar both go the day their window opens", updated: "2026-09-06",
   },
   {
     slug: "north-cascades", title: "North Cascades + Methow", subtitle: "Planned once, then Hawaii took the window",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🌲", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Mid-July–September", region: "Washington", country: "USA",
     coords: [48.5, -120.7], nights: null, budget: null,
@@ -350,6 +477,7 @@ const TRIPS = [
   },
   {
     slug: "high-uintas", title: "High Uintas", subtitle: "Absurdly lake-dense, short season",
+    months: [7, 8, 9], mode: "fly",
     emoji: "💧", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "Late July–September", region: "Utah", country: "USA",
     coords: [40.7, -110.88], nights: null, budget: "1.5 hr from SLC",
@@ -359,6 +487,7 @@ const TRIPS = [
   },
   {
     slug: "lassen", title: "Lassen Volcanic", subtitle: "Best day-hike fit in California",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🌋", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "California", country: "USA",
     coords: [40.49, -121.42], nights: null, budget: null,
@@ -368,15 +497,17 @@ const TRIPS = [
   },
   {
     slug: "san-juans", title: "San Juans", subtitle: "Ice Lakes Basin is the marquee",
+    months: [7, 8, 9], mode: "fly",
     emoji: "⛏️", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Colorado", country: "USA",
     coords: [37.81, -107.66], nights: null, budget: null,
-    tags: ["car camping", "alpine", "mining ruins"],
+    tags: ["car camping", "alpine", "ruins"],
     why: "⚠️ South Mineral CG puts you at the Ice Lakes trailhead. Ranked lower purely because you're Colorado-saturated — be suspicious of Colorado ideas that arrive feeling easy.",
     next: "Only if it beats Snowy Range on its merits, not on familiarity", updated: "2026-09-03",
   },
   {
     slug: "oregon-coast-crater", title: "Oregon Coast + Crater Lake", subtitle: "Inverts the effort-equals-payoff model",
+    months: [9], mode: "fly",
     emoji: "🌊", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "September", region: "Oregon / Northern California", country: "USA",
     coords: [43.0, -124.0], nights: "12 nights, three landscapes", budget: null,
@@ -386,6 +517,7 @@ const TRIPS = [
   },
   {
     slug: "olympic-rainier", title: "Olympic + Rainier", subtitle: "Motel nights are functional here",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🏕️", theme: "forest", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Washington", country: "USA",
     coords: [47.6, -123.2], nights: null, budget: null,
@@ -395,15 +527,18 @@ const TRIPS = [
   },
   {
     slug: "bighorns", title: "Bighorns / Cloud Peak", subtitle: "Unspent and cheap to reach",
+    months: [6, 7, 8, 9], mode: "drive",
     emoji: "🐻", theme: "alpine", status: "wishlist", pinned: false, page: null,
-    start: null, dates: null, window: "July–September", region: "Wyoming", country: "USA",
+    start: null, dates: null, window: "Mid-June–September — earlier than the rest of the alpine tier, which is the point",
+    region: "Wyoming", country: "USA",
     coords: [44.3, -107.2], nights: null, budget: "Cheap",
-    tags: ["car camping", "dispersed", "alpine"],
-    why: "📋 Crazy Woman Canyon Road dispersed camping — creek, canyon walls, the best-reviewed sites in the range. Cut from the overlanding trip and never reallocated.",
-    next: "Check Crazy Woman Canyon Rd against 5.9 in of clearance", updated: "2026-09-03",
+    tags: ["car camping", "dispersed", "alpine", "june"],
+    why: "📋 Crazy Woman Canyon Road dispersed camping — creek, canyon walls, the best-reviewed sites in the range. Cut from the overlanding trip and never reallocated.<br><br>✅ <b>Corrected Sept 6 2026 — this was filed as July–September and that was wrong.</b> Several <b>Cloud Peak Skyway (US-16) campgrounds open June 5</b>, which makes the Bighorns the one entry in the alpine tier that is genuinely in season in June. ⚠️ The caveat is elevation-dependent: high-country roads in the range <b>can stay snow-packed until about July 1</b>, so the Skyway corridor works in mid-June and the highest side roads may not. That distinction is exactly what a <a href=\"#beartooth-plateau\">Beartooth</a> trip does not get — US-212 is above 9,500 ft for its whole length, so there is no low half of it to fall back on.",
+    next: "The Calendar could not offer this for a June window until now. If a June road trip happens, this is the alpine anchor that actually works that month — verify Crazy Woman Canyon Rd against 5.9 in of clearance first", updated: "2026-09-06",
   },
   {
     slug: "ruby-mountains", title: "Ruby Mountains", subtitle: "Booked once, then pivoted away",
+    months: [7, 8, 9], mode: "fly",
     emoji: "💎", theme: "alpine", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Nevada", country: "USA",
     coords: [40.6, -115.36], nights: null, budget: "SLC airport",
@@ -413,6 +548,7 @@ const TRIPS = [
   },
   {
     slug: "great-basin", title: "Great Basin", subtitle: "Darkest sky in the lower 48",
+    months: [7, 8, 9], mode: "fly",
     emoji: "🌲", theme: "night", status: "wishlist", pinned: false, page: null,
     start: null, dates: null, window: "July–September", region: "Nevada", country: "USA",
     coords: [38.98, -114.3], nights: null, budget: null,

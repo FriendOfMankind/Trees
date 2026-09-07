@@ -43,12 +43,12 @@ const DAYS = [
         "Hard 6 PM office cutoff. Only ~30 min of margin. Call ahead about late arrival procedure when booking.",
     },
     schedule: [
-      { time: "3:00 PM", text: "Land at OGG" },
-      { time: "3:00–4:00 PM", text: "Checked bags + rental counter (solo, no one to split errands with)" },
-      { time: "4:00–4:35 PM", text: "Drive to Camp Olowalu" },
-      { time: "4:45 PM", text: "Check in, pitch tent (sunset 6:56 PM, ~2 hrs of light)" },
-      { time: "5:30 PM", text: "Shakedown snorkel off camp — reef at mile marker 14, turtle cleaning station" },
-      { time: "6:56 PM", text: "Sunset from the beach" },
+      { kind: "drive", time: "3:00 PM", text: "Land at OGG", maps: "Kahului Airport (OGG)" },
+      { kind: "stop", time: "3:00–4:00 PM", text: "Checked bags + rental counter (solo, no one to split errands with)" },
+      { kind: "drive", time: "4:00–4:35 PM", text: "Drive to Camp Olowalu", maps: "Camp Olowalu" },
+      { kind: "camp", time: "4:45 PM", text: "Check in, pitch tent (sunset 6:56 PM, ~2 hrs of light)" },
+      { kind: "swim", time: "5:30 PM", text: "Shakedown snorkel off camp — reef at mile marker 14, turtle cleaning station" },
+      { kind: "sunset", time: "6:56 PM", text: "Sunset from the beach" },
     ],
     meals: { b: "airport/plane", l: "plane", d: "bought — Leoda's Kitchen & Pie Shop (Olowalu) or packed" },
     highlights: "Zero-effort first night. Best shore snorkel on the island is 100 yards from your tent.",
@@ -62,6 +62,7 @@ const DAYS = [
     tagline: "Youngest rock on Maui at first light, oldest road on Maui by dusk.",
     type: "activity + drive",
     driving: "~4 hrs total, ~115 miles (Olowalu → La Pérouse → Paia → Waiʻānapanapa)",
+    noSignal: "La Pérouse Bay — no service on the last mile in, or at the trailhead. Back in range returning through Kīhei.",
     overnight: {
       name: "Waiʻānapanapa State Park",
       place: "Hāna",
@@ -72,18 +73,18 @@ const DAYS = [
       notes: "Arrive before 6 PM. Sunset 6:54 PM.",
     },
     schedule: [
-      { time: "4:30 AM", text: "Wake (body clock says 10:30 AM — jetlag is an asset today)" },
-      { time: "5:00 AM", text: "Drive to La Pérouse Bay (~50 min). Last mile is narrow, bumpy, no cell service." },
-      { time: "5:24 AM", text: "First light" },
-      { time: "5:48 AM", text: "Sunrise" },
-      { time: "5:50–9:30 AM", text: "Hoapili Trail (King's Highway) out to Cape Hanamanioa / toward Kanaio Beach" },
-      { time: "10:00 AM", text: "Off the lava. Non-negotiable — zero shade, temps climb fast." },
-      { time: "10:30–11:15 AM", text: "Makena Big Beach (Oneloa) swim/cooldown" },
-      { time: "12:00 PM", text: "Kahului: Costco (bulk groceries + cheapest gas on island) + Walmart/Ace (fuel canisters, ice)" },
-      { time: "1:30 PM", text: "Paia: Mana Foods (open 8:00 AM–8:30 PM) — deli, produce, camp food. Last real grocery before Hāna." },
-      { time: "2:15 PM", text: "Depart Paia on Hāna Highway (~2 hrs remaining to Waiʻānapanapa)" },
-      { time: "4:45 PM", text: "Arrive, set up camp" },
-      { time: "6:54 PM", text: "Sunset over the black sand" },
+      { kind: "wake", time: "4:30 AM", text: "Wake (body clock says 10:30 AM — jetlag is an asset today)" },
+      { kind: "drive", time: "5:00 AM", text: "Drive to La Pérouse Bay (~50 min). Last mile is narrow, bumpy, no cell service.", maps: "La Pérouse Bay", warn: true },
+      { kind: "sunrise", time: "5:24 AM", text: "First light" },
+      { kind: "sunrise", time: "5:48 AM", text: "Sunrise" },
+      { kind: "hike", time: "5:50–9:30 AM", text: "Hoapili Trail (King's Highway) out to Cape Hanamanioa / toward Kanaio Beach" },
+      { kind: "stop", time: "10:00 AM", text: "Off the lava. Non-negotiable — zero shade, temps climb fast.", warn: true },
+      { kind: "swim", time: "10:30–11:15 AM", text: "Makena Big Beach (Oneloa) swim/cooldown", maps: "Makena Big Beach" },
+      { kind: "shop", time: "12:00 PM", text: "Kahului: Costco (bulk groceries + cheapest gas on island) + Walmart/Ace (fuel canisters, ice)", maps: "Costco Kahului" },
+      { kind: "shop", time: "1:30 PM", text: "Paia: Mana Foods (open 8:00 AM–8:30 PM) — deli, produce, camp food. Last real grocery before Hāna.", maps: "Mana Foods" },
+      { kind: "drive", time: "2:15 PM", text: "Depart Paia on Hāna Highway (~2 hrs remaining to Waiʻānapanapa)" },
+      { kind: "camp", time: "4:45 PM", text: "Arrive, set up camp" },
+      { kind: "sunset", time: "6:54 PM", text: "Sunset over the black sand" },
     ],
     meals: { b: "made at camp", l: "bought — Paia Fish Market", d: "made — poke + rice from Mana Foods" },
     highlights: "Hoapili at dawn is the best geology on the island and you'll have it to yourself. Snorkel-to-lava-field-to-rainforest in one day.",
@@ -107,14 +108,14 @@ const DAYS = [
       notes: null,
     },
     schedule: [
-      { time: "6:30 AM", text: "Wake, coffee, slow morning" },
-      { time: "8:00 AM", text: "Drive to Kīpahulu (~11 miles, 25 min past Hāna)" },
-      { time: "9:00 AM", text: "Kīpahulu Visitor Center opens (9:00 AM – 5:00 PM)" },
-      { time: "9:15 AM–12:15 PM", text: "Pīpīwai Trail to Waimoku Falls" },
-      { time: "12:30 PM", text: "Kūloa Point Loop (~0.5 mi) — ʻOheʻo Gulch overlook" },
-      { time: "1:30 PM", text: "Lunch in Hāna town" },
-      { time: "3:00 PM", text: "Hāna Bay, Kahanu Garden, or camp downtime" },
-      { time: "6:54 PM", text: "Sunset" },
+      { kind: "wake", time: "6:30 AM", text: "Wake, slow morning" },
+      { kind: "drive", time: "8:00 AM", text: "Drive to Kīpahulu (~11 miles, 25 min past Hāna)" },
+      { kind: "stop", time: "9:00 AM", text: "Kīpahulu Visitor Center opens (9:00 AM – 5:00 PM)", maps: "Kīpahulu Visitor Center" },
+      { kind: "hike", time: "9:15 AM–12:15 PM", text: "Pīpīwai Trail to Waimoku Falls" },
+      { kind: "hike", time: "12:30 PM", text: "Kūloa Point Loop (~0.5 mi) — ʻOheʻo Gulch overlook" },
+      { kind: "food", time: "1:30 PM", text: "Lunch in Hāna town" },
+      { kind: "camp", time: "3:00 PM", text: "Hāna Bay, Kahanu Garden, or camp downtime" },
+      { kind: "sunset", time: "6:54 PM", text: "Sunset" },
     ],
     meals: { b: "made", l: "bought — Braddah Hutt's BBQ or the Thai truck near Hāna Ballpark", d: "made" },
     highlights: "Banyan grove, the bamboo tunnel, Waimoku Falls. Best-effort-to-payoff hike on Maui.",
@@ -138,12 +139,12 @@ const DAYS = [
       notes: null,
     },
     schedule: [
-      { time: "6:00 AM", text: "Wake" },
-      { time: "7:00–10:00 AM", text: "Waioka Pond (see Important Notes — grey-area access, real hazards)" },
-      { time: "10:30 AM–1:00 PM", text: "Hāmoa Beach + Koki Beach (ʻĀlau islet view)" },
-      { time: "1:00–4:00 PM", text: "Camp downtime, black sand beach, lava tube caves" },
-      { time: "4:30–6:30 PM", text: "Waiʻānapanapa coastal trail (old Piʻilani trail) north toward the sea arch and blowholes — golden hour, straight out of camp" },
-      { time: "6:55 PM", text: "Sunset" },
+      { kind: "wake", time: "6:00 AM", text: "Wake" },
+      { kind: "swim", time: "7:00–10:00 AM", text: "Waioka Pond (see Important Notes — grey-area access, real hazards)", maps: "Waioka Pond", warn: true },
+      { kind: "swim", time: "10:30 AM–1:00 PM", text: "Hāmoa Beach + Koki Beach (ʻĀlau islet view)", maps: "Hāmoa Beach" },
+      { kind: "camp", time: "1:00–4:00 PM", text: "Camp downtime, black sand beach, lava tube caves" },
+      { kind: "hike", time: "4:30–6:30 PM", text: "Waiʻānapanapa coastal trail (old Piʻilani trail) north toward the sea arch and blowholes — golden hour, straight out of camp" },
+      { kind: "sunset", time: "6:55 PM", text: "Sunset" },
     ],
     meals: { b: "made", l: "made", d: "made" },
     highlights: "The coastal trail past the first quarter mile is empty. Sea stacks, blowholes, seabird colony.",
@@ -157,6 +158,7 @@ const DAYS = [
     tagline: "Flex day, then across the far side of the volcano.",
     type: "drive / rest valve",
     driving: "~4 hrs, ~80 miles (Waiʻānapanapa → Kīpahulu → Piʻilani Hwy → ʻUlupalakua → Kula → Hosmer)",
+    noSignal: "Piʻilani Highway, Kīpahulu to ʻUlupalakua — zero cell service the whole way. Roughly 09:00 to 14:00.",
     overnight: {
       name: "Hosmer Grove Campground",
       place: "Haleakalā NP, 6,800 ft",
@@ -167,15 +169,15 @@ const DAYS = [
       notes: "6 sites total. 5G cell service. Grills, picnic tables, pit toilets, potable water.",
     },
     schedule: [
-      { time: "FLEX", text: "If wrecked, sleep in and skip straight to the 11:00 AM departure." },
-      { time: "6:30–9:30 AM", text: "Optional: Kaihalulu (Red Sand Beach). Sketchy eroding access; dry conditions only." },
-      { time: "10:00 AM", text: "Break camp, fill gas tank in Hāna — no fuel for the next 38 miles" },
-      { time: "11:00 AM", text: "Depart Kīpahulu westbound on Piʻilani Highway (Hwy 31)" },
-      { time: "11:00 AM–2:00 PM", text: "38 miles across the Kaupō Gap and the dry leeward flank. Drive slow, honk on blind corners." },
-      { time: "2:15 PM", text: "ʻUlupalakua / Grandma's Coffee House, Keokea" },
-      { time: "3:30 PM", text: "Up Crater Road (Rte 378) to Hosmer Grove, set up" },
-      { time: "4:49 PM", text: "Moonrise (80% lit) — bright all night, see Important Notes" },
-      { time: "7:01 PM", text: "Sunset from 6,800 ft" },
+      { kind: "stop", time: "FLEX", text: "If wrecked, sleep in and skip straight to the 11:00 AM departure." },
+      { kind: "swim", time: "6:30–9:30 AM", text: "Optional: Kaihalulu (Red Sand Beach). Sketchy eroding access; dry conditions only.", warn: true },
+      { kind: "camp", time: "10:00 AM", text: "Break camp, fill gas tank in Hāna — no fuel for the next 38 miles", warn: true },
+      { kind: "drive", time: "11:00 AM", text: "Depart Kīpahulu westbound on Piʻilani Highway (Hwy 31)" },
+      { kind: "drive", time: "11:00 AM–2:00 PM", text: "38 miles across the Kaupō Gap and the dry leeward flank. Drive slow, honk on blind corners.", warn: true },
+      { kind: "food", time: "2:15 PM", text: "ʻUlupalakua / Grandma's Coffee House, Keokea", maps: "Grandma's Coffee House, Keokea" },
+      { kind: "drive", time: "3:30 PM", text: "Up Crater Road (Rte 378) to Hosmer Grove, set up", maps: "Hosmer Grove Campground" },
+      { kind: "moon", time: "4:49 PM", text: "Moonrise (80% lit) — bright all night, see Important Notes" },
+      { kind: "sunset", time: "7:01 PM", text: "Sunset from 6,800 ft" },
     ],
     meals: { b: "made", l: "packed (nothing on Piʻilani)", d: "made at Hosmer" },
     highlights: "The Kaupō Gap — the enormous erosional breach that helped carve Haleakalā's \"crater.\" You're driving through the cross-section.",
@@ -199,13 +201,13 @@ const DAYS = [
       notes: null,
     },
     schedule: [
-      { time: "6:30 AM", text: "Wake (5:41 AM sunrise; sleep in a little, today's hike doesn't need dawn)" },
-      { time: "8:00 AM", text: "Drive to Halemauʻu Trailhead (20.7522771, -156.2284596)" },
-      { time: "8:30 AM–1:30 PM", text: "Halemauʻu Trail to Hōlua — switchbacks down a 1,000 ft headwall into the valley" },
-      { time: "2:00 PM", text: "Hosmer Grove Nature Trail loop (0.5 mi, endemic birds — ʻiʻiwi, ʻapapane)" },
-      { time: "4:00 PM", text: "Camp, layer up, early dinner" },
-      { time: "7:01 PM", text: "Sunset" },
-      { time: "3:45 AM (5/19)", text: "Set alarm. Moonset 4:17 AM. Dark sky window 4:17–5:15 AM. This is your only real stargazing." },
+      { kind: "wake", time: "6:30 AM", text: "Wake (5:41 AM sunrise; sleep in a little, today's hike doesn't need dawn)" },
+      { kind: "drive", time: "8:00 AM", text: "Drive to Halemauʻu Trailhead (20.7522771, -156.2284596)", maps: "Halemauʻu Trailhead" },
+      { kind: "hike", time: "8:30 AM–1:30 PM", text: "Halemauʻu Trail to Hōlua — switchbacks down a 1,000 ft headwall into the valley" },
+      { kind: "hike", time: "2:00 PM", text: "Hosmer Grove Nature Trail loop (0.5 mi, endemic birds — ʻiʻiwi, ʻapapane)", maps: "Hosmer Grove Campground" },
+      { kind: "camp", time: "4:00 PM", text: "Camp, layer up, early dinner" },
+      { kind: "sunset", time: "7:01 PM", text: "Sunset" },
+      { kind: "wake", time: "3:45 AM (5/19)", text: "Set alarm for the summit run. ⚠️ <b>Not a dark-sky window.</b> The moon is 100% lit and does not set until 5:11 AM — eleven minutes before first light. Full moon is 1:00 AM on 5/20. See <b>The moon</b> in Notes.", warn: true },
     ],
     meals: { b: "made", l: "packed", d: "made" },
     highlights: "The Halemauʻu switchbacks are the most dramatic trail feature on the island. Silverswords, cinder cones, nēnē.",
@@ -229,15 +231,15 @@ const DAYS = [
       notes: null,
     },
     schedule: [
-      { time: "3:45 AM", text: "Wake. Moonset 4:17 AM." },
-      { time: "4:20–5:10 AM", text: "Stargazing from camp or a summit pullout — the one dark window of the trip" },
-      { time: "4:45 AM", text: "Drive to summit (~30 min, 11 miles up Crater Road)" },
-      { time: "5:40 AM", text: "Sunrise at Puʻu ʻUlaʻula / Haleakalā Visitor Center (elevation-corrected; 7 min earlier than sea level)" },
-      { time: "6:30–11:30 AM", text: "Keoneheʻeheʻe (Sliding Sands) down toward the first cinder cones and back. Cold, empty, perfect light." },
-      { time: "12:30 PM", text: "Break camp at Hosmer, descend" },
-      { time: "1:30 PM", text: "Komoda Store & Bakery, Makawao (cream puffs — closes when sold out, go early-ish)" },
-      { time: "3:30 PM", text: "Arrive Camp Olowalu, set up" },
-      { time: "6:58 PM", text: "Last sunset" },
+      { kind: "wake", time: "3:45 AM", text: "Wake. The moon is up and effectively full for the whole drive — moonset is 5:11 AM at the summit." },
+      { kind: "moon", time: "5:11–5:22 AM", text: "Moonset to first light: <b>eleven minutes</b> of genuine dark, most of which you spend parking. A bonus if you catch it, not a reason to be up." },
+      { kind: "drive", time: "4:45 AM", text: "Drive to summit (~30 min, 11 miles up Crater Road)", maps: "Hosmer Grove Campground" },
+      { kind: "sunrise", time: "5:40 AM", text: "Sunrise at Puʻu ʻUlaʻula / Haleakalā Visitor Center (elevation-corrected; 7 min earlier than sea level)", maps: "Haleakalā Visitor Center" },
+      { kind: "hike", time: "6:30–11:30 AM", text: "Keoneheʻeheʻe (Sliding Sands) down toward the first cinder cones and back. Cold, empty, perfect light." },
+      { kind: "camp", time: "12:30 PM", text: "Break camp at Hosmer, descend" },
+      { kind: "dessert", time: "1:30 PM", text: "Komoda Store & Bakery, Makawao (cream puffs — closes when sold out, go early-ish)", maps: "Komoda Store & Bakery, Makawao" },
+      { kind: "camp", time: "3:30 PM", text: "Arrive Camp Olowalu, set up", maps: "Camp Olowalu" },
+      { kind: "sunset", time: "6:58 PM", text: "Last sunset" },
     ],
     meals: { b: "made (pre-dawn, at camp)", l: "packed", d: "bought — Leoda's or Kihei poke" },
     highlights: "Sunrise reservation comes free with your Hosmer stay — you skip the 60-day booking scramble entirely. Descending Sliding Sands right after sunrise means cold air and an empty trail.",
@@ -253,10 +255,10 @@ const DAYS = [
     driving: "~1 hr, ~45 miles",
     overnight: { name: "N/A — flight home", place: null, kind: null, cost: null, checkin: null, confirmation: null, notes: null },
     schedule: [
-      { time: "6:00 AM", text: "Wake, break camp" },
-      { time: "OPTION A (late flight)", text: "7:00 AM drive to Waiheʻe Ridge (20.9529, -156.5316), hike 7:30–10:30 AM. Be off it by noon before it clouds in. Shower/rinse, then OGG." },
-      { time: "OPTION B (early/midday flight)", text: "7:00–9:00 AM final snorkel at Olowalu reef, shower at camp, Leoda's for the road, OGG." },
-      { time: "—", text: "Return to OGG at least 2 hrs before departure" },
+      { kind: "wake", time: "6:00 AM", text: "Wake, break camp" },
+      { kind: "hike", time: "OPTION A (late flight)", text: "7:00 AM drive to Waiheʻe Ridge (20.9529, -156.5316), hike 7:30–10:30 AM. Be off it by noon before it clouds in. Shower/rinse, then OGG.", maps: "Waiheʻe Ridge Trailhead" },
+      { kind: "swim", time: "OPTION B (early/midday flight)", text: "7:00–9:00 AM final snorkel at Olowalu reef, shower at camp, Leoda's for the road, OGG." },
+      { kind: "drive", time: "—", text: "Return to OGG at least 2 hrs before departure", maps: "Kahului Airport (OGG)", warn: true },
     ],
     meals: { b: "made", l: "bought — Leoda's or Tin Roof (Kahului)", d: "airport/plane" },
     highlights: "Waiheʻe Ridge is arguably the best hike on Maui and it's a different volcano entirely (Mauna Kahālāwai, ~1.3 Ma, deeply dissected).",
@@ -296,6 +298,62 @@ const WAYPOINTS = [
   { name: "Puʻu Kekaʻa (Black Rock)", lat: 20.9269462, lng: -156.6963223, verified: true, icon: "🤿", days: "flex", notes: "Backup cliff jump. Strong current past the point." },
 ];
 
+/* The field view, generated from WAYPOINTS above rather than retyped.
+
+   This tab exists precisely because eight of Maui's waypoints have no verified
+   coordinates and so are absent from the map. A Google Maps *search string*
+   works for an unlocated place in a way a pin cannot, and it survives the
+   offline region download. Groups are by leg of the loop, which is how you'd
+   actually reach for them. */
+const PLACES = [
+  {
+    group: "Arrival and the west side — Days 1, 7, 8",
+    items: [
+      { name: "Kahului Airport (OGG)", maps: "Kahului Airport OGG Maui" },
+      { name: "Camp Olowalu", note: "Office 7 AM–6 PM. (808) 661-4303", maps: "Camp Olowalu" },
+      { name: "Olowalu reef, mile marker 14", note: "Turtle cleaning station, straight off the beach", maps: "Olowalu mile marker 14 snorkeling Maui" },
+      { name: "Puʻu Kekaʻa (Black Rock)", note: "Backup cliff jump. Strong current past the point.", maps: "Puu Kekaa Black Rock Kaanapali" },
+    ],
+  },
+  {
+    group: "South Maui and the Kahului resupply — Day 2",
+    items: [
+      { name: "La Pérouse Bay", note: "No cell service. Rough final mile.", maps: "La Perouse Bay Maui" },
+      { name: "Makena Big Beach (Oneloa)", note: "Dangerous shore break — swim, don't bodysurf", maps: "Makena Big Beach Oneloa Maui" },
+      { name: "Costco Kahului", note: "Cheapest gas on the island. Fuel canisters can't fly — buy here.", maps: "Costco Kahului Maui" },
+      { name: "Mana Foods, Paia", note: "8:00 AM–8:30 PM. Last real grocery before Hāna.", maps: "Mana Foods Paia" },
+    ],
+  },
+  {
+    group: "Hāna and the east — Days 2–5",
+    items: [
+      { name: "Waiʻānapanapa State Park", note: "Gate closes 6 PM. (808) 248-4843", maps: "Waianapanapa State Park" },
+      { name: "Kīpahulu Visitor Center", note: "9 AM–5 PM. (808) 248-7375", maps: "Kipahulu Visitor Center Haleakala" },
+      { name: "Hāmoa Beach", maps: "Hamoa Beach Hana Maui" },
+      { name: "Waioka Pond (Venus Pool)", note: "Grey-area access, flash flood corridor — see Notes before going", maps: "Waioka Pond Venus Pool Hana" },
+      { name: "Hāna gas station", note: "Last fuel for 38 miles westbound", maps: "gas station Hana Maui" },
+    ],
+  },
+  {
+    group: "The back road and Haleakalā — Days 5–7",
+    items: [
+      { name: "Piʻilani Highway east end (Kīpahulu)", note: "Gas up in Hāna first. Zero cell service across.", maps: "Piilani Highway Kipahulu Maui" },
+      { name: "Grandma's Coffee House, Keokea", maps: "Grandmas Coffee House Keokea Maui" },
+      { name: "Hosmer Grove Campground", note: "5G service. After-hours check-in pavilion.", maps: "Hosmer Grove Campground Haleakala" },
+      { name: "Halemauʻu Trailhead", note: "Small lot, pit toilet", maps: "Halemauu Trailhead Haleakala" },
+      { name: "Haleakalā Visitor Center", note: "6 AM–12 PM. Sunrise lot fills — arrive by 5:00 AM.", maps: "Haleakala Visitor Center summit" },
+      { name: "Komoda Store & Bakery, Makawao", note: "Cream puffs. Closes when sold out.", maps: "Komoda Store and Bakery Makawao" },
+    ],
+  },
+  {
+    group: "The last morning — Day 8",
+    items: [
+      { name: "Waiheʻe Ridge Trailhead", note: "7 AM–7 PM. Small lot, fills.", maps: "Waihee Ridge Trail trailhead Maui" },
+      { name: "Leoda's Kitchen and Pie Shop", note: "On the way back to OGG from Olowalu", maps: "Leodas Kitchen and Pie Shop Olowalu" },
+    ],
+  },
+];
+
 const HIKES = [
   { name: "Hoapili Trail (King's Highway)", day: 2, distance: "4–6 mi RT", gain: "Minimal", difficulty: "Moderate (terrain)", duration: "3–4 hr", notes: "Zero shade. Closed-toe shoes mandatory. Dawn start." },
   { name: "Pīpīwai Trail", day: 3, distance: "4.0 mi RT", gain: "~800 ft", difficulty: "Moderate", duration: "2.5–3 hr", notes: "Roots and rocks throughout. Bamboo tunnel, Waimoku Falls." },
@@ -306,15 +364,38 @@ const HIKES = [
   { name: "Hosmer Grove Nature Loop", day: 6, distance: "0.5 mi", gain: "Minimal", difficulty: "Easy", duration: "30 min", notes: "Endemic forest birds. Straight from camp." },
 ];
 
+/* Where each morning actually starts, so tools/sun.mjs can compute the table
+   instead of anyone typing it. Coordinates come from verified waypoints by
+   name — the tool refuses an unverified one, which is the same rule the map
+   follows. Elevations are the published campground/summit figures.
+
+   Regenerate:  node tools/sun.mjs maui-2027
+   Check:       node tools/sun.mjs maui-2027 --check                        */
+const SUN_MOON_SITES = [
+  { date: "2027-05-13", label: "Olowalu", waypoint: "Camp Olowalu", tz: "Pacific/Honolulu" },
+  { date: "2027-05-14", label: "La Pérouse → Hāna", waypoint: "La Pérouse Bay", tz: "Pacific/Honolulu" },
+  { date: "2027-05-15", label: "Hāna", waypoint: "Waiʻānapanapa State Park", tz: "Pacific/Honolulu" },
+  { date: "2027-05-16", label: "Hāna", waypoint: "Waiʻānapanapa State Park", tz: "Pacific/Honolulu" },
+  { date: "2027-05-17", label: "Hosmer (6,800 ft)", waypoint: "Hosmer Grove Campground", elevationM: 2073, tz: "Pacific/Honolulu" },
+  { date: "2027-05-18", label: "Hosmer (6,800 ft)", waypoint: "Hosmer Grove Campground", elevationM: 2073, tz: "Pacific/Honolulu" },
+  { date: "2027-05-19", label: "Summit (10,023 ft)", waypoint: "Haleakalā Visitor Center", elevationM: 3055, tz: "Pacific/Honolulu" },
+  { date: "2027-05-20", label: "Olowalu", waypoint: "Camp Olowalu", tz: "Pacific/Honolulu" },
+];
+
+/* GENERATED — regenerate with `node tools/sun.mjs maui-2027`, check with --check.
+   NOAA solar position, refraction and horizon dip included. Civil twilight is a
+   fixed 6° solar depression, so unlike sunrise it does NOT shift with elevation —
+   the earlier hand-typed table moved it, which is why the summit rows changed by
+   eight minutes. Moon rise/set ±~4 min; illumination read at local midday. */
 const SUN_MOON = [
-  { date: "Thu 5/13", location: "Olowalu", firstLight: "5:25 AM", sunrise: "5:49 AM", sunset: "6:56 PM", dark: "7:20 PM", moon: "52%" },
-  { date: "Fri 5/14", location: "La Pérouse → Hāna", firstLight: "5:24 AM", sunrise: "5:48 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "59%" },
-  { date: "Sat 5/15", location: "Hāna", firstLight: "5:22 AM", sunrise: "5:46 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "66%" },
-  { date: "Sun 5/16", location: "Hāna", firstLight: "5:21 AM", sunrise: "5:45 AM", sunset: "6:55 PM", dark: "7:19 PM", moon: "73%" },
-  { date: "Mon 5/17", location: "Hosmer (6,800 ft)", firstLight: "5:15 AM", sunrise: "5:41 AM", sunset: "7:01 PM", dark: "7:27 PM", moon: "80% — moonset 3:38 AM" },
-  { date: "Tue 5/18", location: "Hosmer (6,800 ft)", firstLight: "5:15 AM", sunrise: "5:41 AM", sunset: "7:01 PM", dark: "7:27 PM", moon: "87% — moonset 4:17 AM" },
-  { date: "Wed 5/19", location: "Summit (10,023 ft)", firstLight: "5:13 AM", sunrise: "5:40 AM", sunset: "7:03 PM", dark: "7:29 PM", moon: "94%" },
-  { date: "Thu 5/20", location: "Olowalu", firstLight: "5:22 AM", sunrise: "5:47 AM", sunset: "6:59 PM", dark: "7:23 PM", moon: "Full moon" },
+  { date: "Thu 5/13", location: "Olowalu", firstLight: "5:26 AM", sunrise: "5:49 AM", sunset: "6:55 PM", dark: "7:19 PM", moon: "60% — moonset 1:14 AM" },
+  { date: "Fri 5/14", location: "La Pérouse → Hāna", firstLight: "5:25 AM", sunrise: "5:49 AM", sunset: "6:55 PM", dark: "7:19 PM", moon: "70% — moonset 1:52 AM" },
+  { date: "Sat 5/15", location: "Hāna", firstLight: "5:22 AM", sunrise: "5:46 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "80% — moonset 2:27 AM" },
+  { date: "Sun 5/16", location: "Hāna", firstLight: "5:22 AM", sunrise: "5:46 AM", sunset: "6:54 PM", dark: "7:18 PM", moon: "88% — moonset 3:03 AM" },
+  { date: "Mon 5/17", location: "Hosmer (6,800 ft)", firstLight: "5:23 AM", sunrise: "5:40 AM", sunset: "7:02 PM", dark: "7:19 PM", moon: "94% — moonset 3:47 AM" },
+  { date: "Tue 5/18", location: "Hosmer (6,800 ft)", firstLight: "5:22 AM", sunrise: "5:40 AM", sunset: "7:02 PM", dark: "7:20 PM", moon: "98% — moonset 4:27 AM" },
+  { date: "Wed 5/19", location: "Summit (10,023 ft)", firstLight: "5:22 AM", sunrise: "5:38 AM", sunset: "7:04 PM", dark: "7:20 PM", moon: "100% — moonset 5:11 AM" },
+  { date: "Thu 5/20", location: "Olowalu", firstLight: "5:23 AM", sunrise: "5:47 AM", sunset: "6:58 PM", dark: "7:22 PM", moon: "100% — moonset 5:51 AM" },
 ];
 
 const WEATHER = [
@@ -418,7 +499,7 @@ const RESERVATIONS = [
   { text: "Flights CLE→OGG — target ~3:00 PM arrival 5/13 — book when schedules open (~11 months out)" },
   { text: "Confirm Waiʻānapanapa camping booking window (1 year vs 90 days) — do this NOW so the alarm is set correctly" },
   { text: "Camp Olowalu 5/13 + 5/19 — book direct anytime — call about the 6 PM check-in cutoff" },
-  { text: "Hosmer Grove 5/17 + 5/18 — recreation.gov opens ~Nov 13, 2026 (6 months out) — 6 sites total, book the morning it drops" },
+  { text: "Hosmer Grove 5/17 + 5/18 — recreation.gov opens <b>Nov 17, 2026</b>: six months before the first night booked, not before the trip starts. (This said Nov 13, counted from the 5/13 arrival — four days early, which loses nothing but is the wrong date to set an alarm for.) 6 sites total, book the morning it drops" },
   { text: "Waiʻānapanapa camping 5/14–5/16 — ~Feb 2027 if 90-day window" },
   { text: "Waiʻānapanapa day-use entry — opens ~Apr 13, 2027 (30 days out) — verify if camping permit already covers entry" },
   { text: "AAA membership — before booking the car" },
@@ -442,7 +523,11 @@ const NOTES = [
   {
     heading: "The moon",
     body:
-      "Nights of 5/17 and 5/18 have a bright waxing gibbous (80–87% lit) up nearly all night. Hosmer is not a stargazing destination on these dates. The only genuinely dark windows are 4:17–5:15 AM on 5/19 (after moonset, before twilight) — which is scheduled. A trip shifted to ~May 6–13 would have hit near new moon; Colin chose to keep the original dates knowingly.",
+      "<b>Corrected Sept 2026 against computed values</b> (<code>node tools/sun.mjs maui-2027 --check</code>); the earlier numbers on this page were about two days behind the actual cycle.<br><br>" +
+      "Full moon is <b>1:00 AM on 5/20</b>, in the middle of the trip. That makes 5/17 and 5/18 a 94–98% waxing gibbous up nearly all night, not the 80–87% this page used to claim. Hosmer is not a dark-sky site on these dates and no amount of altitude changes that.<br><br>" +
+      "The window scheduled as 4:17–5:15 AM on 5/19 does not exist. Moonset that morning is <b>5:11 AM</b> at the summit (later than at sea level — a 10,000 ft observer sees over the horizon), and civil twilight starts at <b>5:22 AM</b>. That is an eleven-minute gap, under a moon that was 100% lit until the moment it set. The 4:17 AM figure was the moonset for the morning of 5/18, used a day late.<br><br>" +
+      "⚠️ <b>Unresolved, and deliberately left that way:</b> stargazing is on the declined list in the Playbook, and this itinerary schedules it. The declined list is from the Sept 2026 handoff and this page was written earlier. Resolve it in one direction — the validator reports it on every run. Given the real numbers, dropping it costs nothing.<br><br>" +
+      "A trip shifted to ~May 6–13 would have hit near new moon. Colin chose to keep the original dates knowingly; that decision still stands, it was just made against optimistic numbers.",
   },
   {
     heading: "Waioka Pond (Day 4)",
@@ -518,9 +603,13 @@ window.TRIP_DATA = {
   days: DAYS,
   lodging: { rows: LODGING, total: LODGING_TOTAL, summary: `7 nights camping · ${LODGING_TOTAL} total` },
   waypoints: WAYPOINTS,
+  places: PLACES,
+  placesNote: "Tap Maps to open the search. These work for the places that have no verified coordinates and therefore no pin — which on this trip is eight of eighteen.",
+  offlineRegions: "Download the Google Maps offline region for the whole island before leaving home. The Hāna Highway, the Piʻilani section and La Pérouse all have long no-service stretches, and Google's offline maps carry roads only — trails need a separate AllTrails or Gaia download.",
   hikes: { title: "Hikes &amp; Trails", rows: HIKES },
   sunMoon: SUN_MOON,
-  sunMoonNote: "Calculated, elevation-corrected. ~13 hours of daylight daily.",
+  sunMoonSites: SUN_MOON_SITES,
+  sunMoonNote: "Computed, not transcribed — <code>node tools/sun.mjs maui-2027</code>. Sunrise and sunset carry the horizon dip for elevation (the summit gains about seven minutes); first light and dark do not, because civil twilight is a fixed solar depression. ~13 hours of daylight daily.",
   weather: WEATHER,
   budget: {
     rows: BUDGET,
