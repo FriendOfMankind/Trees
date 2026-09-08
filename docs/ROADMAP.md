@@ -89,14 +89,50 @@ have no provisions section at all.** For a traveler whose profile opens with
 "cooks at camp by default," that's the largest content gap on the site — and
 it's now cheap to close, because the recipes exist and only need assigning.
 
+### Grocery stops, timed to the meals between them
+
+**Colin's rule, Sept 2026: shop at the start of every trip, road trips
+included** — everything goes straight into the car. So the question is never
+"where is a supermarket", it is *"how many of each meal do I need to buy at
+this stop to reach the next one."*
+
+The data to compute that already exists. `usedOn` says which day and slot each
+recipe fills; the itinerary says where you are on each day. Between two
+grocery stops there is a known count of breakfasts, lunches and dinners, minus
+the ones marked `bought`. So each stop gets a line like:
+
+> **Kroger, Stanton KY — Thursday, day 3.** Buy 2 breakfasts, 3 lunches,
+> 3 dinners. Plus: 1 block of ice, and the rotisserie chicken that covers
+> tonight and tomorrow.
+
+That is derived, not hand-maintained, and it fixes the thing that makes a
+resupply stressful — standing in an aisle doing arithmetic about how many
+dinners are left.
+
+Shape it as `provisions.stops[]` on a trip:
+
+```js
+stops: [
+  { day: 1, where: "Giant Eagle, Avon OH", kind: "departure", maps: "..." },
+  { day: 3, where: "Kroger, Stanton KY",   kind: "resupply",  maps: "...",
+    also: ["1 BLOCK of ice, not cubes", "Rotisserie chicken — covers D2 and D3"] },
+]
+```
+
+Everything else — the meal counts, the ingredient roll-up, which Zone each
+item lands in — comes from `data/meals.js`. The stop only declares where and
+when.
+
+**Blocked on nothing.** It needs the meals assigned first (item 1 below),
+because a count of meals you have not chosen yet is a count of nothing.
+
 Order of work:
 
 1. **Assign recipes to the existing trips.** Add `usedOn` entries; the trip
    files need no edit and the validator checks every claim.
-2. **Grocery list generator.** `meals.js` knows ingredients, `usedOn` knows
-   which days a trip cooks, the itinerary knows where the resupply stop is.
-   Roll that into a shopping list split by "buy at home" / "resupply". This is
-   the thing the kitchen registry was built to enable.
+2. **Grocery stops with per-stop meal counts**, as designed above. The
+   shopping list falls out of it: ingredients rolled up per stop, split by
+   what goes in the cooler and what does not.
 3. **Cooler timeline.** Same data plus `cleanup` and Zone membership: plot
    Zone 1 depletion against days and flag where a high-cleanup meal is
    scheduled at a site with no potable water. The 11-day Appalachians timeline
@@ -114,13 +150,11 @@ items 1–3 get materially better. Everything else here proceeds without them.
 
 ---
 
-## Tier 2 — the three new trips have no maps
+## Tier 2 — one trip left with no map
 
-`mojave-winter-2027`, `sky-islands-2027` and `northern-rockies-2027` have
-**0 verified waypoints out of 44**. The validator already warns about all
-three. `tools/geocode.mjs` and `tools/setcoord.mjs` exist to fix exactly this,
-so it's mechanical work, not research — and until it's done, three trips fall
-back to a searchable list instead of a map.
+Done Sept 2026 via `mapbench.html`: Kentucky 8/8, Appalachians 9/9, Maui
+18/18, Sky Islands 15/15, Northern Rockies 15/15. **Only
+`mojave-winter-2027` is left, at 0/14.** One session on the bench closes it.
 
 ---
 

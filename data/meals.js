@@ -56,16 +56,24 @@ const KITCHEN = {
    and roasting are the ordinary workaround because the proteins involved are
    heat-labile.
 
-   RESOLVED Sept 2026: <b>roasted nuts are fine.</b> Every nut in this library
-   is therefore a buying instruction — roasted, not raw — and not a problem.
+   RESOLVED Sept 2026, in two passes:
+     <b>Roasted nuts are fine.</b> Every nut here is a buying instruction —
+     roasted, not raw — and not a restriction.
+     <b>Dried fruit, fruit leather and ripe fruit are fine.</b> Apricots, figs,
+     mango, banana chips and dates all stay, and a ripe banana is fine where a
+     crisp apple is not. Ripeness and drying both soften the proteins enough.
 
-   STILL OPEN: raw fruit (the apples in two lunches) and dried fruit. Drying is
-   not cooking, so dried apricots, figs, mango and banana chips are flagged
-   rather than assumed safe either way. */
+   STILL OPEN, and now narrow: <b>crisp raw fruit.</b> Two lunches carry a
+   whole raw apple and those are the only two flags left in this file.
+
+   ⚠️ Note the tension with the vote: both cooked-fruit dishes on the Menu
+   Bench were rejected, so "cook it" is not the workaround here. Swap the
+   apple for a ripe banana, dried fruit or fruit leather instead — all
+   confirmed, all shelf-stable, and none needs the stove. */
 const CONSTRAINTS = [
   {
-    what: "Oral allergy syndrome — raw fruit and vegetables",
-    rule: "Raw is the problem, not the ingredient. <b>Roasted nuts are confirmed fine</b>, so every nut here is a buying instruction rather than a restriction. Cooked vegetables and cooked fruit are the workaround on that side. <b>Raw fruit and dried fruit are still open</b> — the recipes carrying them stay flagged until Colin says which are actually a problem.",
+    what: "Oral allergy syndrome — crisp raw fruit and raw vegetables",
+    rule: "Narrower than it first looked. <b>Roasted nuts, dried fruit, fruit leather and ripe fruit are all confirmed fine</b> — a ripe banana is fine where a crisp apple is not. Nuts are a buying instruction, not a restriction. What remains out is <b>crisp raw fruit</b> and raw vegetables; cooked vegetables are fine. Cooking fruit is <i>not</i> the workaround, because both cooked-fruit dishes were voted down — reach for dried or ripe instead.",
     level: "blocking",
   },
   {
@@ -101,7 +109,7 @@ const KITCHEN_DOCTRINE = [
   "<b>The four things that turn a can into a meal:</b> olive oil in a squeeze bottle, hard cheese, crushed chips, a starch pouch. Carry all four and no dinner is ever just a can.",
   "<b>The routine is snack → hike → hot thermos meal at the turnaround → hike out.</b> That is the shape most days want, and it is why the thermos matters more than a stove at the destination. Build the day's one hot carried meal around it.",
   "<b>A dinner can repeat, just not back to back.</b> Corrected Sept 2026 — the earlier library assumed no dinner ever repeats on a trip and built around a constraint that was never real. Two nights apart is fine, which makes a long trip much easier to provision.",
-  "<b>Raw is the constraint, not the ingredient.</b> Oral allergy syndrome means raw nuts, fruit and vegetables can irritate where the cooked or roasted version doesn't. Roasted nuts are confirmed fine, so nuts are a buying instruction, not a restriction. Raw and dried fruit are still open — reach for cooked fruit rather than dropping the calories.",
+  "<b>Raw is the constraint, not the ingredient.</b> Oral allergy syndrome means raw nuts, fruit and vegetables can irritate where the cooked or roasted version doesn't. Roasted nuts, dried fruit, fruit leather and ripe fruit are all confirmed fine — the line is <b>crisp raw fruit</b>, so a ripe banana works where an apple doesn't. Nuts are a buying instruction, not a restriction. Don't reach for cooked fruit as the fix: both cooked-fruit dishes were voted down.",
   "<b>The wide-mouth thermos is load-bearing.</b> Hot oats on a dark ridge and a hot dinner at an overlook are the same trick. There is one and there will be one — so on a pre-dawn morning the hot meal wins and the hot chocolate gets dropped. Plan for that rather than around a second flask.",
   "<b>Cured, aged and oil-packed food does not need a cooler.</b> Salami, capicola, provolone, olive salad, oil-packed tomato. This is why a pressed sandwich survives ten hours in a pack and why the lunch slot rarely touches Zone 2.",
   "<b>A pressed sandwich gets better squashed.</b> Build it the night before, wrap in parchment then foil, put it under the cooler lid. The weight is the recipe.",
@@ -129,7 +137,7 @@ const PANTRY = [
   { item: "Peanut butter packets + honey", why: "The last 200 kcal of any breakfast, stirred in off-heat." },
   { item: "Whole milk powder", why: "Goes in every pre-mixed oats and hot chocolate bag. The fat is the point at 50°F." },
   { item: "Instant oats packets", why: "Base of the single most-used recipe in this file." },
-  { item: "Bars, jerky, trail mix, dried fruit, roasted nuts", why: "The lunch slot's back half, every trip. Buy <b>roasted</b> nuts, always — raw is the oral-allergy trigger and standard trail mix is raw. Roasted is confirmed fine, so this costs nothing." },
+  { item: "Bars, jerky, dried fruit, fruit leather, roasted nuts", why: "The lunch slot's back half, every trip. Buy <b>roasted</b> nuts, always — raw is the trigger and off-the-shelf trail mix is raw. Dried fruit and fruit leather are confirmed fine and are the better snack calories anyway." },
 ];
 
 /* ---------------------------------------------------------------- RECIPES */
@@ -138,7 +146,6 @@ const MEALS = [
   /* ============================================================ BREAKFAST */
   {
     id: "oats-plus",
-    review: { code: "oas", why: "Dried fruit — dates, apricots, banana chips — is unresolved. Pecans are fine: buy them <b>roasted</b>." },
     name: "Hot oats+",
     type: "breakfast",
     method: "boil",
@@ -253,7 +260,6 @@ const MEALS = [
   },
   {
     id: "cold-bagel-plate",
-    review: { code: "oas", why: "Dried apricots. Unresolved." },
     name: "Cold bagel plate",
     type: "breakfast",
     method: "no-cook",
@@ -277,7 +283,7 @@ const MEALS = [
   /* ================================================================ LUNCH */
   {
     id: "sourdough-sub",
-    review: { code: "oas", why: "The whole raw apple. Raw fruit is the trigger — swap it for a roasted-nut bar or cooked fruit." },
+    review: { code: "oas", why: "The whole raw apple. Crisp raw fruit is the one form still out — swap it for a banana, dried fruit or fruit leather, all of which are confirmed fine." },
     name: "Sourdough sub, built at home",
     type: "lunch",
     method: "assemble",
@@ -298,7 +304,6 @@ const MEALS = [
   },
   {
     id: "pressed-sandwich",
-    review: { code: "oas", why: "Dried apricots. The marcona almonds are fine — marconas are fried or roasted by definition." },
     name: "Pressed muffuletta",
     type: "lunch",
     method: "assemble",
@@ -322,7 +327,6 @@ const MEALS = [
   },
   {
     id: "charcuterie-tortillas",
-    review: { code: "oas", why: "Dried figs or mango. Buy the almonds <b>roasted</b> and that half is settled." },
     name: "Salami, aged cheddar and tortillas",
     type: "lunch",
     method: "no-cook",
@@ -364,7 +368,6 @@ const MEALS = [
   },
   {
     id: "pouch-plate-no-water",
-    review: { code: "oas", why: "Dried apricots. Unresolved." },
     name: "Waterless pouch plate",
     type: "lunch",
     method: "no-cook",
@@ -405,7 +408,7 @@ const MEALS = [
   },
   {
     id: "pb-honey-roll",
-    review: { code: "oas", why: "The whole raw apple, and trail mix unless it is a roasted-nut mix." },
+    review: { code: "oas", why: "The whole raw apple. Same swap as the sourdough sub. The trail mix is fine as long as the nuts are roasted." },
     name: "PB-and-honey roll, built the night before",
     type: "lunch",
     method: "assemble",
@@ -988,7 +991,7 @@ const MEALS = [
     cookware: [], draft: true,
     prepAtHome: "Mixed at home from <b>roasted</b> nuts, so the bag that goes in the pack is already correct.",
     ingredients: ["Roasted almonds, pecans, cashews", "Dark chocolate chunks", "Pretzels or salted crackers"],
-    technique: "<b>This is the standing trail-mix slot, built roasted on purpose.</b> Off-the-shelf trail mix is raw nuts and dried fruit — the exact combination to avoid. Buying roasted costs nothing and removes the problem entirely. No dried fruit until that question is settled.",
+    technique: "<b>This is the standing trail-mix slot, built roasted on purpose.</b> Off-the-shelf trail mix is raw nuts and dried fruit — the exact combination to avoid. Buying roasted costs nothing and removes the problem entirely. Dried fruit is confirmed fine and belongs in it — the constraint was only ever the raw nuts.",
     tags: ["oas-safe", "roasted-only", "no-water", "snack"], variants: [], usedOn: [],
   },
   {

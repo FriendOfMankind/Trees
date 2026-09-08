@@ -44,6 +44,36 @@
     return 2 * R * Math.asin(Math.sqrt(s));
   }
 
+  /** Miles or km out of a registry `distance` string — "~4,300 mi loop",
+      "~1,000 mi round trip", "~400 mi driving". Returns km, or null. */
+  function parseTripDistanceKm(str) {
+    if (!str) return null;
+    const m = String(str).match(/([\d,]+(?:\.\d+)?)\s*(mi|mile|miles|km)\b/i);
+    if (!m) return null;
+    const n = Number(m[1].replace(/,/g, ""));
+    if (!Number.isFinite(n) || n <= 0) return null;
+    return /^k/i.test(m[2]) ? n : n * 1.609344;
+  }
+
+  /** How far from the trip's centre a waypoint may legitimately be.
+
+      A fixed radius is wrong, and it was: a 21-day Badlands-to-Glacier road
+      trip had 16 correct coordinates refused because Glacier is 686 km from
+      the trip's middle, while a 700-mile loop around the Sky Islands should
+      not tolerate anything like that.
+
+      The registry already states each trip's driving distance, and that is
+      the signal. For a closed loop of perimeter P no point is further than
+      P/4 from the centre, so that bound scales with the trip instead of
+      against it. Floored at 150 km so a short trip still gets a real check,
+      and the fixed default survives for a trip with no distance recorded. */
+  function maxRadiusKm(distanceStr) {
+    const km = parseTripDistanceKm(distanceStr);
+    if (km == null) return { warn: 300, stop: 800 };
+    const r = Math.max(150, km / 4);
+    return { warn: r, stop: r * 2.5 };
+  }
+
   /** Decimal places actually present in a number as written. */
   function precisionOf(n) {
     const s = String(n);
@@ -61,6 +91,7 @@
    * @param {Array}  [o.tripCoords] [lat,lng] region centroid from the registry
    * @param {string} [o.country]   "USA" | "Canada" | other
    * @param {object} [o.existing]  { lat, lng, verified, source } already on file
+   * @param {string} [o.tripDistance] registry `distance` prose, e.g. "~4,300 mi loop"
    * @returns {Array<{level:"stop"|"warn", code:string, msg:string}>}
    */
   function coordChecks(o) {
@@ -93,8 +124,12 @@
 
     if (Array.isArray(o.tripCoords) && o.tripCoords.length === 2) {
       const km = haversineKm([lat, lng], o.tripCoords);
-      if (km > 800) out.push({ level: "stop", code: "far", msg: `${Math.round(km)} km from the trip's region centre. That is not this trip.` });
-      else if (km > 300) out.push({ level: "warn", code: "far", msg: `${Math.round(km)} km from the trip's region centre — worth confirming it's the right one.` });
+      const limit = maxRadiusKm(o.tripDistance);
+      if (km > limit.stop) {
+        out.push({ level: "stop", code: "far", msg: `${Math.round(km)} km from the trip's region centre, which is beyond anything a ${o.tripDistance || "trip of unstated length"} can reach. That is not this trip.` });
+      } else if (km > limit.warn) {
+        out.push({ level: "warn", code: "far", msg: `${Math.round(km)} km from the trip's region centre — further than a ${o.tripDistance || "trip of unstated length"} would usually reach. Worth confirming.` });
+      }
     }
 
     /* Replacing something already sourced. Distance decides how loud: a near
@@ -131,6 +166,8 @@
   }
 
   root.coordChecks = coordChecks;
+  root.coordMaxRadiusKm = maxRadiusKm;
+  root.parseTripDistanceKm = parseTripDistanceKm;
   root.coordPrecisionOf = precisionOf;
   root.coordHaversineKm = haversineKm;
 })(typeof globalThis !== "undefined" ? globalThis : this);

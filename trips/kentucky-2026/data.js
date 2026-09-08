@@ -500,11 +500,6 @@ window.TRIP_DATA = {
 
   openQuestions: [
     {
-      question: "Blue Heron: is the pin on the mining community, or on the campground?",
-      blocks: "Sunday morning. Getting this wrong is a wrong turn at the end of KY-742, not a disaster — but it is the largest disagreement on the trip.",
-      detail: "The stored coordinate comes from <b>Recreation.gov facility 232505</b> via the RIDB bulk export. A Google Maps placement in Sept 2026 landed <b>2,696 m away</b> — by far the biggest gap of the eight. A facility ID does not say <i>which</i> facility, and Blue Heron has both a campground and the reconstructed coal camp. <b>The stored pin is the one more likely to be wrong here</b>, because the waypoint is named for the mining community and a Recreation.gov facility is usually the campground. recreation.gov is blocked from this session so I cannot check which. Stored: 36.678056, -84.518889. Placed: 36.671249, -84.547903. Resolve by looking at both on a map before Sunday."
-    },
-    {
       question: "Auxier Ridge: parking lot or trailhead? The two pins are 953 m apart.",
       blocks: "Nothing — the Tunnel Ridge Road drive is unambiguous once you are on it. But it is a 5:45 AM start in the dark.",
       detail: "The stored coordinate is <b>OSM way 225745556, the footway at the Tunnel Ridge Rd lot</b> — that is where you park. A Google Maps placement landed <b>953 m</b> away, which is roughly where the trail proper begins. For driving there the stored one is the useful pin, so it stays. Worth knowing the difference exists rather than discovering it in the dark. Stored: 37.828230, -83.677587. Placed: 37.820076, -83.680935."
@@ -656,7 +651,7 @@ window.TRIP_DATA = {
     { name: "Bandy Creek Campground", lat: 36.488329, lng: -84.697519, verified: true, icon: "⛺", days: "3–5", notes: "Bear country", source: "Recreation.gov facility 232506, agreeing with OSM node 13121679831 to 36 m, and with a Google Maps placement Sept 2026 to <b>65 m</b> — three sources inside the campground." },
     { name: "Twin Arches Trailhead", lat: 36.541700, lng: -84.735700, verified: true, icon: "🪨", days: "4", notes: "5 unpaved miles", source: "OSM node 12269314919, Big South Fork — not the same-named arch in Red River Gorge" },
     { name: "Honey Creek Trailhead", lat: 36.421268, lng: -84.651813, verified: true, icon: "🪜", days: "5", notes: "Small lot ~1 mi before road end", source: "Checked on satellite imagery; matches OSM node 3373114451, amenity=parking, to 7 m. Independently re-placed from Google Maps Sept 2026 to <b>3 m</b> — corroborated twice." },
-    { name: "Blue Heron Mining Community", lat: 36.678056, lng: -84.518889, verified: true, icon: "🏚️", days: "6", notes: "", source: "Recreation.gov facility 232505 (RIDB bulk export)" },
+    { name: "Blue Heron Mining Community", lat: 36.669947, lng: -84.547655, verified: true, icon: "🏚️", days: "6", notes: "", source: "Google Maps, confirmed twice by Colin Sept 2026 — supersedes Recreation.gov facility 232505, which pinned a point 2.7 km away" },
   ],
   map: { center: [37.0, -84.2], zoom: 8 },
 };

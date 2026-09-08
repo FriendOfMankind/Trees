@@ -26,8 +26,17 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import { haversineMeters } from "./lib/geo.mjs";
+import { loadHub } from "./lib/site.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+/* The radius rule lives in js/coordcheck.js so the browser bench and this tool
+   cannot drift apart, and so one set of tests covers both. It is DOM-free,
+   which is why it loads here at all. */
+const cc = { };
+vm.createContext(cc);
+vm.runInContext(readFileSync(join(ROOT, "js/coordcheck.js"), "utf8"), cc, { filename: "js/coordcheck.js" });
+
 const argv = process.argv.slice(2);
 const positional = argv.filter((a) => !a.startsWith("--") && argv[argv.indexOf(a) - 1] !== "--source");
 const flag = (n, d) => { const i = argv.indexOf(`--${n}`); return i === -1 ? d : argv[i + 1]; };
@@ -101,7 +110,13 @@ if (anchors.length) {
     .map((a) => ({ ...a, d: haversineMeters(a, { lat, lng }) }))
     .sort((x, y) => x.d - y.d)[0];
 
-  if (nearest.d > 150000) {
+  /* Not a fixed radius. A 21-day Badlands-to-Glacier loop legitimately puts
+     600 km between neighbouring stops; a 700-mile loop does not. The registry
+     states each trip's driving distance, so the allowance comes from that. */
+  const registryEntry = (loadHub().read("TRIPS") || []).find((t) => t.slug === slug) || {};
+  const limitKm = cc.coordMaxRadiusKm(registryEntry.distance).warn;
+
+  if (nearest.d > limitKm * 1000) {
     // The classic paste error is swapping the two numbers, and it produces a
     // coordinate that is confidently somewhere else on Earth. Check whether
     // the swap lands where the trip actually is before blaming the user.
@@ -115,11 +130,11 @@ if (anchors.length) {
       console.error(`That is almost certainly what you meant. Re-run with the numbers the other way round.`);
       process.exit(1);
     }
-    console.error(`\nThat may be right for a trip that spans a long way, but it is far enough`);
-    console.error(`out to be worth a second look. Re-run with --force if you are sure.`);
+    console.error(`\nFor a ${registryEntry.distance || "trip of unstated length"} anything past`);
+    console.error(`${Math.round(limitKm)} km is worth a second look. Re-run with --force if you are sure.`);
     if (!has("force")) process.exit(1);
   } else {
-    console.log(`${(nearest.d / 1000).toFixed(1)} km from ${nearest.name} — plausible.`);
+    console.log(`${(nearest.d / 1000).toFixed(1)} km from ${nearest.name} — plausible for a ${registryEntry.distance || "trip"}.`);
   }
 }
 
@@ -148,23 +163,31 @@ const lineRe = new RegExp(`^([ \\t]*\\{[^\\n]*name:\\s*"${nameLit}"[^\\n]*lat:[^
 const m = region.match(lineRe);
 if (!m) { console.error(`"${wpName}" is not a single-line waypoint entry with a lat field — edit ${rel} by hand.`); process.exit(1); }
 
+/* EVERY replacement below passes a FUNCTION, never a string.
+
+   This is not style. A replacement string treats $1, $&, $` and $' as
+   substitution patterns, and campground notes are full of dollar amounts —
+   "$10 tent", "$20, no drinking water". Passing such a line as a replacement
+   string made String.replace() expand "$10" into capture group 1 followed by
+   a literal 0, splicing the old entry into the middle of the new one and
+   leaving a data.js that no longer parsed. It corrupted two trip files before
+   anyone noticed, and it would have corrupted them silently if the result had
+   happened to stay valid JavaScript. */
 let line = m[1]
-  .replace(/lat:\s*[^,]+,/, `lat: ${lat.toFixed(6)},`)
-  .replace(/lng:\s*[^,]+,/, `lng: ${lng.toFixed(6)},`)
-  .replace(/verified:\s*(true|false)/, "verified: true");
+  .replace(/lat:\s*[^,]+,/, () => `lat: ${lat.toFixed(6)},`)
+  .replace(/lng:\s*[^,]+,/, () => `lng: ${lng.toFixed(6)},`)
+  .replace(/verified:\s*(true|false)/, () => "verified: true");
 
 // Record provenance next to the coordinate, replacing any earlier one.
 const src = JSON.stringify(SOURCE);
 if (/\bsource:\s*"/.test(line)) {
-  line = line.replace(/\bsource:\s*"(?:[^"\\]|\\.)*"/, `source: ${src}`);
+  line = line.replace(/\bsource:\s*"(?:[^"\\]|\\.)*"/, () => `source: ${src}`);
 } else {
-  // Insert before the closing brace, keeping the separating comma. Getting
-  // this wrong produces a file that no longer parses, so it is one explicit
-  // substitution rather than a chain of clever ones.
-  line = line.replace(/\s*\}(\s*,?)\s*$/, `, source: ${src} }$1`);
+  // Insert before the closing brace, keeping the separating comma.
+  line = line.replace(/\s*\}(\s*,?)\s*$/, (_, comma) => `, source: ${src} }${comma}`);
 }
 
-region = region.replace(lineRe, line);
+region = region.replace(lineRe, () => line);
 writeFileSync(file, source.slice(0, span.start) + region + source.slice(span.end));
 
 console.log(`\n${wpName}`);
