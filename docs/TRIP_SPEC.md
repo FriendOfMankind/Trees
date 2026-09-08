@@ -176,6 +176,15 @@ Add a buffer of 10–15%. `note` says what's excluded (usually airfare).
 **packing** — trip-specific only. Universal gear lives in the hub's Gear
 Locker. Call out the weak link in the category name if there is one.
 
+> Gear Locker items (`GEAR` in `data/profile.js`) are
+> `{ name, state, note }`, where `state` is `own` / `replace` / `need` /
+> `rent` / `unknown`. The clothing categories add two optional fields:
+> `qty` — how many to **pack** on a typical 5–10 night trip, *not* how many
+> are owned — and `type`, the garment's role (`shell`, `midlayer`, `base`,
+> `socks`, …). `qty: null` renders as `?` and means the number has never
+> been written down. Never fill one in with a guess; `?` plus `unknown` is
+> the correct output for a closet nobody has counted.
+
 **reservations** — **in booking-window order, earliest first.** The order
 carries information: the first unchecked item is literally what to do next.
 Each line should say what to book, when the window opens, and what happens if

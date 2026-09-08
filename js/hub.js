@@ -788,7 +788,7 @@
   function renderGear() {
     $("#panel-gear").innerHTML = `
       <h2 class="section-title">Gear Locker</h2>
-      <p class="section-sub">What's in the kit and what it can't do yet. Every trip's packing list is built against this — if something here says <em>replace</em>, that's a purchase with a deadline, not a nice-to-have.</p>
+      <p class="section-sub">What's in the kit and what it can't do yet. Every trip's packing list is built against this — if something here says <em>replace</em>, that's a purchase with a deadline, not a nice-to-have. On the clothing cards the number is a <em>pack</em> count for a 5–10 night trip, and <span class=\"g-state unknown\">unknown</span> means nobody ever wrote it down — not that it is missing.</p>
       ${gearQuestionsHtml()}
       <div class="gear-grid">
         ${GEAR.map((cat) => `
@@ -797,7 +797,8 @@
             ${cat.note ? `<p class="section-sub" style="margin:-0.2em 0 0.6em">${cat.note}</p>` : ""}
             <ul class="gear-list">
               ${cat.items.map((i) => `<li>
-                <span class="g-name">${i.name}${i.note ? `<span class="g-note">${i.note}</span>` : ""}</span>
+                ${"qty" in i ? `<span class="g-qty${i.qty == null ? " unknown" : ""}">${i.qty == null ? "?" : "\u00d7" + i.qty}</span>` : ""}
+                <span class="g-name">${i.name}${i.type ? `<span class="g-type">${i.type}</span>` : ""}${i.note ? `<span class="g-note">${i.note}</span>` : ""}</span>
                 <span class="g-state ${i.state}">${i.state}</span>
               </li>`).join("")}
             </ul>

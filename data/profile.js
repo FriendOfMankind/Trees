@@ -6,13 +6,19 @@
    versions of this file inferred these facts from the Maui 2027 spec and got
    several of them wrong. This version is transcribed, not inferred.
 
-   Gear `state`: "own" | "replace" | "need" | "rent"
+   Gear `state`: "own" | "replace" | "need" | "rent" | "unknown"
 
    A gear item may also carry `question: { text, answeredBy: "<slug>" }` — a
    thing you will only find out by using it. The hub surfaces those as a
    standing list, and the trip named in `answeredBy` answers it in its `retro`
    block once it has happened. Before this existed the questions sat in prose
    notes and were answered nowhere.
+
+   Two more optional item fields, used by the clothing categories:
+     `qty`  — how many to PACK on a typical 5–10 night trip. Not an inventory
+              count. `null` means the number has never been written down —
+              it renders as "?" rather than a guess.
+     `type` — garment/kit role: "shell", "midlayer", "base", "socks", etc.
    ========================================================================== */
 
 const PROFILE = {
@@ -151,7 +157,7 @@ const GEAR = [
         question: { text: "Is it needed, or does the Siesta 20 cover the mid-30s on its own?", answeredBy: "kentucky-2026" } },
       { name: "Therm-a-Rest MondoKing 3D, 25 in Large", state: "own", note: "R-7.0. Overkill for anything on the current list, which is the correct problem to have." },
       { name: "2-person tent", state: "own", note: "" },
-      { name: "Puffy, hat, gloves", state: "own", note: "" },
+      { name: "Puffy, hat, gloves", state: "own", note: "Lives in <b>Clothing — the layer system</b> below. Listed here too because the puffy is a sleep layer on any night the bag is marginal." },
     ],
   },
   {
@@ -173,6 +179,33 @@ const GEAR = [
       { name: "Boots with real grip", state: "own", note: "Wet rock and wet rope are the recurring hazard." },
       { name: "Headlamp + spare batteries", state: "own", note: "In the pack regardless of the hour." },
       { name: "Camp shoes", state: "own", note: "" },
+    ],
+  },
+  {
+    category: "Clothing — the layer system",
+    note: "The three layers that decide whether a cold, wet, exposed morning is fine or a bail-out. <b>Counts here are pack counts for a 5–10 night trip, not an inventory.</b> Anything marked <em>unknown</em> has never been written down — tell me and I'll set it.",
+    items: [
+      { name: "Rain shell", type: "shell", qty: 1, state: "unknown", note: "On the Maui 2027 list as guaranteed use at Hāna and Hosmer. Whether one is already owned was never recorded." },
+      { name: "Fleece or midlayer", type: "midlayer", qty: 1, state: "unknown", note: "The layer between shirt and puffy. Never confirmed in any trip file." },
+      { name: "Puffy jacket", type: "insulation", qty: 1, state: "own", note: "Double duty: ridge layer and sleep layer. Hawksbill at 7:15 AM, 4,009 ft, mid-30s — and the Mount Rogers ridge, where the note says shell and gloves are not optional." },
+      { name: "Warm hat", type: "insulation", qty: 1, state: "own", note: "" },
+      { name: "Gloves", type: "insulation", qty: 1, state: "own", note: "One pair. A wet pair with no spare is how a cold ridge morning ends early." },
+      { name: "Sun hat", type: "sun", qty: 1, state: "unknown", note: "" },
+      { name: "Sunglasses", type: "sun", qty: 1, state: "unknown", note: "" },
+    ],
+  },
+  {
+    category: "Clothing — worn articles & counts",
+    note: "Counts are transcribed from the Maui 2027 packing list, which is the only place any number was ever written down. They are a 7-day fly-in target — a 10-night drive-out trip with a laundromat mid-route wants different numbers. <b>No cotton on anything that gets sweat in it.</b>",
+    items: [
+      { name: "Hiking shirts", type: "base", qty: 2, state: "unknown", note: "Merino or synthetic. Cotton holds water and stops insulating — that's the whole reason this line exists." },
+      { name: "Long pants", type: "legs", qty: 1, state: "unknown", note: "Brush, sun and cold mornings. One pair means one wet-pants day ends the pants." },
+      { name: "Shorts", type: "legs", qty: 2, state: "unknown", note: "" },
+      { name: "Wool socks", type: "socks", qty: 4, state: "unknown", note: "The highest-leverage count on this list. Wet feet on day three of eight is a whole-trip problem, not a day problem." },
+      { name: "Liner socks", type: "socks", qty: null, state: "unknown", note: "On the Maui list with no number. Blister insurance on the long descents." },
+      { name: "Underwear", type: "base", qty: null, state: "unknown", note: "Never written down anywhere in this repo. Synthetic or merino, one per day unless there's a laundry stop." },
+      { name: "Swim trunks", type: "water", qty: 2, state: "unknown", note: "\"One always wet\" — the Maui list's reasoning, and it applies to any swimming-hole trip." },
+      { name: "Sleep layer", type: "base", qty: 1, state: "unknown", note: "Dedicated dry set that never leaves the tent. Sleeping in the clothes you hiked in is how a 20°F bag underperforms." },
     ],
   },
   {
