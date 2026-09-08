@@ -1,5 +1,13 @@
 /* ==========================================================================
-   Sky Islands — SE Arizona, March 5–15 2027.  STATUS: OUTLINE.
+   Sky Islands — SE Arizona, March 5–15 2027.  STATUS: PLANNED.
+
+   Promoted from OUTLINE on 2026-09-07, at the point the booking started.
+   What changed: the 3-vs-2-night monument split was decided (three nights,
+   Mar 8–10), the Bonita Canyon site count was settled at 25+1 from NPS's own
+   page, the recreation.gov release time was corrected to 10 AM Eastern, and
+   every waypoint had already been placed via mapbench.html. The remaining
+   open questions are cost and road-condition questions, not shape questions
+   — none of them changes a single day of the itinerary.
 
    Built 2026-09-06 from the `sky-islands` wishlist entry plus a verification
    pass. Nothing was pasted in; there was no upstream brief, so every fact
@@ -84,7 +92,7 @@ window.TRIP_DATA = {
       { h: "Dates", p: "Mar 5–15, 2027<br>11 days / 10 nights" },
       { h: "Group", p: "Solo. One person, one tent, one portion." },
       { h: "Why this window", p: "Computed from the academic calendar, not picked. Tue/Thu classes, spring break Mar 8–12. <b>Zero missed classes</b>, and the only 11-day window before Commencement." },
-      { h: "The booking race", p: "🚨 <b>Bonita Canyon is the whole plan: 25 sites, all reservable, 6-month rolling window, no walk-ups.</b> Mar 8 releases <b>Tue Sept 8 2026 at 10:00 AM Eastern</b>, Mar 9 on the 9th, Mar 10 on the 10th. It is the busiest month of its year and there is no fallback inside the monument." },
+      { h: "The booking race", p: "🚨 <b>Three alarms, 10:00 AM Eastern, Sept 8 / 9 / 10.</b> Bonita Canyon is 25 sites, all reservable, no walk-ups, in the busiest month of its year — one night releases per morning. Try all three nights in one transaction on the 8th; if it refuses, one alarm per morning. <b>Gilbert Ray (Mar 5, 6, 14) is bookable today</b> and is the only thing here that is simply undone rather than waiting." },
       { h: "The crowd problem", p: "March is Chiricahua's peak month and the profile says crowds are actively avoided. <b>This itinerary answers that by spending 3 nights in the monument and 4 on the empty side of the range</b> — Cave Creek and the Dragoons are the same geology with a fraction of the people." },
       { h: "No entrance fee", p: "✅ Chiricahua National Monument charges <b>no entrance fee</b> — it was eliminated when the campground moved to reservations. The America the Beautiful pass does nothing here. It is not needed." },
       { h: "Time zone", p: "Arizona does <b>not</b> observe daylight saving. DST starts Sun Mar 14 2027 — the clock at camp does not move, but every connecting flight time and everyone at home shifts an hour relative to you." },
@@ -92,7 +100,7 @@ window.TRIP_DATA = {
     ],
 
     footerNote:
-      'Outline. Campgrounds and closures are verified; fees, coordinates and airfare are not. <a href="../../index.html">← All trips</a>',
+      'Planned as of Sept 7 2026 — dates, route, campgrounds, coordinates and the monument split are all locked. Still unverified: two campground fees, the Slavin Gulch and Herb Martyr approach roads, and airfare, which Colin is pricing himself. <a href="../../index.html">← All trips</a>',
   },
 
   days: [
@@ -561,7 +569,7 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "0️⃣ <b>DECIDE THE SPLIT FIRST — tonight, before any booking.</b> Three nights at Bonita Canyon, or two there plus a second night in the Dragoons? It is the last open question that changes <i>which nights get booked</i>, and Bonita has no walk-up fallback: rebooking a 25-site campground in its peak month is not a plan. Everything below assumes the current 3-night version (Mar 8, 9, 10)." },
+    { text: "0️⃣ <b>DECIDED Sept 7 2026 — three nights at Bonita Canyon: Mar 8, 9 and 10.</b> The 2-night version with a second Dragoon night was weighed and dropped. The asymmetry settled it: Cochise Stronghold is first-come, so a Dragoon night costs nothing to add at any point up to arrival, while Bonita is a 25-site reservation in its peak month and cannot be added later. Book three, cancel one in the winter if the Dragoons win — that direction is recoverable and the other is not." },
 
     { text: "1️⃣ <b>TONIGHT — Gilbert Ray, Mar 5, Mar 6 and Mar 14.</b> ✅ The entire 2026–27 season is already bookable; the \"72 hours ahead\" line in an older source is a minimum lead time, not the window. $10/night tent, reservation-only, no race. <b>This is a 10-minute job that has simply not been done</b>, and it is what satisfies the rule that night one and the last night are reservable. 520-724-5159 or pima.gov." },
 
@@ -601,9 +609,6 @@ window.TRIP_DATA = {
       blocks: "Whether the trip is affordable at all",
       detail: "The single largest line item and the one nobody has checked. Every other number on this page is knowable within about $50; this one could swing $400. It is also the item the Mojave deferral was supposed to free money for, so it deserves pricing before anything else gets booked." },
 
-    { question: "🚨 Is three nights inside the monument the right split? — ANSWER BEFORE SEPT 8, 10 AM ET",
-      blocks: "Which nights get booked at Bonita Canyon. This stopped being a design question and became a deadline.",
-      detail: "The crowd argument says the monument is the compromise and Cave Creek and the Dragoons are the payoff. Currently it is 3 nights in the monument, 3 at Portal, 1 in the Dragoons. An alternative worth weighing: 2 nights in the monument, 2 in the Dragoons, and keep 3 at Portal — the Dragoons have a 9.4-mile trail leaving directly from the campground that this plan never uses.<br><br><b>The asymmetry that should decide it:</b> Cochise Stronghold is first-come, so the Dragoon night costs nothing to add or drop later. Bonita Canyon is a 25-site reservation in its peak month, so the monument night is the one that cannot be added later. If you are genuinely unsure, book the third Bonita night — it is the reversible-by-cancellation choice, and the Dragoons will still be there and still empty." },
   ],
 
   places: [
