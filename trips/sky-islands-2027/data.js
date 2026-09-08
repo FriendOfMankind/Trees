@@ -18,6 +18,14 @@
      - Cochise Stronghold: $20, first-come, 11 sites, NO drinking water
      - Fort Bowie: grounds sunrise–sunset daily; visitor center Wed–Sun only
      - Gilbert Ray: reservation-only, Sept 1–Apr 30, $10/night tent
+   VERIFIED 2026-09-07 (the reservation pass):
+     - Bonita Canyon is 25 individual sites + 1 group site — NPS's own
+       campground rate-increase page, which settles the 23-vs-26 disagreement
+     - recreation.gov releases at 7am PT / 8am MT / 10am ET, per its own
+       booking-tips article — NOT 7 AM in the campground's zone
+     - Gilbert Ray: the ENTIRE 2026–27 season (Sept 1 – Apr 30) is bookable
+       now, per pima.gov. March 2027 is open today; the "72 hours" figure in
+       an older source is a MINIMUM lead time, not the window.
    CALCULATED:
      - Every sunrise / sunset / twilight time below (tools/sun.mjs, NOAA)
      - New moon falls Mar 7–8 2027
@@ -30,8 +38,14 @@
    COULD NOT VERIFY:
      - Cave Creek campground FEES. An aggregator gave "$8–40", which is not
        a number. Douglas Ranger District (520) 364-3468.
-     - Whether Bonita Canyon is 23 or 26 sites — two sources disagree — and
-       whether the $20 fee has gone to the proposed $25.
+     - Whether Bonita Canyon's fee is still $20 or has gone to the proposed
+       $25. Two 2026 aggregators now quote $25–$50; the NPS page consulted
+       still said $20. Treated as $25 in the budget, which is the safe
+       direction to be wrong in.
+     - Whether recreation.gov anchors its 6-month window to the ARRIVAL date
+       (book all three nights at once on Sept 8) or to EACH night (book one
+       night on each of Sept 8, 9, 10). Third-party sources say both. The
+       booking plan below works either way.
      - Whether Bonita Canyon Drive to Massai Point ever closes for snow.
      - EVERY COORDINATE. tools/geocode.mjs was run and returned NONE for all
        15 waypoints: overpass-api.de and nominatim.openstreetmap.org are both
@@ -70,7 +84,7 @@ window.TRIP_DATA = {
       { h: "Dates", p: "Mar 5–15, 2027<br>11 days / 10 nights" },
       { h: "Group", p: "Solo. One person, one tent, one portion." },
       { h: "Why this window", p: "Computed from the academic calendar, not picked. Tue/Thu classes, spring break Mar 8–12. <b>Zero missed classes</b>, and the only 11-day window before Commencement." },
-      { h: "The booking race", p: "<b>Bonita Canyon is the whole plan and it is 23–26 sites on a 6-month rolling window.</b> March 5 released around Sept 5 2026. Every later night releases one day at a time. It is the busiest month of its year." },
+      { h: "The booking race", p: "🚨 <b>Bonita Canyon is the whole plan: 25 sites, all reservable, 6-month rolling window, no walk-ups.</b> Mar 8 releases <b>Tue Sept 8 2026 at 10:00 AM Eastern</b>, Mar 9 on the 9th, Mar 10 on the 10th. It is the busiest month of its year and there is no fallback inside the monument." },
       { h: "The crowd problem", p: "March is Chiricahua's peak month and the profile says crowds are actively avoided. <b>This itinerary answers that by spending 3 nights in the monument and 4 on the empty side of the range</b> — Cave Creek and the Dragoons are the same geology with a fraction of the people." },
       { h: "No entrance fee", p: "✅ Chiricahua National Monument charges <b>no entrance fee</b> — it was eliminated when the campground moved to reservations. The America the Beautiful pass does nothing here. It is not needed." },
       { h: "Time zone", p: "Arizona does <b>not</b> observe daylight saving. DST starts Sun Mar 14 2027 — the clock at camp does not move, but every connecting flight time and everyone at home shifts an hour relative to you." },
@@ -193,7 +207,7 @@ window.TRIP_DATA = {
         cost: "$20/night — ⚠️ a rise to $25 was proposed; verify",
         checkin: "Reservation-only. Confirm the arrival cutoff.",
         confirmation: "TBD — recreation.gov, 6-month rolling window",
-        notes: "✅ Verified: ~5,400 ft, open year-round, <b>every site reservable, none first-come</b>, 6-month rolling window. ⚠️ Two sources disagree on whether it is 23 or 26 sites. Feb–April is its busiest season and it is <b>full most nights</b>. There is no walk-up fallback inside the monument.",
+        notes: "✅ Verified: ~5,400 ft, open year-round, <b>25 individual sites + 1 group site, every one reservable, none first-come</b>, 6-month rolling window. (The 23-vs-26 disagreement is settled: NPS's own rate-increase page says 25 + 1.) Feb–April is its busiest season and it is <b>full most nights</b>. There is no walk-up fallback inside the monument.",
       },
       schedule: [
         { kind: "sunrise", time: "6:30 AM", text: "Sunrise. First light 6:11 AM." },
@@ -432,9 +446,9 @@ window.TRIP_DATA = {
       { night: 1, date: "Fri 3/5", location: "Tucson Mountain Park", type: "County campground", name: "Gilbert Ray", cost: "$10", status: "Reservation-only — needs booking" },
       { night: 2, date: "Sat 3/6", location: "Tucson Mountain Park", type: "County campground", name: "Gilbert Ray", cost: "$10", status: "Reservation-only — needs booking" },
       { night: 3, date: "Sun 3/7", location: "Dragoon Mountains", type: "USFS — FCFS", name: "Cochise Stronghold", cost: "$20", status: "First-come. No water." },
-      { night: 4, date: "Mon 3/8", location: "Chiricahua NM", type: "NPS campground", name: "Bonita Canyon", cost: "$20", status: "⚠️ 6-month window — book first" },
-      { night: 5, date: "Tue 3/9", location: "Chiricahua NM", type: "NPS campground", name: "Bonita Canyon", cost: "$20", status: "⚠️ 6-month window" },
-      { night: 6, date: "Wed 3/10", location: "Chiricahua NM", type: "NPS campground", name: "Bonita Canyon", cost: "$20", status: "⚠️ 6-month window" },
+      { night: 4, date: "Mon 3/8", location: "Chiricahua NM", type: "NPS campground", name: "Bonita Canyon", cost: "$25 (was $20)", status: "🚨 Releases Sept 8, 10 AM ET" },
+      { night: 5, date: "Tue 3/9", location: "Chiricahua NM", type: "NPS campground", name: "Bonita Canyon", cost: "$25 (was $20)", status: "🚨 Releases Sept 9, 10 AM ET" },
+      { night: 6, date: "Wed 3/10", location: "Chiricahua NM", type: "NPS campground", name: "Bonita Canyon", cost: "$25 (was $20)", status: "🚨 Releases Sept 10, 10 AM ET" },
       { night: 7, date: "Thu 3/11", location: "Cave Creek, Portal", type: "USFS — FCFS", name: "Sunny Flat", cost: "TBD", status: "First-come. No water until April." },
       { night: 8, date: "Fri 3/12", location: "Cave Creek, Portal", type: "USFS — FCFS", name: "Sunny Flat", cost: "TBD", status: "First-come" },
       { night: 9, date: "Sat 3/13", location: "Cave Creek, Portal", type: "USFS — FCFS", name: "Sunny Flat", cost: "TBD", status: "First-come" },
@@ -547,11 +561,23 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "🚨 <b>Bonita Canyon Campground, Mar 8–10</b> — recreation.gov, 6-month rolling window. March 8 released around <b>Sept 8 2026</b> and each later night releases one day at a time. 23–26 sites, all reservable, no walk-up option, in the campground's busiest month. <b>If this fails the trip's whole middle fails</b> and there is no fallback inside the monument." },
-    { text: "<b>Gilbert Ray Campground, Mar 5–6 and Mar 14</b> — reservation-only since 2024, at least 72 hours ahead. $10/night tent. Cheap and rarely a race, but it is what satisfies the rule that night one and the last night are reservable." },
-    { text: "<b>Flights CLE → TUS, Mar 5 out / Mar 15 back</b> — not priced. Spring break is peak Tucson. Sweet spot per the hub's own booking table is 2–5 months out, i.e. roughly Oct 2026 – Jan 2027." },
-    { text: "<b>Rental car, 11 days from TUS</b> — 2–3 months out, re-check monthly, free cancellation. Verify AAA still waives the under-25 surcharge before booking; on 11 days that fee is worth $165–385." },
-    { text: "No reservation possible: Cochise Stronghold (11 sites, FCFS) and Sunny Flat / Stewart (~24 sites between them, FCFS). Arrive early, drive the loop once, take the first acceptable site." },
+    { text: "0️⃣ <b>DECIDE THE SPLIT FIRST — tonight, before any booking.</b> Three nights at Bonita Canyon, or two there plus a second night in the Dragoons? It is the last open question that changes <i>which nights get booked</i>, and Bonita has no walk-up fallback: rebooking a 25-site campground in its peak month is not a plan. Everything below assumes the current 3-night version (Mar 8, 9, 10)." },
+
+    { text: "1️⃣ <b>TONIGHT — Gilbert Ray, Mar 5, Mar 6 and Mar 14.</b> ✅ The entire 2026–27 season is already bookable; the \"72 hours ahead\" line in an older source is a minimum lead time, not the window. $10/night tent, reservation-only, no race. <b>This is a 10-minute job that has simply not been done</b>, and it is what satisfies the rule that night one and the last night are reservable. 520-724-5159 or pima.gov." },
+
+    { text: "2️⃣ <b>Tue Sept 8, 10:00 AM Eastern — Bonita Canyon, night of Mar 8.</b> 🚨 The single booking the trip stands on. 25 sites, all reservable, no walk-ups, busiest month of its year. <b>Try to book Mar 8–11 (all three nights) in one transaction first</b> — if recreation.gov anchors its window to the arrival date, it will take it and you are done. If it refuses the later nights, book Mar 8 alone and continue below. Be logged in, payment saved, before 9:55." },
+
+    { text: "3️⃣ <b>Wed Sept 9, 10:00 AM ET — Bonita Canyon, night of Mar 9</b>, if step 2 could not take the whole stay. Book the <i>same site</i> if it is there; a different site is still a yes, it just means moving the tent one morning." },
+
+    { text: "4️⃣ <b>Thu Sept 10, 10:00 AM ET — Bonita Canyon, night of Mar 10</b>, same rule. After this the middle of the trip is locked and nothing else on the list is a race." },
+
+    { text: "5️⃣ <b>Price CLE → TUS now, book Oct–Jan.</b> Not a deadline, a gate: it is the largest number on the page and the only one that can swing $400, and it is unpriced. The hub\'s own booking table puts the sweet spot 2–5 months out. <b>Pricing it is free; do it this week so the camping money is not committed against an airfare nobody has looked at.</b> Mar 5 out, Mar 15 back — and note Arizona ignores DST while the return flight on Mar 15 is after the Mar 14 changeover." },
+
+    { text: "6️⃣ <b>Rental car, 11 days from TUS — Dec–Jan, free cancellation, re-check monthly.</b> Verify AAA still waives the under-25 surcharge <i>before</i> paying it; on 11 days that fee is worth $165–385, which is more than the entire camping bill." },
+
+    { text: "❌ <b>Not bookable at all: Cochise Stronghold (11 sites) and Sunny Flat / Stewart (~24 between them).</b> Both first-come, no reservations accepted. Arrive early, drive the loop once, take the first acceptable site. Stewart is the named fallback for Sunny Flat, half a mile northeast." },
+
+    { text: "☎️ <b>One phone call closes two open questions: Douglas Ranger District, (520) 364-3468.</b> Ask what Sunny Flat and Stewart actually cost — published sources say $8, $10, $20 and \"$8–30\", which is not an answer — and whether the Slavin Gulch and Herb Martyr approach roads are passable in a low-clearance car. Neither is a trip-breaker; both are cheap to resolve and neither has been done." },
   ],
 
   openQuestions: [
@@ -559,9 +585,9 @@ window.TRIP_DATA = {
       blocks: "The budget, and nothing else",
       detail: "The only figure found was an aggregator's \"$8–40 per night\", which is a range wide enough to be useless. Same ranger district as Cochise Stronghold, which is $20 — so $20 is the working assumption and it is a guess. <b>Douglas Ranger District (520) 364-3468.</b>" },
 
-    { question: "Is Bonita Canyon 23 sites or 26, and is the fee $20 or $25?",
-      blocks: "Nothing structural — but it changes the odds on the only booking that matters",
-      detail: "One source says 23 sites, another 26. NPS lists $20/night; a separate NPS notice describes a proposed increase from $20 to $25. Neither materially changes the plan, but on a campground this small the site count is the difference between a race and a lottery. Check recreation.gov directly at booking." },
+    { question: "Does recreation.gov open the window on the ARRIVAL date or on each night?",
+      blocks: "Whether Mar 8–10 is one alarm or three",
+      detail: "✅ <b>The site count is settled — 25 individual sites plus 1 group site</b>, per NPS's own campground rate-increase page, so the 23-vs-26 disagreement is closed. What is <i>not</i> settled is the window mechanic: some third-party guides say the six months is measured from the arrival date and you can then book the whole stay, others say each night releases on its own day. <b>The booking plan handles both</b> — try all three nights on Sept 8, fall back to one alarm per morning. Fee: NPS still published $20, two 2026 aggregators say $25–$50, and the proposed increase was $20→$25, so the budget now carries $25. Confirm at the checkout screen." },
 
     { question: "Does Bonita Canyon Drive ever close for snow in early March?",
       blocks: "Days 5 and 6 — Echo Canyon and Massai Point both hang off it",
@@ -575,16 +601,16 @@ window.TRIP_DATA = {
       blocks: "Whether the trip is affordable at all",
       detail: "The single largest line item and the one nobody has checked. Every other number on this page is knowable within about $50; this one could swing $400. It is also the item the Mojave deferral was supposed to free money for, so it deserves pricing before anything else gets booked." },
 
-    { question: "Is three nights inside the monument the right split?",
-      blocks: "The shape of days 4–7",
-      detail: "The crowd argument says the monument is the compromise and Cave Creek and the Dragoons are the payoff. Currently it is 3 nights in the monument, 3 at Portal, 1 in the Dragoons. An alternative worth weighing: 2 nights in the monument, 2 in the Dragoons, and keep 3 at Portal — the Dragoons have a 9.4-mile trail leaving directly from the campground that this plan never uses." },
+    { question: "🚨 Is three nights inside the monument the right split? — ANSWER BEFORE SEPT 8, 10 AM ET",
+      blocks: "Which nights get booked at Bonita Canyon. This stopped being a design question and became a deadline.",
+      detail: "The crowd argument says the monument is the compromise and Cave Creek and the Dragoons are the payoff. Currently it is 3 nights in the monument, 3 at Portal, 1 in the Dragoons. An alternative worth weighing: 2 nights in the monument, 2 in the Dragoons, and keep 3 at Portal — the Dragoons have a 9.4-mile trail leaving directly from the campground that this plan never uses.<br><br><b>The asymmetry that should decide it:</b> Cochise Stronghold is first-come, so the Dragoon night costs nothing to add or drop later. Bonita Canyon is a 25-site reservation in its peak month, so the monument night is the one that cannot be added later. If you are genuinely unsure, book the third Bonita night — it is the reversible-by-cancellation choice, and the Dragoons will still be there and still empty." },
   ],
 
   places: [
     {
       group: "Tucson",
       items: [
-        { name: "Gilbert Ray Campground", maps: "Gilbert Ray Campground Tucson AZ", note: "Nights 1, 2, 10. Reservation-only, $10 tent, open Sept 1–Apr 30." },
+        { name: "Gilbert Ray Campground", maps: "Gilbert Ray Campground Tucson AZ", note: "Nights 1, 2, 10. Reservation-only, $10 tent, Sept 1–Apr 30. ✅ The whole 2026–27 season is bookable NOW — this one is not a race, it is just undone. 520-724-5159." },
         { name: "King Canyon Trailhead", maps: "King Canyon Trailhead Saguaro National Park West", note: "Day 2. Opposite the Desert Museum. Small lot — dawn." },
         { name: "Signal Hill Petroglyphs", maps: "Signal Hill Petroglyphs Saguaro National Park", note: "Day 1, ~0.5 mi. Hohokam petroglyph boulders." },
         { name: "Tucson International Airport", maps: "Tucson International Airport", note: "In Day 1, out Day 11. ~40 min from Gilbert Ray." },
@@ -646,7 +672,7 @@ window.TRIP_DATA = {
   budget: {
     note: "Excludes airfare, which is the largest single number on this trip and has not been priced. Everything here is per-person solo.",
     rows: [
-      { category: "Camping — 10 nights", cost: 176, notes: "Gilbert Ray 3×$10, Cochise Stronghold 1×$20, Bonita Canyon 3×$22 (approx), Sunny Flat 3×$20 (TBD)" },
+      { category: "Camping — 10 nights", cost: 185, notes: "Gilbert Ray 3×$10, Cochise Stronghold 1×$20, Bonita Canyon 3×$25 (fee increase assumed — safe direction), Sunny Flat 3×$20 (still TBD; sources say $8, $10, $20 and $8–30)" },
       { category: "Rental car — 11 days", cost: 440, notes: "~$40/day base. ⚠️ Under-25 surcharge of $165–385 is NOT in this number — it assumes AAA waives it. Verify before booking." },
       { category: "Fuel", cost: 90, notes: "~700 mi loop at ~28 mpg" },
       { category: "Groceries", cost: 130, notes: "10 days solo, cooking at camp. Tucson on Day 1, Willcox on Day 4." },
@@ -654,10 +680,10 @@ window.TRIP_DATA = {
       { category: "Fuel canisters + arrival sundries", cost: 25, notes: "Cannot fly. Bought Tucson, left behind." },
       { category: "Bisbee / Tombstone entries", cost: 30, notes: "TBD — Queen Mine tour and Boothill costs unverified" },
     ],
-    subtotal: 961,
-    buffer: 115,
+    subtotal: 970,
+    buffer: 116,
     bufferLabel: "Buffer (12%)",
-    total: 1076,
+    total: 1086,
   },
 
   waypoints: [

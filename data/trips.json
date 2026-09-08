@@ -35,7 +35,7 @@
         {
           "system": "recreation.gov",
           "what": "Koomer Ridge (Sept 22–23)",
-          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "note": "⚠️ Corrected Sept 2026. This row said \"7 AM local\", meaning the campground's own zone. recreation.gov's own booking-tips article says <b>7am PT / 8am MT / 10am ET</b> — one instant nationwide — \"but not always\". From Ohio the alarm is <b>10:00 AM</b> no matter where the campground is. Confirm on the facility's own page; small campgrounds go in seconds.",
           "booked": true,
           "known": true,
           "source": "derived",
@@ -47,7 +47,7 @@
         {
           "system": "recreation.gov",
           "what": "Bandy Creek (Sept 24–26)",
-          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "note": "⚠️ Corrected Sept 2026. This row said \"7 AM local\", meaning the campground's own zone. recreation.gov's own booking-tips article says <b>7am PT / 8am MT / 10am ET</b> — one instant nationwide — \"but not always\". From Ohio the alarm is <b>10:00 AM</b> no matter where the campground is. Confirm on the facility's own page; small campgrounds go in seconds.",
           "booked": true,
           "known": true,
           "source": "derived",
@@ -101,7 +101,7 @@
         {
           "system": "recreation.gov",
           "what": "Davidson River (Oct 18–21)",
-          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "note": "⚠️ Corrected Sept 2026. This row said \"7 AM local\", meaning the campground's own zone. recreation.gov's own booking-tips article says <b>7am PT / 8am MT / 10am ET</b> — one instant nationwide — \"but not always\". From Ohio the alarm is <b>10:00 AM</b> no matter where the campground is. Confirm on the facility's own page; small campgrounds go in seconds.",
           "booked": true,
           "known": true,
           "source": "derived",
@@ -113,7 +113,7 @@
         {
           "system": "recreation.gov",
           "what": "Hurricane Campground (Oct 24)",
-          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "note": "⚠️ Corrected Sept 2026. This row said \"7 AM local\", meaning the campground's own zone. recreation.gov's own booking-tips article says <b>7am PT / 8am MT / 10am ET</b> — one instant nationwide — \"but not always\". From Ohio the alarm is <b>10:00 AM</b> no matter where the campground is. Confirm on the facility's own page; small campgrounds go in seconds.",
           "booked": true,
           "known": true,
           "source": "derived",
@@ -275,7 +275,7 @@
         {
           "system": "recreation.gov",
           "what": "Cedar Pass, Badlands (Jul 7–8)",
-          "note": "Small campgrounds go in seconds. Set an alarm for the exact drop.",
+          "note": "⚠️ Corrected Sept 2026. This row said \"7 AM local\", meaning the campground's own zone. recreation.gov's own booking-tips article says <b>7am PT / 8am MT / 10am ET</b> — one instant nationwide — \"but not always\". From Ohio the alarm is <b>10:00 AM</b> no matter where the campground is. Confirm on the facility's own page; small campgrounds go in seconds.",
           "booked": false,
           "known": true,
           "source": "derived",
@@ -857,7 +857,7 @@
       ],
       "nights": "10 nights camping",
       "distance": "~700 mi loop",
-      "budget": "~$1,076 excl. airfare",
+      "budget": "~$1,086 excl. airfare",
       "tags": [
         "car camping",
         "desert",
@@ -869,14 +869,14 @@
         "march",
         "reservation race"
       ],
-      "why": "⚠️ Heart of Rocks and Echo Canyon are the marquee day hikes through rhyolite hoodoo forests — welded ash from the Turkey Creek caldera, so the geology is the whole point rather than a footnote. The Dragoons are the counterpoint at 1.4 billion years, and you can see one range from the other.<br><br>✅ <b>Verified Sept 2026 — the facts that decide whether March works:</b> <b>Chiricahua charges no entrance fee.</b> <b>Bonita Canyon (~5,400 ft) is year-round, 23–26 sites, all reservable, no walk-ups, 6-month rolling window</b>, full most nights in its Feb–April peak. <b>Sunny Flat is year-round first-come — but potable water is off until April</b>, and <b>Cochise Stronghold has none at any time of year</b>: four of ten nights are haul-your-own. 🚨 <b>Rustler Park and FR 42D are closed Nov–March and unplowed</b>, so the eight miles between the monument and Portal cost 2h 35m around on I-10, and the high country is off the trip.<br><br>⚠️ <b>Turn your own rule on this before booking it.</b> \"Actively avoids crowds\" is the profile, and March is the monument's busiest month; a reservation removes the lottery, not the people. The itinerary answers that with a split — <b>3 nights in the monument, 7 outside it</b> — and puts the two hardest days on a Wednesday and a Saturday.",
-      "next": "Bonita Canyon is 23–26 sites on a 6-month rolling window and there is no walk-up fallback inside the monument — Mar 8 released around Sept 8 2026 and each later night releases one day at a time. Then price CLE → TUS, which is the only number on the page that could swing $400",
-      "updated": "2026-09-06",
+      "why": "⚠️ Heart of Rocks and Echo Canyon are the marquee day hikes through rhyolite hoodoo forests — welded ash from the Turkey Creek caldera, so the geology is the whole point rather than a footnote. The Dragoons are the counterpoint at 1.4 billion years, and you can see one range from the other.<br><br>✅ <b>Verified Sept 2026 — the facts that decide whether March works:</b> <b>Chiricahua charges no entrance fee.</b> <b>Bonita Canyon (~5,400 ft) is year-round, 25 individual sites + 1 group, all reservable, no walk-ups, 6-month rolling window</b>, full most nights in its Feb–April peak. <b>Sunny Flat is year-round first-come — but potable water is off until April</b>, and <b>Cochise Stronghold has none at any time of year</b>: four of ten nights are haul-your-own. 🚨 <b>Rustler Park and FR 42D are closed Nov–March and unplowed</b>, so the eight miles between the monument and Portal cost 2h 35m around on I-10, and the high country is off the trip.<br><br>⚠️ <b>Turn your own rule on this before booking it.</b> \"Actively avoids crowds\" is the profile, and March is the monument's busiest month; a reservation removes the lottery, not the people. The itinerary answers that with a split — <b>3 nights in the monument, 7 outside it</b> — and puts the two hardest days on a Wednesday and a Saturday.",
+      "next": "🚨 <b>Sept 8 2026, 10:00 AM Eastern: Bonita Canyon, night of Mar 8.</b> 25 sites, no walk-up fallback, peak month — Mar 9 and Mar 10 release the two mornings after. <b>Decide the 3-vs-2-night monument split before that alarm.</b> Gilbert Ray (Mar 5, 6, 14) is bookable today and simply has not been done. Then price CLE → TUS, the only number on the page that can swing $400",
+      "updated": "2026-09-07",
       "booking": [
         {
           "system": "recreation.gov",
           "what": "Bonita Canyon, Chiricahua NM (Mar 8–10)",
-          "note": "All sites reservable, no first-come option, full most nights Feb–April. If this fails, the middle of the trip fails.",
+          "note": "25 sites, all reservable, no first-come option, full most nights Feb–April. Releases 10:00 AM Eastern on Sept 8, 9 and 10 2026. If this fails, the middle of the trip fails.",
           "booked": false,
           "known": true,
           "source": "derived",
@@ -884,6 +884,18 @@
           "leadMonths": 6,
           "opensISO": "2026-09-08",
           "basis": "6 months before 2027-03-08"
+        },
+        {
+          "system": "pima-county",
+          "what": "Gilbert Ray CG, Tucson (Mar 5, 6 and 14)",
+          "note": "✅ Bookable NOW — the whole 2026–27 season is open. $10/night tent, reservation-only, no race. Undone rather than blocked.",
+          "booked": false,
+          "known": true,
+          "source": "derived",
+          "target": "2027-03-05",
+          "leadMonths": 12,
+          "opensISO": "2026-03-05",
+          "basis": "12 months before 2027-03-05"
         }
       ]
     },
