@@ -366,7 +366,7 @@ window.TRIP_DATA = {
 
   provisions: {
     summary:
-      "Five nights, one 48qt cooler, one resupply on Thursday. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving.",
+      "Five nights, one 48qt cooler, one resupply on Thursday. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving.<br><br><b>Four stops, in this order</b> — the groups below are sorted by which one they belong to, because <i>when</i> a thing gets bought is the only question that matters once the list exists. <b>1. Meijer, Sept 13</b> — everything shelf-stable, at Bridge Day quantities, one trip for both 2026 trips. <b>2. Meijer, the day you cook</b> — the chili and burrito ingredients, bought the day they go in the pot, not a week early. <b>3. Meijer, morning of Sept 22</b> — Zone 2, straight from the checkout into the cooler. <b>4. Kroger, Stanton KY, Thursday</b> — block ice and the rotisserie chicken.",
     coolerNote:
       "<b>Zone 1 is your ice</b> — cooked meals frozen flat in quart bags, which chill everything above them and then get eaten. <b>Zone 2 is the zone that ruins trips</b> (eggs, dairy, produce, raw meat): keep it small, eat it early. Zone 3 is shelf-stable and takes no cooler space at all. ⚠️ Climate normals for these dates run 75–77°F, warmer than the 70–75°F the meal plan assumed, which shortens the window before Thursday's resupply.",
     cooler: [
@@ -392,7 +392,7 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Meijer, one trip — shelf-stable, and it buys Bridge Day too",
+        group: "Stop 1 — Meijer, Sept 13, shelf-stable (buys Bridge Day too)",
         note: "Sept 13. Everything in this group keeps until Oct 25, so buy the October quantity once and split it into two crates. <b>Bracketed numbers are Bridge Day's own Zone 3 figures</b>, taken from <code>appalachians-2026</code>, not estimated here. ⚠️ <b>Nuts: roasted, always.</b> Raw is the OAS trigger and off-the-shelf trail mix is usually raw almonds and cashews — read the bag, or buy roasted nuts and dried fruit separately and mix them yourself.",
         items: [
           "Instant oats packets — 4 here [a ~13-packet box covers October too] · whole milk powder 50g [250g]",
@@ -406,16 +406,16 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Meijer, this week — the cook-and-freeze ingredients",
-        note: "These two meals <i>are</i> the ice, so they have to be cooked, bagged and frozen flat before Sept 22 — which means buying them now, not on departure morning. ⚠️ <b>Quantities are deliberately absent:</b> they live in MEALS-trip1-kentucky.md, which is not in this repo. Cook to your own portion rather than to a number invented here.",
+        group: "Stop 2 — Meijer, the day you cook",
+        note: "These two meals <i>are</i> the ice, so they have to be cooked, bagged and frozen flat before Sept 22 — which puts them outside the buy-now / buy-departure-morning split. ⚠️ <b>Buy the meat the day you actually cook it.</b> Ground beef and fresh chorizo keep 1–2 days in a fridge, so bought on the Sept 13 run and cooked on the 20th they spoil; bought Saturday and cooked Sunday they are frozen flat by Monday and the problem is gone. <b>Quantities are deliberately absent</b> — they live in MEALS-trip1-kentucky.md, which is not in this repo. Cook to your own portion rather than to a number invented here.",
         items: [
           "Ground beef, beans and chili fixings · cheddar (K-D1, Wednesday dinner)",
           "Chorizo · potatoes · flour tortilla (K-B2, Thursday breakfast — built, foiled and frozen whole)",
         ],
       },
       {
-        group: "Meijer, Sept 21–22 — Zone 2, buy it last",
-        note: "The zone that ruins trips. Only four meals happen before Thursday's resupply, and that is the entire reason five nights fit in one 48qt cooler — so keep this list exactly this short.",
+        group: "Stop 3 — Meijer, morning of Sept 22, into the cooler",
+        note: "The zone that ruins trips, and the reason the final stop is the morning of departure rather than the night before: it goes from the checkout into the cooler and the cooler goes into the car. Only four meals happen before Thursday's resupply, and that is the entire reason five nights fit in one 48qt — so keep this list exactly this short.",
         items: [
           "Sub fixings for K-L1: sourdough roll · Genoa salami · provolone · pepperoncini",
           "⚠️ <b>The K-L1 recipe carries a whole raw apple, and crisp raw fruit is the one OAS form still out.</b> Swap it for a ripe banana, fruit leather or dried fruit — all confirmed fine, and all already on the shelf-stable list above.",
@@ -424,7 +424,7 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Resupply — Kroger, Stanton KY, Thursday",
+        group: "Stop 4 — Kroger, Stanton KY, Thursday",
         note: "The only one this trip, and now shorter than it was: the shelf-stable half moved to Meijer. What is left is cold, and cold is the one thing that cannot ride down from Ohio.",
         items: [
           "<b>1 BLOCK of ice</b> — not cubes",

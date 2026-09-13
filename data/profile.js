@@ -52,6 +52,7 @@ const PRINCIPLES = [
   "<b>Drive estimates are Google plus 15%</b>, and stop durations are set at the slow end. Optimistic driving is how a day runs out of daylight.",
   "<b>Every day carries a slack line</b> saying how much margin exists and what gets cut first.",
   "<b>Cook at camp; eat out for a named dish.</b> The restaurant entry is the order, not the address.",
+  "<b>Two shops per trip: a preliminary one and a final one.</b> Confirmed Sept 2026. The preliminary run buys everything shelf-stable, well ahead and at whatever quantity the next few trips need between them — it is a crate in the trunk, not a deadline. The final run is <b>the morning of departure</b>, perishables only, checkout straight into the cooler and the cooler straight into the car. Anything that has to be cooked and frozen flat at home is a third, separate errand timed to the day it gets cooked, because raw meat does not keep as long as the frozen meal it becomes. A trip\'s provisions list is therefore sorted by <i>which stop</i>, not by food group.",
   "<b>Ruins count as scenery.</b> Coal towns, homesteads, tipples and ghost structures are destinations, not filler.",
 ];
 
