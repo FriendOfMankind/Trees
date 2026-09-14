@@ -406,11 +406,13 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Stop 2 — Meijer, the day you cook",
-        note: "These two meals <i>are</i> the ice, so they have to be cooked, bagged and frozen flat before Sept 22 — which puts them outside the buy-now / buy-departure-morning split. ⚠️ <b>Buy the meat the day you actually cook it.</b> Ground beef and fresh chorizo keep 1–2 days in a fridge, so bought on the Sept 13 run and cooked on the 20th they spoil; bought Saturday and cooked Sunday they are frozen flat by Monday and the problem is gone. <b>Quantities are deliberately absent</b> — they live in MEALS-trip1-kentucky.md, which is not in this repo. Cook to your own portion rather than to a number invented here.",
+        group: "Stop 2 — bought on the Stop 1 run, frozen raw the same hour",
+        note: "These two meals <i>are</i> the ice, so they have to be cooked, bagged and frozen flat before Sept 22. <b>Settled Sept 14: one Meijer run, cooking the weekend of the 19th–20th.</b> That is a five-day gap, and raw ground beef and fresh chorizo keep 1–2 days in a fridge — so <b>the meat goes in the home freezer the hour you get home, not the fridge</b>, and moves down to the fridge Friday night to thaw. Raw → frozen → thawed in the fridge → cooked → frozen flat is a safe sequence; what is not safe is five days at fridge temperature. Everything else in this group keeps loose for a fortnight. <b>Quantities are deliberately absent</b> — they live in MEALS-trip1-kentucky.md, which is not in this repo. Cook to your own portion rather than to a number invented here.",
         items: [
-          "Ground beef, beans and chili fixings · cheddar (K-D1, Wednesday dinner)",
-          "Chorizo · potatoes · flour tortilla (K-B2, Thursday breakfast — built, foiled and frozen whole)",
+          "Ground beef — <b>into the freezer on arrival</b> · beans and chili fixings · cheddar (K-D1, Wednesday dinner)",
+          "Fresh chorizo — <b>into the freezer on arrival</b> · potatoes · flour tortilla (K-B2, Thursday breakfast — built, foiled and frozen whole)",
+          "<b>Friday Sept 18, night:</b> both meats from freezer to fridge to thaw",
+          "<b>Saturday or Sunday:</b> cook both, bag flat, freeze. Solid by Monday, which is all the trip needs.",
         ],
       },
       {
