@@ -38,14 +38,14 @@ window.TRIP_DATA = {
     stats: [
       { num: "11 days", lbl: "Length" },
       { num: "10", lbl: "Nights camping" },
-      { num: "7 of 10", lbl: "Nights confirmed" },
+      { num: "7 of 10", lbl: "Nights reserved" },
       { num: "~46 mi", lbl: "On foot" },
     ],
     overviewCards: [
       { h: "Dates", p: "Oct 15–25, 2026<br>11 days / 10 nights" },
       { h: "Group", p: "Solo." },
-      { h: "Lodging", p: "Arrowhead ✅ <b>Oct 16–18, 2 nights</b> — so <b>Oct 15 has no bed</b> · Davidson River ✅ 0864063574-1 · <b>FS 210 ❌ first-come</b> · Hurricane ✅ 0840120294-1" },
-      { h: "The one real risk", p: "<b>Oct 22.</b> Leave a reserved site at 6:30 AM and compete for a first-come dispersed site on FS 210, on the Thursday of peak color week, with no cell service and no reservation possible in the corridor." },
+      { h: "Lodging", p: "<b>Oct 15 primitive, first-come</b> (NRG park campground) · Arrowhead ✅ Oct 16–18 · Davidson River ✅ 0864063574-1 · <b>FS 210 ❌ first-come</b> · Hurricane ✅ 0840120294-1" },
+      { h: "The one real risk", p: "<b>Oct 22.</b> Leave a reserved site at 6:30 AM and race for a first-come dispersed site on FS 210, peak color week, no signal. ⚠️ <b>Nothing in the corridor is reservable — Mortimer isn't either.</b> The early start is the whole mitigation." },
       { h: "The open call", p: "<b>Fayette County Chamber 800-927-0263</b> — Fayette Station Road parking on Bridge Day. Arrowhead is now confirmed Oct 16–18." },
       { h: "The lecture", p: "Wed Oct 21, 11:00–3:00, at camp over Starlink. Confirmed on both 2026 trips. Oct 21 was already the buffer day — this one absorbs it cleanly." },
     ],
@@ -58,36 +58,36 @@ window.TRIP_DATA = {
       day: 1,
       date: "Thu Oct 15, 2026",
       title: "Down I-77",
-      tagline: "Five and a half hours, then the bridge head-on at sunset.",
+      tagline: "Five and a half hours, a free site by the river, then the bridge head-on at sunset.",
       type: "travel + activity",
       driving: "~6h 05m",
-      slack: "<b>None after dark.</b> If the drive runs 90 min long, cut Fayette Station Road and do it Friday morning. Long Point is what to protect.",
+      slack: "<b>None after dark, and now you are also site-hunting.</b> If the drive runs 90 min long, cut Fayette Station Road — claiming a site in daylight beats a scenic drive. Long Point is what to protect after that.",
       overnight: {
-        name: "⚠️ Arrowhead Bike Farm — NOT BOOKED FOR TONIGHT",
-        place: "8263 Gatewood Rd, Fayetteville WV",
-        kind: "Private campground",
-        cost: "$25.44 for the stay",
-        checkin: "Check-in 3 PM at the bike shop, or the Handle Bar after hours with the camp host. Checkout 11 AM.",
-        confirmation: "❌ Ref ROTXCV is <b>confirmed Oct 16 → Oct 18</b> on the booking site. This night is genuinely not covered — see Open Questions.",
-        notes: "Under 3 mi from town. <b>The Long Point trailhead is at the campground.</b> Kaymoor Top is 5 minutes away. Bike shop 10–6, bar and kitchen 11–9 (10 on Fri/Sat). Bathhouse is the red building by the parking lot. <b>Waiver required</b> — sign it before arrival. Changes and cancellations by phone only: 304-900-5501.",
+        name: "NRG primitive campground — first-come",
+        place: "New River Gorge NP, WV",
+        kind: "Primitive, free, no reservations",
+        cost: "Free",
+        checkin: "None — drive in and take a site",
+        confirmation: "❌ No reservation exists or is possible. <b>Every NRG park campground is first-come, year-round.</b>",
+        notes: "Four free options, all inside the park, all with fire rings, grills, tables and pit toilets, and <b>none with drinking water</b>: <b>Army Camp</b> (11 sites, near Prince), <b>Glade Creek</b> (11 sites, riverside, Glade Creek Trail from camp), <b>Grandview Sandbar</b>, and <b>Stone Cliff</b>. Seven of the park's eight campgrounds sit right on the river. ⚠️ Access roads to the riverside sites get rough after rain, and this is the Thursday before Bridge Day.",
       },
       schedule: [
-        { kind: "drive", time: "7:30 → 1:05", est: "5h 35m", text: "Avon OH → Arrowhead Bike Farm, I-77 S.", maps: "Arrowhead Bike Farm Fayetteville WV" },
-        { kind: "stop", time: "1:05 → 1:50", est: "45m", text: "Check in, pitch tent, unpack." },
+        { kind: "drive", time: "7:30 → 1:05", est: "5h 35m", text: "Avon OH → New River Gorge, I-77 S.", maps: "Canyon Rim Visitor Center Lansing WV" },
+        { kind: "stop", time: "1:05 → 1:50", est: "45m", text: "⚠️ <b>Decide the campground now, not at 5 PM.</b> Ask at Canyon Rim which of Army Camp, Glade Creek, Grandview Sandbar and Stone Cliff still has space and which access road is passable after recent rain.", warn: true },
         { kind: "drive", time: "1:50 → 2:05", est: "15m", text: "→ Canyon Rim Visitor Center.", maps: "Canyon Rim Visitor Center Lansing WV" },
         { kind: "stop", time: "2:05 → 2:55", est: "50m", text: "Both decks plus the boardwalk. ⚠️ <b>Ask a ranger about Keeneys Creek Road</b> — that's tomorrow's Nuttallburg access and it's the day's biggest variable.", warn: true },
         { kind: "drive", time: "2:55 → 3:55", est: "60m", text: "<b>Fayette Station Road</b> — 8-mile one-way loop, hairpins to the gorge floor, passes directly under the bridge, crosses the Tunney Hunsaker Bridge, through the Fayette and South Fayette townsites.", maps: "Fayette Station Road Fayetteville WV" },
-        { kind: "drive", time: "3:55 → 4:10", est: "15m", text: "Road exit onto US-19 → Arrowhead." },
-        { kind: "stop", time: "4:10 → 5:20", est: "1h 10m", text: "Camp, eat, reset. ⚠️ <b>Arrowhead kitchen closes 6 PM Thursday.</b>", warn: true },
+        { kind: "drive", time: "3:55 → 4:10", est: "15m", text: "Road exit onto US-19." },
+        { kind: "camp", time: "4:10 → 5:20", est: "1h 10m", text: "⚠️ <b>Claim a primitive site and pitch before dark.</b> Army Camp, Glade Creek, Grandview Sandbar or Stone Cliff — free, first-come, no water, pit toilets. Drive one and take what is open rather than shopping around; it is the Thursday of Bridge Day weekend. <b>Carry your own water in.</b>", warn: true },
         { kind: "hike", time: "5:20 → 6:05", est: "45m", text: "<b>Walk to Long Point from the tent</b>, ~1.6 mi each way.", maps: "Long Point Trailhead Fayetteville WV" },
         { kind: "sunset", time: "6:05 → 7:05", est: "60m", text: "⭐ <b>Long Point through sunset, 6:48</b> (recomputed; the plan said 6:52). Head-on bridge view — the classic angle." },
         { kind: "hike", time: "7:05 → 7:50", est: "45m", text: "Walk back. <b>Headlamp required</b> — civil twilight ends ~7:17 and it's fully dark before you're off the trail.", warn: true },
       ],
-      meals: { b: "home", l: "<b>O-L1</b> packed — sourdough sub: salami, provolone, pepperoncini, oil, oregano. Apple, chips. Built at home (~850 kcal)", d: "Arrowhead biergarten, before the 6 PM Thursday cutoff. ⚠️ The meal plan assumes you sleep here tonight — see Open Questions." },
+      meals: { b: "home", l: "<b>O-L1</b> packed — sourdough sub: salami, provolone, pepperoncini, oil, oregano. Apple, chips. Built at home (~850 kcal)", d: "⚠️ <b>Cook at camp or eat in Fayetteville.</b> The meal plan put you at the Arrowhead biergarten tonight; you are at a primitive site with no water instead. Bring dinner or plan a town stop." },
       highlights:
-        "Long Point gives the head-on bridge view and the trailhead is at your campsite, so the first evening costs no driving. Fayette Station Road drops you to the gorge floor and back the same afternoon.",
+        "Fayette Station Road drops you to the gorge floor and back in one afternoon, and Long Point gives the head-on bridge view at sunset. ⚠️ Note the change: <b>the Long Point trailhead is at Arrowhead, which you are not at tonight</b> — from a river campground it is a drive, not a walk from the tent.",
       warnings:
-        "The kitchen closes at 6 and you're on the trail at 5:20 — eat before you walk, not after. Nothing on this day has margin once the sun goes down.",
+        "Two things now compete for the same afternoon: claiming a first-come site and getting to Long Point for sunset. <b>The site wins.</b> Sunset is 6:48 and it is fully dark by 7:17, so the Long Point return is a headlamp walk either way — that part was always true. What is new is that you cannot arrive at a campsite after dark and expect one, on the Thursday before 100,000 people show up in Fayette County. If it is 5:30 and you have no site, skip Long Point and sort the tent.",
     },
     {
       day: 2,
@@ -205,7 +205,7 @@ window.TRIP_DATA = {
       tagline: "Grassy summits with no trees, four trailheads, one stretch of road.",
       type: "activity",
       driving: "~1h 30m",
-      slack: "<b>Tight, ~15 min.</b> First cut is Sam Knob. Second is Skinny Dip.",
+      slack: "<b>~1h 20m.</b> Was 15 minutes. Taking the short Black Balsam bought it, and nothing had to be cut.",
       overnight: {
         name: "Davidson River Campground",
         place: "Brevard, NC",
@@ -217,23 +217,23 @@ window.TRIP_DATA = {
       },
       schedule: [
         { kind: "drive", time: "7:45 → 8:30", est: "45m", text: "→ Black Balsam trailhead, off BRP MP 420. Sunrise 7:41.", maps: "Black Balsam Knob Trailhead Canton NC" },
-        { kind: "hike", time: "8:30 → 11:00", est: "2h 30m", text: "<b>Black Balsam → Tennent Mtn</b>, ~4 mi via Art Loeb. Open grassy summits, real 360°, no trees. ⚠️ See the hike table — AllTrails lists a 1.4 mi version and a 9.7 mi version and your ~4 mi is neither; decide the route before you park." },
-        { kind: "hike", time: "11:00 → 12:50", est: "1h 50m", text: "<b>Sam Knob</b>, ~2.5 mi, same lot." },
-        { kind: "stop", time: "12:50 → 1:20", est: "30m", text: "Lunch at the trailhead." },
-        { kind: "drive", time: "1:20 → 1:30", est: "10m", text: "→ Graveyard Fields, MP 418.8.", maps: "Graveyard Fields Blue Ridge Parkway" },
-        { kind: "hike", time: "1:30 → 3:15", est: "1h 45m", text: "Graveyard Fields loop, ~3 mi." },
-        { kind: "drive", time: "3:15 → 3:30", est: "15m", text: "→ Devil's Courthouse, MP 422.", maps: "Devils Courthouse Blue Ridge Parkway" },
-        { kind: "hike", time: "3:30 → 4:15", est: "45m", text: "Devil's Courthouse — short, steep, five-state view. Reopened Aug 2025." },
-        { kind: "drive", time: "4:15 → 4:30", est: "15m", text: "→ Looking Glass Rock Overlook, MP 417.", maps: "Looking Glass Rock Overlook Blue Ridge Parkway" },
-        { kind: "hike", time: "4:30 → 5:30", est: "60m", text: "<b>Skinny Dip Falls</b>, ~0.5 mi in." },
-        { kind: "dessert", time: "5:30 → 6:30", est: "35m + 25m", text: "→ <b>Dolly's Dairy Bar.</b> 100+ flavors with combos named after the adventures in the forest.", maps: "Dollys Dairy Bar Pisgah Forest NC" },
-        { kind: "drive", time: "6:30 → 6:40", est: "10m", text: "→ camp. Sunset 6:52." },
+        { kind: "hike", time: "8:30 → 9:50", est: "1h 20m", text: "✅ <b>Black Balsam Knob via Art Loeb — the short route, 1.4 mi / 357 ft.</b> AllTrails moving time 46 min. Open grassy summit, real 360°, no trees. <b>This is the chosen version</b>; the Tennent Mountain extension is 3.8 mi / 780 ft and the Graveyard Ridge loop is 9.7 mi / 1,666 ft if you ever want them." },
+        { kind: "hike", time: "9:50 → 11:30", est: "1h 40m", text: "✅ <b>Sam Knob</b> — AllTrails confirms 2.5 mi / 561 ft, 78 min. Same lot, no driving." },
+        { kind: "stop", time: "11:30 → 12:10", est: "40m", text: "Lunch at the trailhead. Hot soup in the thermos — at 5,000 ft in wind it does more than the calories." },
+        { kind: "drive", time: "12:10 → 12:20", est: "10m", text: "→ Graveyard Fields, MP 418.8.", maps: "Graveyard Fields Blue Ridge Parkway" },
+        { kind: "hike", time: "12:20 → 2:10", est: "1h 50m", text: "<b>Graveyard Fields loop.</b> ✅ AllTrails: 3.3 mi / 416 ft — slightly longer than the ~3 mi estimate." },
+        { kind: "drive", time: "2:10 → 2:25", est: "15m", text: "→ Devil's Courthouse, MP 422.", maps: "Devils Courthouse Blue Ridge Parkway" },
+        { kind: "hike", time: "2:25 → 3:10", est: "45m", text: "Devil's Courthouse — short, steep, five-state view. Reopened Aug 2025." },
+        { kind: "drive", time: "3:10 → 3:25", est: "15m", text: "→ Looking Glass Rock Overlook, MP 417.", maps: "Looking Glass Rock Overlook Blue Ridge Parkway" },
+        { kind: "hike", time: "3:25 → 4:25", est: "60m", text: "<b>Skinny Dip Falls</b>, ~0.5 mi in." },
+        { kind: "dessert", time: "4:25 → 5:25", est: "35m + 25m", text: "→ <b>Dolly's Dairy Bar.</b> 100+ flavors with combos named after the adventures in the forest.", maps: "Dollys Dairy Bar Pisgah Forest NC" },
+        { kind: "drive", time: "5:25 → 5:35", est: "10m", text: "→ camp. Sunset 6:52 — you are back with an hour of light to spare." },
       ],
       meals: { b: "<b>O-B3</b> made — breakfast tacos: 3 eggs, 200g diced potato, cheddar, 3 tortillas, salsa. <b>Eat all three</b> (~950 kcal)", l: "<b>O-L4</b> packed — 2 tortillas, hummus cups, hard salami, spinach, <b>plus 400 ml tomato soup in the thermos</b>, heated in the same pot right after breakfast. In relentless wind at 5,000 ft the hot liquid does more than the calories (~950 kcal)", d: "<b>O-D2</b> made — white chicken chili frozen flat, cheddar, sourdough. 10 min (~700 kcal). <b>Both Zone 1 dinners now gone — buy block ice in Brevard tomorrow.</b>" },
       highlights:
         "Everything today sits within five Parkway miles. Black Balsam and Tennent are grassy balds with genuine 360° views and no trees at all — the most un-Appalachian terrain in the Appalachians.",
       warnings:
-        "Everything above 5,000 ft here is fully exposed — roughly <b>15°F colder than camp</b>, with wind. <b>Color note:</b> the balds peak late Sept / early Oct, so by the 19th the high country may already be browning. The color payoff on this trip is Linville on the 22nd–23rd, not here.",
+        "Everything above 5,000 ft here is fully exposed — roughly <b>15°F colder than camp</b>, with wind. <b>Color note:</b> the balds peak late Sept / early Oct, so by the 19th the high country may already be browning. The color payoff on this trip is Linville on the 22nd–23rd, not here. Taking the short Black Balsam is the right call for a day that was over-packed; the summit view is the same one, you just skip the ridge walk out to Tennent.",
     },
     {
       day: 6,
@@ -304,6 +304,7 @@ window.TRIP_DATA = {
     {
       day: 8,
       date: "Thu Oct 22, 2026",
+      noSignal: "FS 210 / Linville Gorge — no cell service from the turn onto the forest road until leaving the corridor. All day.",
       title: "The Race for FS 210",
       tagline: "Wake at a site you paid for. Sleep somewhere you have no claim on.",
       type: "transfer + the risk day",
@@ -341,6 +342,7 @@ window.TRIP_DATA = {
     {
       day: 9,
       date: "Fri Oct 23, 2026",
+      noSignal: "FS 210 / Linville Gorge — no cell service. All day.",
       title: "Hawksbill at Sunrise",
       tagline: "4,009 feet, the river 2,000 below, peak color. It costs an alarm.",
       type: "the payoff",
@@ -375,6 +377,7 @@ window.TRIP_DATA = {
     {
       day: 10,
       date: "Sat Oct 24, 2026",
+      noSignal: "Hurricane Campground, VA — no cell service at all and no pay phone. From arrival until departure the next morning.",
       title: "Mount Rogers and Fatman's Squeeze",
       tagline: "Virginia's high point, wild ponies, and a rock slot you take your pack off for.",
       type: "activity + transfer",
@@ -425,10 +428,10 @@ window.TRIP_DATA = {
   ],
 
   lodging: {
-    summary: "⚠️ 10 nights · 7 confirmed, 1 uncovered (Oct 15), 2 first-come with no reservation possible",
+    summary: "10 nights · 7 reserved, 3 first-come (Oct 15 in NRG, Oct 22–23 at Linville). Nothing in either first-come area is reservable at any price.",
     total: "Arrowhead $25.44 · Hurricane $20 · Davidson River reserved",
     rows: [
-      { night: "1", date: "Oct 15", location: "Fayetteville, WV", type: "—", name: "⚠️ NOTHING BOOKED", cost: "—", status: "❌ Arrowhead moved off this night" },
+      { night: "1", date: "Oct 15", location: "New River Gorge, WV", type: "Primitive, no water", name: "Army Camp / Glade Creek / Grandview Sandbar / Stone Cliff", cost: "Free", status: "First-come — nothing to reserve" },
       { night: "2–3", date: "Oct 16–17", location: "Fayetteville, WV", type: "Private", name: "Arrowhead Bike Farm", cost: "$25.44", status: "✅ Ref ROTXCV — confirmed on the booking site" },
       { night: "4–7", date: "Oct 18–21", location: "Brevard, NC", type: "USFS", name: "Davidson River", cost: "Reserved", status: "✅ 0864063574-1 + phone-confirmed open" },
       { night: "8–9", date: "Oct 22–23", location: "Linville Gorge, NC", type: "Dispersed, no facilities", name: "FS 210 roadside", cost: "Free", status: "❌ FIRST-COME — no reservation possible" },
@@ -446,9 +449,10 @@ window.TRIP_DATA = {
       { name: "Nuttallburg + Conveyor Trail", day: 2, distance: "~1.0 mi (est)", gain: "—", difficulty: "Easy–steep", duration: "+60m", notes: "Keeneys Creek Rd access is the clearance question." },
       { name: "Fayette Station Rd walk-down", day: 3, distance: "9.0 mi", gain: "~800 ft", difficulty: "Moderate", duration: "3h 45m total", notes: "⚠️ Parking at the top unconfirmed — 800-927-0263." },
       { name: "Moore Cove Falls", day: 4, distance: "1.4 mi", gain: "—", difficulty: "Easy", duration: "60m", notes: "The trail goes behind the water." },
-      { name: "Black Balsam → Tennent Mtn", day: 5, distance: "⚠️ ~4.0 mi (est)", gain: "—", difficulty: "Moderate", duration: "2h 30m", notes: "⚠️ AllTrails has a 1.4 mi out-and-back to Black Balsam alone and a 9.7 mi / 1,666 ft Graveyard Ridge loop. Your ~4 mi is between them — pick the route before you park." },
-      { name: "Sam Knob", day: 5, distance: "~2.5 mi (est)", gain: "—", difficulty: "Moderate", duration: "1h 50m", notes: "Same lot. First thing cut if the day slips." },
-      { name: "Graveyard Fields Loop", day: 5, distance: "~3.0 mi (est)", gain: "—", difficulty: "Easy", duration: "1h 45m", notes: "" },
+      { name: "⭐ Black Balsam Knob via Art Loeb (short)", day: 5, distance: "✅ 1.4 mi", gain: "✅ 357 ft", difficulty: "Moderate", duration: "46 min moving", notes: "<b>The chosen route.</b> Same summit, same 360°." },
+      { name: "Black Balsam — longer alternatives", day: "5 (not taken)", distance: "3.8 / 4.3 / 9.7 mi", gain: "780 / 688 / 1,666 ft", difficulty: "Moderate", duration: "up to 4h 32m", notes: "Tennent Mtn out-and-back, Ivestor Gap loop, Graveyard Ridge loop. The plan's ~4 mi was the Tennent version." },
+      { name: "Sam Knob", day: 5, distance: "✅ 2.5 mi", gain: "✅ 561 ft", difficulty: "Moderate", duration: "78 min", notes: "Same lot as Black Balsam — no driving between." },
+      { name: "Graveyard Fields Loop", day: 5, distance: "✅ 3.3 mi", gain: "✅ 416 ft", difficulty: "Moderate", duration: "1h 50m", notes: "Slightly longer than the ~3 mi estimate." },
       { name: "Devil's Courthouse", day: 5, distance: "~0.8 mi (est)", gain: "—", difficulty: "Short, steep", duration: "45m", notes: "Five-state view. Reopened Aug 2025." },
       { name: "Skinny Dip Falls", day: 5, distance: "~1.0 mi (est)", gain: "—", difficulty: "Easy", duration: "60m", notes: "Second cut if the day slips." },
       { name: "✅ Looking Glass Rock", day: 6, distance: "6.5 mi (plan) · AllTrails 6.0 mi", gain: "~1,700 ft · AllTrails 1,699 ft", difficulty: "Moderate", duration: "4h 30m budgeted · AllTrails ~3h 30m", notes: "✅ Best-corroborated hike on the trip. The budget has real margin." },
@@ -490,7 +494,7 @@ window.TRIP_DATA = {
 
   provisions: {
     summary:
-      "Eleven days, one 48qt cooler, one mid-trip resupply. It cannot stay cold the whole way and it does not need to. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving. Restaurant slots — Tudor's, Secret Sandwich Society, Pies &amp; Pints, the Bridge Day chili cook-off, The Falls Landing — are handled on the day cards, not here.",
+      "Eleven days, one 48qt cooler, one mid-trip resupply. It cannot stay cold the whole way and it does not need to. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving. Restaurant slots — Tudor's, Secret Sandwich Society, Pies &amp; Pints, the Bridge Day chili cook-off, The Falls Landing — are handled on the day cards, not here.<br><br><b>Five stops, in this order.</b> <b>1. Meijer, Sept 13</b> — the whole Zone 3 crate, bought in September alongside Kentucky's because none of it cares about five weeks. <b>2. Meijer, early October</b> — the freeze-flat ingredients, bought the day they get cooked. <b>3. Meijer, morning of Oct 15</b> — Zone 2, checkout to cooler to car. <b>4. Fayetteville, Oct 16</b> — one block of ice. <b>5. Brevard, Oct 20</b> — the only real resupply, and the last cold of the trip.",
     coolerNote:
       "The structural problem of this trip in three rows. <b>The breakfast burrito is the calibration item:</b> it has to survive nine days frozen and be edible on Oct 22, so freeze it hardest and bury it under the water bottles. Frozen 1L bottles do double duty — coolant on the way down, and drinking water exactly when you arrive somewhere with none.",
     cooler: [
@@ -502,8 +506,8 @@ window.TRIP_DATA = {
       "Four slots decide whether you actually eat on the hard leg, and all four collapse to one primitive — <b>boil water, pour into a labeled bag, eat from the bag, pack it out.</b> <b>O-D4</b> (Thu 7:30 PM, dark, tired, no water) · <b>O-B7</b> (post-Hawksbill hot oats, pot never touches food) · <b>O-D5</b> (same format, different flavour, so night two doesn't taste like night one) · <b>O-L7</b> (zero cookware). Mix the five bags at your kitchen table in October and the hard leg is solved before you leave Ohio.",
     lists: [
       {
-        group: "Freeze flat at home",
-        note: "This is your ice. You are not choosing between carrying ice and carrying food.",
+        group: "Stop 2 — Meijer, early October, then cook and freeze",
+        note: "This is your ice. You are not choosing between carrying ice and carrying food. ⚠️ <b>Buy the meat the day you cook it, not on the September run</b> — a frozen-flat ragù keeps five weeks happily, raw ground pork in a fridge does not keep five days. Cook, bag, freeze flat, then forget about it until Oct 15.",
         items: [
           "Beef and pork ragù — 500 ml quart bag, frozen flat (O-D1, Sun 10/18)",
           "White chicken chili — 400 ml quart bag, thinnest so it thaws first (O-D2, Mon 10/19)",
@@ -512,7 +516,7 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Pre-mix into labeled bags at home",
+        group: "Stop 1 (the dry half) — pre-mix into labeled bags at home",
         note: "The work that makes the no-water leg survivable. Do it at the kitchen table, not at 35°F in the dark.",
         items: [
           "Oats ×5 — 2 packets · 25g milk powder · 30g nuts · 30g dried fruit · salt",
@@ -523,7 +527,8 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Zone 3 — shelf-stable, trunk crate, no cooler space",
+        group: "Stop 1 — Meijer, Sept 13, Zone 3 trunk crate",
+        note: "<b>Bought in September on the same run as Kentucky's shelf-stable list</b>, because nothing here is harmed by five weeks in a crate and one big shop beats two medium ones. Kentucky borrows from this crate and refills it — buy the October number once, split it into two boxes, label them.",
         items: [
           "Maple &amp; brown sugar oatmeal, big box (~13 packets) · whole milk powder 250g",
           "Peanut butter jar + 6 single-serve PB packets · pecans 200g · apricots 400g · dried mango 400g",
@@ -541,20 +546,21 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Zone 2 — buy Oct 15 morning",
-        note: "The zone that ruins trips. Keep it small, eat it early.",
+        group: "Stop 3 — Meijer, morning of Oct 15, into the cooler",
+        note: "The zone that ruins trips, and the last stop before the car. Checkout to cooler to trunk — which is the whole reason it is the morning of departure and not the night before. Keep it small, eat it early.",
         items: [
           "Ciabatta roll, Genoa salami, capicola, provolone, olive salad — <b>build the Bridge Day muffuletta on Oct 16 night</b>",
-          "Eggs (half dozen) · spinach · bell peppers ×2 · sourdough loaf · sub fixings for O-L1 · 2 apples",
+          "Eggs (half dozen) · spinach · bell peppers ×2 · sourdough loaf · sub fixings for O-L1",
+          "⚠️ <b>The 2 apples are gone.</b> O-L1 and O-L3 both carry a whole raw apple and crisp raw fruit is the one OAS form still out. Swap for ripe bananas, fruit leather or dried fruit — the dried fruit is already in the September crate.",
         ],
       },
       {
-        group: "Buy in Fayetteville — Oct 16",
+        group: "Stop 4 — Fayetteville, Oct 16",
         note: "Fayetteville feeds you. That is the whole list.",
         items: ["1 block of ice"],
       },
       {
-        group: "Resupply — Brevard NC, Tuesday Oct 20",
+        group: "Stop 5 — Brevard NC, Tuesday Oct 20",
         note: "The only real resupply of the trip and the last cold you get.",
         items: [
           "<b>1 block of ice</b> — the last cold of the trip",
@@ -623,7 +629,8 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "⚠️ Decide what happens Oct 15 — the itinerary AND the meal plan both still assume a bed at Arrowhead that night. Do this first." },
+    { text: "⚠️ Oct 15 dinner — the meal plan still puts you at the Arrowhead biergarten that night. Pack a camp dinner or plan a Fayetteville stop." },
+    { text: "Price and phone-check ONE motel in Newland / Linville Falls / Morganton before leaving Ohio — the Linville bail-out is first-come too" },
     { text: "⚠️ CALL 800-927-0263 — Fayette Station Road parking on Bridge Day." },
     { text: "Sign the Arrowhead waiver before arrival — every camper needs one" },
     { text: "Mix the five pre-portioned bags at home: oats ×5, oats XL (double-bagged), couscous, rice, hot chocolate ×3" },
@@ -633,9 +640,9 @@ window.TRIP_DATA = {
     { text: "Buy pull-tab cans only — a forgotten can opener at Linville means no dinner" },
     { text: "Call Grandfather Ranger District (828) 652-2144 — FS 210 site availability, the 200-ft camping Forest Order, and Table Rock loop routing given the washed-out Spence Ridge bridge" },
     { text: "Day 1 at Canyon Rim Visitor Center: ask about Keeneys Creek Road condition for a 5.9 in clearance car" },
-    { text: "✅ Arrowhead ref ROTXCV — confirmed Oct 16–18, 2 nights, on the booking site" },
-    { text: "✅ Davidson River Oct 18–21 — recreation.gov 0864063574-1, 4 nights, campground open (phone-confirmed)" },
-    { text: "✅ Hurricane Campground Oct 24 — recreation.gov 0840120294-1, 1 night. Gate 7 AM–10 PM. No cell service — carry it on paper." },
+    { text: "✅ Arrowhead ref ROTXCV — confirmed Oct 16–18, 2 nights, on the booking site", booked: true },
+    { text: "✅ Davidson River Oct 18–21 — recreation.gov 0864063574-1, 4 nights, campground open (phone-confirmed)", booked: true },
+    { text: "✅ Hurricane Campground Oct 24 — recreation.gov 0840120294-1, 1 night. Gate 7 AM–10 PM. No cell service — carry it on paper.", booked: true },
     { text: "Decide the FS 210 bail-out BEFORE the trip: Mortimer Campground, or a motel in Newland / Linville Falls / Morganton" },
     { text: "Sleeping bag liner — decide after the September Kentucky shakedown" },
     { text: "Reserve The Falls Landing, Brevard, for Tuesday Oct 20" },
@@ -647,10 +654,21 @@ window.TRIP_DATA = {
 
   openQuestions: [
     {
-      question: "⚠️ Arrowhead is confirmed Oct 16–18. Oct 15 has no bed, and both the itinerary and the meal plan still assume one.",
-      blocks: "Day 1 — and the shape of the whole WV leg",
+      question: "Three October meals were voted down on the Menu Bench and are still on the plan.",
+      blocks: "Day 5 lunch, day 5 dinner and day 8 lunch. None is urgent — this trip is Oct 15 — but day 8 is the one that matters.",
+      detail: "The Sept 2026 vote rejected 20 of 88 candidate dishes, and three of them are scheduled here. The validator reports all three every run.<br><br><b>O-L7, day 8 lunch — the important one.</b> It is the waterless pouch plate, on a site with nothing to wash with, and \"eating a pouch straight as the meal\" was a no. <b>Summer sausage and cheese board</b> is the clean swap: voted yes, Zone 3 only, zero cleanup, no water, and it holds up on day 8 when the ice is gone.<br><br><b>O-D2, day 5 dinner</b> — white chicken chili, voted no. The beef-and-bean version of the same frozen-flat bag was voted yes, so the swap costs nothing structurally: same Zone 1 behaviour, same prep, same night. Beef stew and lentil-and-sausage stew were also both yes.<br><br><b>O-L4, day 5 lunch</b> — the hummus cups. Only that component was rejected; the tortillas, salami and thermos of hot soup were not. Swap the hummus for hard cheese and the meal survives intact.<br><br>Not changed automatically: swapping a meal changes a day, and this is a planned trip with a written cooler timeline behind it."
+    },
+    {
+      question: "Oct 15 is now a first-come primitive site, and that is the one thing left to get right.",
+      blocks: "Day 1",
       detail:
-        "Settled fact now rather than an open loop: ref <b>ROTXCV</b> is Oct 16 3 PM to Oct 18 11 AM, two nights, confirmed on the booking site. It covers Bridge Day night, which the original booking did not, and it hands straight off to Davidson River's 2 PM check-in on Oct 18. Both good.<br><br>What it leaves is Oct 15. The day-by-day still drives to Arrowhead and sleeps there, and <b>the meal plan carries the same assumption</b> — its header reads <i>Arrowhead (3n)</i>, <b>O-L1</b> is a Thursday car lunch and <b>O-B1</b> is a Friday breakfast at camp. Move departure to Oct 16 and O-L1 slides while O-B1 has nowhere to go.<br><br><b>The hard constraint is Endless Wall.</b> It must happen before Saturday, because the bridge-overlook trails close for Bridge Day security. If the trip starts Oct 16 you land around 1 PM, and Endless Wall's three hours have to fit between a 3 PM check-in and the Long Point sunset — which pushes Canyon Rim, Fayette Station Road and most likely Nuttallburg off the trip. Nuttallburg is the best ruin on either 2026 trip, so that is a real loss, not a trim.<br><br><b>Two options that keep the itinerary intact:</b> book Oct 15 somewhere else in Fayette County — Bridge Day weekend in a small county, so that call is now, not in October — or leave on Oct 16 and accept losing Nuttallburg. Leaving Ohio at 3 AM to buy the afternoon back is worse than it sounds on day one of a ten-day solo trip.",
+        "Arrowhead is confirmed Oct 16–18, which covers Bridge Day night and hands off to Davidson River's 2 PM check-in on Oct 18. Oct 15 is solved by camping primitive inside the park instead.<br><br><b>Four free options, all first-come, all with fire rings, grills, tables and pit toilets, none with drinking water:</b> Army Camp (11 sites, near Prince), Glade Creek (11 sites, riverside, with the Glade Creek Trail leaving from camp), Grandview Sandbar, and Stone Cliff. Every campground in New River Gorge is first-come year-round — <b>there is nothing to reserve, so there is nothing to forget to book.</b><br><br>What that costs you: the Long Point trailhead is at Arrowhead, so on Oct 15 it becomes a drive rather than a walk from the tent. Water has to be carried in. And access roads to the riverside sites get rough after rain. <b>Ask at Canyon Rim Visitor Center when you arrive</b> which sites have space and which road is passable — that is a 5-minute conversation that saves an hour of driving in the dark.<br><br>Sources: <a href=\"https://www.nps.gov/neri/planyourvisit/campgrounds.htm\">NPS New River Gorge campgrounds</a> · <a href=\"https://thedyrt.com/camping/west-virginia/near/new-river-gorge-national-river/with/dispersed\">The Dyrt</a>",
+    },
+    {
+      question: "Linville has no reservable option. Not in the gorge, and not as a bail-out.",
+      blocks: "Days 8–9 — and it changes the risk, not the plan",
+      detail:
+        "You asked whether there is a reservable campground worth taking instead of racing for FS 210. <b>There isn't.</b><br><br>There are <b>no designated campsites inside Linville Gorge Wilderness at all</b> — the permit system counts people per night, it does not reserve a site. And permits are <b>not required</b> for day use, for roadside camping on FS 210, or for camping on Table Rock, so the Fri/Sat quota through Oct 31 does not apply to what you are actually doing. The dispersed sites along FS 210 near the Hawksbill trailhead and Spence Ridge parking are the whole inventory, and they are first-come.<br><br><b>The bail-out is also first-come.</b> Mortimer Campground is 17 USFS sites at $20–30 with flush toilets, showers and potable water — genuinely nice, and <b>not on recreation.gov</b>. You cannot pre-book it either.<br><br>So the honest read: the FS 210 gamble has no insurance policy available, which makes the 6:30 AM departure from Davidson River the entire mitigation rather than one of two. The realistic fallback ladder is FS 210 → Mortimer (also a race) → a motel in Newland, Linville Falls or Morganton. <b>Price and phone-check one motel before you leave Ohio</b> so the fallback is a decision, not a search at 8 PM with no signal.<br><br>Sources: <a href=\"https://ashevilletrails.com/linville-gorge/camping/\">Asheville Trails</a> · <a href=\"https://www.recreation.gov/permits/4675331\">Linville Gorge overnight permits</a> · <a href=\"https://www.fs.usda.gov/r08/northcarolina/recreation/mortimer-campground\">USFS Mortimer</a>",
     },
     {
       question: "Fayette Station Road parking on Bridge Day.",
@@ -810,13 +828,13 @@ window.TRIP_DATA = {
   waypoints: [
     { name: "Spence Ridge parking, FS 210", lat: 35.904183, lng: -81.878217, verified: true, icon: "⛺", days: "8–9", notes: "From the source file. A 200-ft walk east into the forest — right at the Forest Order threshold." },
     { name: "Arrowhead Bike Farm", lat: 38.0403, lng: -81.0805, verified: true, icon: "⛺", days: "1–3", notes: "From the source file. Long Point trailhead on site." },
-    { name: "Canyon Rim Visitor Center", lat: null, lng: null, verified: false, icon: "🌉", days: "1", notes: "" },
-    { name: "Nuttallburg", lat: null, lng: null, verified: false, icon: "🏚️", days: "2", notes: "Via Keeneys Creek Rd — clearance question" },
-    { name: "Davidson River Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "4–7", notes: "" },
-    { name: "Hawksbill Trailhead", lat: null, lng: null, verified: false, icon: "🌄", days: "8–9", notes: "Boulder-marked lot" },
-    { name: "Table Rock picnic area", lat: null, lng: null, verified: false, icon: "🪨", days: "8–9", notes: "End of FS 210" },
-    { name: "Massie Gap", lat: null, lng: null, verified: false, icon: "🐴", days: "10", notes: "" },
-    { name: "Hurricane Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "10", notes: "Follow written directions, not GPS" },
+    { name: "Canyon Rim Visitor Center", lat: 38.070905, lng: -81.075728, verified: true, icon: "🌉", days: "1", notes: "", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
+    { name: "Nuttallburg", lat: 38.050062, lng: -81.040005, verified: true, icon: "🏚️", days: "2", notes: "Via Keeneys Creek Rd — clearance question", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
+    { name: "Davidson River Campground", lat: 35.281165, lng: -82.722225, verified: true, icon: "⛺", days: "4–7", notes: "", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
+    { name: "Hawksbill Trailhead", lat: 35.914433, lng: -81.878363, verified: true, icon: "🌄", days: "8–9", notes: "Boulder-marked lot", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
+    { name: "Table Rock picnic area", lat: 35.896515, lng: -81.869363, verified: true, icon: "🪨", days: "8–9", notes: "End of FS 210", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
+    { name: "Massie Gap", lat: 36.634289, lng: -81.510294, verified: true, icon: "🐴", days: "10", notes: "", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
+    { name: "Hurricane Campground", lat: 36.723242, lng: -81.490372, verified: true, icon: "⛺", days: "10", notes: "Follow written directions, not GPS", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
   ],
   map: { center: [37.2, -81.9], zoom: 7 },
 };

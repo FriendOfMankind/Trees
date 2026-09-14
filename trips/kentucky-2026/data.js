@@ -4,10 +4,24 @@
    Transcribed from MASTER-trip1-kentucky-sept-2026.md and
    MEALS-trip1-kentucky.md (both Sept 2026). Rendered by ../../js/trip.js.
 
-   WHAT CHANGED IN TRANSCRIPTION — nothing structural. Three weeks out with
-   both campgrounds reserved is the wrong time to restructure, per the audit
-   prompt's own configuration. Findings are recorded as warnings and open
-   questions instead of silent edits:
+   REVISED 2026-09-06 — restructured against two stated preferences:
+     1. Hike out, sit up to an hour, hike back. Lookouts, river shelves,
+        falls and rock shelters are the destinations worth sitting at.
+     2. One outing per day. No mid-day return to camp without a reason
+        that earns it; a trailhead reachable on foot from the tent is free.
+   Campgrounds and drive days are untouched — both reservations still stand.
+   Changes: Angel Falls added Thursday as a stop on the drive in (Leatherwood
+   Ford is 15 min short of Bandy Creek, so it costs no extra driving); the
+   East Rim sunset moved Thursday -> Friday, which removes Thursday's second
+   outing; John Litton cut from Friday; Sky Bridge cut from Wednesday;
+   Devil's Jump expanded to absorb Sunday's 45-minute wait in Stearns.
+   Confirmed by the traveler: Miguel's 7:00 AM-9:45 PM; Red River Rockhouse
+   12-9 PM and closed Tue/Wed, so it is off this trip; Divide Road will be
+   driven with a turnaround; Honey Creek is off if it rains; Yahoo Falls
+   declined.
+
+   FROM THE EARLIER TRANSCRIPTION PASS — findings recorded as warnings and
+   open questions rather than silent edits:
      - Hike stats now carry an AllTrails cross-check. Where the two sources
        disagree, BOTH are shown. Neither is automatically right.
      - Sun times recomputed (NOAA solar position). The plan's Sept 24 sunset
@@ -29,7 +43,7 @@ window.TRIP_DATA = {
     emoji: "🪨",
     theme: "forest",
     route:
-      "Avon OH → Koomer Ridge (2 nights, Red River Gorge) → Bandy Creek (3 nights, Big South Fork) → Blue Heron → home. Two sandstone plateaus, one transfer day between them.",
+      "Avon OH → Koomer Ridge (2 nights, Red River Gorge) → Bandy Creek (3 nights, Big South Fork) → Blue Heron → home. Two sandstone plateaus, one transfer day between them. <b>Every day is one loop out from camp and back</b> — no returning mid-day unless the reason is worth the drive.",
     vehicle:
       "2013 Subaru Legacy. AWD, ~5.9 in ground clearance, low front air dam. The five unpaved miles to Twin Arches off Divide Road are the one road on this trip that needs a condition check first.",
     gettingThere:
@@ -37,7 +51,7 @@ window.TRIP_DATA = {
     stats: [
       { num: "6 days", lbl: "Length" },
       { num: "5", lbl: "Nights camping" },
-      { num: "~19 mi", lbl: "On foot" },
+      { num: "~27 mi", lbl: "On foot" },
       { num: "✅ Both", lbl: "Campgrounds booked" },
     ],
     overviewCards: [
@@ -45,7 +59,8 @@ window.TRIP_DATA = {
       { h: "Group", p: "Solo. One person, one tent, one portion." },
       { h: "Lodging", p: "<b>All reserved.</b> Koomer Ridge ×2 (walk-in tent, $24), Bandy Creek ×3 (tent loop, free hot showers)" },
       { h: "Permits", p: "<b>None needed.</b> There is no RRG camping permit — the thing that exists is an overnight <i>parking</i> pass for vehicles left on forest land 10 PM–6 AM. The campground fee covers it." },
-      { h: "The constraint", p: "Remote lecture Wed Sept 23, 11:00–3:00, at camp over Starlink. Confirmed to fall on <b>both</b> 2026 trips." },
+      { h: "The constraint", p: "Remote lecture Wed Sept 23, 11:00–3:00, at camp over Starlink. Confirmed on <b>both</b> 2026 trips. Cooking lunch through it is fine — K-L2 is a 12-minute job." },
+      { h: "The shape of a day", p: "<b>Hike out, sit up to an hour, hike back.</b> Lookouts, river shelves, falls and rock shelters are the destinations. Days are routed as a single outing from camp — the lecture is the only mid-day return the trip permits." },
       { h: "Time zone", p: "The ET/CT line cuts through Big South Fork just west of Bandy Creek. The phone will flip mid-hike. <b>All park and campground hours are Eastern.</b>" },
     ],
     footerNote:
@@ -59,8 +74,8 @@ window.TRIP_DATA = {
       title: "Down the Mountain Parkway",
       tagline: "Five and a half hours, then three arches before dinner.",
       type: "travel + activity",
-      driving: "~6h 15m total",
-      slack: "~1 hour. First cut is Angel Windows.",
+      driving: "~6h 05m total",
+      slack: "~2 hours once Gladie comes off. First cut is Angel Windows, and you almost certainly will not need it.",
       overnight: {
         name: "Koomer Ridge Campground",
         place: "Slade, KY",
@@ -76,15 +91,13 @@ window.TRIP_DATA = {
         { kind: "stop", time: "1:50 → 2:10", est: "20m", text: "<b>TEST STARLINK.</b> Find the site's best sky window now, not Wednesday at 10:55. Koomer Ridge is forested and a four-hour lecture is not the moment to discover the canopy blocks it.", warn: true },
         { kind: "drive", time: "2:10 → 2:30", est: "20m", text: "→ Nada Tunnel. 900 ft, one lane, hand-cut 1910–11 for the Dana Lumber Company. The Gateway to the Gorge.", maps: "Nada Tunnel Red River Gorge KY" },
         { kind: "stop", time: "2:30 → 2:50", est: "20m", text: "Drive through and photograph it." },
-        { kind: "drive", time: "2:50 → 3:05", est: "15m", text: "→ Gladie Learning Center.", maps: "Gladie Cultural Environmental Learning Center Stanton KY" },
-        { kind: "stop", time: "3:05 → 3:35", est: "30m", text: "<b>BUILDING CLOSED TUESDAYS</b> (open Thu–Sun 10–5). Grounds are open — the Gladie Cabin (former hotel, post office, and childhood home of bluegrass musician Lily May Ledford), the barn, farm artifacts, two short nature trails.", warn: true },
-        { kind: "drive", time: "3:35 → 4:00", est: "25m", text: "→ the KY 715 overlook cluster.", maps: "Princess Arch Trailhead Red River Gorge" },
-        { kind: "hike", time: "4:00 → 5:50", est: "1h 50m", text: "<b>Princess Arch, Whistling Arch, Angel Windows</b> — all under a mile each." },
-        { kind: "drive", time: "5:50 → 6:00", est: "10m", text: "→ Sky Bridge Station, KY 715.", maps: "Sky Bridge Station Pine Ridge KY" },
-        { kind: "food", time: "6:00 → 6:55", est: "55m", text: "<b>Dinner.</b> Restaurant, taphouse, hostel and gear shop in one rustic cabin — the only real option in the northeastern Gorge. <b>Order the gourmet hot dogs.</b>" },
-        { kind: "dessert", time: "6:55 → 7:15", est: "20m", text: "<b>The Brick</b>, directly across the street. Hand-scooped ice cream in a ~1900 brick building. <b>Order strawberry cheesecake.</b>", maps: "The Brick Pine Ridge KY" },
-        { kind: "drive", time: "7:15 → 7:30", est: "15m", text: "→ Chimney Top Rock for sunset.", maps: "Chimney Top Rock Red River Gorge" },
-        { kind: "sunset", time: "7:30 → 8:10", est: "40m", text: "Sunset <b>7:33</b> (recomputed; the plan said 7:36). Short walk from parking. ⚠️ Aspect was never verified — Chimney Top was assigned to sunset on the assumption it faces west." },
+        { kind: "drive", time: "2:50 → 3:15", est: "25m", text: "→ the KY 715 overlook cluster. <b>Gladie is cut</b> — the building is closed Tuesdays and its two short nature trails do not compete with three arches.", maps: "Princess Arch Trailhead Red River Gorge" },
+        { kind: "hike", time: "3:15 → 5:15", est: "2h", text: "<b>Princess Arch, Whistling Arch, Angel Windows.</b> ✅ AllTrails: Whistling 0.6 mi / 91 ft / 16 min, Angel Windows 0.6 mi / 88 ft / 16 min. Three short walks with a few minutes of driving between them — two hours is generous, which is the point on arrival day." },
+        { kind: "drive", time: "5:15 → 5:25", est: "10m", text: "→ Sky Bridge Station, KY 715.", maps: "Sky Bridge Station Pine Ridge KY" },
+        { kind: "food", time: "5:25 → 6:25", est: "60m", text: "<b>Dinner.</b> Restaurant, taphouse, hostel and gear shop in one rustic cabin — the only real option in the northeastern Gorge. <b>Order the gourmet hot dogs.</b>" },
+        { kind: "dessert", time: "6:25 → 6:45", est: "20m", text: "<b>The Brick</b>, directly across the street. Hand-scooped ice cream in a ~1900 brick building. <b>Order strawberry cheesecake.</b>", maps: "The Brick Pine Ridge KY" },
+        { kind: "drive", time: "6:45 → 7:05", est: "20m", text: "→ Chimney Top Rock for sunset.", maps: "Chimney Top Rock Red River Gorge" },
+        { kind: "sunset", time: "7:05 → 7:55", est: "50m", text: "✅ <b>Chimney Top faces west / northwest</b> — aspect confirmed, this is the right sunset spot. Sunset <b>7:31</b>. AllTrails: 0.7 mi, 98 ft, paved and ADA-rated, 18 min. You arrive with half an hour spare instead of three minutes." },
         { kind: "drive", time: "8:10 → 8:35", est: "25m", text: "→ camp." },
       ],
       meals: {
@@ -93,7 +106,7 @@ window.TRIP_DATA = {
         d: "bought — Sky Bridge Station hot dogs, then The Brick",
       },
       highlights:
-        "Three arches, a hand-cut tunnel and a sunset overlook, all inside the four hours after a five-and-a-half-hour drive. Nothing today is hard.",
+        "Three arches, a hand-cut tunnel and a confirmed west-facing sunset overlook, all inside the four hours after a five-and-a-half-hour drive. Nothing today is hard, and cutting Gladie means nothing today is rushed either.",
       warnings:
         "Test Starlink today. It is the single point of failure for Wednesday and you have exactly one day of buffer to solve it. Fallbacks in order: an open spot elsewhere in the campground, the Gladie or Slade area, or Miguel's / Sky Bridge Station, which have wifi.",
     },
@@ -103,8 +116,8 @@ window.TRIP_DATA = {
       title: "Ridge at First Light, Laptop by Eleven",
       tagline: "Canyon fog, then four hours of class in a tent.",
       type: "activity + lecture",
-      driving: "~2h 15m",
-      slack: "Tight before 11:00 — the drive back from Auxier is the buffer. Loose after 3:00.",
+      driving: "~2h",
+      slack: "Tight before 11:00 — the drive back from Auxier is the buffer. Loose after 3:00, and looser than it was: Sky Bridge came off, which removed a third stop and a fourth drive leg.",
       overnight: {
         name: "Koomer Ridge Campground",
         place: "Slade, KY",
@@ -124,30 +137,28 @@ window.TRIP_DATA = {
         { kind: "stop", time: "9:55 → 11:00", est: "1h 05m", text: "Breakfast, set up the laptop, <b>verify Starlink</b>." },
         { kind: "lecture", time: "11:00 → 3:00", est: "4h", text: "<b>REMOTE LECTURE.</b> At camp. Class runs 11:10–2:30; the padding is setup and overrun.", warn: true },
         { kind: "drive", time: "3:15 → 3:50", est: "35m", text: "→ Rock Bridge Recreation Area.", maps: "Rock Bridge Recreation Area Red River Gorge" },
-        { kind: "hike", time: "3:50 → 5:20", est: "1h 30m", text: "<b>Rock Bridge + Creation Falls</b>, 1.4 mi — the only arch in the Gorge that spans water." },
-        { kind: "drive", time: "5:20 → 5:50", est: "30m", text: "→ Sky Bridge area." },
-        { kind: "food", time: "5:50 → 6:50", est: "60m", text: "Dinner — cook at camp, or Sky Bridge Station again." },
-        { kind: "hike", time: "7:00 → 8:15", est: "1h 15m", text: "⭐ <b>Sky Bridge — walk over the TOP of the arch, then take the lower trail underneath it.</b> Most people do one and leave. Same 0.7 mi. Sunset 7:32.", maps: "Sky Bridge Red River Gorge KY" },
-        { kind: "drive", time: "8:15 → 8:40", est: "25m", text: "→ camp." },
+        { kind: "hike", time: "3:50 → 5:50", est: "2h", text: "⭐ <b>Rock Bridge + Creation Falls — and a full hour sitting at the falls.</b> ✅ AllTrails: 1.4 mi loop / 311 ft, or 1.5 mi out-and-back at 42 min moving. The only arch in the Gorge that spans water, and AllTrails tags this trail with a <b>beach</b> — the creek shelf below Creation Falls is the sit. Forty-two minutes of walking inside a two-hour block is deliberate." },
+        { kind: "drive", time: "5:50 → 6:25", est: "35m", text: "→ camp, and stay there." },
+        { kind: "food", time: "6:25 →", est: "—", text: "<b>Dinner at camp.</b> Chili out of the frozen quart bag, one pot, Fritos poured in. Nothing after it — the day ends where you sleep." },
       ],
       meals: {
         b: "made — hot maple oats+ in the thermos, eaten on the ridge. Pre-mixed at home: 2 packets, milk powder, pecans, dates, salt, PB stirred in last (~970 kcal)",
-        l: "⚠️ made — chicken quesadillas, 12 min in the pan. <b>The meal plan schedules this at 12:05, inside the lecture block.</b> See Open Questions.",
-        d: "made — beef-and-bean chili frozen flat, reheated. Split the Frito bag lengthwise and pour it in (~950 kcal, one pot)",
+        l: "<b>K-L2</b> made — chicken quesadillas: 3 tortillas, chicken pouch, 80g cheddar, bell pepper, salsa. 12 min in the pan at 12:05, cooked during the lecture — <b>confirmed workable</b> (~950 kcal). Potable water on site.",
+        d: "made — beef-and-bean chili frozen flat, reheated at camp at 6:25. Split the Frito bag lengthwise and pour it in (~950 kcal, one pot)",
       },
       highlights:
-        "Auxier Ridge at dawn with canyon fog below is the best thing in the Gorge and you'll have it alone. AllTrails puts the out-and-back to Courthouse Rock at 4.3 mi / 738 ft — close to the plan's 4.6 mi estimate.",
+        "Auxier Ridge at dawn with canyon fog below is the best thing in the Gorge and you'll have it alone. AllTrails puts the out-and-back to Courthouse Rock at 4.3 mi / 738 ft — close to the plan's 4.6 mi estimate. The afternoon is now one hike instead of three stops: an hour on the creek shelf under an arch that spans water, then camp.",
       warnings:
-        "Casualties of the lecture: Double Arch, the full Auxier loop, and Hidden Arch (2.3 mi from camp). Now permanent — the lecture is confirmed on both trips, so there is no version of this where Double Arch comes back.",
+        "⚠️ <b>The 6:15 AM walk out Auxier Ridge is moonless.</b> The moon sets at <b>4:09 AM</b>; by 6:15 it is well below the horizon. Nothing overhead helps you — the headlamp is the whole plan, and spare batteries are in the pack for a reason.<br><br>Casualties of the lecture: Double Arch, the full Auxier loop, and Hidden Arch. Now permanent — the lecture is confirmed on both trips. <b>Sky Bridge is a separate, deliberate cut</b>: it faces E/SE so the evening light was never going to work, and it was the third stop and fourth drive leg of an already long day.",
     },
     {
       day: 3,
       date: "Thu Sept 24, 2026",
       title: "Gray's Arch, Then South",
-      tagline: "A hike, a transfer, and a sunset overlook — in one day.",
+      tagline: "Short arch, long drive, dinner on the rocks beside the rapids.",
       type: "activity + transfer",
-      driving: "~4h 20m",
-      slack: "<b>None.</b> This is the heaviest day of the trip and the source file lists no margin at all.",
+      driving: "~4h 05m",
+      slack: "<b>~1h 30m.</b> Was zero. Swapping the Gray's Arch loop for the 2.5 mi out-and-back cut 1h 45m off the day; moving the rim sunset to Friday cut the second outing entirely.",
       overnight: {
         name: "Bandy Creek Campground",
         place: "Big South Fork, TN",
@@ -155,39 +166,40 @@ window.TRIP_DATA = {
         cost: "Reserved",
         checkin: "Visitor center adjacent, 9–5 ET",
         confirmation: "✅ recreation.gov <b>0895576747-1</b> — 3 nights",
-        notes: "Free hot showers. ⚠️ Active black bear habitat — food storage required. Flagged hazardous tree area: look up before pitching.",
+        notes: "Free hot showers. ⚠️ Active black bear habitat — food storage required. Flagged hazardous tree area: look up before pitching. Visitor center is adjacent but closes 5 PM ET — you arrive after it.",
       },
       schedule: [
-        { kind: "stop", time: "6:00 → 6:45", est: "45m", text: "Break camp." },
-        { kind: "drive", time: "6:45 → 7:10", est: "25m", text: "→ Gray's Arch Picnic Area, Tunnel Ridge Rd.", maps: "Grays Arch Picnic Area Red River Gorge" },
-        { kind: "hike", time: "7:10 → 11:10", est: "4h", text: "<b>Gray's Arch via Rough / Pinch 'Em Tight.</b> ⚠️ <b>Gray's Arch Trail is only 0.3 mi and does NOT reach the arch</b> — turn onto Rough Trail for another 0.6. Everything in RRG is stitched segments. ⚠️ Distance disputed: the plan says ~6.5 mi, AllTrails says 3.8 mi / 577 ft for the same named loop. If AllTrails is right you gain ~1.5 hours here.", warn: true },
-        { kind: "drive", time: "11:10 → 11:35", est: "25m", text: "→ Slade.", maps: "Miguels Pizza Slade KY" },
-        { kind: "food", time: "11:35 → 12:35", est: "1h", text: "<b>Lunch at Miguel's.</b> Opened 1984 as an ice cream shop by Miguel Ventura; now called the Camp Four of the East — climbers give crag directions relative to it. <b>Build your own, 45 toppings. Do not order a plain pie.</b> A fresh one takes 20–30 min even when packed." },
-        { kind: "shop", time: "12:35 → 1:20", est: "45m", text: "<b>RESUPPLY — the only one this trip.</b> Kroger in Stanton has the real selection. <b>Buy one BLOCK of ice</b> (block, not cubes — lasts 2–3× longer) and a rotisserie chicken, which covers tonight's dinner and tomorrow's.", maps: "Kroger Stanton Kentucky" },
-        { kind: "drive", time: "1:20 → 4:35", est: "3h 15m", text: "→ Bandy Creek Campground.", maps: "Bandy Creek Campground Oneida TN" },
-        { kind: "stop", time: "4:35 → 5:35", est: "60m", text: "Set up, free hot shower. ⚠️ Bear-aware food storage. Look up before pitching. <b>Ask at the visitor center about Honey Creek conditions and the Twin Arches forest road.</b>", warn: true },
-        { kind: "drive", time: "5:35 → 6:00", est: "25m", text: "→ East Rim Trailhead.", maps: "East Rim Trailhead Big South Fork" },
-        { kind: "sunset", time: "6:00 → 8:10", est: "2h 10m", text: "<b>Sunset Overlook</b>, 1.3 mi each way. The Park Service says the walk out is unremarkable and the view definitely is not. <b>No railings or fencing of any kind.</b> Sunset <b>7:34</b> (recomputed — the plan said 7:30, but Big South Fork is 65 mi west of Slade so its sunset is <i>later</i>, not earlier). Civil twilight ends ~8:00: <b>the walk back is in the dark. Headlamp.</b>", warn: true },
-        { kind: "drive", time: "8:10 → 8:35", est: "25m", text: "→ camp." },
+        { kind: "hike", time: "OPTIONAL 6:00 → 7:30", est: "1h 30m", text: "<i>Optional, if you wake early:</i> <b>Hidden Arch</b>, 2.3 mi straight from the campground — the hike the lecture took off Wednesday. Only if you actually want it; the day is better without it." },
+        { kind: "stop", time: "7:30 → 8:15", est: "45m", text: "Break camp. <b>An hour and a half later than the original plan</b> — the shorter Gray's Arch bought it." },
+        { kind: "drive", time: "8:15 → 8:40", est: "25m", text: "→ Gray's Arch Picnic Area, Tunnel Ridge Rd.", maps: "Grays Arch Picnic Area Red River Gorge" },
+        { kind: "hike", time: "8:40 → 10:10", est: "1h 30m", text: "✅ <b>Gray's Arch Trail, out-and-back — 2.5 mi, 308 ft.</b> AllTrails moving time is 62 min; 90 minutes covers the arch itself. ⚠️ <b>The Gray's Arch spur alone is 0.3 mi and does NOT reach the arch</b> — turn onto Rough Trail for another 0.6. <b>This replaces the 6.1–7.8 mi Rough / Pinch 'Em Tight loop and is what makes today survivable.</b>" },
+        { kind: "drive", time: "10:10 → 10:35", est: "25m", text: "→ Slade.", maps: "Miguels Pizza Slade KY" },
+        { kind: "food", time: "10:35 → 11:35", est: "60m", text: "<b>Lunch at Miguel's.</b> ✅ <b>Open 7:00 AM–9:45 PM — confirmed, the 10:35 arrival is safe.</b> Opened 1984 as an ice cream shop by Miguel Ventura; now the Camp Four of the East — climbers give crag directions relative to it. <b>Build your own, 45 toppings. Never a plain pie.</b> A fresh one takes 20–30 min even when quiet." },
+        { kind: "shop", time: "11:35 → 12:20", est: "45m", text: "<b>RESUPPLY — the only one this trip.</b> Kroger in Stanton has the real selection. <b>Buy one BLOCK of ice</b> (block, not cubes — 2–3× longer) and a rotisserie chicken, which covers tonight's dinner and tomorrow's.", maps: "Kroger Stanton Kentucky" },
+        { kind: "drive", time: "12:20 → 3:20", est: "3h", text: "→ <b>Leatherwood Ford</b>, on TN 297. You drive past it on the way in — it is 15 minutes short of the campground, not a detour.", maps: "Leatherwood Ford Big South Fork" },
+        { kind: "stop", time: "3:20 → 3:35", est: "15m", text: "Boil water in the car park and build the couscous. Thermos sealed, dinner carried in." },
+        { kind: "hike", time: "3:35 → 5:45", est: "2h 10m", text: "⭐ <b>Angel Falls Trail — 3.7 mi out-and-back, 200 ft, Easy.</b> ✅ AllTrails: 76 min moving, 4.5★, 739 reviews. A flat river walk along the Big South Fork ending at the boulders where the rapids run. <b>Eat dinner sitting on them.</b> ⚠️ AllTrails' own description blends a clifftop overlook and the riverside rapids into one paragraph; 200 ft spread over 3.7 mi says river-level. Ask at the campground which you actually get." },
+        { kind: "drive", time: "5:45 → 6:00", est: "15m", text: "→ Bandy Creek Campground. ⚠️ TN 297 climbs out of the gorge on this stretch — the 13% grade is right here, in the good direction.", maps: "Bandy Creek Campground Oneida TN" },
+        { kind: "stop", time: "6:00 → 7:30", est: "1h 30m", text: "Set up, free hot shower, <b>bear-aware food storage sorted in daylight</b> — sunset is 7:32. Look up before pitching: flagged hazardous tree area. <b>You are done for the day.</b> ⚠️ The visitor center closes 5 PM ET, so you miss it — that is the price of Angel Falls on the way in.", warn: true },
       ],
       meals: {
         b: "made — chorizo–potato foil burrito, built and frozen at home, 6 min in a dry pan, eaten while striking the tent (~760 kcal). Move it to Zone 2 tonight.",
         l: "bought — Miguel's",
-        d: "packed — couscous, rotisserie chicken, chickpeas, sun-dried tomatoes, feta. Built at 4:20, carried hot in the thermos, eaten at the overlook (~1,000 kcal). Couscous holds heat and doesn't slosh.",
+        d: "packed — couscous, rotisserie chicken, chickpeas, sun-dried tomatoes, feta. Built at Leatherwood Ford at 3:20, carried hot in the thermos, eaten on the boulders beside the rapids (~1,000 kcal). Couscous holds heat and doesn't slosh, which is exactly why it survives 1.8 miles of river trail.",
       },
       highlights:
-        "You end the day eating a hot dinner out of a thermos on an unfenced sandstone rim watching the sun go down over the Cumberland Plateau. That's the payoff for the transfer.",
+        "You end the day eating a hot dinner out of a thermos on river boulders with the rapids running past, then drive fifteen minutes uphill and pitch a tent in daylight. Angel Falls is the best pure hike-sit-hike on the trip: 3.7 flat miles, 200 ft, and it costs no extra driving because it is on the road in.",
       warnings:
-        "<b>This is the day to watch.</b> 6:00 AM to 8:35 PM is 14h 35m, containing a 9-mile hike, 4h 20m of driving, and a first arrival at an unfamiliar bear-country campground that you set up and immediately leave again. The source file assigns Friday as the uncertain day; by the numbers, Thursday is heavier and has no slack. Two honest levers if it runs long: skip the Sunset Overlook (it repeats in spirit on Saturday) or move it to Friday evening, which has two hours spare.",
+        "<b>Still the longest driving day, but the shape is fixed.</b> 7:30 AM to 7:30 PM with about 4 hours behind the wheel. The old version's real hazard is gone: you no longer arrive at an unfamiliar bear-country campground, set up, and immediately leave again for a fenceless overlook you walk back from in the dark on night one. The rim moved to Friday and costs two minutes of sunset (7:34 → 7:32).<br><br>What it costs instead: <b>the Bandy Creek visitor center, which closes at 5 PM ET.</b> That was the plan's place to ask about the Twin Arches forest road and Honey Creek conditions. Both are now judgment calls made in the field — turn around if Divide Road goes rough, and don't start Honey Creek after rain. If you would rather have the ranger, do camp first and Angel Falls becomes a Saturday afternoon hike."
     },
     {
       day: 4,
       date: "Fri Sept 25, 2026",
       title: "Arches and Homesteads",
-      tagline: "Climb on top of the biggest arch complex in the East.",
+      tagline: "Two arches, a waterfall, an afternoon off, then the rim at sunset.",
       type: "activity",
-      driving: "~1h 45m across three trailheads",
-      slack: "2 hours. See Open Questions — there is now a third option for this day.",
+      driving: "~2h 35m, two trailheads out and the rim back",
+      slack: "<b>Genuinely loose.</b> 8.1 miles on foot against a ~10 mi ceiling, and two and a half hours of nothing in the middle of it. Was 12.3 miles across three trailheads.",
       overnight: {
         name: "Bandy Creek Campground",
         place: "Big South Fork, TN",
@@ -198,25 +210,25 @@ window.TRIP_DATA = {
         notes: null,
       },
       schedule: [
-        { kind: "drive", time: "8:00 → 8:45", est: "45m", text: "→ Twin Arches TH. Includes <b>5 unpaved miles off Divide Road</b> — ask about its condition at the visitor center Thursday evening before committing 5.9 in of clearance to it.", maps: "Twin Arches Trailhead Big South Fork", warn: true },
-        { kind: "hike", time: "8:45 → 10:30", est: "1h 45m", text: "<b>Twin Arches</b>, ~2 mi as planned. Largest natural arch complex in the eastern US — ⭐ <b>you can climb on top of them.</b> ⚠️ AllTrails lists the full Twin Arches Loop at 5.1 mi / 810 ft; the 2 mi figure is the short spur." },
-        { kind: "drive", time: "10:30 → 10:50", est: "20m", text: "→ Sawmill Trailhead.", maps: "Sawmill Trailhead Big South Fork" },
-        { kind: "hike", time: "10:50 → 12:50", est: "2h", text: "<b>Slave Falls + Needle Arch</b>, ~3 mi (est)." },
-        { kind: "stop", time: "12:50 → 1:20", est: "30m", text: "Lunch from the pack — tortilla plate, no cooking, no cleanup." },
-        { kind: "drive", time: "1:20 → 2:00", est: "40m", text: "→ Litton / Slaven Farm trailhead.", maps: "Litton Slaven Farm Loop Big South Fork" },
-        { kind: "hike", time: "2:00 → 5:15", est: "3h 15m", text: "<b>Litton / Slaven Farm Loop</b>, 5.9 mi — Cumberland Plateau farmstead, waterfall, rock shelters, hemlock cove. Homestead ruins today; industrial ruins Sunday." },
-        { kind: "drive", time: "5:15 → 5:35", est: "20m", text: "→ camp." },
-        { kind: "food", time: "5:35 →", est: "—", text: "Cook. <b>Early night — tomorrow is the day.</b>" },
+        { kind: "drive", time: "8:00 → 8:45", est: "45m", text: "→ Twin Arches TH, including <b>5 unpaved miles off Divide Road</b>. Farthest trailhead first, then work back toward camp all day. ⚠️ <b>Committed, with a turnaround</b> — 5.9 in of clearance and a low air dam. If the surface goes rough or rutted, reverse out and the day becomes Slave Falls plus a long afternoon.", maps: "Twin Arches Trailhead Big South Fork", warn: true },
+        { kind: "hike", time: "8:45 → 10:30", est: "1h 45m", text: "⭐ <b>Twin Arches Short Loop — ✅ 1.1 mi, 269 ft, 37 min moving.</b> Not the 2 mi the plan carried, and nowhere near the 5.1 mi full loop. Largest natural arch complex in the eastern US and <b>you can climb on top of them</b> — an hour sitting up there is most of this block, which is now the point rather than the overrun." },
+        { kind: "drive", time: "10:30 → 10:50", est: "20m", text: "→ Sawmill Trailhead, back down Divide Road toward camp.", maps: "Sawmill Trailhead Big South Fork" },
+        { kind: "hike", time: "10:50 → 1:20", est: "2h 30m", text: "<b>Slave Falls + Needle Arch — ✅ 4.4 mi loop, 383 ft, Easy, 100 min moving.</b> Longer than the plan's 3.0 mi estimate, which is why Litton had to go. Lunch and 45 minutes at the falls inside the block: tortilla plate, no cooking, no cleanup." },
+        { kind: "drive", time: "1:20 → 2:00", est: "40m", text: "→ camp." },
+        { kind: "stop", time: "2:00 → 4:45", est: "2h 45m", text: "⭐ <b>The one afternoon off.</b> Free hot shower, then cook dinner early — rotisserie chicken, potatoes, green beans. <b>Cook double potatoes and bag half</b>: that is Saturday's breakfast and Saturday is the day. Camp sits between Divide Road and the East Rim, so this stop costs about fifteen minutes of driving, not a round trip." },
+        { kind: "drive", time: "4:45 → 5:10", est: "25m", text: "→ East Rim Trailhead.", maps: "East Rim Trailhead Big South Fork" },
+        { kind: "sunset", time: "5:10 → 8:00", est: "2h 50m", text: "⭐ <b>Sunset Overlook — moved off Thursday.</b> ✅ AllTrails: 2.6 mi out-and-back, only 104 ft, Easy, 51 min moving — so roughly <b>1h 45m of this block is sitting on the rim</b>, which is the entire idea. Sunset <b>7:31</b>, civil twilight ends 7:56. ⚠️ <b>No railings or fencing of any kind.</b> Headlamp for the walk out — though the moon is <b>98% lit</b> and ~9° up in the east at sunset, ~18° by the time you are back at the car, so this is not a black-woods walk.", warn: true },
+        { kind: "drive", time: "8:00 → 8:25", est: "25m", text: "→ camp." },
       ],
       meals: {
         b: "made — eggs, spinach, red bell pepper, sourdough toasted dry in the pan first (~700 kcal). The relaxed one.",
-        l: "packed — 2 tortillas, hard salami, aged cheddar, honey mustard, figs, almonds (~950 kcal). Zero cleanup. Curing is what makes this safe unrefrigerated.",
-        d: "made — rotisserie chicken, 400g diced russets, green beans. <b>Cook double potatoes and bag half</b> — they're tomorrow's breakfast and tomorrow is a 6-hour day.",
+        l: "packed — 2 tortillas, hard salami, aged cheddar, honey mustard, figs, almonds (~950 kcal), eaten at Slave Falls. Zero cleanup. Curing is what makes this safe unrefrigerated.",
+        d: "made — rotisserie chicken, 400g diced russets, green beans, <b>cooked early at camp around 3:00</b> so the rim block stays free. <b>Cook double potatoes and bag half</b> — they're tomorrow's breakfast and tomorrow is a 6-hour day. Carry dessert and the thermos to the overlook.",
       },
       highlights:
-        "Twin Arches is the largest natural arch complex in the eastern US and you can stand on top of it. Litton/Slaven adds a Cumberland Plateau farmstead, a waterfall and rock shelters on one loop.",
+        "Twin Arches is the largest natural arch complex in the eastern US and you can stand on top of it. Then a waterfall, then an actual afternoon off, then an hour and three quarters on an unfenced sandstone rim watching the sun go down over the Cumberland Plateau — with fresh legs, from a campground you already know, the night before the hard day.",
       warnings:
-        "Three trailheads, 1h 45m of driving between them, ~11 miles on foot. That's the fragmentation you dislike. The five unpaved miles to Twin Arches are the one clearance question on this trip — ask Thursday evening, and have the willingness to turn around.",
+        "<b>Fixed, and the fix cost Litton.</b> The day was 12.3 miles across three trailheads. Cutting the John Litton Farm Loop drops it to <b>8.1 miles across two</b>, under the ceiling, the day before Honey Creek. That is a real trade, not a free one — AllTrails has Litton at 5.7 mi / 465 ft / 2h 07m moving with rock shelters, Fall Branch Falls and the farmstead on it, so the plan's 3h 15m estimate was an hour heavy. You are giving up a good loop to buy a rim at sunset. Worth it, but know what you paid.<br><br>⚠️ <b>The five unpaved miles to Twin Arches are the only clearance question on this trip</b>, and you are driving them without a ranger's read because the visitor center closed before you arrived Thursday. Drive them slowly, and turn around the moment the surface stops being maintained gravel. A cut sidewall five miles down Divide Road with no signal is the failure mode, not getting stuck.",
     },
     {
       day: 5,
@@ -238,11 +250,11 @@ window.TRIP_DATA = {
       schedule: [
         { kind: "stop", time: "6:15 → 7:00", est: "45m", text: "Wake, big breakfast, pack the day properly." },
         { kind: "drive", time: "7:00 → 7:50", est: "50m", text: "→ Honey Creek trailhead. Park at the small lot about a mile before the road ends; the trailhead is just up the road past the parking area. ✅ Confirmed open by phone.", maps: "Honey Creek Trailhead Big South Fork" },
-        { kind: "hike", time: "7:50 → 1:50", est: "6h", text: "⭐ <b>HONEY CREEK LOOP, COUNTER-CLOCKWISE.</b> Multiple trip reports recommend this direction — you'd rather climb <i>up</i> wet rock than down it. <b>Trailhead signs say one hour per mile. Believe them</b> — that's scouting and backtracking, not slow walking. AllTrails independently says the same: <i>\"allow for a slower pace, roughly an hour per mile.\"</i>" },
+        { kind: "hike", time: "7:50 → 1:50", est: "6h", text: "⭐ <b>HONEY CREEK LOOP, COUNTER-CLOCKWISE.</b> <b>Take your hour on the BACK HALF</b> — Indian Rockhouse or Hide-Out Falls, after the 11:00 turnaround check. A sit before halfway spends the safety margin; a sit after it is nearly free, and you would still be at camp by 3:15. Multiple trip reports recommend this direction — you'd rather climb <i>up</i> wet rock than down it. <b>Trailhead signs say one hour per mile. Believe them</b> — that's scouting and backtracking, not slow walking. AllTrails independently says the same: <i>\"allow for a slower pace, roughly an hour per mile.\"</i>" },
         { kind: "drive", time: "1:50 → 2:00", est: "10m", text: "→ Honey Creek Overlook — drive the last mile up.", maps: "Honey Creek Overlook Big South Fork" },
         { kind: "stop", time: "2:00 → 2:30", est: "30m", text: "Judge whether the ladder spur would've been worth it. Opinions genuinely split — one hiker called the overlook boring and the loop far better." },
         { kind: "drive", time: "2:30 → 3:20", est: "50m", text: "→ camp." },
-        { kind: "food", time: "3:20 →", est: "—", text: "<b>The one relaxed dinner of the trip.</b> Nothing scheduled after." },
+        { kind: "food", time: "3:20 →", est: "—", text: "<b>The one relaxed dinner of the trip.</b> Ribeye, smashed potatoes, garlic-thyme butter. Nothing scheduled after — and the moon comes up <b>full</b> — 100%, rising about sunset." },
       ],
       meals: {
         b: "made — loaded breakfast tacos, biggest breakfast of the trip on purpose. Friday's pre-cooked potatoes make it a 14-minute crisp-and-scramble (~1,050 kcal)",
@@ -267,10 +279,9 @@ window.TRIP_DATA = {
         { kind: "stop", time: "6:30 → 7:15", est: "45m", text: "Break camp. ⚠️ <b>Hwy 297 toward Oneida has a 13% grade</b> with winding curves into the gorge. Alternate: Hwy 154 to Bandy Creek Rd.", warn: true },
         { kind: "drive", time: "7:15 → 8:20", est: "1h 05m", text: "→ Blue Heron Mining Community, 9 mi west of Stearns.", maps: "Blue Heron Mining Community Stearns KY" },
         { kind: "ruins", time: "8:20 → 9:35", est: "1h 15m", text: "<b>Blue Heron ghost structures.</b> Restored coal town once owned by the Stearns Coal and Lumber Co. Free, self-guided." },
-        { kind: "hike", time: "9:35 → 10:00", est: "25m", text: "<b>Devil's Jump Overlook</b> — 0.1 mi from the trailhead, paved, deck with bench seating, view of the river bend below." },
-        { kind: "hike", time: "optional", est: "+3h", text: "<i>Optional:</i> Blue Heron Loop, 6.5 mi with the \"Cracks in the Rocks\" passage. Only on Version A, and only if the legs have it after Honey Creek." },
-        { kind: "drive", time: "10:00 → 10:15", est: "15m", text: "→ Stearns.", maps: "The Whistle Stop Stearns KY" },
-        { kind: "stop", time: "10:15 → 11:00", est: "45m", text: "⚠️ <b>Dead time.</b> The Whistle Stop opens 11:00 on Sunday and the source file's clock skips this gap. Either fill it with the Blue Heron Loop, or take Version B and eat on the road.", warn: true },
+        { kind: "stop", time: "9:35 → 10:35", est: "1h", text: "⭐ <b>Devil's Jump Overlook — sit here for an hour.</b> 0.1 mi from the trailhead at Blue Heron, paved, deck with bench seating over the river bend. <b>This is what kills the Whistle Stop gap</b>: the old plan drove to Stearns at 10:15 and waited 45 minutes in a car park for an 11:00 opening. Same hour, better chair, no extra driving." },
+        { kind: "hike", time: "optional", est: "+3h", text: "<i>Optional, Version A only:</i> Blue Heron Loop, 6.5 mi with the \"Cracks in the Rocks\" passage — no extra driving, it leaves from Blue Heron. Only if the legs have it after Honey Creek, which they probably won't." },
+        { kind: "drive", time: "10:35 → 10:50", est: "15m", text: "→ Stearns. You arrive ten minutes before it opens instead of forty-five.", maps: "The Whistle Stop Stearns KY" },
         { kind: "food", time: "11:00 → 12:15", est: "1h 15m", text: "<b>The Whistle Stop</b>, at the railway depot. Sunday 11:00–5:00. <b>Order the fried green tomatoes</b> — that's the dish reviewers single out; the burger and club get called average." },
         { kind: "drive", time: "12:15 → 7:15", est: "7h", text: "→ Avon OH. North on US 27 → I-75 N.", maps: "Avon, OH" },
       ],
@@ -280,9 +291,9 @@ window.TRIP_DATA = {
         d: "home",
       },
       highlights:
-        "Blue Heron is a coal town the Park Service stabilized rather than restored — free, self-guided, and empty on a Sunday morning. Optional 40-minute detour either version: <b>Yahoo Falls</b> off US 27, 1 mi loop, 113 ft, the highest waterfall in Kentucky. <b>No safety barriers at the upper viewpoint.</b>",
+        "Blue Heron is a coal town the Park Service stabilized rather than restored — free, self-guided, and empty on a Sunday morning. Then an hour on a benched deck above the river bend at Devil's Jump before lunch, which is the same shape as the rest of the trip and costs nothing.",
       warnings:
-        "Seven hours of driving after five nights in a tent and a six-hour scramble day. Version B exists for a reason — don't wait 45 minutes for a restaurant if you're already tired.",
+        "Seven hours of driving after five nights in a tent and a six-hour scramble day. Version B still exists — if you're wrecked, skip the Whistle Stop and eat on the road. <b>Yahoo Falls is declined</b>: a 40-minute driving detour for a 1 mi walk is the wrong trade on a day that is already eight hours of highway.",
     },
   ],
 
@@ -301,35 +312,50 @@ window.TRIP_DATA = {
   hikes: {
     title: "Hikes &amp; Trails",
     summary:
-      "Two sources, shown side by side where they disagree. Plan figures marked (est) were unverified estimates in the source file; AllTrails figures are crowd-sourced GPS from thousands of recorded hikes. Neither is automatically right — but a 4-hour block for a 3.8-mile trail is worth knowing about before you're standing at the trailhead.",
+      "✅ = cross-checked against AllTrails and settled. <b>Every hike here is now scored against one shape: walk out, sit up to an hour, walk back.</b> Lookouts, river shelves, falls and rock shelters are the destinations. Three routes moved on measurement — <b>Gray's Arch was never one number</b> (five routes share the name, 2.5 to 7.8 mi), <b>Honey Creek's gain is 820 ft, not 571</b>, and <b>Twin Arches is a 1.1 mi short loop, not 2 mi</b>. Two hikes came off (Sky Bridge, John Litton) and one came on (Angel Falls).",
     rows: [
-      { name: "Princess / Whistling / Angel Windows", day: 1, distance: "~2.0 mi (est)", gain: "—", difficulty: "Easy", duration: "1h 50m", notes: "Three separate sub-mile walks off KY 715." },
-      { name: "Auxier Ridge out-and-back", day: 2, distance: "~4.6 mi (est) · AllTrails 4.3 mi", gain: "AllTrails 738 ft", difficulty: "Moderate", duration: "2h 05m", notes: "Sources broadly agree. Dark start, sunrise at the turnaround." },
-      { name: "Rock Bridge + Creation Falls", day: 2, distance: "1.4 mi", gain: "—", difficulty: "Easy", duration: "1h 30m", notes: "The only arch in the Gorge spanning water." },
-      { name: "Sky Bridge (top + underneath)", day: 2, distance: "0.7 mi", gain: "—", difficulty: "Easy", duration: "1h 15m", notes: "Do both halves. Most people do one." },
-      { name: "Gray's Arch via Rough / Pinch 'Em Tight", day: 3, distance: "⚠️ ~6.5 mi (est) · AllTrails 3.8 mi", gain: "AllTrails 577 ft", difficulty: "Moderate", duration: "4h budgeted", notes: "⚠️ Biggest disagreement on the trip. Gray's Arch Trail alone is 0.3 mi and does not reach the arch." },
-      { name: "Sunset Overlook", day: 3, distance: "2.6 mi RT", gain: "—", difficulty: "Easy", duration: "2h 10m", notes: "No railings. Returns after dark — headlamp." },
-      { name: "Twin Arches", day: 4, distance: "~2.0 mi spur · AllTrails loop 5.1 mi", gain: "AllTrails 810 ft (loop)", difficulty: "Moderate", duration: "1h 45m", notes: "5 unpaved miles to the trailhead. You can climb on top of the arches." },
-      { name: "Slave Falls / Needle Arch", day: 4, distance: "~3.0 mi (est)", gain: "—", difficulty: "Easy–moderate", duration: "2h", notes: "From Sawmill Trailhead." },
-      { name: "Slave Falls + Twin Arches combined loop", day: "4 (option)", distance: "AllTrails 10.1 mi", gain: "1,174 ft", difficulty: "Moderate", notes: "⭐ One trailhead instead of two. See Open Questions — this may be the better Friday." },
-      { name: "Litton / Slaven Farm Loop", day: 4, distance: "5.9 mi", gain: "—", difficulty: "Moderate", duration: "3h 15m", notes: "Farmstead, waterfall, rock shelters, hemlock cove." },
-      { name: "⭐ Honey Creek Loop", day: 5, distance: "5.5–6.0 mi (plan) · AllTrails 4.6 mi", gain: "~571 ft (plan) · ⚠️ AllTrails 820 ft", difficulty: "Hard", duration: "6h — one hour per mile", notes: "⚠️ AllTrails has 44% more climb and a mile less distance. Both sources say one hour per mile regardless." },
-      { name: "Devil's Jump Overlook", day: 6, distance: "0.1 mi", gain: "—", difficulty: "Easy", duration: "25m", notes: "Paved, benched." },
-      { name: "Blue Heron Loop (optional)", day: 6, distance: "6.5 mi", gain: "—", difficulty: "Moderate", duration: "+3h", notes: "\"Cracks in the Rocks\" passage. Version A only." },
-      { name: "Yahoo Falls (optional)", day: 6, distance: "1.0 mi", gain: "—", difficulty: "Easy", duration: "40m detour", notes: "113 ft, highest in Kentucky. No barriers at the upper viewpoint." },
+      { name: "Princess / Whistling / Angel Windows", day: 1, distance: "✅ 0.6 mi each", gain: "✅ 88–91 ft each", difficulty: "Easy", duration: "16 min each", notes: "Three separate walks off KY 715. Princess not in AllTrails; the other two confirmed." },
+      { name: "Chimney Top Rock", day: 1, distance: "✅ 0.7 mi", gain: "✅ 98 ft", difficulty: "Easy — paved, ADA", duration: "18 min", notes: "✅ Faces W/NW. Confirmed sunset spot." },
+      { name: "Auxier Ridge out-and-back", day: 2, distance: "✅ 4.3 mi (AllTrails) · plan said ~4.6", gain: "✅ 738 ft", difficulty: "Moderate", duration: "2h 05m", notes: "To Courthouse Rock. Dark start, sunrise at the turnaround." },
+      { name: "Rock Bridge + Creation Falls", day: 2, distance: "✅ 1.4 mi loop", gain: "✅ 311 ft", difficulty: "Moderate", duration: "1h 30m", notes: "The only arch in the Gorge spanning water." },
+      { name: "Rock Bridge / Creation Falls — the sit", day: 2, distance: "✅ 1.5 mi out-and-back", gain: "✅ 259 ft", difficulty: "Moderate", duration: "42 min moving", notes: "⭐ AllTrails tags this trail with a <b>beach</b> — the creek shelf below the falls. A two-hour block for 42 min of walking." },
+      { name: "Sky Bridge", day: "2 (cut)", distance: "0.7 mi loop", gain: "160 ft", difficulty: "Moderate", duration: "23 min", notes: "<b>Cut.</b> Faces E/SE so evening light never worked, and it was a third stop plus a fourth drive leg on the lecture day." },
+      { name: "⭐ Gray's Arch Trail (out-and-back)", day: 3, distance: "✅ 2.5 mi", gain: "✅ 308 ft", difficulty: "Moderate", duration: "62 min moving", notes: "<b>The chosen route.</b> The spur alone is 0.3 mi and does not reach the arch — turn onto Rough Trail." },
+      { name: "Gray's Arch — longer alternatives", day: "3 (not taken)", distance: "3.8 / 4.8 / 6.1 / 7.8 mi", gain: "577 / 987 / 1,056 / 1,505 ft", difficulty: "Moderate–Hard", duration: "up to 3h 49m", notes: "Pinch Em Tight loop, Long Loop, Rough+Martin's Fork, Rough Trail loop. The plan's ~6.5 mi was one of these — all four cost Thursday its slack." },
+      { name: "⭐ Angel Falls Trail", day: 3, distance: "✅ 3.7 mi out-and-back", gain: "✅ 200 ft", difficulty: "Easy", duration: "76 min moving", notes: "<b>New — the best hike-sit-hike on the trip.</b> Flat river walk from Leatherwood Ford to the boulders at the rapids. On the road in, so it costs no extra driving. 4.5★, 739 reviews." },
+      { name: "⭐ Sunset Overlook", day: "4 (moved from 3)", distance: "✅ 2.6 mi", gain: "✅ 104 ft", difficulty: "Easy", duration: "51 min moving", notes: "No railings. ~1h 45m of the block is sitting. Moved to Friday: same rim, rested legs, known campground, two minutes of sunset." },
+      { name: "⭐ Twin Arches Short Loop", day: 4, distance: "✅ 1.1 mi — plan said ~2.0", gain: "✅ 269 ft", difficulty: "Moderate", duration: "37 min moving", notes: "<b>Settled.</b> The full loop is a separate 5.1 mi / 810 ft route. 5 unpaved miles to the trailhead. You can climb on top of the arches — that is the hour." },
+      { name: "Slave Falls + Needle Arch", day: 4, distance: "✅ 4.4 mi loop — plan said ~3.0", gain: "✅ 383 ft", difficulty: "Easy", duration: "100 min moving", notes: "From Sawmill Trailhead, 20 min back down Divide Road from Twin Arches. Lunch and 45 min at the falls." },
+      { name: "Slave Falls + Twin Arches combined loop", day: "4 (option)", distance: "10.1 mi", gain: "1,174 ft", difficulty: "Moderate", duration: "4h 07m", notes: "⭐ One trailhead instead of two. See Open Questions." },
+      { name: "John Litton Farm Loop", day: "4 (cut)", distance: "✅ 5.7 mi loop", gain: "✅ 465 ft", difficulty: "Moderate", duration: "2h 07m moving", notes: "<b>Cut to buy the Friday rim sunset.</b> It IS in AllTrails — under <i>John Litton Farm Loop</i>, 4.6★, with caves, Fall Branch Falls and the farmstead. The plan's 3h 15m was an hour heavy. Trailhead is at Bandy Creek, zero driving. A genuine loss." },
+      { name: "⭐ Honey Creek Loop", day: 5, distance: "✅ 4.6 mi", gain: "✅ 820 ft — settled", difficulty: "Hard", duration: "6h — one hour per mile", notes: "The plan's 571 ft was low. Both sources independently say an hour per mile." },
+      { name: "Hidden Arch (optional)", day: "3 (optional)", distance: "✅ 2.1 mi loop", gain: "✅ 252 ft", difficulty: "Moderate", duration: "52 min moving", notes: "From Koomer Ridge, zero driving. The hike the lecture cut — recoverable Thursday morning if you wake early. Note first light is 7:02." },
+      { name: "Silvermine Arch (unscheduled)", day: "—", distance: "3.0 mi out-and-back", gain: "393 ft", difficulty: "Moderate", duration: "76 min moving", notes: "⭐ <b>The best trail with no home on this trip.</b> Leaves straight from Koomer Ridge — arch plus rock shelter, 4.6★. The zero-drive alternative to Wednesday's Rock Bridge run, or a longer Thursday-morning option than Hidden Arch. Next time." },
+      { name: "⭐ Devil's Jump Overlook", day: 6, distance: "0.1 mi", gain: "—", difficulty: "Easy", duration: "1h — mostly sitting", notes: "Paved, benched deck over the river bend, at the Blue Heron trailhead. Absorbs the 45 minutes the old plan spent waiting in a car park in Stearns." },
+      { name: "Blue Heron Loop (optional)", day: 6, distance: "6.5 mi", gain: "—", difficulty: "Moderate", duration: "+3h", notes: "Cracks in the Rocks passage. No extra driving — leaves from Blue Heron. Version A only, and only if the legs survived Honey Creek." },
+      { name: "Yahoo Falls", day: "6 (declined)", distance: "✅ 1.0 mi loop", gain: "✅ 193 ft", difficulty: "Easy", duration: "30 min moving", notes: "<b>Declined.</b> 113 ft, highest in Kentucky, 4.7★ — but a 40-minute driving detour for a 30-minute walk on an eight-hour driving day. Wrong trade." },
     ],
   },
 
+  sunMoonSites: [
+    { date: "2026-09-22", label: "Koomer Ridge / Chimney Top", waypoint: "Koomer Ridge Campground", tz: "America/New_York" },
+    { date: "2026-09-23", label: "Auxier Ridge", waypoint: "Auxier Ridge Trailhead", tz: "America/New_York" },
+    { date: "2026-09-24", label: "Bandy Creek / Leatherwood Ford", waypoint: "Bandy Creek Campground", tz: "America/New_York" },
+    { date: "2026-09-25", label: "Bandy Creek / East Rim", waypoint: "Bandy Creek Campground", tz: "America/New_York" },
+    { date: "2026-09-26", label: "Honey Creek", waypoint: "Honey Creek Trailhead", tz: "America/New_York" },
+    { date: "2026-09-27", label: "Blue Heron / Stearns", waypoint: "Blue Heron Mining Community", tz: "America/New_York" },
+  ],
+
   sunMoon: [
-    { date: "Tue 9/22", location: "Slade / Chimney Top", firstLight: "6:56", sunrise: "7:22", sunset: "7:33 PM", dark: "~7:59 PM", moon: "—" },
-    { date: "Wed 9/23", location: "Auxier Ridge", firstLight: "6:57", sunrise: "7:23", sunset: "7:32 PM", dark: "~7:58 PM", moon: "—" },
-    { date: "Thu 9/24", location: "Bandy Creek / East Rim", firstLight: "7:02", sunrise: "7:28", sunset: "7:34 PM", dark: "~8:00 PM", moon: "—" },
-    { date: "Fri 9/25", location: "Big South Fork", firstLight: "7:03", sunrise: "7:29", sunset: "7:32 PM", dark: "~7:58 PM", moon: "—" },
-    { date: "Sat 9/26", location: "Honey Creek", firstLight: "7:03", sunrise: "7:29", sunset: "7:31 PM", dark: "~7:57 PM", moon: "—" },
-    { date: "Sun 9/27", location: "Blue Heron / Stearns", firstLight: "7:04", sunrise: "7:30", sunset: "7:30 PM", dark: "~7:56 PM", moon: "—" },
+    { date: "Tue 9/22", location: "Koomer Ridge / Chimney Top", firstLight: "6:56", sunrise: "7:22", sunset: "7:31 PM", dark: "7:57 PM", moon: "83% — moonset 3:06 AM. Waxing gibbous." },
+    { date: "Wed 9/23", location: "Auxier Ridge", firstLight: "6:57", sunrise: "7:23", sunset: "7:29 PM", dark: "7:56 PM", moon: "90% — moonset 4:09 AM. ⚠️ <b>Gone two hours before the dark ridge walk starts.</b>" },
+    { date: "Thu 9/24", location: "Bandy Creek / Leatherwood Ford", firstLight: "7:02", sunrise: "7:28", sunset: "7:32 PM", dark: "7:58 PM", moon: "95% — moonset 5:18 AM" },
+    { date: "Fri 9/25", location: "Bandy Creek / East Rim", firstLight: "7:03", sunrise: "7:29", sunset: "7:31 PM", dark: "7:56 PM", moon: "98% — ~9° up at sunset, ~18° by 8:20. The rim walk-out is lit." },
+    { date: "Sat 9/26", location: "Honey Creek", firstLight: "7:04", sunrise: "7:29", sunset: "7:29 PM", dark: "7:55 PM", moon: "100% — <b>full moon</b>, rising about sunset" },
+    { date: "Sun 9/27", location: "Blue Heron / Stearns", firstLight: "7:04", sunrise: "7:30", sunset: "7:27 PM", dark: "7:53 PM", moon: "99% — moonset 8:32 AM. Still reads full." },
   ],
   sunMoonNote:
-    "Recomputed with the NOAA solar position algorithm for each day's actual coordinates, because the source file's Sept 24 sunset was <i>earlier</i> than Sept 22's despite moving 65 miles west — which cannot be right. These are sea-level times with standard refraction; a ridge or a gorge wall takes light away earlier. Moon phase not yet worked out — see Open Questions.",
+    "<b>Derived, not typed.</b> Every figure here now comes from <code>node tools/sun.mjs kentucky-2026</code> against each day's verified waypoint — NOAA solar position with refraction and horizon dip, moon rise/set to about ±4 minutes. That replaced a hand-recomputed table whose sunsets ran <b>1–3 minutes late every single day</b>. A gorge wall or a ridge still takes the light earlier than any of these numbers.<br><br><b>Moon: settled, and it changed the Wednesday risk read.</b> Waxing gibbous all week, <b>full on Sept 26</b> — computed by <code>tools/sun.mjs</code>, not looked up. Two consequences and they cut opposite ways. ⚠️ <b>Wednesday's 6:15 AM walk out Auxier Ridge is moonless</b> — the moon sets at 4:09 AM, two hours before you leave the car. Nothing overhead helps; the headlamp is the entire plan. ✅ <b>Every evening is moonlit</b> — during the Friday walk back from the unfenced East Rim the moon is 98% lit and 9–18° up in the east. Still carry the headlamp, but that walk is not through black woods.",
 
   weather: [
     { location: "Red River Gorge (Stanton KY)", elevation: "~1,200 ft", high: "75–77", low: "48–50", notes: "AccuWeather climate normals for Sept 22–27. The plan said 70–75°F highs — normals run slightly warmer, and last year ran 73–84°F." },
@@ -340,7 +366,7 @@ window.TRIP_DATA = {
 
   provisions: {
     summary:
-      "Five nights, one 48qt cooler, one resupply on Thursday. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving.",
+      "Five nights, one 48qt cooler, one resupply on Thursday. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving.<br><br><b>Four stops, in this order</b> — the groups below are sorted by which one they belong to, because <i>when</i> a thing gets bought is the only question that matters once the list exists. <b>1. Meijer, Sept 13</b> — everything shelf-stable, at Bridge Day quantities, one trip for both 2026 trips. <b>2. Meijer, the day you cook</b> — the chili and burrito ingredients, bought the day they go in the pot, not a week early. <b>3. Meijer, morning of Sept 22</b> — Zone 2, straight from the checkout into the cooler. <b>4. Kroger, Stanton KY, Thursday</b> — block ice and the rotisserie chicken.",
     coolerNote:
       "<b>Zone 1 is your ice</b> — cooked meals frozen flat in quart bags, which chill everything above them and then get eaten. <b>Zone 2 is the zone that ruins trips</b> (eggs, dairy, produce, raw meat): keep it small, eat it early. Zone 3 is shelf-stable and takes no cooler space at all. ⚠️ Climate normals for these dates run 75–77°F, warmer than the 70–75°F the meal plan assumed, which shortens the window before Thursday's resupply.",
     cooler: [
@@ -362,38 +388,65 @@ window.TRIP_DATA = {
         group: "Pre-mix into labeled bags at home",
         items: [
           "Oats ×2 — 2 packets · 25g milk powder · nuts · dried fruit · salt (K-B1 Wed, K-B5 Sun)",
-          "Hot chocolate — packets · 15g whole milk powder · pinch of salt. <b>For the dark Auxier Ridge start; the fat and sugar do more at 50°F than caffeine would.</b>",
+          "Hot chocolate — packets · 15g whole milk powder · pinch of salt. <b>For the dark Auxier Ridge start; the fat and sugar do more at 50°F than caffeine would.</b> ⚠️ <b>With one thermos this cannot happen on Wednesday</b> — the oats are already in it and the kitchen doctrine says the meal wins. Mix the bag anyway; it works any other morning, or in the mug at camp.",
         ],
       },
       {
-        group: "Buy at home",
+        group: "Stop 1 — Meijer, Sept 13, shelf-stable (buys Bridge Day too)",
+        note: "Sept 13. Everything in this group keeps until Oct 25, so buy the October quantity once and split it into two crates. <b>Bracketed numbers are Bridge Day's own Zone 3 figures</b>, taken from <code>appalachians-2026</code>, not estimated here. ⚠️ <b>Nuts: roasted, always.</b> Raw is the OAS trigger and off-the-shelf trail mix is usually raw almonds and cashews — read the bag, or buy roasted nuts and dried fruit separately and mix them yourself.",
         items: [
-          "Sub fixings for K-L1: sourdough, Genoa salami, provolone, pepperoncini, oil, oregano",
-          "Eggs, spinach, bell peppers, sourdough loaf, tortillas",
-          "Chicken pouch (7oz) · hard salami · aged cheddar · provolone · sun-dried tomato pesto",
-          "Trail mix 900g · bars ×8 · jerky 200g · waffles ×6 · dried mango 250g · almonds 250g",
-          "Honey mustard packets · dried figs · banana chips · cocoa",
-          "Olive oil squeeze bottle, hard cheese, crushed chips, starch pouches — the four things that turn a can into a meal",
+          "Instant oats packets — 4 here [a ~13-packet box covers October too] · whole milk powder 50g [250g]",
+          "Roasted pecans [200g] · roasted almonds 250g [500g] · dates · dried figs · banana chips · dried mango 250g [400g] · dried apricots [400g]",
+          "Trail mix 900g [1.5kg] — <b>check the label for raw nuts</b> · bars ×8 [×16] · jerky 200g [400g] · waffles ×6 [×10] · dark chocolate",
+          "Cocoa packets [×12] · peanut butter packets · honey packets · honey mustard packets",
+          "Chicken pouch 7oz ×1 (K-L2 Wednesday) [October: chicken ×3, salmon ×2]",
+          "Couscous · instant rice · chickpeas <b>pull-tab</b> · sun-dried tomatoes — <b>all four moved off the Kroger list.</b> Nothing shelf-stable belongs in a 45-minute resupply on a four-hour driving day.",
+          "Olive oil squeeze bottle · individual Fritos · tortillas · oregano · salt, pepper, garlic powder, paprika",
+          "Quart freezer bags · gallon bags · foil · <b>parchment</b> — Friday night's pressed wrap is parchment first, then foil",
         ],
       },
       {
-        group: "Resupply — Kroger, Stanton KY, Thursday",
-        note: "The only one this trip.",
+        group: "Stop 2 — Meijer, the day you cook",
+        note: "These two meals <i>are</i> the ice, so they have to be cooked, bagged and frozen flat before Sept 22 — which puts them outside the buy-now / buy-departure-morning split. ⚠️ <b>Buy the meat the day you actually cook it.</b> Ground beef and fresh chorizo keep 1–2 days in a fridge, so bought on the Sept 13 run and cooked on the 20th they spoil; bought Saturday and cooked Sunday they are frozen flat by Monday and the problem is gone. <b>Quantities are deliberately absent</b> — they live in MEALS-trip1-kentucky.md, which is not in this repo. Cook to your own portion rather than to a number invented here.",
+        items: [
+          "Ground beef, beans and chili fixings · cheddar (K-D1, Wednesday dinner)",
+          "Chorizo · potatoes · flour tortilla (K-B2, Thursday breakfast — built, foiled and frozen whole)",
+        ],
+      },
+      {
+        group: "Stop 3 — Meijer, morning of Sept 22, into the cooler",
+        note: "The zone that ruins trips, and the reason the final stop is the morning of departure rather than the night before: it goes from the checkout into the cooler and the cooler goes into the car. Only four meals happen before Thursday's resupply, and that is the entire reason five nights fit in one 48qt — so keep this list exactly this short.",
+        items: [
+          "Sub fixings for K-L1: sourdough roll · Genoa salami · provolone · pepperoncini",
+          "⚠️ <b>The K-L1 recipe carries a whole raw apple, and crisp raw fruit is the one OAS form still out.</b> Swap it for a ripe banana, fruit leather or dried fruit — all confirmed fine, and all already on the shelf-stable list above.",
+          "Eggs (half dozen) · spinach · bell peppers ×2 · sourdough loaf",
+          "Hard salami · aged cheddar · provolone",
+        ],
+      },
+      {
+        group: "Stop 4 — Kroger, Stanton KY, Thursday",
+        note: "The only one this trip, and now shorter than it was: the shelf-stable half moved to Meijer. What is left is cold, and cold is the one thing that cannot ride down from Ohio.",
         items: [
           "<b>1 BLOCK of ice</b> — not cubes",
           "<b>Rotisserie chicken</b> — covers K-D2 Thursday and K-D3 Friday. The correct move for one person.",
           "400g russet potatoes (<b>cook double Friday</b> — half is Saturday's breakfast) · 400g baby potatoes",
           "1× 12oz ribeye for Saturday · butter · garlic · thyme · balsamic · beef broth",
-          "Couscous · chickpeas (pull-tab) · feta · sun-dried tomatoes in oil · lemon",
+          "Feta · lemon",
           "Frozen green beans · frozen broccoli · red onion · bell peppers · salsa",
         ],
       },
       {
-        group: "Kit",
+        group: "Kit — and what is actually confirmed owned",
+        note: "⚠️ <b>The gear locker in <code>data/profile.js</code> confirms one burner, pot, pan, mug and spork — and nothing else on this list.</b> The long spoon, the spatula, the basin, the soap and the bandanas have ridden on both trips' kit lists without ever being marked owned. Open the drawer before Meijer, not at Koomer Ridge.",
         items: [
-          "<b>Wide-mouth thermos</b> — hot oats on the ridge Wednesday, hot couscous dinner at the Sunset Overlook Thursday. Two meals depend on it.",
-          "One burner, 2L pot with lid, 8–10\" pan, insulated mug, spork, long spoon, folding knife, spatula",
-          "48qt cooler, pre-chilled · wash basin · biodegradable soap · 2 bandanas",
+          "<b>Wide-mouth thermos</b> — <b>confirmed owned.</b> Hot oats on the ridge Wednesday, hot couscous dinner at the Sunset Overlook Thursday. Two meals depend on it.",
+          "One burner, 2L pot with lid, 8–10\" pan, insulated mug, spork — <b>confirmed owned</b>",
+          "<b>Long-handled spoon — not in the gear locker.</b> October calls it the single most important item on the Linville leg; here it is what gets oats out of the bottom of a thermos without wearing them.",
+          "<b>Thin silicone spatula — not in the gear locker</b>, and a spork fails on eggs. Three meals this trip are pan eggs.",
+          "<b>Fuel canisters — marked <code>need</code>.</b> October budgets 3 for eleven days, so 1 plus a spare covers five nights here; 4 now covers both trips. You are driving, so the no-fly rule does not apply — but confirm Meijer stocks the screw-on isobutane your burner takes, not just green propane bottles.",
+          "Wash basin · biodegradable soap · sponge · 2 bandanas (one pot wipe, one towel) — <b>none confirmed owned</b>",
+          "48qt cooler, pre-chilled · folding knife",
+          "<b>A second wide-mouth thermos — deliberately declined Sept 2026</b> (\"one, and staying at one\"). Re-opening it only because you will be standing in the aisle: with one flask, Wednesday's hot oats and Wednesday's hot chocolate compete and the drink loses. That is the trade you already accepted, not a mistake — but $20 ends it for this trip and for Hawksbill in October.",
           "Bear-aware food storage for Bandy Creek — sorted before dark Thursday",
         ],
       },
@@ -455,14 +508,17 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "✅ Koomer Ridge, Sept 22–23 — recreation.gov 0822210215-1, 2 nights, confirmed 9/1" },
-    { text: "✅ Bandy Creek, Sept 24–26 — recreation.gov 0895576747-1, 3 nights, confirmed 9/1" },
-    { text: "✅ Tunnel Ridge Road — confirmed OPEN by phone. The Bison Way fallback is dead." },
-    { text: "✅ Honey Creek — confirmed OPEN by phone." },
+    { text: "✅ Koomer Ridge, Sept 22–23 — recreation.gov 0822210215-1, 2 nights, confirmed 9/1", booked: true },
+    { text: "✅ Bandy Creek, Sept 24–26 — recreation.gov 0895576747-1, 3 nights, confirmed 9/1", booked: true },
+    { text: "✅ Tunnel Ridge Road — confirmed OPEN by phone. The Bison Way fallback is dead.", booked: true },
+    { text: "✅ Honey Creek — confirmed OPEN by phone.", booked: true },
+    { text: "✅ Miguel's Pizza — open 7:00 AM–9:45 PM. Thursday's 10:35 lunch confirmed safe.", booked: true },
+    { text: "✅ Red River Rockhouse — 12–9 PM, CLOSED Tue and Wed. Those are your only two Gorge nights, so it is off this trip. Question closed.", booked: true },
     { text: "Check fire ban status, both parks" },
-    { text: "Thu evening at Bandy Creek visitor center: ask about the Twin Arches forest road condition" },
-    { text: "Thu evening at Bandy Creek visitor center: ask about Honey Creek ladder condition and recent rain" },
-    { text: "Thu: check Saturday's forecast — do not do Honey Creek right after rain, be willing to swap with Friday" },
+    { text: "⚠️ No visitor center Thursday — you arrive after 5 PM ET. Divide Road and Honey Creek are field calls now." },
+    { text: "Divide Road / Twin Arches: drive it slow, turn around the moment it stops being maintained gravel" },
+    { text: "~Sept 12: first forecast that reaches Sept 22. ~Sept 16: first forecast that reaches Honey Creek Saturday." },
+    { text: "Sat: no Honey Creek after rain. Be willing to swap it with Friday." },
     { text: "Download offline Google Maps regions AND AllTrails/Gaia trail maps — before leaving home" },
     { text: "Load the Honey Creek GPX. Not optional." },
     { text: "Text the trip plan home, including Saturday's Honey Creek window" },
@@ -471,46 +527,44 @@ window.TRIP_DATA = {
 
   openQuestions: [
     {
-      question: "Friday now has a third option, and it may beat both of the originals.",
-      blocks: "Day 4",
-      detail:
-        "AllTrails lists a <b>Slave Falls + Twin Arches combined loop: 10.1 mi, 1,174 ft, one trailhead.</b> That's the same two destinations you already planned, connected on foot instead of by a 20-minute drive, landing exactly on the ~10 mi ceiling. Measured against your own stated criteria — crowd-averse, ~10 mi / 2,500 ft, dislikes fragmented driving — it beats the three-trailhead day on fragmentation and beats the Leatherwood Ford alternative on not being a different place entirely. Cost: you'd drop Litton/Slaven, which is the homestead-ruins hike. Worth ten minutes on the AllTrails page before Thursday.",
+      question: "Auxier Ridge: parking lot or trailhead? The two pins are 953 m apart.",
+      blocks: "Nothing — the Tunnel Ridge Road drive is unambiguous once you are on it. But it is a 5:45 AM start in the dark.",
+      detail: "The stored coordinate is <b>OSM way 225745556, the footway at the Tunnel Ridge Rd lot</b> — that is where you park. A Google Maps placement landed <b>953 m</b> away, which is roughly where the trail proper begins. For driving there the stored one is the useful pin, so it stays. Worth knowing the difference exists rather than discovering it in the dark. Stored: 37.828230, -83.677587. Placed: 37.820076, -83.680935."
     },
     {
-      question: "The meal plan schedules a 12-minute cook inside the lecture block.",
-      blocks: "Day 2",
-      detail:
-        "K-L2 is chicken quesadillas, three rounds in the pan, MED cleanup, at 12:05 Wednesday. The lecture runs 11:00–3:00. The meal file predates the lecture revision — it also still says to double snacks for \"the Auxier loop,\" which the lecture cut. Either build the quesadillas cold Tuesday night and eat them at the break, or move to a no-cook tortilla plate and save the quesadillas for Friday.",
+      question: "Twin Arches and Koomer Ridge: 634 m and 458 m between two placements each.",
+      blocks: "Nothing. Both are large sites and both pins are inside them.",
+      detail: "Twin Arches stored is OSM node 12269314919 (the one deliberately checked as <i>not</i> the same-named arch in Red River Gorge); the Google Maps placement is 634 m off, likely the parking area versus the trailhead. Koomer Ridge stored is Recreation.gov facility 10311270; the placement is 458 m off, which is about the length of the campground. Neither is wrong enough to act on, and the stored sources are the stronger ones, so both stay. Recorded so nobody re-discovers the gap and assumes it is an error."
     },
     {
-      question: "Gray's Arch: 3.8 miles or 6.5?",
-      blocks: "Day 3 — the day with no slack",
+      question: "Angel Falls: does the trail give you a clifftop overlook, a riverside rapid, or both?",
+      blocks: "Nothing — the hike happens either way",
       detail:
-        "The plan budgets 4 hours for ~6.5 mi. AllTrails puts the same named loop at 3.8 mi / 577 ft. If AllTrails is right you gain roughly 90 minutes on the heaviest day of the trip, which would take the pressure off the evening. If the plan is right, nothing changes. Ten minutes on the AllTrails page or the DBNF trail listing settles it.",
+        "AllTrails' curated description for Angel Falls Trail runs both together: a 180° panoramic vista reached through an aperture in the rock, <i>and</i> a continuation below the overlook arriving at boulders where the rapids run. The measured stats — <b>3.7 mi, 200 ft, Easy, 76 min moving</b> — say river-level, because 200 ft of gain over 3.7 miles is not a clifftop route. I have not resolved which the marked trail from Leatherwood Ford actually delivers and I am not going to guess. Ask at Bandy Creek, or just walk it and find out. Either answer is a good Thursday evening.",
     },
     {
-      question: "Honey Creek: 571 ft of gain or 820?",
-      blocks: "Day 5",
+      question: "Visitor center or Angel Falls? You cannot have both on Thursday.",
+      blocks: "Day 3 — decided, but reversible",
       detail:
-        "AllTrails says 4.6 mi / 820 ft, Hard, from 2,244 reviews. The plan says 5.5–6.0 mi / ~571 ft. Both sources independently say one hour per mile, so the 6-hour budget holds either way — but 820 ft over 4.6 miles is a materially different day than 571 over 6.",
+        "Bandy Creek Visitor Center is 9–5 ET. Stopping at Leatherwood Ford on the way in puts you at camp around 6:00, so you miss it. <b>Taken deliberately</b>, because the two things the plan wanted to ask a ranger are already decided: Divide Road is a drive-it-and-turn-around-if-rough call, and Honey Creek is off if it rains. If you would rather have the ranger's read on the forest road, flip it — camp first Thursday, and Angel Falls becomes a Saturday afternoon hike after Honey Creek. It is flat and 10 minutes from the campground, so it survives tired legs.",
     },
     {
-      question: "Which overlook faces which way?",
-      blocks: "Days 1 and 2",
+      question: "Wednesday afternoon: Creation Falls, or Silvermine Arch from the tent?",
+      blocks: "Day 2 — decided, but it's close",
       detail:
-        "Chimney Top Rock and Sky Bridge were assigned to sunset on the assumption that they're the two named short-walk viewpoints. <b>Aspect was never verified.</b> A sunset overlook that faces east is a wasted evening.",
-    },
-    {
-      question: "Moon phase for Sept 22–27 was never worked out.",
-      blocks: "Nothing critical",
-      detail:
-        "Stargazing is on the declined list so this may not matter at all — but the 5:45 AM Wednesday walk out Auxier Ridge in the dark is easier or harder depending on it, and it's the one thing the conditions table can't answer yet.",
+        "<b>Creation Falls is scheduled.</b> It is the better destination — the only arch in the Gorge that spans water, 4.8★, and AllTrails tags the trail with a <i>beach</i>, meaning the creek shelf you would sit on. The cost is 35 minutes of driving each way for 42 minutes of walking.<br><br><b>Silvermine Arch</b> is the alternative and it is a genuinely close call: <b>3.0 mi out-and-back, 393 ft, 76 min, 4.6★</b>, arch plus rock shelter, and it leaves <i>straight from Koomer Ridge</i> — zero driving, more walking. Better ratio, lesser destination. The tiebreaker was that 35 minutes through the Gorge after four hours of laptop in a tent reads as decompression rather than commuting.",
     },
     {
       question: "Print the confirmations before you leave.",
       blocks: "Nothing — both sites are confirmed",
       detail:
-        "Koomer Ridge <b>0822210215-1</b> (2 nights) and Bandy Creek <b>0895576747-1</b> (3 nights), both booked through recreation.gov on Sept 1. The numbers are on this page now, but cell service is limited to none at both campgrounds — carry paper too.",
+        "Koomer Ridge <b>0822210215-1</b> (2 nights) and Bandy Creek <b>0895576747-1</b> (3 nights), both booked through recreation.gov on Sept 1. Cell service is limited to none at both campgrounds — carry paper.",
+    },
+    {
+      question: "The forecast does not reach your dates yet. Two dates to check.",
+      blocks: "Day 5 — Honey Creek is the weather-dependent one",
+      detail:
+        "The 10-day forecast currently reaches about Sept 16. <b>First real look at Sept 22 is around Sept 12; first look at Saturday Sept 26 is around Sept 16.</b> That second one is the load-bearing date — the rule is no Honey Creek after rain, and a rule you cannot act on is not a rule. Until then the page carries climate normals (75–77°F highs), not a forecast.",
     },
   ],
 
@@ -520,15 +574,15 @@ window.TRIP_DATA = {
       items: [
         { name: "Koomer Ridge Campground", maps: "Koomer Ridge Campground Slade KY", note: "Nights 1–2. Walk-in tent site." },
         { name: "Nada Tunnel", maps: "Nada Tunnel Red River Gorge KY", note: "One lane, 900 ft, hand-cut 1910–11" },
-        { name: "Gladie Learning Center", maps: "Gladie Cultural Environmental Learning Center Stanton KY", note: "Building closed Tuesdays. Grounds open." },
         { name: "Princess Arch Trailhead", maps: "Princess Arch Trailhead Red River Gorge", note: "The KY 715 overlook cluster" },
         { name: "Auxier Ridge Trailhead", maps: "Auxier Ridge Trailhead Red River Gorge", note: "Via Tunnel Ridge Rd. Wednesday's dark start." },
         { name: "Gray's Arch Picnic Area", maps: "Grays Arch Picnic Area Red River Gorge", note: "Thursday morning" },
-        { name: "Chimney Top Rock", maps: "Chimney Top Rock Red River Gorge", note: "Tuesday sunset — aspect unverified" },
-        { name: "Sky Bridge", maps: "Sky Bridge Red River Gorge KY", note: "Walk the top AND the lower trail" },
+        { name: "Chimney Top Rock", maps: "Chimney Top Rock Red River Gorge", note: "✅ Tuesday sunset. Faces W/NW — confirmed." },
+        { name: "Silvermine Arch Trailhead", maps: "Silvermine Arch Trailhead Koomer Ridge KY", note: "⭐ Leaves from Koomer Ridge. 3.0 mi out-and-back, arch + rock shelter. Unscheduled — the standby if plans move." },
+        { name: "Sky Bridge", maps: "Sky Bridge Red River Gorge KY", note: "Cut — faces E/SE, wrong light for an evening" },
         { name: "Rock Bridge Recreation Area", maps: "Rock Bridge Recreation Area Red River Gorge", note: "The only arch spanning water" },
-        { name: "Miguel's Pizza", maps: "Miguels Pizza Slade KY", note: "Build your own, 45 toppings" },
-        { name: "Red River Rockhouse", maps: "Red River Rockhouse Campton KY", note: "⭐ The cheeseburger. Not currently scheduled — the best meal you'd be skipping." },
+        { name: "Miguel's Pizza", maps: "Miguels Pizza Slade KY", note: "✅ 7:00 AM–9:45 PM. Build your own, 45 toppings." },
+        { name: "Red River Rockhouse", maps: "Red River Rockhouse Campton KY", note: "⚠️ 12–9 PM, CLOSED Tue + Wed — your only two Gorge nights. Off this trip. Next time." },
         { name: "Sky Bridge Station", maps: "Sky Bridge Station Pine Ridge KY", note: "Gourmet hot dogs. Live music Fri/Sat." },
         { name: "The Brick", maps: "The Brick Pine Ridge KY", note: "Strawberry cheesecake, across the street" },
         { name: "Kroger Stanton", maps: "Kroger Stanton Kentucky", note: "The only resupply. BLOCK ice + rotisserie chicken." },
@@ -539,13 +593,13 @@ window.TRIP_DATA = {
       items: [
         { name: "Bandy Creek Campground", maps: "Bandy Creek Campground Oneida TN", note: "Nights 3–5. Free hot showers. Bear country." },
         { name: "Bandy Creek Visitor Center", maps: "Bandy Creek Visitor Center Big South Fork", note: "9–5 ET. Ask about Honey Creek and the Twin Arches road." },
-        { name: "East Rim Trailhead", maps: "East Rim Trailhead Big South Fork", note: "Sunset Overlook. No railings." },
+        { name: "East Rim Trailhead", maps: "East Rim Trailhead Big South Fork", note: "Sunset Overlook — <b>Friday</b> now, not Thursday. No railings." },
         { name: "Twin Arches Trailhead", maps: "Twin Arches Trailhead Big South Fork", note: "5 unpaved miles off Divide Road" },
         { name: "Sawmill Trailhead", maps: "Sawmill Trailhead Big South Fork", note: "Slave Falls + Needle Arch" },
-        { name: "Litton / Slaven Farm Loop", maps: "Litton Slaven Farm Loop Big South Fork", note: "Friday afternoon" },
+        { name: "John Litton Farm Loop", maps: "John Litton Farm Loop Big South Fork", note: "Cut from Friday. Trailhead is at Bandy Creek if the day opens up." },
         { name: "Honey Creek Trailhead", maps: "Honey Creek Trailhead Big South Fork", note: "Small lot ~1 mi before the road ends" },
         { name: "Honey Creek Overlook", maps: "Honey Creek Overlook Big South Fork", note: "Drive the last mile up" },
-        { name: "Leatherwood Ford", maps: "Leatherwood Ford Big South Fork", note: "The single-trailhead Friday alternative" },
+        { name: "⭐ Leatherwood Ford / Angel Falls TH", maps: "Leatherwood Ford Big South Fork", note: "Thursday, on the way in. TN 297, 15 min short of camp. 3.7 mi flat river walk to the rapids." },
       ],
     },
     {
@@ -554,7 +608,7 @@ window.TRIP_DATA = {
         { name: "Blue Heron Mining Community", maps: "Blue Heron Mining Community Stearns KY", note: "Free, self-guided ghost structures" },
         { name: "Devil's Jump Overlook", maps: "Devils Jump Overlook Big South Fork", note: "0.1 mi, paved" },
         { name: "The Whistle Stop", maps: "The Whistle Stop Stearns KY", note: "Opens 11:00 Sunday. Fried green tomatoes." },
-        { name: "Yahoo Falls", maps: "Yahoo Falls Kentucky", note: "Optional 40-min detour. No barriers up top." },
+        { name: "Yahoo Falls", maps: "Yahoo Falls Kentucky", note: "Declined — 40 min of driving for a 30 min walk on an 8-hour driving day." },
       ],
     },
   ],
@@ -564,6 +618,16 @@ window.TRIP_DATA = {
     "Two Google Maps regions: <b>Slade–Stanton–Campton</b> and <b>Oneida–Stearns–Jamestown</b>. ⚠️ Google Maps offline does not include trails — download AllTrails or Gaia separately, and the <b>Honey Creek GPX is not optional</b>. Cell service is limited to none at both campgrounds.",
 
   notes: [
+    {
+      heading: "The shape every day now has",
+      body:
+        "Two rules were applied to the whole itinerary and they reorganised three days.<br><br><b>One: hike out, sit up to an hour, hike back.</b> The destination has to be worth sitting at — a lookout, a river shelf, a waterfall, a rock shelter. Measured against that, the plan was already half right: Auxier Ridge at dawn, Chimney Top at sunset and the East Rim overlook are all textbook. Friday was the opposite — 12.3 miles across three trailheads with nowhere to stop.<br><br><b>Two: one outing per day.</b> No returning to camp mid-day unless the reason earns it, and a trailhead you can walk to from the tent doesn't count as a return. Only two days broke this. Wednesday's mid-day return is the lecture, which is not negotiable. Thursday's was real: arrive at an unfamiliar bear-country campground, set up, leave again for an unfenced clifftop, walk back in the dark on night one.<br><br>The Thursday fix turned out to be geography nobody had checked. AllTrails' directions for Angel Falls read <i>\"from Oneida, take TN 297 west 10 miles to Leatherwood Ford\"</i> — that is the road you drive in on, and Leatherwood Ford sits fifteen minutes short of Bandy Creek. So Angel Falls is not an evening trip out from camp. It is a stop on the way in, and the rim sunset moves to Friday for the price of two minutes of daylight.",
+    },
+    {
+      heading: "What came off, and what it cost",
+      body:
+        "<b>Sky Bridge (Wed).</b> A third stop and a fourth drive leg on a day with a 5:45 wake and four hours of laptop in it. It also faces E/SE, so the evening light was never going to work. Wednesday afternoon is now one hike and a full hour on the creek shelf at Creation Falls.<br><br><b>John Litton Farm Loop (Fri).</b> The expensive one, and worth being honest about. It <i>is</i> in AllTrails, under <i>John Litton Farm Loop</i> — 5.7 mi, 465 ft, 2h 07m moving, 4.6★, with caves, Fall Branch Falls and the farmstead on it, and a trailhead at Bandy Creek that costs no driving at all. The page previously said it wasn't listed and budgeted 3h 15m, an hour heavy. It came off anyway: 11+ miles the day before a six-hour rope-and-ladder scramble, with none of those miles ending anywhere you'd sit. You traded a good loop for an evening on the rim.<br><br><b>Yahoo Falls (Sun).</b> Declined outright — 40 minutes of driving for a 30-minute walk on a day that is already eight hours of highway.<br><br><b>Red River Rockhouse.</b> Not a cut, a closure: 12–9 PM, shut Tuesday and Wednesday, which are the only two nights in the Gorge. There is no version of this trip that reaches it. The open question is closed rather than left hanging.",
+    },
     {
       heading: "The Wednesday lecture — now confirmed on both trips",
       body:
@@ -575,14 +639,14 @@ window.TRIP_DATA = {
         "Koomer Ridge is a forested campground and Starlink needs sky view. Test it Tuesday afternoon on arrival — that gives one full day of buffer, which is thinner than October's three. Fallbacks in order: an open spot elsewhere in the campground, the Gladie or Slade area, or Miguel's / Sky Bridge Station, which have wifi. If the canopy wins, the lecture happens somewhere with a roof and Wednesday morning's plan is unaffected either way.",
     },
     {
-      heading: "Thursday is the day that breaks, not Friday",
+      heading: "Thursday was the day that broke. Then Friday. Both are fixed.",
       body:
-        "The source file names Friday as the uncertain day and gives Thursday no slack line at all. By the numbers Thursday is the heavier one: 14h 35m door to tent, 9.1 miles on foot, 4h 20m driving including the 3h 15m transfer, and a first arrival at an unfamiliar bear-country campground that gets set up and immediately abandoned for a sunset hike that returns after dark. Friday has two hours spare and three trailheads you could trim. If Gray's Arch turns out to be 3.8 miles rather than 6.5, Thursday solves itself.",
+        "The source file called Friday the uncertain day and gave Thursday no slack line at all. By the numbers Thursday was the heavier one — 14h 35m door to tent, nine miles on foot, and a first arrival at a bear-country campground that got set up and immediately abandoned for a sunset hike returning in the dark.<br><br>The fix turned out to be a data problem, not a scheduling one. <b>Gray's Arch is five different routes.</b> AllTrails carries a 2.5 mi out-and-back, a 3.8 mi Pinch Em Tight loop, a 4.8 mi long loop, a 6.1 mi Rough/Martin's Fork loop and a 7.8 mi Rough Trail loop. The plan's \"~6.5 mi\" had landed on one of the long ones without anyone choosing it. Taking the 2.5 mi out-and-back — which still reaches the arch, and still requires the Rough Trail turn most people miss — cuts 1h 45m and four miles, moves wake-up from 6:00 to 7:30, and gets you to Bandy Creek in daylight.<br><br>Thursday is now about twelve hours door to tent, ends at 7:30 PM instead of 8:20, and no longer contains a second outing at all.<br><br><b>Friday inherited the problem and has now been fixed too.</b> Slave Falls measured 4.4 mi against an estimated 3.0, and Twin Arches turned out to be a <b>1.1 mi short loop</b> rather than the 2 mi the plan carried — so the day was 11.2 miles across three trailheads, not the 12.3 first calculated. Either way it was over the ceiling the day before Honey Creek. Cutting John Litton drops it to <b>8.1 miles across two trailheads</b>, with a two-and-three-quarter-hour hole in the middle for a shower and an early dinner, and the rim at sunset on the back end. Camp sits between Divide Road and the East Rim, so the mid-day stop costs about fifteen minutes of driving rather than a round trip — which is why it survives the one-outing rule.",
     },
     {
-      heading: "Two sources, both shown",
+      heading: "Everything is now cross-checked, and two things moved",
       body:
-        "Nine of nineteen hike stats in the source file were flagged as unverified estimates. Cross-checking against AllTrails resolved some and opened others: Auxier broadly agrees, Gray's Arch disagrees by nearly half, and Honey Creek has 44% more climb over a mile less distance. AllTrails is crowd-sourced GPS from recorded hikes — good at distance and gain, bad at agency-official routing. Where they disagree, both are printed rather than picked. The one thing both sources agree on is Honey Creek's hour-per-mile pace.",
+        "Nine of nineteen stats in the source file were flagged as unverified estimates. All of them have now been checked against AllTrails and the two that mattered both moved. <b>Gray's Arch</b> was never a single trail — five routes share the name and the plan had accidentally budgeted four hours for one of the longest. <b>Honey Creek's elevation gain is 820 ft, not 571</b> — confirmed, and over 4.6 miles rather than the 5.5–6.0 the plan assumed, which makes it a steeper day than it read on paper. Both sources still independently say an hour per mile, so the six-hour budget stands.<br><br>Smaller corrections: Slave Falls is 4.4 mi not 3.0; the Twin Arches full loop is 5.1 mi against the 2 mi spur in the plan; Sunset Overlook is 51 minutes of walking, so most of that block is sitting on the rim. Everything on Days 1 and 2 confirmed within a tenth of a mile.<br><br>And the aspect question is closed: <b>Chimney Top faces west/northwest and is the sunset spot; Sky Bridge faces east/southeast and is a sunrise one.</b> Sky Bridge stays on Wednesday evening because walking over the top and then underneath is the point, but it will not give you the sunset the plan implied.",
     },
     {
       heading: "Honey Creek on a Saturday is deliberate",
@@ -602,18 +666,19 @@ window.TRIP_DATA = {
     {
       heading: "Big South Fork food is thin, and that's not a research failure",
       body:
-        "Oneida and Jamestown are chains. Bandy Creek has potable water and free hot showers, which is exactly why Saturday's ribeye dinner is scheduled there — high cleanup is only allowed where there's water. Fayetteville does the opposite job in October, eating five restaurant slots in three days. Here, the good meals are front-loaded in the Gorge: Sky Bridge Station and The Brick on Tuesday, Miguel's on Thursday. <b>Red River Rockhouse is the notable omission</b> — local sources call it the best food at the Red and the cheeseburger the best meal available, and the current schedule never reaches it.",
+        "Oneida and Jamestown are chains. Bandy Creek has potable water and free hot showers, which is exactly why Saturday's ribeye dinner is scheduled there — high cleanup is only allowed where there's water. Fayetteville does the opposite job in October, eating five restaurant slots in three days. Here, the good meals are front-loaded in the Gorge: Sky Bridge Station and The Brick on Tuesday, Miguel's on Thursday (✅ open 7:00 AM–9:45 PM, so the 10:35 arrival is safe).<br><br><b>Red River Rockhouse is settled and the answer is no.</b> Local sources call it the best food at the Red — but it runs 12–9 PM and closes Tuesday and Wednesday, which are precisely the two nights you are in the Gorge. Thursday you are on the road south by 12:20. Reaching it would cost the resupply and an hour of the transfer drive for a cheeseburger. It goes on the next-time list, not this one.",
     },
   ],
 
   waypoints: [
-    { name: "Koomer Ridge Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "1–2", notes: "Walk-in tent site" },
-    { name: "Auxier Ridge Trailhead", lat: null, lng: null, verified: false, icon: "🌄", days: "2", notes: "Via Tunnel Ridge Rd" },
-    { name: "Gray's Arch Picnic Area", lat: null, lng: null, verified: false, icon: "🥾", days: "3", notes: "" },
-    { name: "Bandy Creek Campground", lat: null, lng: null, verified: false, icon: "⛺", days: "3–5", notes: "Bear country" },
-    { name: "Twin Arches Trailhead", lat: null, lng: null, verified: false, icon: "🪨", days: "4", notes: "5 unpaved miles" },
-    { name: "Honey Creek Trailhead", lat: null, lng: null, verified: false, icon: "🪜", days: "5", notes: "Small lot ~1 mi before road end" },
-    { name: "Blue Heron Mining Community", lat: null, lng: null, verified: false, icon: "🏚️", days: "6", notes: "" },
+    { name: "Koomer Ridge Campground", lat: 37.784032, lng: -83.632634, verified: true, icon: "⛺", days: "1–2", notes: "Walk-in tent site", source: "Recreation.gov facility 10311270 (RIDB bulk export)" },
+    { name: "Auxier Ridge Trailhead", lat: 37.828230, lng: -83.677587, verified: true, icon: "🌄", days: "2", notes: "Via Tunnel Ridge Rd", source: "OSM way 225745556, footway at the Tunnel Ridge Rd lot" },
+    { name: "Gray's Arch Picnic Area", lat: 37.807934, lng: -83.657265, verified: true, icon: "🥾", days: "3", notes: "", source: "Checked on satellite imagery; Tunnel Ridge Road parking area. Independently re-placed from Google Maps Sept 2026 to <b>10 m</b> — corroborated." },
+    { name: "Leatherwood Ford / Angel Falls TH", lat: 36.476828, lng: -84.667818, verified: true, icon: "🏞️", days: "3", notes: "On TN 297, ~15 min short of camp — Thursday's stop on the drive in", source: "Google Maps, placed via mapbench.html (Colin, Sept 2026)" },
+    { name: "Bandy Creek Campground", lat: 36.488329, lng: -84.697519, verified: true, icon: "⛺", days: "3–5", notes: "Bear country", source: "Recreation.gov facility 232506, agreeing with OSM node 13121679831 to 36 m, and with a Google Maps placement Sept 2026 to <b>65 m</b> — three sources inside the campground." },
+    { name: "Twin Arches Trailhead", lat: 36.541700, lng: -84.735700, verified: true, icon: "🪨", days: "4", notes: "5 unpaved miles", source: "OSM node 12269314919, Big South Fork — not the same-named arch in Red River Gorge" },
+    { name: "Honey Creek Trailhead", lat: 36.421268, lng: -84.651813, verified: true, icon: "🪜", days: "5", notes: "Small lot ~1 mi before road end", source: "Checked on satellite imagery; matches OSM node 3373114451, amenity=parking, to 7 m. Independently re-placed from Google Maps Sept 2026 to <b>3 m</b> — corroborated twice." },
+    { name: "Blue Heron Mining Community", lat: 36.669947, lng: -84.547655, verified: true, icon: "🏚️", days: "6", notes: "", source: "Google Maps, confirmed twice by Colin Sept 2026 — supersedes Recreation.gov facility 232505, which pinned a point 2.7 km away" },
   ],
   map: { center: [37.0, -84.2], zoom: 8 },
 };

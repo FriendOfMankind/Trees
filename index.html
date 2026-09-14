@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
 <link rel="stylesheet" href="css/base.css" />
 <link rel="stylesheet" href="css/hub.css" />
+<link rel="stylesheet" href="css/print.css" media="print" />
 </head>
 <body>
 
@@ -23,7 +24,10 @@
   </div>
   <nav class="tabs" id="tabs" aria-label="Sections">
     <button class="tab-btn active" data-tab="trips">Trips</button>
+    <button class="tab-btn" data-tab="agenda">Agenda</button>
+    <button class="tab-btn" data-tab="calendar">Calendar</button>
     <button class="tab-btn" data-tab="map">Map</button>
+    <button class="tab-btn" data-tab="kitchen">Camp Kitchen</button>
     <button class="tab-btn" data-tab="gear">Gear Locker</button>
     <button class="tab-btn" data-tab="playbook">Playbook</button>
   </nav>
@@ -33,28 +37,43 @@
   <section id="panel-trips" class="panel active">
     <h2 class="section-title">Trips</h2>
     <p class="section-sub">Pinned first, then whatever's closest to real. The <b>Next</b> line on each card is the single thing standing between it and being booked.</p>
+    <div class="search-row">
+      <input type="search" id="trip-search" class="search-box" autocomplete="off" spellcheck="false"
+             placeholder="Search trips — name, region, tag, or why (press /)"
+             aria-label="Search trips" />
+      <span class="search-count" id="search-count" aria-live="polite"></span>
+    </div>
     <div class="filter-bar" id="filter-bar"></div>
     <div class="trip-grid" id="trip-grid"></div>
   </section>
 
+  <section id="panel-agenda" class="panel"></section>
+
   <section id="panel-map" class="panel">
     <h2 class="section-title">Where It All Is</h2>
-    <p class="section-sub">Region-level pins for orientation only. Navigation-grade coordinates live on each trip's own map, where the verified flag applies.</p>
+    <p class="section-sub">Region-level pins for orientation only. Navigation-grade coordinates live on each trip's own map, where the verified flag applies. Missing pins get fixed on the <a href="mapbench.html">Map Bench</a>.</p>
     <div class="map-legend" id="map-legend"></div>
     <div id="hub-map-wrap"><div id="map"></div></div>
   </section>
 
+  <section id="panel-calendar" class="panel"></section>
+  <section id="panel-kitchen" class="panel"></section>
   <section id="panel-gear" class="panel"></section>
   <section id="panel-playbook" class="panel"></section>
 </main>
 
 <footer class="site-footer">
-  <p>Static site, no build step. Trips live in <code>data/trips.js</code>; each plan is a folder under <code>trips/</code>. See <code>docs/TRIP_SPEC.md</code> to add one.</p>
+  <p>Static site, no build step. Trips live in <code>data/trips.js</code>, meals in <code>data/meals.js</code>; each plan is a folder under <code>trips/</code>. See <code>docs/TRIP_SPEC.md</code> to add one.</p>
 </footer>
 
 <script src="vendor/leaflet/leaflet.js"></script>
 <script src="js/themes.js"></script>
+<script src="js/derive.js"></script>
+<script src="js/exports.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/offline.js"></script>
 <script src="data/profile.js"></script>
+<script src="data/meals.js"></script>
 <script src="data/trips.js"></script>
 <script src="js/hub.js"></script>
 </body>
