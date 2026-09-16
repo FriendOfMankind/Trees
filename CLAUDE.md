@@ -131,6 +131,53 @@ docs/ROADMAP.md       what to build next, and what not to
 
 Context a new session needs, so it isn't re-derived from scratch.
 
+**Kentucky leaves Sept 22 2026 — the nearest thing on the board.** Shopping
+and the camp kitchen were worked through Sept 13–16. What a new session needs:
+
+- **The gear locker was wrong and is now honest.** The camp kitchen category
+  had the pot, pan, lid, thermos, cooler and folding knife as `own`, inherited
+  from the Maui packing list rather than from anyone checking a cupboard. Both
+  2026 meal plans were built on that. Colin confirmed on Sept 16 that they are
+  all purchases. **The burner IS owned** — that one was checked, because 13 of
+  Kentucky's 18 slots need a flame. ⚠️ **He then went shopping and did not
+  itemise what he came back with, so the `need` rows are stale in the
+  optimistic direction. Ask, item by item, before trusting them.** Specs that
+  matter: 48 qt cooler (the whole cooler doctrine is sized to it), wide-mouth
+  thermos 500 ml+ (narrow flasks cannot be loaded or eaten from), 2 L pot
+  **with** lid.
+- **Shopping is two runs plus a cook errand**, now recorded in `PRINCIPLES`:
+  a preliminary shop well ahead for everything shelf-stable, a final shop the
+  morning of departure for perishables, and the cook-and-freeze ingredients
+  timed to the day they are cooked. Provisions lists are sorted by *which
+  stop*, not by food group.
+- **The frozen-flat meals are not optional and are not made yet.** Wednesday's
+  chili and Thursday's burrito *are* the Zone 1 ice. They must be cooked,
+  bagged flat and frozen before Sept 22 or the five-nights-one-cooler
+  structure collapses. The plan on the page is to cook them the weekend of the
+  19th–20th with the raw meat frozen on purchase; cooking them alongside a
+  home meal-prep session was proposed as better and never confirmed.
+- **A method for `thermos-couscous-dinner` was worked out in chat and
+  deliberately not committed.** `meals.js` has no quantities for it and says
+  so; the sequence reasoned out (preheat the flask, feta and lemon in at the
+  far end, err dry on water) is reconstruction, not transcription. Offer it
+  before writing it in.
+
+**Repo hygiene, unfinished.** Three `claude/*` branches and no `main`; the
+default branch is `claude/build-this-9gnkxf`, which GitHub Pages appears to
+serve — so the live site lags whatever has not been merged into it. PR #2 is
+merged. **PR #3 points backwards** (head = the default branch, base = the
+already-contained `claude/travel-hub-templates-haoorn`) and should be closed.
+`claude/travel-hub-templates-haoorn` is fully merged and safe to delete, and
+renaming the default branch to `main` is the fix that stops new sessions
+stacking `claude/*` branches on `claude/*` branches.
+
+**Known-stale content the validator already reports.** Bridge Day still serves
+three dishes rejected on the Menu Bench — white chicken chili, hummus cups and
+the straight-from-the-pouch lunch — and has five meal slots that say only
+"made"/"bought". Frozen and blended fruit appear to be fine for Colin's OAS
+(he buys it routinely) but that is **not** recorded in `CONSTRAINTS`; ask and
+write it down rather than inferring it.
+
 **The horizon does the deciding.** Colin graduates May 8 2027 and starts
 full-time work at the end of that summer. Every trip is therefore ranked by
 one question: *how much harder does this get on two weeks of PTO?* Alaska and
