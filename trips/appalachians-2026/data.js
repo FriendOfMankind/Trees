@@ -494,7 +494,7 @@ window.TRIP_DATA = {
 
   provisions: {
     summary:
-      "Eleven days, one 48qt cooler, one mid-trip resupply. It cannot stay cold the whole way and it does not need to. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving. Restaurant slots — Tudor's, Secret Sandwich Society, Pies &amp; Pints, the Bridge Day chili cook-off, The Falls Landing — are handled on the day cards, not here.",
+      "Eleven days, one 48qt cooler, one mid-trip resupply. It cannot stay cold the whole way and it does not need to. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving. Restaurant slots — Tudor's, Secret Sandwich Society, Pies &amp; Pints, the Bridge Day chili cook-off, The Falls Landing — are handled on the day cards, not here.<br><br><b>Five stops, in this order.</b> <b>1. Meijer, Sept 13</b> — the whole Zone 3 crate, bought in September alongside Kentucky's because none of it cares about five weeks. <b>2. Meijer, early October</b> — the freeze-flat ingredients, bought the day they get cooked. <b>3. Meijer, morning of Oct 15</b> — Zone 2, checkout to cooler to car. <b>4. Fayetteville, Oct 16</b> — one block of ice. <b>5. Brevard, Oct 20</b> — the only real resupply, and the last cold of the trip.",
     coolerNote:
       "The structural problem of this trip in three rows. <b>The breakfast burrito is the calibration item:</b> it has to survive nine days frozen and be edible on Oct 22, so freeze it hardest and bury it under the water bottles. Frozen 1L bottles do double duty — coolant on the way down, and drinking water exactly when you arrive somewhere with none.",
     cooler: [
@@ -506,8 +506,8 @@ window.TRIP_DATA = {
       "Four slots decide whether you actually eat on the hard leg, and all four collapse to one primitive — <b>boil water, pour into a labeled bag, eat from the bag, pack it out.</b> <b>O-D4</b> (Thu 7:30 PM, dark, tired, no water) · <b>O-B7</b> (post-Hawksbill hot oats, pot never touches food) · <b>O-D5</b> (same format, different flavour, so night two doesn't taste like night one) · <b>O-L7</b> (zero cookware). Mix the five bags at your kitchen table in October and the hard leg is solved before you leave Ohio.",
     lists: [
       {
-        group: "Freeze flat at home",
-        note: "This is your ice. You are not choosing between carrying ice and carrying food.",
+        group: "Stop 2 — Meijer, early October, then cook and freeze",
+        note: "This is your ice. You are not choosing between carrying ice and carrying food. ⚠️ <b>Buy the meat the day you cook it, not on the September run</b> — a frozen-flat ragù keeps five weeks happily, raw ground pork in a fridge does not keep five days. Cook, bag, freeze flat, then forget about it until Oct 15.",
         items: [
           "Beef and pork ragù — 500 ml quart bag, frozen flat (O-D1, Sun 10/18)",
           "White chicken chili — 400 ml quart bag, thinnest so it thaws first (O-D2, Mon 10/19)",
@@ -516,7 +516,7 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Pre-mix into labeled bags at home",
+        group: "Stop 1 (the dry half) — pre-mix into labeled bags at home",
         note: "The work that makes the no-water leg survivable. Do it at the kitchen table, not at 35°F in the dark.",
         items: [
           "Oats ×5 — 2 packets · 25g milk powder · 30g nuts · 30g dried fruit · salt",
@@ -527,7 +527,8 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Zone 3 — shelf-stable, trunk crate, no cooler space",
+        group: "Stop 1 — Meijer, Sept 13, Zone 3 trunk crate",
+        note: "<b>Bought in September on the same run as Kentucky's shelf-stable list</b>, because nothing here is harmed by five weeks in a crate and one big shop beats two medium ones. Kentucky borrows from this crate and refills it — buy the October number once, split it into two boxes, label them.",
         items: [
           "Maple &amp; brown sugar oatmeal, big box (~13 packets) · whole milk powder 250g",
           "Peanut butter jar + 6 single-serve PB packets · pecans 200g · apricots 400g · dried mango 400g",
@@ -545,20 +546,21 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Zone 2 — buy Oct 15 morning",
-        note: "The zone that ruins trips. Keep it small, eat it early.",
+        group: "Stop 3 — Meijer, morning of Oct 15, into the cooler",
+        note: "The zone that ruins trips, and the last stop before the car. Checkout to cooler to trunk — which is the whole reason it is the morning of departure and not the night before. Keep it small, eat it early.",
         items: [
           "Ciabatta roll, Genoa salami, capicola, provolone, olive salad — <b>build the Bridge Day muffuletta on Oct 16 night</b>",
-          "Eggs (half dozen) · spinach · bell peppers ×2 · sourdough loaf · sub fixings for O-L1 · 2 apples",
+          "Eggs (half dozen) · spinach · bell peppers ×2 · sourdough loaf · sub fixings for O-L1",
+          "⚠️ <b>The 2 apples are gone.</b> O-L1 and O-L3 both carry a whole raw apple and crisp raw fruit is the one OAS form still out. Swap for ripe bananas, fruit leather or dried fruit — the dried fruit is already in the September crate.",
         ],
       },
       {
-        group: "Buy in Fayetteville — Oct 16",
+        group: "Stop 4 — Fayetteville, Oct 16",
         note: "Fayetteville feeds you. That is the whole list.",
         items: ["1 block of ice"],
       },
       {
-        group: "Resupply — Brevard NC, Tuesday Oct 20",
+        group: "Stop 5 — Brevard NC, Tuesday Oct 20",
         note: "The only real resupply of the trip and the last cold you get.",
         items: [
           "<b>1 block of ice</b> — the last cold of the trip",
