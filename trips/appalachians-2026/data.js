@@ -120,7 +120,7 @@ window.TRIP_DATA = {
       ],
       meals: { b: "made — <b>loaded potato scramble</b>: potato flakes stirred into boiling water until thick, milk powder, butter, 2 eggs stirred in over low heat until set, cheddar, bacon bits. One pot (~820 kcal)", l: "bought — Secret Sandwich Society", d: "bought — Pies &amp; Pints, or Arrowhead. <b>Tonight: build tomorrow’s Bridge Day muffuletta and press it under the cooler lid.</b>" },
       highlights:
-        "Nuttallburg is the best ruin on either 2026 trip: a stabilized 90-acre historic district with a conveyor running down the hillside above the treetops, and a Henry Ford vertical-integration story attached to it.",
+        "Nuttallburg is the best-preserved ruin on the trip: a stabilized 90-acre historic district with a conveyor running down the hillside above the treetops, and a Henry Ford vertical-integration story attached to it. The climb to the headhouse is what makes it more than a walk-by. For raw and unrestored, the Blevins-farm kind, the pick is <b>Kaymoor on Day 4</b> (Sept 28 ruins check).",
       warnings:
         "<b>Keeneys Creek Road is the variable.</b> Some sources recommend high clearance and you have 5.9 inches. Ask at Canyon Rim on Day 1. <b>If it's a no:</b> skip Nuttallburg and take the afternoon easy — you are not losing the coal ruins, because <b>Kaymoor is now scheduled on Day 4 morning</b> (promoted Sept 28), same corridor, conveyor and coke ovens, reached by a long stairway down.",
     },
@@ -574,7 +574,7 @@ window.TRIP_DATA = {
       category: "Sleep — colder than September",
       items: [
         "REI Siesta 20 — mid-30s at Linville and Hurricane",
-        "Sleeping bag liner ⚠️ recommended, not confirmed purchased. Decide after the September shakedown.",
+        "Sleeping bag liner — bought (Sept 28). For the mid-30s nights at FS 210 and Hurricane.",
         "Therm-a-Rest MondoKing 3D",
         "Puffy, hat, gloves — Hawksbill at 7:15 AM at 4,009 ft, and the Mount Rogers ridge",
       ],
@@ -599,12 +599,11 @@ window.TRIP_DATA = {
   ],
 
   reservations: [
-    { text: "⚠️ Oct 15 dinner — the meal plan still puts you at the Arrowhead biergarten that night. Pack a camp dinner or plan a Fayetteville stop." },
+    { text: "✅ Oct 15 dinner — Stove Top + chicken + gravy at the primitive site, carried water. Settled Sept 28 (the old biergarten plan is gone).", booked: true },
     { text: "Price and phone-check ONE motel in Newland / Linville Falls / Morganton before leaving Ohio — the Linville bail-out is first-come too" },
     { text: "⚠️ CALL 800-927-0263 — Fayette Station Road parking on Bridge Day." },
     { text: "Sign the Arrowhead waiver before arrival — every camper needs one" },
     { text: "Mix the five pre-portioned bags at home: oats ×5, oats XL (double-bagged), couscous, rice, hot chocolate ×3" },
-    { text: "Freeze the breakfast burrito hardest — it has to survive nine days and be edible Oct 22" },
     { text: "Buy block ice twice: Fayetteville Oct 16, Brevard Oct 20" },
     { text: "Fill three 1-gallon water jugs in Brevard before leaving for Linville — ~12 L total carry" },
     { text: "Buy pull-tab cans only — a forgotten can opener at Linville means no dinner" },
@@ -623,11 +622,6 @@ window.TRIP_DATA = {
   ],
 
   openQuestions: [
-    {
-      question: "Three October meals were voted down on the Menu Bench and are still on the plan.",
-      blocks: "Day 5 lunch, day 5 dinner and day 8 lunch. None is urgent — this trip is Oct 15 — but day 8 is the one that matters.",
-      detail: "The Sept 2026 vote rejected 20 of 88 candidate dishes, and three of them are scheduled here. The validator reports all three every run.<br><br><b>O-L7, day 8 lunch — the important one.</b> It is the waterless pouch plate, on a site with nothing to wash with, and \"eating a pouch straight as the meal\" was a no. <b>Summer sausage and cheese board</b> is the clean swap: voted yes, Zone 3 only, zero cleanup, no water, and it holds up on day 8 when the ice is gone.<br><br><b>O-D2, day 5 dinner</b> — white chicken chili, voted no. The beef-and-bean version of the same frozen-flat bag was voted yes, so the swap costs nothing structurally: same Zone 1 behaviour, same prep, same night. Beef stew and lentil-and-sausage stew were also both yes.<br><br><b>O-L4, day 5 lunch</b> — the hummus cups. Only that component was rejected; the tortillas, salami and thermos of hot soup were not. Swap the hummus for hard cheese and the meal survives intact.<br><br>Not changed automatically: swapping a meal changes a day, and this is a planned trip with a written cooler timeline behind it."
-    },
     {
       question: "Oct 15 is now a first-come primitive site, and that is the one thing left to get right.",
       blocks: "Day 1",

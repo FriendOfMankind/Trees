@@ -418,7 +418,7 @@ window.TRIP_DATA = {
         note: "The zone that ruins trips, and the reason the final stop is the morning of departure rather than the night before: it goes from the checkout into the cooler and the cooler goes into the car. Only four meals happen before Thursday's resupply, and that is the entire reason five nights fit in one 48qt — so keep this list exactly this short.",
         items: [
           "Sub fixings for K-L1: sourdough roll · Genoa salami · provolone · pepperoncini",
-          "⚠️ <b>The K-L1 recipe carries a whole raw apple, and crisp raw fruit is the one OAS form still out.</b> Swap it for a ripe banana, fruit leather or dried fruit — all confirmed fine, and all already on the shelf-stable list above.",
+          "⚠️ <b>The K-L1 recipe carries a whole raw apple, and crisp raw fruit is the one OAS form still out.</b> Swap it for pretzels or a bar. <b>Corrected Sept 28:</b> this line used to call dried fruit and fruit leather \"confirmed fine\" — they are not; dried fruit is still an open OAS question, and the Kentucky retro could not settle it because none was eaten.",
           "Eggs (half dozen) · spinach · bell peppers ×2 · sourdough loaf",
           "Hard salami · aged cheddar · provolone",
         ],
