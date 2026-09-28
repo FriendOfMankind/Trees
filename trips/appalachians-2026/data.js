@@ -263,7 +263,7 @@ window.TRIP_DATA = {
         { kind: "food", time: "5:00 → 6:30", est: "1h 30m", text: "<b>Dinner: The Falls Landing.</b> Downtown since 1993, the town's serious restaurant. <b>Reserve ahead.</b> ⭐ <b>Fresh NC mountain trout</b> — the owner steers people to it personally; comes with a potato cake reviewers single out. Mountain trout is <i>the</i> regional dish.", maps: "The Falls Landing Brevard NC" },
         { kind: "drive", time: "6:30 → 6:50", est: "20m", text: "→ camp. Sunset 6:51." },
       ],
-      meals: { b: "<b>O-B4</b> made — hot oats+ with an extra 20g pecans (~1,050 kcal)", l: "<b>O-L5</b> packed — salmon or chicken pouch, 2 tortillas, hot sauce, string cheese, Fritos, dried mango (~850 kcal)", d: "bought — The Falls Landing, mountain trout. <b>Resupply today: block ice, shrimp for Wednesday, and the vacuum-packed kielbasa that becomes the last night — keep it sealed.</b>" },
+      meals: { b: "<b>O-B4</b> made — hot oats+ with an extra 20g pecans (~1,050 kcal)", l: "<b>O-L5</b> packed — salmon or chicken pouch, 2 tortillas, hot sauce, string cheese, Fritos, dried mango (~850 kcal)", d: "bought — The Falls Landing, mountain trout. <b>Resupply today: block ice, and the vacuum-packed kielbasa that becomes the last night — keep it sealed.</b> Wednesday's pierogi get bought tomorrow afternoon, not today." },
       highlights:
         "The best-corroborated hike on the trip: AllTrails and the plan agree to within half a mile and one foot of gain. Daniel Ridge in the afternoon is the quiet counterweight.",
       warnings:
@@ -290,12 +290,12 @@ window.TRIP_DATA = {
         { kind: "stop", time: "7:30 → 10:15", est: "2h 45m", text: "Slow morning at camp. Breakfast, no time pressure. <b>This is a rest day now.</b>" },
         { kind: "stop", time: "10:15 → 11:00", est: "45m", text: "Set up the laptop, <b>verify Starlink</b>." },
         { kind: "lecture", time: "11:00 → 3:00", est: "4h", text: "<b>REMOTE LECTURE.</b> Class runs 11:10–2:30; the padding is setup and overrun.", warn: true },
-        { kind: "shop", time: "3:15 → 4:45", est: "1h 30m", text: "→ Brevard. Final resupply, top off fuel." },
+        { kind: "shop", time: "3:15 → 4:45", est: "1h 30m", text: "→ Brevard. Final resupply, top off fuel. <b>Buy tonight's dinner here:</b> a bag of frozen potato-and-cheese pierogi and a <b>small</b> pack of kielbasa (the 12 oz one stays sealed for Oct 24)." },
         { kind: "stop", time: "5:00 → 5:30", est: "30m", text: "⭐ <b>Download offline maps — Linville + Mount Rogers.</b> Last reliable signal on the trip.", warn: true },
         { kind: "stop", time: "5:30 → 6:30", est: "60m", text: "⭐ <b>Repack for two nights with no water and no service.</b> Charge everything. Starlink packed and accessible.", warn: true },
         { kind: "food", time: "6:30 →", est: "—", text: "Dinner at camp. <b>In bed early — tomorrow starts at 5:45.</b> Sunset 6:49." },
       ],
-      meals: { b: "<b>O-B5</b> made — sausage and pepper hash with eggs on top: 150g smoked sausage, 300g potatoes, pepper, onion, 2 eggs, cheddar, sourdough. ~30 min, cleanup HIGH and that is fine — <b>last morning with a sink and a table</b> (~1,100 kcal). Deliberately drains Zone 2.", l: "<b>O-L6</b> made — quesadillas from whatever remains: leftover chicken, cheese, peppers, tortillas, salsa. <b>This slot exists to empty the cooler. Cook what is left, do not be precious</b> (~800 kcal)", d: "<b>O-D3</b> ⭐ made — garlic butter shrimp with orzo, blistered green beans, lemon, parsley, parmesan. ~25 min. <b>Shrimp 2 min a side, do not walk away — it is the one thing here you can ruin.</b> Last high-cleanup meal of the trip (~1,000 kcal)" },
+      meals: { b: "<b>O-B5</b> made — sausage and pepper hash with eggs on top: 150g smoked sausage, 300g potatoes, pepper, onion, 2 eggs, cheddar, sourdough. ~30 min, cleanup HIGH and that is fine — <b>last morning with a sink and a table</b> (~1,100 kcal). Deliberately drains Zone 2.", l: "<b>O-L6</b> made — quesadillas from whatever remains: leftover chicken, cheese, peppers, tortillas, salsa. <b>This slot exists to empty the cooler. Cook what is left, do not be precious</b> (~800 kcal)", d: "⭐ made — <b>pierogi + kielbasa</b>, the trip's one real cook (chosen Sept 28). Frozen potato-and-cheese pierogi and a small pack of kielbasa, both bought on this afternoon's Brevard run. Boil the pierogi ~4 min with frozen green beans until they float, drain, then brown them in the pot with butter and the sliced kielbasa. One pot, no measuring (~850 kcal). Replaces the shrimp orzo: Kentucky showed the elaborate cooks don't happen." },
       highlights:
         "October absorbs the lecture cleanly because Oct 21 was already the buffer day. Mount Pisgah, DuPont and PARI come off, and they were filler.",
       warnings:
@@ -499,7 +499,7 @@ window.TRIP_DATA = {
       "The structural problem of this trip in three rows. <b>The breakfast burrito is the calibration item:</b> it has to survive nine days frozen and be edible on Oct 22, so freeze it hardest and bury it under the water bottles. Frozen 1L bottles do double duty — coolant on the way down, and drinking water exactly when you arrive somewhere with none.",
     cooler: [
       { days: "1–3 · Oct 15–17", where: "Arrowhead, WV", state: "<b>Fayetteville eats five slots</b>, so the cooler is only carrying Zone 1 mass that stays frozen for later. <b>Block ice Oct 16.</b> Barely open it." },
-      { days: "4–7 · Oct 18–21", where: "Davidson River, NC", state: "Both Zone 1 dinners consumed (O-D1 Sunday, O-D2 Monday). <b>Block ice Brevard Oct 20 — the last cold of the trip.</b> It carries the shrimp to Wednesday." },
+      { days: "4–7 · Oct 18–21", where: "Davidson River, NC", state: "Both Zone 1 dinners consumed (O-D1 Sunday, O-D2 Monday). <b>Block ice Brevard Oct 20 — the last cold of the trip.</b> Wednesday's pierogi are bought frozen in Brevard that same afternoon, so they never need to survive the cooler." },
       { days: "8–11 · Oct 22–25", where: "Linville → Hurricane → home", state: "<b>Cooler is empty. Wipe it out the morning of Oct 22 and it becomes the dry box and the water carrier.</b> Everything from O-B6 onward is shelf-stable." },
     ],
     criticalSlots:
@@ -562,7 +562,7 @@ window.TRIP_DATA = {
         note: "The only real resupply of the trip and the last cold you get.",
         items: [
           "<b>1 block of ice</b> — the last cold of the trip",
-          "250g frozen raw shrimp (O-D3) · 150g smoked sausage or andouille (O-B5)",
+          "150g smoked sausage or andouille (O-B5)",
           "<b>1× 12oz vacuum-packed kielbasa — keep it sealed until Oct 24. This is the last dinner. Protect it.</b>",
           "Eggs (half dozen) · potatoes 800g, <b>pre-diced if available</b> · bell peppers ×2 · onions ×2 · garlic ×2 · lemons ×3 · parsley",
           "Frozen green beans",

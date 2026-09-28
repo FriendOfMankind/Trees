@@ -537,7 +537,7 @@ const MEALS = [
     technique: "⭐ <b>Shrimp 2 minutes a side, do not walk away — it is the one thing here you can ruin.</b> Buy it the day it's eaten; this is not a Zone 1 meal. Schedule it as the last high-cleanup meal of a trip, at a site with water.",
     tags: ["high-cleanup", "needs-potable-water", "same-day-resupply", "the-good-night"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-D3", day: 7, meal: "d" }],
+    usedOn: [],  // was Appalachians O-D3 (day 7 dinner); replaced by pierogi + kielbasa 2026-09-28
   },
   {
     id: "boil-bag-couscous",
