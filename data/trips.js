@@ -80,13 +80,13 @@ const TRIPS = [
     budget: "TBD",
     tags: ["car camping", "fall color", "ruins", "BASE jumping", "first-come", "solo", "lodging gap"],
     why: "BASE jumpers watched from the gorge floor, three coal ghost towns, and a sunrise on Hawksbill during peak color week — with two unreservable nights on a forest road as the price.",
-    next: "Call Arrowhead 304-900-5501 — the reservation moved to Oct 16–18 by phone, leaving Oct 15 with no bed and nothing in writing",
+    next: "Oct 15 is settled: a first-come NRG primitive site, chosen at Canyon Rim Visitor Center on arrival. Before leaving: build the food list from staples + 1–2 real cooks (Kentucky lesson), and print the Hurricane confirmation",
     booking: [
       { system: "private", what: "Arrowhead Bike Farm (Oct 16–18)", target: "2026-10-16", booked: true },
       { system: "recreation.gov", what: "Davidson River (Oct 18–21)", target: "2026-10-18", booked: true },
       { system: "recreation.gov", what: "Hurricane Campground (Oct 24)", target: "2026-10-24", booked: true },
     ],
-    updated: "2026-09-04",
+    updated: "2026-09-28",
   },
 
   /* ---------------------------------------------------------------- 2027 */
