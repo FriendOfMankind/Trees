@@ -136,7 +136,7 @@ const DISLIKES = [
   { what: "Hummus as a meal component", terms: ["hummus"] },
   { what: "Egg salad", terms: ["egg salad"] },
   { what: "Rice balls / onigiri", terms: ["rice ball", "onigiri"] },
-  { what: "Ramen, both instant and upgraded", terms: ["ramen"] },
+  { what: "Ramen as a planned meal, loaded or upgraded (plain cup ramen as trailhead fuel is fine — narrowed 2026-09-28 after Kentucky)", terms: ["loaded ramen", "upgraded ramen", "ramen with egg"] },
   { what: "Pork chop with cooked apple", terms: ["pork chop"] },
   { what: "White chicken chili", terms: ["white chicken chili", "white chili"] },
   { what: "Gumbo", terms: ["gumbo"] },
