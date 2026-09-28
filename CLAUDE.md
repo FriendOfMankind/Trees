@@ -51,6 +51,8 @@ docs/ROADMAP.md       what to build next, and what not to
 
 ## Working on this repo
 
+- **GitHub Pages publishes from `main`** (set up 2026-09-28). Every session opens its PR into `main`, not into another `claude/*` branch; the old three-branch chain is how fixes sat unpublished.
+
 - **Adding a trip?** Use the `/new-trip` skill
   (`.claude/skills/new-trip/SKILL.md`). Don't freestyle it.
 - **The intake pipeline:** upstream chatbot fills `docs/TRIPFORMAT.md` →
