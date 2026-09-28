@@ -175,9 +175,6 @@ const MEALS = [
     usedOn: [
       { slug: "kentucky-2026", code: null, day: 2, meal: "b" },
       { slug: "kentucky-2026", code: null, day: 6, meal: "b" },
-      { slug: "appalachians-2026", code: "O-B2", day: 4, meal: "b" },
-      { slug: "appalachians-2026", code: "O-B4", day: 6, meal: "b" },
-      { slug: "appalachians-2026", code: "O-B7", day: 9, meal: "b" },
     ],
   },
   {
@@ -197,7 +194,6 @@ const MEALS = [
     variants: ["Nine days in the cooler (O-B6) — it survives the whole trip if it stays in Zone 1 until the night before."],
     usedOn: [
       { slug: "kentucky-2026", code: null, day: 3, meal: "b" },
-      { slug: "appalachians-2026", code: "O-B6", day: 8, meal: "b" },
     ],
   },
   {
@@ -217,7 +213,6 @@ const MEALS = [
     variants: [],
     usedOn: [
       { slug: "kentucky-2026", code: null, day: 4, meal: "b" },
-      { slug: "appalachians-2026", code: "O-B1", day: 2, meal: "b" },
     ],
   },
   {
@@ -238,7 +233,6 @@ const MEALS = [
     variants: [],
     usedOn: [
       { slug: "kentucky-2026", code: null, day: 5, meal: "b" },
-      { slug: "appalachians-2026", code: "O-B3", day: 5, meal: "b" },
     ],
   },
   {
@@ -256,7 +250,7 @@ const MEALS = [
     technique: "<b>This is a Zone 2 drain disguised as a breakfast.</b> Schedule it on the last morning with a sink and a table — cleanup is HIGH and that is fine exactly once. Everything perishable that is left goes in.",
     tags: ["zone-2-drain", "high-cleanup", "needs-potable-water"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-B5", day: 7, meal: "b" }],
+    usedOn: [],  // was Appalachians O-B5; replaced by the staples menu 2026-09-28
   },
   {
     id: "cold-bagel-plate",
@@ -345,7 +339,6 @@ const MEALS = [
     ],
     usedOn: [
       { slug: "kentucky-2026", code: null, day: 4, meal: "l" },
-      { slug: "appalachians-2026", code: "O-L5", day: 6, meal: "l" },
       { slug: "appalachians-2026", code: "O-L8", day: 9, meal: "l" },
     ],
   },
@@ -364,7 +357,7 @@ const MEALS = [
     technique: "<b>Heat the soup in the same pot right after breakfast</b> — one boil, two meals, no extra wash. <b>In relentless wind at 5,000 ft the hot liquid does more than the calories do.</b> This is the exposed-ridge lunch.",
     tags: ["thermos", "cold-weather", "exposed", "piggybacks-breakfast"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-L4", day: 5, meal: "l" }],
+    usedOn: [],  // was Appalachians O-L4; replaced by the staples menu 2026-09-28
   },
   {
     id: "pouch-plate-no-water",
@@ -381,7 +374,7 @@ const MEALS = [
     technique: "⚠️ <b>The no-water slot. Zero cookware touches food</b> — the pouch is the plate and it packs out. Built for a campsite with nothing to wash with.",
     tags: ["no-water", "zero-cleanup", "pack-it-out"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-L7", day: 8, meal: "l" }],
+    usedOn: [],  // was Appalachians O-L7; replaced by the staples menu 2026-09-28
   },
   {
     id: "quesadillas",
@@ -424,7 +417,6 @@ const MEALS = [
     tags: ["no-water", "gloves-on", "exposed", "build-night-before"],
     variants: ["Bagel version (O-L3) — bagel, PB, honey, jerky, apple, plus leftover snacks."],
     usedOn: [
-      { slug: "appalachians-2026", code: "O-L3", day: 4, meal: "l" },
       { slug: "appalachians-2026", code: "O-L9", day: 10, meal: "l" },
     ],
   },
@@ -451,7 +443,6 @@ const MEALS = [
     ],
     usedOn: [
       { slug: "kentucky-2026", code: null, day: 2, meal: "d" },
-      { slug: "appalachians-2026", code: "O-D2", day: 5, meal: "d" },
     ],
   },
   {
@@ -469,7 +460,7 @@ const MEALS = [
     technique: "Same Zone 1 trick as the chili but the pasta cooks on site, which is what pushes cleanup to MED — you are draining starchy water. <b>The first Zone 1 dinner out of the cooler</b> on a long trip; eat it before the pasta water becomes a problem.",
     tags: ["frozen-flat", "zone-1", "med-cleanup"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-D1", day: 4, meal: "d" }],
+    usedOn: [],  // was Appalachians O-D1; replaced by the staples menu 2026-09-28
   },
   {
     id: "thermos-couscous-dinner",
@@ -537,7 +528,7 @@ const MEALS = [
     technique: "⭐ <b>Shrimp 2 minutes a side, do not walk away — it is the one thing here you can ruin.</b> Buy it the day it's eaten; this is not a Zone 1 meal. Schedule it as the last high-cleanup meal of a trip, at a site with water.",
     tags: ["high-cleanup", "needs-potable-water", "same-day-resupply", "the-good-night"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-D3", day: 7, meal: "d" }],
+    usedOn: [],  // was Appalachians O-D3 (day 7 dinner); replaced by pierogi + kielbasa 2026-09-28
   },
   {
     id: "boil-bag-couscous",
@@ -554,7 +545,7 @@ const MEALS = [
     technique: "⚠️ Boil 200 ml, pour in, roll the bag shut, 5 min, tear in a chicken pouch and the oil. <b>Eight minutes, headlamp on.</b> Flagged on the October trip as the highest-risk meal of both trips — at 7:30 PM in the dark at 35°F, anything harder than boil-water ends with a protein bar and going to bed hungry. <b>The bag has to already exist.</b>",
     tags: ["no-water", "boil-bag", "dark-and-cold", "highest-risk", "pre-mix-required"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-D4", day: 8, meal: "d" }],
+    usedOn: [],  // was Appalachians O-D4; replaced by the staples menu 2026-09-28
   },
   {
     id: "boil-bag-burrito-bowl",
@@ -571,7 +562,7 @@ const MEALS = [
     technique: "<b>The undrained can is the trick.</b> The bean liquid counts toward your water and there is no wet waste to pack out — on a dry site that is two problems solved by not opening a strainer. Pull-tab, so no opener.",
     tags: ["no-water", "boil-bag", "water-positive", "pre-mix-required"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-D5", day: 9, meal: "d" }],
+    usedOn: [],  // was Appalachians O-D5; replaced by the staples menu 2026-09-28
   },
   {
     id: "kielbasa-cannellini-orecchiette",
@@ -588,7 +579,7 @@ const MEALS = [
     technique: "⭐⭐ <b>Day 10, empty cooler, nothing but shelf-stable food — which is exactly the problem this dish was invented for.</b> Every component rides in Zone 3 from day one. Sequential on one burner, ~28 min. Finish with hot chocolate and dark chocolate, and take the twenty minutes.",
     tags: ["zone-3-only", "shelf-stable", "last-night", "the-good-night"],
     variants: [],
-    usedOn: [{ slug: "appalachians-2026", code: "O-D6", day: 10, meal: "d" }],
+    usedOn: [],  // was Appalachians O-D6; replaced by the staples menu 2026-09-28
   },
 
   /* ================================================================ DRINK */

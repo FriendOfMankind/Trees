@@ -83,7 +83,7 @@ window.TRIP_DATA = {
         { kind: "sunset", time: "6:05 → 7:05", est: "60m", text: "⭐ <b>Long Point through sunset, 6:48</b> (recomputed; the plan said 6:52). Head-on bridge view — the classic angle." },
         { kind: "hike", time: "7:05 → 7:50", est: "45m", text: "Walk back. <b>Headlamp required</b> — civil twilight ends ~7:17 and it's fully dark before you're off the trail.", warn: true },
       ],
-      meals: { b: "home", l: "<b>O-L1</b> packed — sourdough sub: salami, provolone, pepperoncini, oil, oregano. Apple, chips. Built at home (~850 kcal)", d: "⚠️ <b>Cook at camp or eat in Fayetteville.</b> The meal plan put you at the Arrowhead biergarten tonight; you are at a primitive site with no water instead. Bring dinner or plan a town stop." },
+      meals: { b: "home", l: "<b>O-L1</b> packed — sourdough sub: salami, provolone, pepperoncini, oil, oregano. Chips and pretzels. Built at home (~850 kcal)", d: "⚠️ <b>NO WATER — Stove Top + chicken + gravy.</b> Boil ~1½ mugs of carried water with butter, half a gravy packet and frozen green beans, add 2 chicken pouches, kill the heat, dump in half a box of stuffing, lid on 5 min. Soggy → lid off a minute; dry → splash. <b>It drinks all its water: nothing to drain, nothing to pack out</b> (~600 kcal; whole box ~930 if hungry after the drive)" },
       highlights:
         "Fayette Station Road drops you to the gorge floor and back in one afternoon, and Long Point gives the head-on bridge view at sunset. ⚠️ Note the change: <b>the Long Point trailhead is at Arrowhead, which you are not at tonight</b> — from a river campground it is a drive, not a walk from the tent.",
       warnings:
@@ -112,17 +112,17 @@ window.TRIP_DATA = {
         { kind: "drive", time: "11:05 → 11:20", est: "15m", text: "→ downtown Fayetteville.", maps: "Secret Sandwich Society Fayetteville WV" },
         { kind: "food", time: "11:20 → 12:35", est: "1h 15m", text: "<b>Secret Sandwich Society.</b> ⚠️ Weekend waits run 35–50 min; Friday lunch is the right slot. ⭐ <b>The Brussels sprouts</b> — feta, hot honey, balsamic; the dish locals name unprompted. Then the <b>McKinley</b>. <b>Key lime pie to go.</b>" },
         { kind: "drive", time: "12:35 → 1:10", est: "35m", text: "→ <b>Nuttallburg</b> via Keeneys Creek Rd. One lane, steep, drops into the gorge — trees over the hood, rock walls close.", maps: "Nuttallburg Winona WV", warn: true },
-        { kind: "ruins", time: "1:10 → 3:40", est: "2h 30m", text: "⭐ <b>NUTTALLBURG.</b> Coal tipple on the C&O tracks, a rust-colored steel conveyor swooping down the hillside above the treetops, <b>80 coke ovens you can walk into</b>, town ruins. Nothing has run since 1958 — no glass in the windows, no graffiti either, grounds maintained. The Nuttall family gave it to the Park Service in 1998.<br><br><b>The Henry Ford angle:</b> Fordson Coal took the mining rights in 1920 trying to vertically integrate coal into the steel supply. Edsel oversaw the investment — the tipple and conveyor are from the 1923–26 rebuild. Ford mothballed the No. 2 mine within a year of visiting." },
-        { kind: "hike", time: "optional", est: "+60m", text: "<i>Optional:</i> <b>Conveyor Trail</b>, ~0.5 mi steep to the headhouse. Also nearby: <b>Seldom Seen</b>, a former community reduced to foundation blocks and a great name." },
+        { kind: "ruins", time: "1:10 → 2:10", est: "1h", text: "⭐ <b>NUTTALLBURG.</b> Coal tipple on the C&O tracks, a rust-colored steel conveyor swooping down the hillside above the treetops, <b>80 coke ovens you can walk into</b>, town ruins. Nothing has run since 1958 — no glass in the windows, no graffiti either, grounds maintained. The Nuttall family gave it to the Park Service in 1998.<br><br><b>The Henry Ford angle:</b> Fordson Coal took the mining rights in 1920 trying to vertically integrate coal into the steel supply. Edsel oversaw the investment — the tipple and conveyor are from the 1923–26 rebuild. Ford mothballed the No. 2 mine within a year of visiting." },
+        { kind: "hike", time: "2:10 → 3:40", est: "1h 30m", text: "⭐ <b>Conveyor Trail up to the headhouse and mine entrance — not optional any more.</b> ~0.5 mi steep, climbing alongside the conveyor. Trip reports call it <i>\"very challenging but worth it\"</i>, and it is what separates Nuttallburg from a walk-by: Blue Heron in Kentucky was polished and flat and disappointed; this is the part you climb into. Also nearby if time is left: <b>Seldom Seen</b>, a former community reduced to foundation blocks." },
         { kind: "drive", time: "3:40 → 4:20", est: "40m", text: "→ Arrowhead." },
         { kind: "stop", time: "4:20 → 6:00", est: "1h 40m", text: "Camp, shower, rest. Sunset 6:46." },
         { kind: "food", time: "6:00 → 7:30", est: "1h 30m", text: "Dinner — <b>Pies & Pints</b> (founded here before spreading to five states). ⭐ <b>The black bean pizza with pork</b> — the tourist order is Grape & Gorgonzola; this is the local one. Pimento cheese fries. Or Arrowhead, open till 10 tonight." },
       ],
-      meals: { b: "<b>O-B1</b> made — 3 eggs, 60g spinach, ½ bell pepper, 2 slices sourdough, butter. Toast the bread dry first. 12 min (~700 kcal)", l: "bought — Secret Sandwich Society", d: "bought — Pies &amp; Pints, or Arrowhead. <b>Tonight: build tomorrow’s Bridge Day muffuletta and press it under the cooler lid.</b> Also buy the block of ice today." },
+      meals: { b: "made — <b>loaded potato scramble</b>: potato flakes stirred into boiling water until thick, milk powder, butter, 2 eggs stirred in over low heat until set, cheddar, bacon bits. One pot (~820 kcal)", l: "bought — Secret Sandwich Society", d: "bought — Pies &amp; Pints, or Arrowhead. <b>Tonight: build tomorrow’s Bridge Day muffuletta and press it under the cooler lid.</b>" },
       highlights:
         "Nuttallburg is the best ruin on either 2026 trip: a stabilized 90-acre historic district with a conveyor running down the hillside above the treetops, and a Henry Ford vertical-integration story attached to it.",
       warnings:
-        "<b>Keeneys Creek Road is the variable.</b> Some sources recommend high clearance and you have 5.9 inches. Ask at Canyon Rim on Day 1. <b>If it's a no:</b> fall back to Kaymoor Top, 5 minutes from camp — same corridor, conveyor and coke ovens, reached by a long stairway down.",
+        "<b>Keeneys Creek Road is the variable.</b> Some sources recommend high clearance and you have 5.9 inches. Ask at Canyon Rim on Day 1. <b>If it's a no:</b> skip Nuttallburg and take the afternoon easy — you are not losing the coal ruins, because <b>Kaymoor is now scheduled on Day 4 morning</b> (promoted Sept 28), same corridor, conveyor and coke ovens, reached by a long stairway down.",
     },
     {
       day: 3,
@@ -155,7 +155,7 @@ window.TRIP_DATA = {
         { kind: "event", time: "3:25 → 4:40", est: "1h 15m", text: "<b>Chili cook-off</b>, Fayette County Courthouse. The food event of the day, plus 200+ vendors. <b>Cash.</b>", maps: "Fayette County Courthouse Fayetteville WV" },
         { kind: "drive", time: "4:40 → 4:50", est: "10m", text: "→ Arrowhead. Sunset 6:45." },
       ],
-      meals: { b: "bought — Tudor’s Biscuit World, Oak Hill, 6 AM", l: "<b>O-L2</b> ⭐ pressed muffuletta — ciabatta, 60g Genoa salami, 40g capicola, 50g provolone, olive salad, oil. Built last night, pressed overnight. Plus marcona almonds, apricots, 2 bars, a waffle (~1,200 kcal across the day). <b>Everything in it is cured, aged or oil-packed</b> — ten hours unrefrigerated in a pack, and it is genuinely better squashed.", d: "bought — chili cook-off, cash" },
+      meals: { b: "bought — Tudor’s Biscuit World, Oak Hill, 6 AM", l: "<b>O-L2</b> ⭐ pressed muffuletta — ciabatta, 60g Genoa salami, 40g capicola, 50g provolone, olive salad, oil. Built last night, pressed overnight. Plus roasted almonds, 2 bars, pretzels (~1,200 kcal across the day). <b>Everything in it is cured, aged or oil-packed</b> — ten hours unrefrigerated in a pack, and it is genuinely better squashed.", d: "bought — chili cook-off, cash" },
       highlights:
         "The free, legal version: the roads are open to pedestrians even though the trails are closed and patrolled. You watch from directly below the jump zone instead of from the deck with everyone else.",
       warnings:
@@ -164,11 +164,11 @@ window.TRIP_DATA = {
     {
       day: 4,
       date: "Sun Oct 18, 2026",
-      title: "Thurmond, Then South",
+      title: "Kaymoor, Thurmond, Then South",
       tagline: "Population 5, then a waterfall you walk behind.",
       type: "activity + transfer",
       driving: "~5h 30m",
-      slack: "Moderate. The afternoon waterfall cluster is all roadside and trims easily.",
+      slack: "<b>Tighter than it was.</b> Kaymoor before the long drive puts arrival at Davidson River around 3:50. Cut order if it runs long: Looking Glass Falls, then Thurmond (drive straight through). <b>Never the Starlink test.</b>",
       overnight: {
         name: "Davidson River Campground",
         place: "Brevard, NC",
@@ -180,21 +180,20 @@ window.TRIP_DATA = {
       },
       schedule: [
         { kind: "stop", time: "7:00 → 7:45", est: "45m", text: "Break camp." },
-        { kind: "drive", time: "7:45 → 8:25", est: "40m", text: "→ Thurmond.", maps: "Thurmond Depot Thurmond WV" },
-        { kind: "ruins", time: "8:25 → 9:40", est: "1h 15m", text: "<b>Thurmond.</b> Population 5 as of the 2010 census. Preserved storefronts and bank buildings; the C&O depot is now an NPS visitor center. In its prime it moved <b>95,000 passengers a year</b> — a division point where the coal and rail industries met." },
-        { kind: "drive", time: "9:40 → 2:30", est: "4h 50m", text: "→ Davidson River Campground.", maps: "Davidson River Campground Pisgah Forest NC" },
-        { kind: "stop", time: "2:30 → 3:30", est: "60m", text: "Check in (2 PM), set up. ⚠️ <b>TEST STARLINK for Wednesday.</b> Davidson River is forested and cell service here is described as extremely limited. This gives three days of buffer — use them.", warn: true },
-        { kind: "drive", time: "3:30 → 3:40", est: "10m", text: "→ Looking Glass Falls.", maps: "Looking Glass Falls Pisgah Forest NC" },
-        { kind: "stop", time: "3:40 → 4:00", est: "20m", text: "Looking Glass Falls — roadside." },
-        { kind: "drive", time: "4:00 → 4:10", est: "10m", text: "→ Moore Cove trailhead.", maps: "Moore Cove Falls Trailhead Pisgah Forest NC" },
-        { kind: "hike", time: "4:10 → 5:10", est: "60m", text: "⭐ <b>Moore Cove Falls</b>, 1.4 mi — 50-ft plunge and <b>the trail goes behind the water</b>." },
-        { kind: "drive", time: "5:10 → 5:20", est: "10m", text: "→ Sliding Rock.", maps: "Sliding Rock Pisgah Forest NC" },
-        { kind: "stop", time: "5:20 → 5:35", est: "15m", text: "Sliding Rock — looking, not sliding. It's October." },
-        { kind: "drive", time: "5:35 → 5:50", est: "15m", text: "→ camp, cook. Sunset 6:53." },
+        { kind: "drive", time: "7:45 → 7:55", est: "10m", text: "→ Kaymoor Top trailhead, ~5 min from Arrowhead.", maps: "Kaymoor Miners Trail Fayetteville WV" },
+        { kind: "hike", time: "7:55 → 9:55", est: "2h", text: "⭐ <b>KAYMOOR MINERS TRAIL</b> — promoted from fallback Sept 28. ~0.5 mi of steep switchbacks, then <b>800+ steps</b> down to the Kaymoor No. 1 mine site: <i>\"the abandoned mine and buildings were super cool\"</i> (AllTrails, 4.6★ over ~2,900 reviews). The climb back up is the workout. Unrestored and hard to reach — the closest thing on this trip to the Blevins farm night. The 2h is an estimate from trip reports, not a measured time. ⚠️ Reports disagree on whether the riverside town site is reachable from here — don't count on it." },
+        { kind: "drive", time: "9:55 → 10:35", est: "40m", text: "→ Thurmond.", maps: "Thurmond Depot Thurmond WV" },
+        { kind: "ruins", time: "10:35 → 11:00", est: "25m", text: "<b>Thurmond — a look, not a stop.</b> Cut from 1h 15m Sept 28: reports say most of its ~30 buildings still stand but <b>you can't go inside them</b>, and the depot is a restored visitor center — the Blue Heron problem. Walk the street of façades along the tracks, then go. Population 5 as of the 2010 census; in its prime it moved <b>95,000 passengers a year</b>." },
+        { kind: "drive", time: "11:00 → 3:50", est: "4h 50m", text: "→ Davidson River Campground.", maps: "Davidson River Campground Pisgah Forest NC" },
+        { kind: "stop", time: "3:50 → 4:50", est: "60m", text: "Check in, set up. ⚠️ <b>TEST STARLINK for Wednesday — at your site, today.</b> In Kentucky it only worked after moving to a better sky view, so scout the fallback spot now too. Three days of buffer — use them.", warn: true },
+        { kind: "drive", time: "4:50 → 5:00", est: "10m", text: "→ Moore Cove trailhead.", maps: "Moore Cove Falls Trailhead Pisgah Forest NC" },
+        { kind: "hike", time: "5:00 → 6:00", est: "60m", text: "⭐ <b>Moore Cove Falls</b>, 1.4 mi — 50-ft plunge and <b>the trail goes behind the water</b>." },
+        { kind: "stop", time: "6:00 → 6:30", est: "30m", text: "<i>If there's light:</i> Looking Glass Falls — roadside, 10 min back toward camp. First thing cut. Sliding Rock is dropped (it was looking-not-sliding in October anyway).", maps: "Looking Glass Falls Pisgah Forest NC" },
+        { kind: "drive", time: "6:30 → 6:40", est: "10m", text: "→ camp, cook. Sunset 6:53." },
       ],
-      meals: { b: "<b>O-B2</b> made — hot oats+ in the pot: 2 packets, milk powder, pecans, dried fruit, PB last. 6 min (~970 kcal)", l: "<b>O-L3</b> packed — bagel, PB, honey, jerky, apple, leftover Bridge Day snacks (~700 kcal)", d: "<b>O-D1</b> made — beef-and-pork ragù frozen flat, 120g rigatoni, parmesan, sourdough. One pot, ~20 min (~1,050 kcal). <b>First Zone 1 dinner out of the cooler.</b>" },
+      meals: { b: "made — <b>power oats</b>: plain oats stirred in boiling water until as thick as you like, then off the heat stir in whole milk powder, a scoop of whey and 2 tbsp PB; brown sugar to taste (~980 kcal, ~55 g protein)", l: "made — <b>ramen bomb + jerky</b> at a pull-off: ramen block with half the seasoning, potato flakes stirred in to soak up the water, 2 oz jerky on the side (~750 kcal)", d: "made — <b>Brami + marinara + chicken + broccoli</b>: boil the pasta, frozen broccoli in for the last 3 min, drain, stir in marinara and 2 chicken pouches, parmesan on top. Davidson River has water, so this is a draining night (~925 kcal)" },
       highlights:
-        "Thurmond is a town of five people that used to move 95,000 passengers a year. Moore Cove is the waterfall you walk behind, and it's a mile and a half.",
+        "Kaymoor first: 800 steps down into an abandoned mine site nobody has tidied up. Then Thurmond, a town of five people that used to move 95,000 passengers a year — seen, not stopped at. Moore Cove is the waterfall you walk behind.",
       warnings:
         "Cathedral Falls and Hawks Nest were <b>removed</b> — they're northwest on Rt 60, the wrong direction when driving south, and cost about an hour of backtracking. Thurmond replaced them. Don't add them back on the day.",
     },
@@ -229,7 +228,7 @@ window.TRIP_DATA = {
         { kind: "dessert", time: "4:25 → 5:25", est: "35m + 25m", text: "→ <b>Dolly's Dairy Bar.</b> 100+ flavors with combos named after the adventures in the forest.", maps: "Dollys Dairy Bar Pisgah Forest NC" },
         { kind: "drive", time: "5:25 → 5:35", est: "10m", text: "→ camp. Sunset 6:52 — you are back with an hour of light to spare." },
       ],
-      meals: { b: "<b>O-B3</b> made — breakfast tacos: 3 eggs, 200g diced potato, cheddar, 3 tortillas, salsa. <b>Eat all three</b> (~950 kcal)", l: "<b>O-L4</b> packed — 2 tortillas, hummus cups, hard salami, spinach, <b>plus 400 ml tomato soup in the thermos</b>, heated in the same pot right after breakfast. In relentless wind at 5,000 ft the hot liquid does more than the calories (~950 kcal)", d: "<b>O-D2</b> made — white chicken chili frozen flat, cheddar, sourdough. 10 min (~700 kcal). <b>Both Zone 1 dinners now gone — buy block ice in Brevard tomorrow.</b>" },
+      meals: { b: "made — <b>loaded potato scramble</b> (~820 kcal)", l: "thermos — <b>tortellini in broth</b>, made right after breakfast: bouillon + dried tortellini boiled until tender, peas and a chicken pouch in at the end, parmesan. Hot soup in the wind on the Parkway, and the water becomes the broth (~760 kcal)", d: "made — <b>trunk chili + Fritos</b>: drained kidney and black beans, a can of diced tomatoes, mild chili seasoning, 2 chicken pouches, water until it looks like chili, simmer 10 min, crushed Fritos and cheddar on top (~920 kcal)" },
       highlights:
         "Everything today sits within five Parkway miles. Black Balsam and Tennent are grassy balds with genuine 360° views and no trees at all — the most un-Appalachian terrain in the Appalachians.",
       warnings:
@@ -263,7 +262,7 @@ window.TRIP_DATA = {
         { kind: "food", time: "5:00 → 6:30", est: "1h 30m", text: "<b>Dinner: The Falls Landing.</b> Downtown since 1993, the town's serious restaurant. <b>Reserve ahead.</b> ⭐ <b>Fresh NC mountain trout</b> — the owner steers people to it personally; comes with a potato cake reviewers single out. Mountain trout is <i>the</i> regional dish.", maps: "The Falls Landing Brevard NC" },
         { kind: "drive", time: "6:30 → 6:50", est: "20m", text: "→ camp. Sunset 6:51." },
       ],
-      meals: { b: "<b>O-B4</b> made — hot oats+ with an extra 20g pecans (~1,050 kcal)", l: "<b>O-L5</b> packed — salmon or chicken pouch, 2 tortillas, hot sauce, string cheese, Fritos, dried mango (~850 kcal)", d: "bought — The Falls Landing, mountain trout. <b>Resupply today: block ice, shrimp for Wednesday, and the vacuum-packed kielbasa that becomes the last night — keep it sealed.</b>" },
+      meals: { b: "made — <b>power oats</b> (~980 kcal)", l: "thermos — <b>couscous + black beans + chicken</b>: beans and mild taco seasoning heated in some water, heat off, couscous in, lid on 5 min, chicken pouch, cheddar, a little oil (~945 kcal)", d: "bought — The Falls Landing, mountain trout. <b>Resupply today: block ice, and the vacuum-packed kielbasa that becomes the last night — keep it sealed.</b> Wednesday's pierogi get bought tomorrow afternoon, not today." },
       highlights:
         "The best-corroborated hike on the trip: AllTrails and the plan agree to within half a mile and one foot of gain. Daniel Ridge in the afternoon is the quiet counterweight.",
       warnings:
@@ -290,12 +289,12 @@ window.TRIP_DATA = {
         { kind: "stop", time: "7:30 → 10:15", est: "2h 45m", text: "Slow morning at camp. Breakfast, no time pressure. <b>This is a rest day now.</b>" },
         { kind: "stop", time: "10:15 → 11:00", est: "45m", text: "Set up the laptop, <b>verify Starlink</b>." },
         { kind: "lecture", time: "11:00 → 3:00", est: "4h", text: "<b>REMOTE LECTURE.</b> Class runs 11:10–2:30; the padding is setup and overrun.", warn: true },
-        { kind: "shop", time: "3:15 → 4:45", est: "1h 30m", text: "→ Brevard. Final resupply, top off fuel." },
+        { kind: "shop", time: "3:15 → 4:45", est: "1h 30m", text: "→ Brevard. Final resupply, top off fuel. <b>Buy tonight's dinner here:</b> a bag of frozen potato-and-cheese pierogi and a <b>small</b> pack of kielbasa (the 12 oz one stays sealed for Oct 24)." },
         { kind: "stop", time: "5:00 → 5:30", est: "30m", text: "⭐ <b>Download offline maps — Linville + Mount Rogers.</b> Last reliable signal on the trip.", warn: true },
         { kind: "stop", time: "5:30 → 6:30", est: "60m", text: "⭐ <b>Repack for two nights with no water and no service.</b> Charge everything. Starlink packed and accessible.", warn: true },
         { kind: "food", time: "6:30 →", est: "—", text: "Dinner at camp. <b>In bed early — tomorrow starts at 5:45.</b> Sunset 6:49." },
       ],
-      meals: { b: "<b>O-B5</b> made — sausage and pepper hash with eggs on top: 150g smoked sausage, 300g potatoes, pepper, onion, 2 eggs, cheddar, sourdough. ~30 min, cleanup HIGH and that is fine — <b>last morning with a sink and a table</b> (~1,100 kcal). Deliberately drains Zone 2.", l: "<b>O-L6</b> made — quesadillas from whatever remains: leftover chicken, cheese, peppers, tortillas, salsa. <b>This slot exists to empty the cooler. Cook what is left, do not be precious</b> (~800 kcal)", d: "<b>O-D3</b> ⭐ made — garlic butter shrimp with orzo, blistered green beans, lemon, parsley, parmesan. ~25 min. <b>Shrimp 2 min a side, do not walk away — it is the one thing here you can ruin.</b> Last high-cleanup meal of the trip (~1,000 kcal)" },
+      meals: { b: "made — <b>loaded potato scramble</b>. <b>Last morning with a sink and a table</b> — use the rest of the eggs (~820 kcal)", l: "<b>O-L6</b> made — quesadillas from whatever remains: leftover chicken, cheese, tortillas, salsa. <b>Cooking during the lecture worked in Kentucky</b> — this slot empties the cooler (~800 kcal)", d: "⭐ made — <b>pierogi + kielbasa</b>, the trip's one real cook (chosen Sept 28). Frozen potato-and-cheese pierogi and a small pack of kielbasa, both bought on this afternoon's Brevard run. Boil the pierogi ~4 min with frozen green beans until they float, drain, then brown them in the pot with butter and the sliced kielbasa. One pot, no measuring (~850 kcal). Replaces the shrimp orzo: Kentucky showed the elaborate cooks don't happen." },
       highlights:
         "October absorbs the lecture cleanly because Oct 21 was already the buffer day. Mount Pisgah, DuPont and PARI come off, and they were filler.",
       warnings:
@@ -333,7 +332,7 @@ window.TRIP_DATA = {
         { kind: "sunset", time: "3:50 → 6:20", est: "2h 30m", text: "<b>The Chimneys at sunset</b> — rock towers on the rim. Sunset <b>6:44</b> (recomputed; the plan said 6:41)." },
         { kind: "drive", time: "6:55 → 7:30", est: "35m", text: "→ camp. <b>Dark on FS 210 — go slow.</b>", warn: true },
       ],
-      meals: { b: "<b>O-B6</b> made — <b>the foil burrito, nine days in the making.</b> Move it to Zone 2 tonight. Foil in a dry pan, 6 min, eaten one-handed while driving (~760 kcal). <b>Last thing out of the cooler — after this it is a dry box and water carrier.</b>", l: "<b>O-L7</b> ⚠️ NO WATER — 2 tortillas, a 5oz salmon pouch eaten straight from the pouch, PB packets, honey, Fritos, apricots. <b>Zero cookware touches food</b> (~900 kcal)", d: "<b>O-D4</b> ⚠️ NO WATER — boil-bag couscous: 110g couscous, sun-dried tomato, parmesan, seasoning, pre-mixed at home. Boil 200 ml, pour in, roll, 5 min, tear in a chicken pouch and 2 tbsp oil. <b>8 minutes, headlamp on. The highest-risk meal on either trip</b> — at 7:30 PM in the dark at 35°F, anything harder than boil-water ends with a bar and going to bed hungry (~950 kcal)" },
+      meals: { b: "thermos — <b>power oats</b>, made at Davidson River before the 6:30 departure while there is still a tap. Eaten on the road (~980 kcal)", l: "⚠️ NO WATER, NO COOKING — <b>summer sausage and cheese board</b>: summer sausage, cheddar, tortillas, mustard, pretzels. Zero cookware while you race for a site (~1,100 kcal, estimate)", d: "⚠️ <b>NO WATER — couscous + black beans + chicken</b>, the absorb-the-water version: heat a <b>pull-tab can of black beans, undrained — the liquid counts toward your water</b> with taco seasoning, heat off, couscous in, lid on 5 min, chicken pouch, cheddar. Nothing to drain (~945 kcal)" },
       highlights:
         "Peak color week in the corridor the whole trip was sequenced around. Hawksbill today is reconnaissance for tomorrow's sunrise — that's the entire reason it's on the schedule twice.",
       warnings:
@@ -368,7 +367,7 @@ window.TRIP_DATA = {
         { kind: "hike", time: "10:25 → 3:55", est: "5h 30m", text: "<b>Table Rock Loop</b>, 7.5 mi, 2,000 → 4,100 ft. Little Table Rock → Spence Ridge → Table Rock Gap → summit. Rugged and rocky. ⚠️ <b>The Spence Ridge bridge over the Linville River is washed out.</b> The east-rim loop shouldn't need it — <b>confirm routing with Grandfather Ranger District, (828) 652-2144.</b>", warn: true },
         { kind: "drive", time: "3:55 → 4:30", est: "35m", text: "→ camp. Sunset 6:43." },
       ],
-      meals: { b: "<b>O-B7</b> ⭐ NO WATER — hot oats+ <b>in the bag</b>. Boil 400 ml, pour into the double-bagged mix, roll, 3 min, stir in a PB packet, eat from the bag. <b>Hot, sweet, ready 7 minutes after you get back down</b> (~1,150 kcal). The pot only ever held boiling water — wipe it with a bandana.", l: "<b>O-L8</b> packed — 70g hard salami, aged cheddar, tortillas, mustard, dried mango, almonds, a bar. <b>10-mile day at altitude — do not trim this one</b> (~1,000 kcal)", d: "<b>O-D5</b> ⚠️ NO WATER — boil-bag burrito bowl: instant rice and taco seasoning pre-mixed, plus a <b>pull-tab can of black beans, undrained — the liquid counts toward your water and there is no wet waste to pack out</b>. Chicken pouch, cheddar, crushed Fritos. 10 min (~1,050 kcal)" },
+      meals: { b: "⭐ NO WATER — <b>power oats in the bag</b>: oats, milk powder and whey pre-mixed at home in a double bag. Boil water, pour in until it looks right, roll, 3 min, stir in a PB packet, eat from the bag. <b>Hot, sweet, ready 7 minutes after you get back down.</b> The pot only held boiling water — wipe it with a bandana (~980 kcal)", l: "<b>O-L8</b> packed — 70g hard salami, aged cheddar, tortillas, mustard, roasted almonds, a bar. <b>10-mile day at altitude — do not trim this one</b> (~1,000 kcal)", d: "⚠️ <b>NO WATER — mashed potatoes + gravy + summer sausage</b>: sliced summer sausage and peas warmed in a little water, potato flakes and milk powder stirred in until thick; gravy made in the mug with hot water from the pot. Absorbs everything, nothing to drain (~900 kcal)" },
       highlights:
         "This is the day the whole trip was sequenced to reach. Hawksbill at sunrise during peak color week, from a site you have to be lucky to get.",
       warnings:
@@ -401,7 +400,7 @@ window.TRIP_DATA = {
         { kind: "stop", time: "3:50 → 5:00", est: "1h 10m", text: "Check in, set up, <b>hot shower.</b> $20. Sunset 6:39." },
         { kind: "food", time: "5:00 →", est: "—", text: "Cook. Last night. Damascus is ~35 min if you want a town; the leg is otherwise thin for food." },
       ],
-      meals: { b: "<b>O-B8</b> ⚠️ still no water — 2 bagels, PB packets, honey, apricots, a shelf-stable protein shake. <b>No dishes, no water, no decisions in the dark</b> (~800 kcal)", l: "<b>O-L9</b> packed — a foil-wrapped PB-and-honey tortilla roll built last night, 2 bars, jerky, trail mix. <b>Nothing requiring assembly or taking your gloves off</b> on an exposed ridge (~900 kcal)", d: "<b>O-D6</b> ⭐⭐ made — kielbasa, cannellini and orecchiette with toasted breadcrumbs, sun-dried tomato, garlic, rosemary, lemon, parmesan. ~28 min, one burner, sequential. <b>Day 10 with an empty cooler and nothing but shelf-stable food — which is exactly what this dish was invented for</b> (~1,250 kcal). Finish with hot chocolate and dark chocolate. Take the twenty minutes." },
+      meals: { b: "<b>O-B8</b> ⚠️ still no water — 2 bagels, PB packets, honey, a shelf-stable protein shake. <b>No dishes, no water, no decisions in the dark</b> (~750 kcal)", l: "<b>O-L9</b> packed — a foil-wrapped PB-and-honey tortilla roll built last night, 2 bars, jerky, trail mix. <b>Nothing requiring assembly or taking your gloves off</b> on an exposed ridge (~900 kcal)", d: "⭐ made — <b>kielbasa + white beans + Brami</b>, the sealed 12 oz kielbasa finally opened: boil the pasta, drain most of the water, add a drained can of cannellini and the sliced kielbasa, warm through, parmesan and a little oil. Hurricane has water (~1,000 kcal+ with the full pack). Finish with hot chocolate." },
       highlights:
         "Wild ponies that walk right up, a rock slot you take your pack off to get through, and Virginia's high point — with the honest caveat that the summit itself is wooded and the ridge is the reason you're there.",
       warnings:
@@ -421,7 +420,7 @@ window.TRIP_DATA = {
         { kind: "stop", time: "6:45 → 7:30", est: "45m", text: "Break camp." },
         { kind: "drive", time: "7:30 → 3:00", est: "7h 30m", text: "Hurricane CG → Avon OH. US 58 E → I-77 N the whole way.", maps: "Avon, OH" },
       ],
-      meals: { b: "<b>O-B9</b> — bagels, PB, honey, apricots, protein shake, eaten driving (~650 kcal)", l: "<b>O-L10</b> — whatever is left. You will probably stop somewhere; plan it anyway so the stop stays optional.", d: "home" },
+      meals: { b: "<b>O-B9</b> — bagels, PB, honey, protein shake, eaten driving (~600 kcal)", l: "<b>O-L10</b> — whatever is left. You will probably stop somewhere; plan it anyway so the stop stays optional.", d: "home" },
       highlights: "One mile on the legs before 450 miles in a seat.",
       warnings: "Sunrise is 7:42 and the optional loop starts at 6:00 — that's a headlamp walk, not a stroll. Skip it if the alarm hurts.",
     },
@@ -446,7 +445,8 @@ window.TRIP_DATA = {
     rows: [
       { name: "Long Point", day: 1, distance: "~3.0 mi (est)", gain: "—", difficulty: "Easy", duration: "1h 30m", notes: "Trailhead is at the campground. Returns after dark — headlamp." },
       { name: "Endless Wall → Diamond Point", day: 2, distance: "5.4 mi", gain: "508 ft", difficulty: "Moderate", duration: "3h", notes: "Verified in source. Nuttall lot, not Fern Creek. Must be Friday — closed Saturday." },
-      { name: "Nuttallburg + Conveyor Trail", day: 2, distance: "~1.0 mi (est)", gain: "—", difficulty: "Easy–steep", duration: "+60m", notes: "Keeneys Creek Rd access is the clearance question." },
+      { name: "Nuttallburg + Conveyor Trail", day: 2, distance: "~1.0 mi (est)", gain: "—", difficulty: "Easy–steep", duration: "1h 30m", notes: "The climb to the headhouse is now core, not optional (Sept 28). Keeneys Creek Rd access is the clearance question." },
+      { name: "⭐ Kaymoor Miners Trail", day: 4, distance: "~1 mi RT + 800+ steps (from reports)", gain: "Steep — unmeasured", difficulty: "Strenuous (stairs)", duration: "2h (est)", notes: "Promoted from fallback Sept 28: unrestored mine buildings, the trip's best match for the Blevins-farm kind of ruin. Distance and gain are from trip reports, not measured." },
       { name: "Fayette Station Rd walk-down", day: 3, distance: "9.0 mi", gain: "~800 ft", difficulty: "Moderate", duration: "3h 45m total", notes: "⚠️ Parking at the top unconfirmed — 800-927-0263." },
       { name: "Moore Cove Falls", day: 4, distance: "1.4 mi", gain: "—", difficulty: "Easy", duration: "60m", notes: "The trail goes behind the water." },
       { name: "⭐ Black Balsam Knob via Art Loeb (short)", day: 5, distance: "✅ 1.4 mi", gain: "✅ 357 ft", difficulty: "Moderate", duration: "46 min moving", notes: "<b>The chosen route.</b> Same summit, same 360°." },
@@ -494,96 +494,66 @@ window.TRIP_DATA = {
 
   provisions: {
     summary:
-      "Eleven days, one 48qt cooler, one mid-trip resupply. It cannot stay cold the whole way and it does not need to. Solo, one burner, one pot, one pan. No coffee, no alcohol. Every quantity is one serving. Restaurant slots — Tudor's, Secret Sandwich Society, Pies &amp; Pints, the Bridge Day chili cook-off, The Falls Landing — are handled on the day cards, not here.<br><br><b>Five stops, in this order.</b> <b>1. Meijer, Sept 13</b> — the whole Zone 3 crate, bought in September alongside Kentucky's because none of it cares about five weeks. <b>2. Meijer, early October</b> — the freeze-flat ingredients, bought the day they get cooked. <b>3. Meijer, morning of Oct 15</b> — Zone 2, checkout to cooler to car. <b>4. Fayetteville, Oct 16</b> — one block of ice. <b>5. Brevard, Oct 20</b> — the only real resupply, and the last cold of the trip.",
+      "<b>Rebuilt Sept 28 around staples</b>, after Kentucky showed the recipe timeline doesn't survive the trip: the planned meals collapsed into oatmeal, mac, Brami and couscous. Everything below is one pot and eyeball-the-water, from the staples menu in the new planner (<code>kitchen/staples.md</code>), plus restaurants where they earn it and <b>one real cook: pierogi + kielbasa on Oct 21</b>. kcal figures are estimates. No coffee, no alcohol, no raw or dried fruit (the allergy question is still open).",
     coolerNote:
-      "The structural problem of this trip in three rows. <b>The breakfast burrito is the calibration item:</b> it has to survive nine days frozen and be edible on Oct 22, so freeze it hardest and bury it under the water bottles. Frozen 1L bottles do double duty — coolant on the way down, and drinking water exactly when you arrive somewhere with none.",
+      "<b>The cooler is small now.</b> Eggs, cheddar, butter, frozen veg (which is its own ice for a few days), the muffuletta meats, and from Oct 20 the sealed 12 oz kielbasa for Oct 24. No freezer meals. The pierogi are bought frozen the afternoon they're cooked.",
     cooler: [
-      { days: "1–3 · Oct 15–17", where: "Arrowhead, WV", state: "<b>Fayetteville eats five slots</b>, so the cooler is only carrying Zone 1 mass that stays frozen for later. <b>Block ice Oct 16.</b> Barely open it." },
-      { days: "4–7 · Oct 18–21", where: "Davidson River, NC", state: "Both Zone 1 dinners consumed (O-D1 Sunday, O-D2 Monday). <b>Block ice Brevard Oct 20 — the last cold of the trip.</b> It carries the shrimp to Wednesday." },
-      { days: "8–11 · Oct 22–25", where: "Linville → Hurricane → home", state: "<b>Cooler is empty. Wipe it out the morning of Oct 22 and it becomes the dry box and the water carrier.</b> Everything from O-B6 onward is shelf-stable." },
+      { days: "1–3 · Oct 15–17", where: "New River Gorge, WV", state: "Eggs, cheddar, butter, sub and muffuletta meats, frozen broccoli, peas and green beans. The frozen veg is the ice. Block ice in Fayetteville Oct 16 if it's warm." },
+      { days: "4–7 · Oct 18–21", where: "Davidson River, NC", state: "Water and a table every night, so this is where the draining meals (Brami, pierogi) live. <b>Block ice + the sealed 12 oz kielbasa in Brevard Oct 20.</b>" },
+      { days: "8–10 · Oct 22–24", where: "FS 210 → Hurricane", state: "<b>No-water leg: only absorb-the-water meals</b> (oats in the bag, couscous with undrained beans, mashed potatoes). The kielbasa rides sealed to Hurricane, where there's water to drain pasta." },
     ],
     criticalSlots:
-      "Four slots decide whether you actually eat on the hard leg, and all four collapse to one primitive — <b>boil water, pour into a labeled bag, eat from the bag, pack it out.</b> <b>O-D4</b> (Thu 7:30 PM, dark, tired, no water) · <b>O-B7</b> (post-Hawksbill hot oats, pot never touches food) · <b>O-D5</b> (same format, different flavour, so night two doesn't taste like night one) · <b>O-L7</b> (zero cookware). Mix the five bags at your kitchen table in October and the hard leg is solved before you leave Ohio.",
+      "<b>The no-water nights (Oct 15, 22, 23) only work with meals that drink their water</b>: Stove Top, couscous, potato flakes, oats. Never pasta that has to be drained — that's carried water poured on the ground. Mix the <b>power oats bag</b> (Oct 23) at home: oats, milk powder and whey double-bagged. The pull-tab beans on Oct 22 go in undrained; their liquid is water you didn't have to carry.",
     lists: [
       {
-        group: "Stop 2 — Meijer, early October, then cook and freeze",
-        note: "This is your ice. You are not choosing between carrying ice and carrying food. ⚠️ <b>Buy the meat the day you cook it, not on the September run</b> — a frozen-flat ragù keeps five weeks happily, raw ground pork in a fridge does not keep five days. Cook, bag, freeze flat, then forget about it until Oct 15.",
+        group: "Stop 1 — Meijer, trunk crate (shelf-stable)",
+        note: "<b>The September crate (Sept 13 run) is bought</b> (confirmed Sept 28) — <b>use it first</b>: maple packets work in power oats in place of plain oats (less protein, more sugar — add the whey), pecans top the oats, and the dried apricots and mango wait until the dried-fruit allergy question is answered. Buy only what the crate is missing.",
         items: [
-          "Beef and pork ragù — 500 ml quart bag, frozen flat (O-D1, Sun 10/18)",
-          "White chicken chili — 400 ml quart bag, thinnest so it thaws first (O-D2, Mon 10/19)",
-          "Breakfast burrito ×1, foiled — <b>freeze hardest, nine days, buried at the bottom</b> (O-B6, Thu 10/22)",
-          "4× 1L water bottles, frozen solid",
+          "Plain oats (big canister) · whole milk powder · whey protein · peanut butter jar + 6 PB packets · brown sugar",
+          "Plain potato flakes · real bacon bits · 1 ramen block · couscous · Brami ×2 boxes · dried tortellini · Stove Top ×1 box · gravy packets ×2 · bouillon",
+          "<b>Pull-tab cans only:</b> black beans ×2, kidney beans ×1, cannellini ×1, diced tomatoes ×1 — a forgotten opener at Linville means no dinner",
+          "Chicken pouches ×9 · summer sausage ×1 · jerky · jarred marinara ×1 · mild chili and mild taco seasoning · parmesan wedge · olive oil squeeze bottle",
+          "Large tortillas ×2 packs · bagels ×4 · Fritos · pretzels · mustard · honey packets · shelf-stable protein shakes ×2",
+          "Trail mix · bars ×16 · roasted almonds · hot chocolate packets · dark chocolate",
+          "1 freeze-dried meal as the bail-out — trunk, unopened",
+          "Quart freezer bags · gallon bags · foil · pack-out trash bags for Linville",
+          "3× 1-gallon water jugs — fill before leaving Brevard",
         ],
       },
       {
-        group: "Stop 1 (the dry half) — pre-mix into labeled bags at home",
-        note: "The work that makes the no-water leg survivable. Do it at the kitchen table, not at 35°F in the dark.",
+        group: "Stop 1 (the dry half) — pre-mix at home",
+        items: ["Power oats bag for Oct 23, double-bagged: oats · milk powder · a scoop of whey (PB packet goes in after)"],
+      },
+      {
+        group: "Stop 2 — Meijer, morning of Oct 15, into the cooler",
+        note: "Checkout to cooler to trunk. No freezer-meal cooking run any more — the old early-October Meijer stop is gone with the frozen-flat meals.",
         items: [
-          "Oats ×5 — 2 packets · 25g milk powder · 30g nuts · 30g dried fruit · salt",
-          "Oats XL ×1, <b>double-bagged</b> — 3 packets · 30g milk powder · 40g pecans · 40g apricot · salt (O-B7)",
-          "Couscous — 110g couscous · 30g sun-dried tomato · 30g parmesan · Italian seasoning (O-D4)",
-          "Rice — 80g instant rice · taco seasoning (O-D5)",
-          "Hot chocolate ×3 — 3 packets · 25g milk powder · salt (Hawksbill summit + spares)",
+          "Eggs (half dozen) · cheddar block · butter · frozen broccoli, peas and green beans",
+          "Sub fixings for O-L1 · ciabatta, Genoa salami, capicola, provolone, olive salad for the Bridge Day muffuletta (build Oct 16 night)",
         ],
       },
       {
-        group: "Stop 1 — Meijer, Sept 13, Zone 3 trunk crate",
-        note: "<b>Bought in September on the same run as Kentucky's shelf-stable list</b>, because nothing here is harmed by five weeks in a crate and one big shop beats two medium ones. Kentucky borrows from this crate and refills it — buy the October number once, split it into two boxes, label them.",
+        group: "Stop 3 — Brevard NC, Tuesday Oct 20",
         items: [
-          "Maple &amp; brown sugar oatmeal, big box (~13 packets) · whole milk powder 250g",
-          "Peanut butter jar + 6 single-serve PB packets · pecans 200g · apricots 400g · dried mango 400g",
-          "Couscous · instant rice · rigatoni 150g · orzo 150g · orecchiette 150g",
-          "<b>Pull-tab cans only:</b> black beans ×1, cannellini ×1 — a forgotten opener at Linville means no dinner",
-          "Chicken pouches ×3 (7oz) · salmon pouches ×2 (5oz)",
-          "Panko 50g · parmesan wedge · <b>olive oil squeeze bottle</b> · dry-packed sun-dried tomatoes",
-          "Large tortillas ×2 packs · bagels ×4 · individual Fritos ×4 · shelf-stable protein shakes ×3",
-          "Honey packets · hot sauce · mustard · taco and Italian seasoning · rosemary · red pepper flakes · salt, pepper, garlic powder, paprika",
-          "Tomato soup carton ×1 · hot chocolate packets ×12 · cider packets ×6",
-          "Trail mix 1.5kg · bars ×16 · jerky 400g · waffles ×10 · almonds 500g · dark chocolate 200g",
-          "<b>1 freeze-dried meal as the bail-out</b> — trunk, unopened, hope you never need it",
-          "Quart freezer bags ×16 · gallon bags ×8 · foil · parchment · <b>pack-out trash bags for Linville</b>",
-          "<b>3× 1-gallon water jugs</b> — fill before leaving Brevard",
+          "1 block of ice",
+          "<b>1× 12oz vacuum-packed kielbasa — keep it sealed until Oct 24.</b>",
+          "Eggs (half dozen) for the Oct 21 scramble · salsa and tortillas for the lecture quesadillas",
+          "Fill the three water jugs before you leave town",
         ],
       },
       {
-        group: "Stop 3 — Meijer, morning of Oct 15, into the cooler",
-        note: "The zone that ruins trips, and the last stop before the car. Checkout to cooler to trunk — which is the whole reason it is the morning of departure and not the night before. Keep it small, eat it early.",
-        items: [
-          "Ciabatta roll, Genoa salami, capicola, provolone, olive salad — <b>build the Bridge Day muffuletta on Oct 16 night</b>",
-          "Eggs (half dozen) · spinach · bell peppers ×2 · sourdough loaf · sub fixings for O-L1",
-          "⚠️ <b>The 2 apples are gone.</b> O-L1 and O-L3 both carry a whole raw apple and crisp raw fruit is the one OAS form still out. Swap for ripe bananas, fruit leather or dried fruit — the dried fruit is already in the September crate.",
-        ],
-      },
-      {
-        group: "Stop 4 — Fayetteville, Oct 16",
-        note: "Fayetteville feeds you. That is the whole list.",
-        items: ["1 block of ice"],
-      },
-      {
-        group: "Stop 5 — Brevard NC, Tuesday Oct 20",
-        note: "The only real resupply of the trip and the last cold you get.",
-        items: [
-          "<b>1 block of ice</b> — the last cold of the trip",
-          "250g frozen raw shrimp (O-D3) · 150g smoked sausage or andouille (O-B5)",
-          "<b>1× 12oz vacuum-packed kielbasa — keep it sealed until Oct 24. This is the last dinner. Protect it.</b>",
-          "Eggs (half dozen) · potatoes 800g, <b>pre-diced if available</b> · bell peppers ×2 · onions ×2 · garlic ×2 · lemons ×3 · parsley",
-          "Frozen green beans",
-          "<b>Shredded</b> cheddar 300g · string cheese ×2 · hard salami 200g · hummus cups ×2 · spinach",
-          "Salsa · sourdough loaf · bagels ×2",
-          "<b>Fill the three water jugs before you leave town</b>",
-        ],
+        group: "Stop 4 — Brevard, Wednesday Oct 21, afternoon",
+        items: ["Frozen potato-and-cheese pierogi · a <b>small</b> kielbasa — tonight's dinner"],
       },
       {
         group: "Kit the meals depend on",
-        note: "Designed around a can opener, cutting board, colander, grater, tongs, bowl and plate — none of which you carry.",
         items: [
-          "<b>3 fuel canisters.</b> Eleven days, and cold air drops canister output.",
-          "<b>Long-handled spoon</b> — the single most important item on the Linville leg. Four meals are eaten out of a deep quart bag; a short spork means chili on your knuckles at 35°F in the dark.",
-          "<b>Wide-mouth thermos, 500ml+</b> — Hawksbill hot chocolate and Black Balsam soup both depend on it",
-          "2L pot with lid (the lid drains, steams and holds heat) · 8–10\" pan · insulated mug · spork",
-          "Thin silicone spatula — a spork will fail on eggs",
-          "Folding knife · collapsible wash basin · sponge · biodegradable soap · 2 bandanas (one pot wipe, one towel)",
-          "<b>Linville water carry: ~12 L / 3.2 gallons</b> — 3.5 L/day drinking, 0.8 L cooking, 0.5 L washing, over 2.5 days. About 27 lbs; the empty cooler carries the jugs from Oct 22.",
+          "3 fuel canisters. Eleven days, and cold air drops canister output.",
+          "Long-handled spoon — the oats bag and the no-water dinners are eaten from deep containers",
+          "Wide-mouth thermos — Oct 19 tortellini, Oct 20 couscous, Oct 22 oats",
+          "2L pot with lid (the lid drains, steams and holds heat) · insulated mug (gravy) · spork",
+          "Folding knife · collapsible wash basin · sponge · biodegradable soap · 2 bandanas",
+          "Linville water carry: ~12 L / 3.2 gallons for 2.5 days. Absorb-the-water meals mean none of it gets drained away.",
         ],
       },
     ],
