@@ -46,7 +46,7 @@ again wastes a session. Verified present in the tree on 2026-09-07:
 | Offline + print | `sw.js`, `js/offline.js`, `css/print.css`, `tools/manifest.mjs` |
 | GPX / .ics / text exports | `tools/export.mjs`, `js/exports.js` |
 | Retro → gear feedback loop | `retro` blocks answering `GEAR[].question` |
-| Test suite | `node --test "tools/test/*.test.mjs"` — 52 tests |
+| Test suite | `node --test tools/test/*.test.mjs` — 71 tests |
 
 An earlier draft of this file proposed nine of these as new work. That's the
 failure mode of planning against a stale checkout, and it's why the re-check
@@ -218,7 +218,7 @@ This file is the most perishable thing in the repo. Before trusting it:
 git log --oneline -20                      # what landed since it was written
 ls tools tools/lib .github/workflows       # what's already automated
 node tools/validate.mjs                    # what the repo says is wrong today
-node --test "tools/test/*.test.mjs"
+node --test tools/test/*.test.mjs
 ```
 
 If a Tier item is already built, delete it rather than leaving it to be

@@ -506,7 +506,8 @@ window.TRIP_DATA = {
       "<b>The no-water nights (Oct 15, 22, 23) only work with meals that drink their water</b>: Stove Top, couscous, potato flakes, oats. Never pasta that has to be drained — that's carried water poured on the ground. Mix the <b>power oats bag</b> (Oct 23) at home: oats, milk powder and whey double-bagged. The pull-tab beans on Oct 22 go in undrained; their liquid is water you didn't have to carry.",
     lists: [
       {
-        group: "Trunk crate — buy at home",
+        group: "Stop 1 — Meijer, trunk crate (shelf-stable)",
+        note: "If the September crate (Sept 13 run) is already bought, <b>use it first</b>: maple packets work in power oats in place of plain oats (less protein, more sugar — add the whey), pecans top the oats, and the dried apricots and mango wait until the dried-fruit allergy question is answered. Buy only what the crate is missing.",
         items: [
           "Plain oats (big canister) · whole milk powder · whey protein · peanut butter jar + 6 PB packets · brown sugar",
           "Plain potato flakes · real bacon bits · 1 ramen block · couscous · Brami ×2 boxes · dried tortellini · Stove Top ×1 box · gravy packets ×2 · bouillon",
@@ -520,18 +521,19 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Pre-mix at home",
+        group: "Stop 1 (the dry half) — pre-mix at home",
         items: ["Power oats bag for Oct 23, double-bagged: oats · milk powder · a scoop of whey (PB packet goes in after)"],
       },
       {
-        group: "Cooler — buy Oct 15 morning",
+        group: "Stop 2 — Meijer, morning of Oct 15, into the cooler",
+        note: "Checkout to cooler to trunk. No freezer-meal cooking run any more — the old early-October Meijer stop is gone with the frozen-flat meals.",
         items: [
           "Eggs (half dozen) · cheddar block · butter · frozen broccoli, peas and green beans",
           "Sub fixings for O-L1 · ciabatta, Genoa salami, capicola, provolone, olive salad for the Bridge Day muffuletta (build Oct 16 night)",
         ],
       },
       {
-        group: "Resupply — Brevard NC, Tuesday Oct 20",
+        group: "Stop 3 — Brevard NC, Tuesday Oct 20",
         items: [
           "1 block of ice",
           "<b>1× 12oz vacuum-packed kielbasa — keep it sealed until Oct 24.</b>",
@@ -540,7 +542,7 @@ window.TRIP_DATA = {
         ],
       },
       {
-        group: "Brevard — Wednesday Oct 21, afternoon",
+        group: "Stop 4 — Brevard, Wednesday Oct 21, afternoon",
         items: ["Frozen potato-and-cheese pierogi · a <b>small</b> kielbasa — tonight's dinner"],
       },
       {

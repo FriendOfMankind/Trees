@@ -52,6 +52,7 @@ const PRINCIPLES = [
   "<b>Drive estimates are Google plus 15%</b>, and stop durations are set at the slow end. Optimistic driving is how a day runs out of daylight.",
   "<b>Every day carries a slack line</b> saying how much margin exists and what gets cut first.",
   "<b>Cook at camp; eat out for a named dish.</b> The restaurant entry is the order, not the address.",
+  "<b>Two shops per trip: a preliminary one and a final one.</b> Confirmed Sept 2026. The preliminary run buys everything shelf-stable, well ahead and at whatever quantity the next few trips need between them — it is a crate in the trunk, not a deadline. The final run is <b>the morning of departure</b>, perishables only, checkout straight into the cooler and the cooler straight into the car. Anything that has to be cooked and frozen flat at home is a third, separate errand timed to the day it gets cooked, because raw meat does not keep as long as the frozen meal it becomes. A trip\'s provisions list is therefore sorted by <i>which stop</i>, not by food group.",
   "<b>Ruins count as scenery.</b> Coal towns, homesteads, tipples and ghost structures are destinations, not filler.",
 ];
 
@@ -217,7 +218,11 @@ const GEAR = [
       { name: "48 qt cooler", state: "own", note: "Frozen meals in flat quart bags <i>are</i> the ice. Holds ~2.5 days unaided in 75°F — buy a <b>block</b> of ice at resupply, not cubes.",
         question: { text: "Does the frozen-meals-as-ice system actually reach the first resupply, and does the breakfast burrito survive to day 8?", answeredBy: "appalachians-2026" } },
       { name: "Olive oil in a squeeze bottle", state: "own", note: "One of the four things that turn a can into a meal: oil, hard cheese, crushed chips, starch pouch." },
-      { name: "Fuel canisters", state: "need", note: "Cannot fly. Buy on arrival on any fly-in trip." },
+      { name: "Fuel canisters", state: "need", note: "Cannot fly. Buy on arrival on any fly-in trip. On a drive-out trip they are just shopping — October budgets <b>3 for eleven days</b>, which is the only per-day figure ever written down. Confirm the burner takes screw-on isobutane before buying." },
+      { name: "Long-handled spoon", state: "unknown", note: "<b>Added Sept 2026 because it was missing here while riding on both 2026 kit lists.</b> October calls it \"the single most important item on the Linville leg\" — four meals eaten out of a deep quart bag. Kentucky needs it for thermos oats. Never confirmed owned." },
+      { name: "Thin silicone spatula", state: "unknown", note: "Same gap. <b>A spork will fail on eggs</b>, and both trips schedule pan eggs and quesadillas. Never confirmed owned." },
+      { name: "Wash basin, sponge, biodegradable soap", state: "unknown", note: "Same gap. Every MED and HIGH cleanup meal on both trips assumes these exist. Never confirmed owned." },
+      { name: "Bandanas ×2", state: "unknown", note: "Same gap. One pot wipe, one towel — the boil-bag primitive's entire wash-up. Never confirmed owned." },
     ],
   },
   {
