@@ -1,5 +1,7 @@
 # Trail Notes
 
+> **FROZEN on 2026-09-29.** Everything moved to [`FriendOfMankind/Colin-Travel-Planner`](https://github.com/FriendOfMankind/Colin-Travel-Planner): trips, the wishlist, preferences, logs. Don't edit this repo, and don't treat anything here as current. It stays as a record, and as the home of the old recipe library (`data/meals.js`), which was deliberately not migrated. The site still works as an offline snapshot of the plans as they stood that day.
+
 A personal hub for travel research, trip planning and camping logistics.
 Every trip — booked, half-planned, or still just an idea — lives in one place,
 in one format, at one URL.

@@ -210,3 +210,14 @@ async function copyText(text) {
     return ok;
   }
 }
+
+/* ---------------- Frozen ----------------
+   Trees was frozen on 2026-09-29. Everything moved to Colin-Travel-Planner,
+   so every page says it's a snapshot rather than letting it pass as current. */
+document.addEventListener("DOMContentLoaded", () => {
+  const b = document.createElement("div");
+  b.setAttribute("role", "note");
+  b.style.cssText = "background:#7a2e0e;color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:8px 14px;text-align:center";
+  b.textContent = "Frozen snapshot, 2026-09-29. The live plans are in Colin-Travel-Planner; anything here may be out of date.";
+  document.body.prepend(b);
+});
