@@ -490,7 +490,7 @@ window.TRIP_DATA = {
     { location: "Hurricane, VA", elevation: "~2,900 ft", high: "—", low: "mid 30s", notes: "Hot showers. Relentless wind on the Mount Rogers ridge." },
   ],
   weatherNote:
-    "<b>Siesta 20 + MondoKing covers all of it.</b> The liner recommendation stands for the last three nights and is unconfirmed. September's Kentucky trip is the shakedown — note there whether the bag actually sleeps warm before deciding. <b>Color gradient:</b> balds above 5,000 ft peak late Sept/early Oct; the 3,000–5,000 ft corridor peaks the second and third weeks of October; the last week is best low. You're chasing color downhill and <b>Linville on Oct 22–23 is the bullseye.</b>",
+    "<b>Siesta 20 + MondoKing covers all of it.</b> The liner is bought (Sept 28) and goes in for the last three nights; the Siesta 20 has only been tested at ~50°F, so FS 210 is its real test. <b>Color gradient:</b> balds above 5,000 ft peak late Sept/early Oct; the 3,000–5,000 ft corridor peaks the second and third weeks of October; the last week is best low. You're chasing color downhill and <b>Linville on Oct 22–23 is the bullseye.</b>",
 
   provisions: {
     summary:
@@ -522,7 +522,7 @@ window.TRIP_DATA = {
       },
       {
         group: "Stop 1 (the dry half) — pre-mix at home",
-        items: ["Power oats bag for Oct 23, double-bagged: oats · milk powder · a scoop of whey (PB packet goes in after)"],
+        items: ["Oats ×4 — the Oct 23 one double-bagged as the power-oats bag: oats · milk powder · a scoop of whey (PB packet goes in after)", "Couscous ×2 (Oct 20 thermos lunch, Oct 22 dinner)", "Hot chocolate ×3 (Oct 24, plus spares)"],
       },
       {
         group: "Stop 2 — Meijer, morning of Oct 15, into the cooler",
@@ -592,7 +592,7 @@ window.TRIP_DATA = {
       items: [
         "One burner, pot, pan, mug, spork",
         "Wide-mouth thermos — Hawksbill sunrise at 4,009 ft in the dark",
-        "48qt cooler ⚠️ eleven days on one cooler. The cooler timeline is in MEALS-trip2-october.md and is not yet on this page.",
+        "Cooler: eggs, cheese, frozen veg and the Oct 24 kielbasa. No freezer meals. Size unconfirmed (see gear); a small one is enough.",
         "Block ice at the Brevard resupply — the last cold of the trip",
       ],
     },
@@ -603,7 +603,7 @@ window.TRIP_DATA = {
     { text: "Price and phone-check ONE motel in Newland / Linville Falls / Morganton before leaving Ohio — the Linville bail-out is first-come too" },
     { text: "⚠️ CALL 800-927-0263 — Fayette Station Road parking on Bridge Day." },
     { text: "Sign the Arrowhead waiver before arrival — every camper needs one" },
-    { text: "Mix the five pre-portioned bags at home: oats ×5, oats XL (double-bagged), couscous, rice, hot chocolate ×3" },
+    { text: "Pre-mix at home to match the menu: oats ×4 (the Oct 23 one double-bagged as the power-oats bag), couscous ×2, hot chocolate ×3. No rice" },
     { text: "Buy block ice twice: Fayetteville Oct 16, Brevard Oct 20" },
     { text: "Fill three 1-gallon water jugs in Brevard before leaving for Linville — ~12 L total carry" },
     { text: "Buy pull-tab cans only — a forgotten can opener at Linville means no dinner" },
@@ -613,7 +613,7 @@ window.TRIP_DATA = {
     { text: "✅ Davidson River Oct 18–21 — recreation.gov 0864063574-1, 4 nights, campground open (phone-confirmed)", booked: true },
     { text: "✅ Hurricane Campground Oct 24 — recreation.gov 0840120294-1, 1 night. Gate 7 AM–10 PM. No cell service — carry it on paper.", booked: true },
     { text: "Decide the FS 210 bail-out BEFORE the trip: Mortimer Campground, or a motel in Newland / Linville Falls / Morganton" },
-    { text: "Sleeping bag liner — decide after the September Kentucky shakedown" },
+    { text: "Sleeping bag liner — bought (Sept 28). Pack it for FS 210 and Hurricane" },
     { text: "Reserve The Falls Landing, Brevard, for Tuesday Oct 20" },
     { text: "Check burn ban status across WV, NC and VA" },
     { text: "Verify Linville Falls trail and spur road access from the closed Parkway corridor" },
@@ -646,12 +646,6 @@ window.TRIP_DATA = {
         "The walk-to-the-bottom plan is free and legal; the roads are open to pedestrians even though the trails are closed and patrolled. What's unconfirmed is <b>where you can legally park at the top.</b> Fayette County Chamber, 800-927-0263. Get this before departure — the fallback (Fayetteville HS at 7:45, shuttle at 8:30, deck 9–3) is a completely different day and you don't want to discover it at 7 AM.",
     },
     {
-      question: "Which Black Balsam route?",
-      blocks: "Day 5 — and Day 5 has only 15 minutes of slack",
-      detail:
-        "The plan says ~4 mi via Art Loeb to Tennent Mountain in 2h 30m. AllTrails lists a 1.4 mi out-and-back to Black Balsam alone, and a 9.7 mi / 1,666 ft Graveyard Ridge loop. Your figure sits between them, which is consistent with an out-and-back along the ridge to Tennent — but on a day with 15 minutes of margin, guessing wrong by five miles ends the day in the dark. Decide the exact route, then re-check whether Sam Knob still fits.",
-    },
-    {
       question: "The two Linville nights have no fallback written down.",
       blocks: "Days 8–9",
       detail:
@@ -661,19 +655,13 @@ window.TRIP_DATA = {
       question: "Keeneys Creek Road for 5.9 inches of clearance.",
       blocks: "Day 2 afternoon",
       detail:
-        "Some sources recommend high clearance. The fallback is Kaymoor Top, five minutes from camp, same corridor, conveyor and coke ovens down a long stairway — a genuinely good substitute rather than a consolation. Ask a ranger at Canyon Rim on Day 1 and be willing to take the substitute.",
+        "Some sources recommend high clearance. Kaymoor is already on Day 4, so the fallback is simply to skip Nuttallburg. ⚠️ Since the Aug 15–16 floods, Nuttallburg Road itself was reported washed out — ask Canyon Rim, (304) 574-2115, before counting on either.",
     },
     {
       question: "Table Rock loop routing with the Spence Ridge bridge out.",
       blocks: "Day 9 afternoon",
       detail:
         "The east-rim loop shouldn't need the washed-out river bridge, but that's an inference, not a confirmation. Grandfather Ranger District, (828) 652-2144. If it does need it, the release valve is the 2.4 mi out-and-back through The Chimneys.",
-    },
-    {
-      question: "Mix the five bags before you leave Ohio.",
-      blocks: "Days 8–10, the no-water leg",
-      detail:
-        "Four of the hard-leg meals collapse to one primitive: boil water, pour into a labeled bag, eat from the bag, pack it out. That only works if the bags already exist. Five get mixed at the kitchen table in October — oats ×5, oats XL double-bagged, couscous, rice, hot chocolate ×3. Do that and Linville is solved before you pull out of the driveway. Skip it and O-D4 becomes a protein bar in the dark at 35°F.",
     },
     {
       question: "Print the confirmations, especially Hurricane.",
